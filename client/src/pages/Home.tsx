@@ -1,5 +1,5 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
-import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, ExternalLink, Instagram, Menu, ShieldCheck, Sparkles, X } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, ExternalLink, Instagram, Menu, ShieldCheck, Sparkles, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { coverMoto, motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
@@ -61,6 +61,7 @@ function Cover({ onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMenuOpen 
     <main className="cover-stage" style={{ backgroundImage: `url(${heroAtmosphere})` }}>
       <div className="cover-stage__noise" />
       <div className="cover-stage__grid" aria-hidden="true" />
+      <div className="cover-motion" aria-hidden="true"><img src={coverMoto.images[1]?.src ?? coverMoto.images[0].src} alt="" /><span className="cover-motion__beam" /><span className="cover-motion__grain" /></div>
       <div className="cover-stage__redline" />
       <header className="cover-header">
         <BrandMark light />
@@ -78,10 +79,11 @@ function Cover({ onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMenuOpen 
           <div className="cover-kicker"><span className="live-dot" /> catálogo digital premium</div>
           <h1><span>Seu próximo</span><em>capítulo</em><span>começa aqui.</span></h1>
           <p>Uma curadoria de motocicletas reais, atendimento direto e escolhas feitas para seguir em frente.</p>
-          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><ArrowRight size={19} /></span><span><b>Abrir catálogo</b><small>Folhear a edição 2026</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Abrir catálogo</b><small>Folhear a edição 2026</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
         </div>
         <div className="cover-object" aria-hidden="true">
           <div className="cover-object__shadow" />
+          <div className="cover-object__page-stack" />
           <div className="cover-object__folio"><span>NETO MOTOS / PLACA 01</span><img src={coverMoto.images[0].src} alt={`${coverMoto.name} em fotografia oficial`} /><b>{coverMoto.name} <i>{coverMoto.category}</i></b></div>
           <div className="cover-object__meta"><span>ARQUIVO</span><b>01—04</b></div>
           <div className="cover-object__line" />

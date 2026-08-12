@@ -75,6 +75,38 @@ const detail = {
   urbanDetail: "/manus-storage/urban-lite-08_39b3a83a.webp",
 };
 
+function galleryImages(name: string, sources: string[]): MotoImage[] {
+  return sources.map((src, index) => ({ src, label: `Galeria ${String(index + 2).padStart(2, "0")}`, alt: `${name} em fotografia oficial adicional da Shineray` }));
+}
+
+const officialGalleries: Record<string, MotoImage[]> = {
+  "jef-170": galleryImages("JEF 170", ["/manus-storage/jef-170-042b21ff_b6f60159.webp", "/manus-storage/jef-170-564cb53d_84181cb0.webp", "/manus-storage/jef-170-8bddfa71_2fd4ea6b.webp"]),
+  "shi-400sc": galleryImages("SHI 400SC", ["/manus-storage/shi-400sc-82f9bc44_380843b8.webp", "/manus-storage/shi-400sc-9614a6ed_8a1861aa.webp", "/manus-storage/shi-400sc-c39ab799_41d6e4be.webp"]),
+  "shi-175": galleryImages("SHI 175", ["/manus-storage/shi-175-3327b55c_f5294d83.webp", "/manus-storage/shi-175-913d7136_1e87b79a.webp", "/manus-storage/shi-175-98fd068f_b2157c92.webp"]),
+  "shi-250": galleryImages("SHI 250", ["/manus-storage/shi-250-3a7923d2_072dae52.webp", "/manus-storage/shi-250-921de02e_232b765e.webp", "/manus-storage/shi-250-f695601d_07198e27.webp"]),
+  "sh4": galleryImages("SH4", ["/manus-storage/sh4-2cda740f_a6bdd6f3.webp", "/manus-storage/sh4-c0fc7889_f75b8000.webp", "/manus-storage/sh4-f524ad2b_e9041771.webp"]),
+  "sh3": galleryImages("SH3", ["/manus-storage/sh3-4158e52c_95c46070.webp", "/manus-storage/sh3-5f2c86a2_a75876f0.webp", "/manus-storage/sh3-e85403e5_89e301a3.webp"]),
+  "urban-150-efi": galleryImages("URBAN 150 EFI", ["/manus-storage/urban-150-efi-65f7d2c3_cb1ae4d6.webp", "/manus-storage/urban-150-efi-894b9296_e57c19ac.webp", "/manus-storage/urban-150-efi-98a1e30a_9fd850ee.webp"]),
+  "250f": galleryImages("250F", ["/manus-storage/250f-c39f453b_c87f6993.webp"]),
+  "free-150-efi": galleryImages("FREE 150 EFI", ["/manus-storage/free-150-efi-1f150264_aaf81bcc.webp", "/manus-storage/free-150-efi-3360bda5_b81cd076.webp", "/manus-storage/free-150-efi-8f20e42f_c96a9acf.webp"]),
+  "jef-150s-efi": galleryImages("JEF 150S EFI", ["/manus-storage/jef-150s-efi-b4a7b92b_28fee322.webp", "/manus-storage/jef-150s-efi-f86487b9_77611c6a.webp"]),
+  "jef-150": galleryImages("JEF 150", ["/manus-storage/jef-150-1dc89392_696abdc7.webp", "/manus-storage/jef-150-5c233733_42353b89.webp", "/manus-storage/jef-150-d75e8d4f_7f79a5b8.webp"]),
+  "rio-125-efi": galleryImages("RIO 125 EFI", ["/manus-storage/rio-125-efi-cd665916_53e18a10.webp"]),
+  "phoenix-s-efi": galleryImages("PHOENIX S EFI", ["/manus-storage/phoenix-s-efi-32bbddec_8ee6c854.webp", "/manus-storage/phoenix-s-efi-69273a5a_e58efc48.webp"]),
+  "jet-125-efi": galleryImages("JET 125 EFI", ["/manus-storage/jet-125-efi-095453f2_cd10e2d2.webp"]),
+  "shi-175s-efi": galleryImages("SHI 175S EFI", ["/manus-storage/shi-175s-efi-3b487fdf_60e05041.webp"]),
+  "se1": galleryImages("SE1", ["/manus-storage/se1-1a56042d_d60fd45f.webp", "/manus-storage/se1-aa9adb99_aea8b8a1.webp", "/manus-storage/se1-d21528b8_e26307ce.webp"]),
+  "se2": galleryImages("SE2", ["/manus-storage/se2-5b1bcba3_49ee11e8.webp", "/manus-storage/se2-67f28610_c0c0fca4.webp", "/manus-storage/se2-d86ec8a9_7a6fb61a.webp"]),
+  "she-s": galleryImages("SHE-S", ["/manus-storage/she-s-59d689d8_672bed83.webp", "/manus-storage/she-s-6c033686_884deea4.webp", "/manus-storage/she-s-755532bf_46f814fe.webp"]),
+  "phoenix-s": galleryImages("PHOENIX S", ["/manus-storage/phoenix-s-bdabb7a1_7e549109.webp", "/manus-storage/phoenix-s-81ab1e72_ded7cd53.webp"]),
+  "ptxs": galleryImages("PTXS", ["/manus-storage/ptxs-e14c88c0_d1e55f6d.webp", "/manus-storage/ptxs-28eb8e4e_f3b40596.webp", "/manus-storage/ptxs-25832623_e17ff18f.webp"]),
+  "pt-stand": galleryImages("PT-STAND", ["/manus-storage/pt-stand-8ef99a5a_68dde2d5.webp", "/manus-storage/pt-stand-6a2d70ef_78149f6f.webp", "/manus-storage/pt-stand-af91961d_df5e927b.webp"]),
+  "pt4-pro": galleryImages("PT4-PRO", ["/manus-storage/pt4-pro-4a4a87df_7c74f7cf.webp", "/manus-storage/pt4-pro-101cde99_c9788cb2.webp", "/manus-storage/pt4-pro-29d00314_a1dbb1cd.webp"]),
+  "ptxr": galleryImages("PTXR", ["/manus-storage/ptxr-3338d84e_1e28716e.webp", "/manus-storage/ptxr-ebd6114c_d3a93eb4.webp", "/manus-storage/ptxr-f1bdb339_1270ed6f.webp"]),
+  "pt1s": galleryImages("PT1S", ["/manus-storage/pt1s-3269315c_3f955d52.webp", "/manus-storage/pt1s-7d645687_4d80e33d.webp", "/manus-storage/pt1s-fa6b8165_e4e6b472.webp"]),
+  "pt2xs": galleryImages("PT2XS", ["/manus-storage/pt2xs-33c51ad8_1eea0243.webp", "/manus-storage/pt2xs-a69e4b84_b5716f06.webp", "/manus-storage/pt2xs-ac3407a2_2bd31d56.webp"]),
+};
+
 const genericSpecs = [
   { label: "Ficha técnica", value: "Consultar ficha vigente" },
   { label: "Disponibilidade", value: "Consultar Neto Motos" },
@@ -122,7 +154,7 @@ function makeMoto({ id, name, category, price, description, copyLine, audience, 
     copyLine,
     audience,
     highlights,
-    images: images(name, image, extraImages),
+    images: images(name, image, [...(officialGalleries[id] ?? []), ...extraImages]),
     specs,
     hotspots: customHotspots ?? hotspots(name, category, "Conversa direta"),
     source,
@@ -261,6 +293,49 @@ const rawMotos: Moto[] = [
     id: "she-s", name: "SHE-S", category: "Elétrica", price: "R$ 16.490,00", image: catalog.sheS, source: "https://www.shineray.com.br/produto/she-s/",
     description: "A SHE-S traduz a mobilidade elétrica em uma presença urbana elegante, para quem quer uma escolha diferente sem abrir mão de personalidade.",
     copyLine: "O futuro também pode ter a sua assinatura.", audience: "Para quem quer explorar uma experiência elétrica com orientação humana em cada etapa.",
+  }),
+  makeMoto({
+    id: "ptxs", name: "PTXS", category: "Mobilidade elétrica", price: "R$ 5.390,00", image: "/manus-storage/ptxs_55c251cd.webp", source: "https://www.shineray.com.br/produto/ptxs/",
+    description: "A PTXS pega a praticidade de um patinete e troca o esforço por uma experiência elétrica leve, direta e pronta para pequenos deslocamentos.",
+    copyLine: "A cidade fica mais leve quando você muda a forma de cruzá-la.", audience: "Para quem quer uma solução compacta, elétrica e fácil de entender.",
+    highlights: ["Motor elétrico", "Autonomia de até 25 km", "Painel digital", "Freio traseiro a disco"],
+    specs: [{ label: "Motor", value: "Elétrico Brushless" }, { label: "Potência", value: "350 W" }, { label: "Velocidade", value: "Até 25 km/h" }, { label: "Autonomia", value: "Até 25 km" }, { label: "Bateria", value: "Lítio 36 V 7,8 Ah" }, { label: "Carga máxima", value: "100 kg" }],
+    extraImages: [],
+  }),
+  makeMoto({
+    id: "pt-stand", name: "PT-STAND", category: "Mobilidade elétrica", price: "R$ 5.990,00", image: "/manus-storage/pt-stand_3c30f455.webp", source: "https://www.shineray.com.br/produto/pt-stand/",
+    description: "Com plataforma antideslizante, visor digital e freios a disco, a PT-STAND transforma o deslocamento curto em uma experiência mais segura e prática.",
+    copyLine: "A liberdade pode começar na próxima esquina.", audience: "Para quem quer uma micromobilidade elétrica com desenho funcional e leitura simples.",
+    highlights: ["Motor 350 W", "Até 30 km de autonomia", "Freio a disco nas duas rodas", "Guidão rebatível"],
+    specs: [{ label: "Motor", value: "Elétrico Brushless" }, { label: "Potência", value: "350 W" }, { label: "Velocidade", value: "Até 35 km/h" }, { label: "Autonomia", value: "Até 30 km" }, { label: "Bateria", value: "36 V 10 Ah" }, { label: "Carga máxima", value: "120 kg" }],
+  }),
+  makeMoto({
+    id: "pt4-pro", name: "PT4-PRO", category: "Scooter elétrica", price: "R$ 9.990,00", image: "/manus-storage/pt4-pro_bcfa441d.webp", source: "https://www.shineray.com.br/produto/pt4-pro/",
+    description: "A PT4-PRO leva acabamento premium, bateria removível e autonomia estimada de até 40 km para uma scooter elétrica que quer fazer parte da sua rotina.",
+    copyLine: "Mais tecnologia para a cidade que você já conhece.", audience: "Para quem quer subir para uma experiência elétrica mais completa, com conforto e presença.",
+    highlights: ["Motor 3.000 W", "Bateria removível", "Até 40 km de autonomia", "Freio a disco nas duas rodas"],
+    specs: [{ label: "Motor", value: "Brushless 3.000 W" }, { label: "Velocidade", value: "Até 45 km/h" }, { label: "Autonomia", value: "Até 40 km" }, { label: "Bateria", value: "60 V 26 Ah removível" }, { label: "Carga", value: "4 a 5 horas" }, { label: "Carga máxima", value: "150 kg" }],
+  }),
+  makeMoto({
+    id: "ptxr", name: "PTXR", category: "Mobilidade elétrica", price: "R$ 6.990,00", image: "/manus-storage/ptxr_d2e3f3fe.webp", source: "https://www.shineray.com.br/produto/ptxr/",
+    description: "O PTXR acrescenta banco ajustável, guidão dobrável e uma proposta elétrica prática para resolver a mobilidade urbana sem complicar.",
+    copyLine: "Prático de guardar. Fácil de levar. Feito para mover.", audience: "Para quem quer uma alternativa compacta com conforto para o caminho diário.",
+    highlights: ["Motor 500 W", "Até 25 km de autonomia", "Banco ajustável", "Guidão dobrável"],
+    specs: [{ label: "Motor", value: "Brushless 500 W" }, { label: "Velocidade", value: "Até 25 km/h" }, { label: "Autonomia", value: "Até 25 km" }, { label: "Bateria", value: "48 V 10 Ah" }, { label: "Carga", value: "Média de 6 horas" }, { label: "Carga máxima", value: "100 kg" }],
+  }),
+  makeMoto({
+    id: "pt1s", name: "PT1S", category: "Mobilidade elétrica", price: "R$ 6.990,00", image: "/manus-storage/pt1s_b09f480c.webp", source: "https://www.shineray.com.br/produto/pt1s/",
+    description: "A PT1S é a escolha para quem quer reduzir o atrito do deslocamento e colocar uma solução elétrica compacta dentro da rotina.",
+    copyLine: "Menos atrito para chegar onde importa.", audience: "Para quem procura praticidade elétrica e quer entender o produto de forma transparente.",
+    highlights: ["Motor 800 W", "Até 25 km de autonomia", "Painel digital", "Cesta dianteira"],
+    specs: [{ label: "Motor", value: "Elétrico Brushless" }, { label: "Potência", value: "800 W" }, { label: "Velocidade", value: "Até 32 km/h" }, { label: "Autonomia", value: "Até 25 km" }, { label: "Bateria", value: "Chumbo ácido" }, { label: "Freio dianteiro", value: "Disco hidráulico" }],
+  }),
+  makeMoto({
+    id: "pt2xs", name: "PT2XS", category: "Mobilidade elétrica", price: "R$ 7.290,00", image: "/manus-storage/pt2xs_ded863bd.webp", source: "https://www.shineray.com.br/produto/pt2xs/",
+    description: "A PT2XS amplia a ideia de micromobilidade com uma proposta urbana e elétrica para quem quer fazer mais com menos esforço.",
+    copyLine: "O caminho curto também merece uma escolha inteligente.", audience: "Para quem quer uma porta de entrada elétrica com atendimento próximo e sem linguagem complicada.",
+    highlights: ["Motor 1.000 W", "Até 30 km de autonomia", "Bateria removível", "Freios a disco"],
+    specs: [{ label: "Motor", value: "Elétrico Brushless" }, { label: "Potência", value: "1.000 W" }, { label: "Velocidade", value: "Até 32 km/h" }, { label: "Autonomia", value: "Até 30 km" }, { label: "Bateria", value: "Íon-lítio 48 V 15 Ah" }, { label: "Carga máxima", value: "80 kg" }],
   }),
 ];
 

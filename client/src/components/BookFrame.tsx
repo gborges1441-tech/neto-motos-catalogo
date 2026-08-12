@@ -65,7 +65,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     window.setTimeout(() => {
       onIndexChange(nextIndex);
       setTurning(null);
-    }, 560);
+    }, 680);
   }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {

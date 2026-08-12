@@ -1,6 +1,6 @@
-# Inventário oficial para o catálogo ampliado — 12/08/2026
+# Inventário oficial para o catálogo ampliado — auditoria atualizada em 12/08/2026
 
-Fontes primárias consultadas: [Produtos — página 1](https://www.shineray.com.br/produtos/) e [Produtos — página 2](https://www.shineray.com.br/produtos/2/).
+Fontes primárias consultadas: [Produtos — página 1](https://www.shineray.com.br/produtos/) e [Produtos — página 2](https://www.shineray.com.br/produtos/2/). A auditoria ao vivo confirmou que a vitrine atual mistura duas rodas, scooters elétricas, patinetes, triciclos, ATVs, karts, automóveis e utilitários nas mesmas páginas.
 
 ## Motos, scooters e elétricas de duas rodas identificadas
 
@@ -33,6 +33,10 @@ Fontes primárias consultadas: [Produtos — página 1](https://www.shineray.com
 ## Produtos que permanecem fora do núcleo de motocicletas
 
 A página também exibe automóveis de carga e passageiros, veículos elétricos utilitários, quadriciclos, karts, patinetes e triciclos, como TLUX, DTRUCK, CGE, ATV, KART e PT. Eles não serão misturados à experiência principal de motos. Se o Neto confirmar que comercializa essas linhas, podem entrar em uma seção posterior chamada **Mobilidade e utilitários**, com linguagem e filtros próprios.
+
+## Atualização que explica a percepção de modelos ausentes
+
+Na auditoria mais recente, a página 2 também exibiu os produtos PTXS, PT-STAND, PT4-PRO, PTXR, PT1s e PT2XS, que aparentam pertencer à mobilidade elétrica individual, além de PT1, PT2, PT3, PT3S e PT3 TRICICLO. Eles não são motocicletas convencionais, mas são produtos de duas rodas ou micromobilidade e podem ser apresentados em um capítulo separado para não desaparecerem da curadoria. A próxima revisão deverá incluir ao menos PTXS, PT-STAND, PT4-PRO, PTXR, PT1s e PT2XS como **Mobilidade elétrica**, desde que o Neto confirme que deseja vender essa linha.
 
 ## Diretriz de conteúdo
 

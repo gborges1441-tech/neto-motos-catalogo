@@ -75,3 +75,6 @@ O wordmark será tipográfico, com “NETO” em bloco condensado e “MOTOS” 
 - A primeira tela deve revelar imediatamente uma motocicleta real dentro de um gesto de catálogo físico; atmosfera abstrata fica como camada de apoio, não como assunto principal.
 - O modo lista é um índice editorial de leitura direta, com superfícies de papel, fotos reais, numeração de capítulos e ritmo de varredura próprio — não uma cópia da capa.
 - CTAs de produto devem soar como atendimento humano do Neto, priorizando frases como “Quero entender esta moto” em vez de linguagem genérica de marketplace.
+- O verde do WhatsApp é uma ação secundária de serviço; a cor de ação da marca permanece Vermelho Lombada `#D92E2E`.
+- Toda visualização fora do livro mantém sinais de arquivo impresso: capítulos numerados, superfícies de papel, etiquetas técnicas e marcadores vermelhos de progresso.
+- O wordmark Neto Motos se comporta como um masthead editorial, com tipografia condensada e um corte diagonal ligado à virada da página.
