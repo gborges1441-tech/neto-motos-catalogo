@@ -81,7 +81,10 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMe
     <main id="catalog-content" className="cover-stage" style={{ backgroundImage: `url(${heroAtmosphere})` }}>
       <div className="cover-stage__noise" />
       <div className="cover-stage__grid" aria-hidden="true" />
-      <div className="cover-motion" aria-hidden="true"><AssetImage src={coverMoto.images[1]?.src ?? coverMoto.images[0].src} alt="" fallbackLabel={coverMoto.name} fetchPriority="high" /><span className="cover-motion__beam" /><span className="cover-motion__grain" /></div>
+      <div className="cover-motion" aria-hidden="true">
+        {coverMoto.images.slice(0, 3).map((image, index) => <div className={`cover-motion__frame cover-motion__frame--${index + 1}`} key={image.src}><AssetImage src={image.src} alt="" fallbackLabel={coverMoto.name} fetchPriority={index === 0 ? "high" : "auto"} /></div>)}
+        <span className="cover-motion__beam" /><span className="cover-motion__road" /><span className="cover-motion__grain" />
+      </div>
       <div className="cover-stage__redline" />
       <header className="cover-header">
         <BrandMark light />

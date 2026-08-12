@@ -141,9 +141,14 @@ button { border: 0; }
 .cover-stage__grid::before { content: ""; position: absolute; left: -35%; right: -35%; bottom: -28%; height: 70%; background-image: linear-gradient(rgba(217,46,46,.27) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.22) 1px, transparent 1px); background-size: 76px 76px; transform: rotateX(66deg) rotateZ(-8deg); transform-origin: bottom center; mask-image: linear-gradient(to top, black 4%, transparent 88%); animation: grid-drift 18s linear infinite; }
 .cover-stage__grid::after { content: ""; position: absolute; left: 61%; top: 8%; width: 1px; height: 120%; background: linear-gradient(transparent, rgba(217,46,46,.75), transparent); transform: rotate(24deg); animation: light-sweep 8s ease-in-out infinite; }
 .cover-stage__redline { position: absolute; top: -20%; right: 22%; width: 1px; height: 140%; background: linear-gradient(transparent, rgba(217,46,46,.7), transparent); transform: rotate(27deg); opacity: .5; z-index: 0; }
-.cover-motion { pointer-events: none; position: absolute; z-index: 0; right: -5vw; top: 12%; width: 63vw; height: 76vh; overflow: hidden; opacity: .28; transform: rotate(-7deg); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.72) 24%, #000 62%, transparent 100%); }
-.cover-motion img, .cover-motion .asset-image-fallback { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: grayscale(.82) contrast(1.25) brightness(.65); mix-blend-mode: screen; animation: cover-dolly 15s ease-in-out infinite alternate; }
+.cover-motion { pointer-events: none; position: absolute; z-index: 0; right: -5vw; top: 12%; width: 63vw; height: 76vh; overflow: hidden; opacity: .42; transform: rotate(-7deg); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.72) 24%, #000 62%, transparent 100%); }
+.cover-motion__frame { position: absolute; inset: 0; opacity: 0; transform: scale(1.07) translate3d(1%, 0, 0); animation: commercial-frame 18s ease-in-out infinite; }
+.cover-motion__frame--1 { animation-delay: 0s; }
+.cover-motion__frame--2 { animation-delay: 6s; }
+.cover-motion__frame--3 { animation-delay: 12s; }
+.cover-motion__frame img, .cover-motion__frame .asset-image-fallback { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: grayscale(.65) contrast(1.3) brightness(.62) saturate(1.15); mix-blend-mode: screen; }
 .cover-motion__beam { position: absolute; inset: -40% 32% -40% 53%; background: linear-gradient(90deg, transparent, rgba(217,46,46,.62), transparent); transform: rotate(18deg); filter: blur(10px); animation: cover-beam 7s ease-in-out infinite; }
+.cover-motion__road { position: absolute; left: -10%; right: -10%; bottom: -24%; height: 70%; transform: perspective(520px) rotateX(61deg) rotateZ(-7deg); transform-origin: bottom center; background-image: linear-gradient(rgba(217,46,46,.24) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.2) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to top, #000, transparent 85%); opacity: .34; animation: road-drift 9s linear infinite; }
 .cover-motion__grain { position: absolute; inset: 0; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 460px; opacity: .45; mix-blend-mode: soft-light; }
 .cover-header { height: 84px; position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; border-bottom: 1px solid rgba(255,255,255,.13); }
 .cover-header__edition { color: rgba(245,239,230,.54); text-transform: uppercase; font-size: 9px; letter-spacing: .18em; margin-left: auto; margin-right: 46px; }
@@ -214,7 +219,7 @@ button { border: 0; }
 .book-topline__hint { display: inline-flex; align-items: center; gap: 7px; }
 .book-spread { height: calc(100svh - 190px); max-height: 730px; min-height: 540px; margin-top: 13px; display: grid; grid-template-columns: 1fr 16px 1fr; position: relative; perspective: 1800px; filter: drop-shadow(0 30px 30px rgba(0,0,0,.28)); }
 .book-page { position: relative; overflow: hidden; background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
-.book-page--left { padding: 30px 5.5% 22px; background: linear-gradient(120deg, #f6f1e9, #e9e2d9); }
+.book-page--left { display: flex; flex-direction: column; padding: 30px 5.5% 22px; background: linear-gradient(120deg, #f6f1e9, #e9e2d9); }
 .book-page--right { padding: 27px 4.3% 18px; background: linear-gradient(115deg, #e7e0d8, #f5f0e9 48%, #eee7df); }
 .page-grain { pointer-events: none; position: absolute; inset: 0; opacity: .08; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 720px; mix-blend-mode: multiply; }
 .book-gutter { position: relative; z-index: 4; background: linear-gradient(90deg, rgba(0,0,0,.35), rgba(255,255,255,.08) 40%, rgba(0,0,0,.26)); box-shadow: 0 0 16px rgba(0,0,0,.5); }
@@ -222,7 +227,7 @@ button { border: 0; }
 .left-page__top, .right-page__meta { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; color: rgba(21,21,20,.58); text-transform: uppercase; letter-spacing: .18em; font-size: 8px; }
 .left-page__top svg { color: var(--red); }
 .chapter-index { color: var(--red); font-weight: 700; }
-.left-page__content { position: relative; z-index: 1; max-width: 410px; margin-top: 7vh; margin-left: 6%; }
+.left-page__content { position: relative; z-index: 1; max-width: 410px; max-height: calc(100% - 165px); overflow: hidden; margin-top: 7vh; margin-left: 6%; margin-bottom: 16px; }
 .left-page__content .page-kicker { color: rgba(21,21,20,.58); }
 .left-page__content h1 { margin: 15px 0 13px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(58px, 7.1vw, 112px); font-weight: 700; line-height: .82; letter-spacing: -.045em; text-transform: uppercase; color: var(--ink); }
 .lead-copy { max-width: 290px; font-size: 15px; line-height: 1.48; color: rgba(21,21,20,.72); margin: 0; }
@@ -236,8 +241,9 @@ button { border: 0; }
 .price-block span { grid-column: 1 / -1; color: rgba(21,21,20,.47); font-size: 8px; text-transform: uppercase; letter-spacing: .17em; }
 .price-block b { font-family: "Barlow Condensed", sans-serif; font-size: 29px; line-height: .9; font-weight: 600; color: var(--ink); }
 .price-block small { max-width: 88px; color: rgba(21,21,20,.42); font-size: 7px; line-height: 1.25; }
-.page-price { position: absolute; left: 28%; bottom: 16px; z-index: 2; }
-.left-page__footer { position: absolute; left: 5.5%; right: 5.5%; bottom: 23px; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 13px; }
+.left-page__lower { position: absolute; z-index: 2; left: 5.5%; right: 5.5%; bottom: 16px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 16px; }
+.page-price { position: relative; left: auto; bottom: auto; z-index: 2; grid-column: 1; max-width: 100%; min-width: 0; margin: 0; }
+.left-page__footer { position: relative; left: auto; right: auto; bottom: auto; z-index: 1; grid-column: 2; display: flex; align-items: flex-end; justify-content: flex-end; gap: 13px; }
 .page-footer-note { display: flex; flex-direction: column; gap: 5px; color: rgba(21,21,20,.45); }
 .page-footer-note span { font-family: "Barlow Condensed", sans-serif; font-size: 26px; color: var(--red); }
 .page-footer-note small { font-size: 7px; text-transform: uppercase; letter-spacing: .18em; }
@@ -401,6 +407,8 @@ button { border: 0; }
 @keyframes frame-drift { 0%, 100% { transform: rotate(24deg) translate3d(0,0,0); } 50% { transform: rotate(19deg) translate3d(3vw,-2vh,0); } }
 @keyframes cover-dolly { 0% { transform: scale(1.04) translate3d(0,0,0); } 50% { transform: scale(1.12) translate3d(-2.5%,1.2%,0); } 100% { transform: scale(1.06) translate3d(2%, -1%,0); } }
 @keyframes cover-beam { 0%, 100% { opacity: .12; transform: rotate(18deg) translateX(-10vw); } 50% { opacity: .65; transform: rotate(18deg) translateX(13vw); } }
+@keyframes commercial-frame { 0%, 27% { opacity: 0; transform: scale(1.08) translate3d(1.5%, 0, 0); } 8%, 22% { opacity: .92; } 33%, 100% { opacity: 0; transform: scale(1.18) translate3d(-2%, -1.4%, 0); } }
+@keyframes road-drift { 0% { background-position: 0 0; } 100% { background-position: 0 160px; } }
 @keyframes turn-mobile-next { 0% { transform: rotateX(0) translateY(0); opacity: 1; } 34% { transform: rotateX(-32deg) translateY(-1%); opacity: 1; } 72% { transform: rotateX(-78deg) translateY(-3%); opacity: .74; } 100% { transform: rotateX(-92deg) translateY(-4%); opacity: 0; } }
 @keyframes turn-mobile-prev { 0% { transform: rotateX(0) translateY(0); opacity: 1; } 34% { transform: rotateX(32deg) translateY(1%); opacity: 1; } 72% { transform: rotateX(78deg) translateY(3%); opacity: .74; } 100% { transform: rotateX(92deg) translateY(4%); opacity: 0; } }
 @keyframes paper-glint { 0% { opacity: .18; } 34% { opacity: .62; } 68% { opacity: .26; } 100% { opacity: .48; } }
@@ -454,12 +462,13 @@ button { border: 0; }
   .turn-sheet--next { transform-origin: center top; animation: turn-mobile-next .68s var(--ease-editorial) both; }
   .turn-sheet--prev { transform-origin: center bottom; animation: turn-mobile-prev .68s var(--ease-editorial) both; }
   .book-page { min-height: 610px; }
-  .book-page--left { padding: 27px 23px 24px; min-height: 450px; }
-  .left-page__content { margin-top: 74px; }
+  .book-page--left { display: block; padding: 27px 23px 24px; min-height: 450px; }
+  .left-page__content { max-height: none; overflow: visible; margin-top: 74px; }
   .left-page__content h1 { font-size: clamp(70px, 21vw, 112px); }
   .lead-copy { font-size: 14px; }
   .copy-line { font-size: 20px; }
   .price-block { margin-top: 17px; }
+  .left-page__lower { position: relative; left: auto; right: auto; bottom: auto; display: block; margin-top: 0; }
   .page-price { position: relative; left: auto; bottom: auto; margin: 22px 0 0; }
   .left-page__footer { position: relative; left: auto; right: auto; bottom: auto; margin-top: 28px; }
   .page-footer-note { display: none; }
@@ -506,4 +515,6 @@ button { border: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
   .cover-motion, .cover-stage__grid, .catalog-3d-field { opacity: .08; }
+  .cover-motion__frame { animation: none; opacity: .9; transform: none; }
+  .cover-motion__frame:not(.cover-motion__frame--1), .cover-motion__road { display: none; }
 }

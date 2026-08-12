@@ -1,5 +1,14 @@
 # Revisão ampliada — Neto Motos Shineray
 
+- [x] Reproduzir a colisão de preço, rodapé e paginação no desktop e definir uma composição sem sobreposição.
+- [x] Pesquisar referências de comerciais de motos com câmera baixa, estrada, produto e ritmo editorial.
+- [x] Definir roteiro de vídeo curto para a SHI 250 ou outro modelo confirmado do catálogo.
+- [x] Preparar fallback cinematográfico em loop com fotos oficiais, estrada 3D, muted/autoplay equivalente e reduced-motion.
+- [x] Integrar o motion apenas como atmosfera de capa, mantendo contraste e leitura do catálogo.
+- [x] Validar o livro em 1280px e em larguras intermediárias, além do mobile.
+- [x] Rodar build, checar performance de asset e salvar novo checkpoint.
+- [ ] Gerar e integrar o clipe final assim que a quota diária de vídeo estiver disponível ou o usuário fornecer um vídeo autorizado.
+
 - [x] Auditar todos os estados da aplicação: capa, livro, arraste, teclado, índice, lista, modais, som e WhatsApp.
 - [x] Medir problemas de hierarquia visual, sobreposição, contraste, leitura e clareza da conversão em desktop e mobile.
 - [x] Revisar o inventário atual e os assets oficiais contra as páginas de produto da Shineray.
