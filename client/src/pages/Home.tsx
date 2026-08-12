@@ -1,7 +1,7 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
 import { ArrowDown, ArrowLeft, ArrowRight, Check, ChevronRight, ExternalLink, Instagram, Menu, ShieldCheck, Sparkles, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motos } from "@/data/motos";
+import { coverMoto, motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { BookFrame } from "@/components/BookFrame";
 import { WhatsAppButton, whatsappHref } from "@/components/WhatsAppButton";
@@ -9,10 +9,11 @@ import { WhatsAppButton, whatsappHref } from "@/components/WhatsAppButton";
 const heroAtmosphere = "/manus-storage/neto-motos-hero-atmosphere_488dc940.jpg";
 const paperGrain = "/manus-storage/neto-motos-paper-grain_d1ac5370.jpg";
 const pageEdge = "/manus-storage/neto-motos-page-edge_1d61e2b4.jpg";
+const coverIndex = 0;
 
 export default function Home() {
   const [opened, setOpened] = useState(() => new URLSearchParams(window.location.search).get("mode") === "book");
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(coverIndex);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [indexOpen, setIndexOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -43,7 +44,7 @@ export default function Home() {
       {listMode ? (
         <ListMode open={listMode} onClose={() => setListMode(false)} onSelect={(index) => { setListMode(false); openCatalog(index); }} />
       ) : !opened ? (
-        <Cover onOpen={() => openCatalog(0)} onOpenAbout={() => setAboutOpen(true)} onOpenIndex={() => { setIndexOpen(true); }} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
+        <Cover onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => setAboutOpen(true)} onOpenIndex={() => { setIndexOpen(true); }} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
       ) : (
         <BookFrame motos={motos} activeIndex={activeIndex} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} />
       )}
@@ -59,6 +60,7 @@ function Cover({ onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMenuOpen 
   return (
     <main className="cover-stage" style={{ backgroundImage: `url(${heroAtmosphere})` }}>
       <div className="cover-stage__noise" />
+      <div className="cover-stage__grid" aria-hidden="true" />
       <div className="cover-stage__redline" />
       <header className="cover-header">
         <BrandMark light />
@@ -80,7 +82,7 @@ function Cover({ onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMenuOpen 
         </div>
         <div className="cover-object" aria-hidden="true">
           <div className="cover-object__shadow" />
-          <div className="cover-object__folio"><span>NETO MOTOS / PLACA 01</span><img src={motos[0].images[0].src} alt="Shineray SHI 250 em fotografia oficial" /><b>SHI 250 <i>TRAIL / 250 CC</i></b></div>
+          <div className="cover-object__folio"><span>NETO MOTOS / PLACA 01</span><img src={coverMoto.images[0].src} alt={`${coverMoto.name} em fotografia oficial`} /><b>{coverMoto.name} <i>{coverMoto.category}</i></b></div>
           <div className="cover-object__meta"><span>ARQUIVO</span><b>01—04</b></div>
           <div className="cover-object__line" />
           <div className="cover-object__hint"><ArrowDown size={14} /> deslize para explorar</div>

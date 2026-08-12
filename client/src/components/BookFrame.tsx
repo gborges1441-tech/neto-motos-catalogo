@@ -18,6 +18,7 @@ type BookFrameProps = {
 
 export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOpenAbout, soundEnabled, onToggleSound }: BookFrameProps) {
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
+  const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
   const pointerStart = useRef<number | null>(null);
@@ -59,11 +60,12 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   function requestPage(nextIndex: number, direction: "next" | "prev") {
     if (turning || nextIndex < 0 || nextIndex >= motos.length) return;
     setTurning(direction);
+    setTurnTarget(nextIndex);
     pageSound(direction);
     window.setTimeout(() => {
       onIndexChange(nextIndex);
       setTurning(null);
-    }, 430);
+    }, 560);
   }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
@@ -80,6 +82,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
   return (
     <main className="catalog-workspace">
+      <div className="catalog-3d-field" aria-hidden="true"><span /><span /><span /></div>
       <header className="catalog-header">
         <BrandMark light compact />
         <div className="catalog-header__center">
@@ -112,11 +115,13 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <h1>{current.name}</h1>
               <p className="lead-copy">{current.description}</p>
               <div className="red-stroke" />
-              <p className="editorial-copy">Uma seleção feita para quem escolhe com os olhos abertos — e com o próximo caminho já na cabeça.</p>
+              <p className="copy-line">{current.copyLine}</p>
+              <p className="editorial-copy">{current.audience}</p>
               <div className="highlight-list">
                 {current.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
               </div>
             </div>
+            <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
             <div className="left-page__footer">
               <div className="page-footer-note"><span>01</span><small>arquivo de performance</small></div>
               <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait_06c154c2.jpg" alt="Neto, da Neto Motos" /></span><span><b>Atendimento de verdade.</b><small>Conheça o Neto</small></span><ArrowRight size={14} /></button>
@@ -147,7 +152,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             </div>
           </div>
 
-          {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><img src={current.images[selectedImage].src} alt="" /></div><div className="turn-sheet__back" /></div>}
+          {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><img src={current.images[selectedImage].src} alt="" /></div><div className="turn-sheet__back"><span>{motos[turnTarget ?? activeIndex]?.name}</span><img src={motos[turnTarget ?? activeIndex]?.images[0].src} alt="" /></div></div>}
         </div>
 
         <div className="book-bottomline">
