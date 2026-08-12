@@ -1,5 +1,17 @@
 # Revisão ampliada — Neto Motos Shineray
 
+- [x] Registrar o bloqueio do Google Flow por carregamento infinito e não depender dele para a entrega.
+- [x] Confirmar a raiz como capa principal e preservar `?mode=book` e `?mode=list`.
+- [x] Validar o fallback cinematográfico local como solução de capa enquanto o MP4 não está disponível.
+- [x] Salvar a versão estável final e informar como integrar um vídeo autorizado posteriormente.
+
+- [ ] Reproduzir o estado atual da raiz e confirmar se a capa está sendo ocultada por query string ou modo persistido.
+- [ ] Auditar o roteamento e o carregamento da Home para recuperar a entrada principal.
+- [ ] Verificar se há alternativa gratuita e autorizada para um vídeo comercial real.
+- [ ] Restaurar a capa principal com entrada clara para o catálogo, índice e atendimento.
+- [ ] Validar a navegação da raiz, `?mode=book`, `?mode=list` e mobile.
+- [ ] Salvar um checkpoint final recuperado e pronto para aprovação.
+
 - [x] Reproduzir a colisão de preço, rodapé e paginação no desktop e definir uma composição sem sobreposição.
 - [x] Pesquisar referências de comerciais de motos com câmera baixa, estrada, produto e ritmo editorial.
 - [x] Definir roteiro de vídeo curto para a SHI 250 ou outro modelo confirmado do catálogo.

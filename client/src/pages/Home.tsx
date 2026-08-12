@@ -12,21 +12,40 @@ const heroAtmosphere = "/manus-storage/neto-motos-hero-atmosphere_488dc940.jpg";
 const coverIndex = 0;
 
 export default function Home() {
-  const [opened, setOpened] = useState(() => new URLSearchParams(window.location.search).get("mode") === "book");
+  const initialMode = new URLSearchParams(window.location.search).get("mode");
+  const [opened, setOpened] = useState(() => initialMode === "book");
   const [activeIndex, setActiveIndex] = useState(coverIndex);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [indexOpen, setIndexOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [listMode, setListMode] = useState(() => new URLSearchParams(window.location.search).get("mode") === "list");
+  const [listMode, setListMode] = useState(() => initialMode === "list");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const lastUrlMode = useRef(initialMode === "book" || initialMode === "list" ? initialMode : "");
 
   useEffect(() => {
     const url = new URL(window.location.href);
-    if (listMode) url.searchParams.set("mode", "list");
-    else if (opened) url.searchParams.set("mode", "book");
+    const nextMode = listMode ? "list" : opened ? "book" : "";
+    if (nextMode === lastUrlMode.current) return;
+    if (nextMode) url.searchParams.set("mode", nextMode);
     else url.searchParams.delete("mode");
-    window.history.replaceState({}, "", url);
+    window.history.pushState({}, "", url);
+    lastUrlMode.current = nextMode;
   }, [listMode, opened]);
+
+  useEffect(() => {
+    const onPopState = () => {
+      const mode = new URLSearchParams(window.location.search).get("mode");
+      const normalizedMode = mode === "book" || mode === "list" ? mode : "";
+      lastUrlMode.current = normalizedMode;
+      setListMode(normalizedMode === "list");
+      setOpened(normalizedMode === "book");
+      setIndexOpen(false);
+      setAboutOpen(false);
+      setMobileMenuOpen(false);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   useEffect(() => {
     document.title = listMode
