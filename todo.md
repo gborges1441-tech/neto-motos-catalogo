@@ -1,5 +1,12 @@
 # Revisão ampliada — Neto Motos Shineray
 
+- [x] Auditar o MP4 fornecido, suas proporções e o poster mais adequado para a capa.
+- [x] Publicar o MP4 fora do diretório do projeto e referenciar a URL persistente do WebDev.
+- [x] Integrar vídeo muted/autoplay/loop com poster, overlay editorial e fallback de movimento reduzido.
+- [x] Usar as imagens enviadas como apoio apenas onde reforçarem a capa sem confundir fichas oficiais.
+- [x] Validar carregamento, mobile, controles, contraste e build de produção.
+- [x] Salvar e entregar o checkpoint final com o comercial integrado.
+
 - [x] Registrar o bloqueio do Google Flow por carregamento infinito e não depender dele para a entrega.
 - [x] Confirmar a raiz como capa principal e preservar `?mode=book` e `?mode=list`.
 - [x] Validar o fallback cinematográfico local como solução de capa enquanto o MP4 não está disponível.

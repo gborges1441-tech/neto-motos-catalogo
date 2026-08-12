@@ -141,7 +141,15 @@ button { border: 0; }
 .cover-stage__grid::before { content: ""; position: absolute; left: -35%; right: -35%; bottom: -28%; height: 70%; background-image: linear-gradient(rgba(217,46,46,.27) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.22) 1px, transparent 1px); background-size: 76px 76px; transform: rotateX(66deg) rotateZ(-8deg); transform-origin: bottom center; mask-image: linear-gradient(to top, black 4%, transparent 88%); animation: grid-drift 18s linear infinite; }
 .cover-stage__grid::after { content: ""; position: absolute; left: 61%; top: 8%; width: 1px; height: 120%; background: linear-gradient(transparent, rgba(217,46,46,.75), transparent); transform: rotate(24deg); animation: light-sweep 8s ease-in-out infinite; }
 .cover-stage__redline { position: absolute; top: -20%; right: 22%; width: 1px; height: 140%; background: linear-gradient(transparent, rgba(217,46,46,.7), transparent); transform: rotate(27deg); opacity: .5; z-index: 0; }
-.cover-motion { pointer-events: none; position: absolute; z-index: 0; right: -5vw; top: 12%; width: 63vw; height: 76vh; overflow: hidden; opacity: .42; transform: rotate(-7deg); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.72) 24%, #000 62%, transparent 100%); }
+.cover-commercial { pointer-events: none; position: absolute; z-index: 0; right: -5vw; top: 9%; width: 68vw; height: 82vh; overflow: hidden; opacity: .54; transform: rotate(-5deg); background-position: center; background-size: cover; mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.76) 21%, #000 61%, transparent 100%); }
+.cover-commercial::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.62), transparent 36%, rgba(10,10,10,.1) 72%, rgba(10,10,10,.52)), linear-gradient(180deg, rgba(10,10,10,.12), transparent 46%, rgba(10,10,10,.72)); z-index: 1; }
+.cover-commercial__video { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.88) contrast(1.1) brightness(.7); mix-blend-mode: screen; animation: commercial-dolly 12s ease-in-out infinite alternate; }
+.cover-commercial__caption { position: absolute; z-index: 3; right: 10%; bottom: 13%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; color: rgba(245,239,230,.64); text-align: right; text-transform: uppercase; letter-spacing: .18em; font-size: 7px; }
+.cover-commercial__caption b { color: var(--paper); font-family: "Barlow Condensed", sans-serif; font-size: 16px; font-weight: 500; letter-spacing: .06em; }
+.cover-commercial__beam { position: absolute; z-index: 2; inset: -40% 32% -40% 53%; background: linear-gradient(90deg, transparent, rgba(217,46,46,.56), transparent); transform: rotate(18deg); filter: blur(10px); animation: cover-beam 7s ease-in-out infinite; }
+.cover-commercial__road { position: absolute; z-index: 2; left: -10%; right: -10%; bottom: -24%; height: 70%; transform: perspective(520px) rotateX(61deg) rotateZ(-7deg); transform-origin: bottom center; background-image: linear-gradient(rgba(217,46,46,.22) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.18) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to top, #000, transparent 85%); opacity: .28; animation: road-drift 9s linear infinite; }
+.cover-commercial__grain { position: absolute; z-index: 2; inset: 0; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 460px; opacity: .38; mix-blend-mode: soft-light; }
+.cover-motion { display: none; }
 .cover-motion__frame { position: absolute; inset: 0; opacity: 0; transform: scale(1.07) translate3d(1%, 0, 0); animation: commercial-frame 18s ease-in-out infinite; }
 .cover-motion__frame--1 { animation-delay: 0s; }
 .cover-motion__frame--2 { animation-delay: 6s; }
@@ -408,6 +416,7 @@ button { border: 0; }
 @keyframes cover-dolly { 0% { transform: scale(1.04) translate3d(0,0,0); } 50% { transform: scale(1.12) translate3d(-2.5%,1.2%,0); } 100% { transform: scale(1.06) translate3d(2%, -1%,0); } }
 @keyframes cover-beam { 0%, 100% { opacity: .12; transform: rotate(18deg) translateX(-10vw); } 50% { opacity: .65; transform: rotate(18deg) translateX(13vw); } }
 @keyframes commercial-frame { 0%, 27% { opacity: 0; transform: scale(1.08) translate3d(1.5%, 0, 0); } 8%, 22% { opacity: .92; } 33%, 100% { opacity: 0; transform: scale(1.18) translate3d(-2%, -1.4%, 0); } }
+@keyframes commercial-dolly { 0% { transform: scale(1.02) translate3d(0, 0, 0); } 50% { transform: scale(1.08) translate3d(-1.4%, .6%, 0); } 100% { transform: scale(1.04) translate3d(1%, -1%, 0); } }
 @keyframes road-drift { 0% { background-position: 0 0; } 100% { background-position: 0 160px; } }
 @keyframes turn-mobile-next { 0% { transform: rotateX(0) translateY(0); opacity: 1; } 34% { transform: rotateX(-32deg) translateY(-1%); opacity: 1; } 72% { transform: rotateX(-78deg) translateY(-3%); opacity: .74; } 100% { transform: rotateX(-92deg) translateY(-4%); opacity: 0; } }
 @keyframes turn-mobile-prev { 0% { transform: rotateX(0) translateY(0); opacity: 1; } 34% { transform: rotateX(32deg) translateY(1%); opacity: 1; } 72% { transform: rotateX(78deg) translateY(3%); opacity: .74; } 100% { transform: rotateX(92deg) translateY(4%); opacity: 0; } }
@@ -443,6 +452,8 @@ button { border: 0; }
   .open-book-button { width: 100%; max-width: 280px; }
   .cover-proof { margin-left: 2px; gap: 7px 13px; max-width: 280px; font-size: 6px; }
   .cover-object { left: 25%; top: 70%; width: 72vw; height: 19vh; opacity: .42; transform: rotate(-12deg); }
+  .cover-commercial { right: -15vw; top: 54%; width: 112vw; height: 44vh; opacity: .28; transform: rotate(-4deg); mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.6) 23%, #000 66%, transparent 100%); }
+  .cover-commercial__caption { display: none; }
   .cover-object__folio { top: 11%; left: 12%; width: 74%; height: 72%; }
   .cover-object__folio b { font-size: 15px; }
   .cover-object__meta { right: -21px; top: 4%; }
@@ -514,7 +525,7 @@ button { border: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
-  .cover-motion, .cover-stage__grid, .catalog-3d-field { opacity: .08; }
-  .cover-motion__frame { animation: none; opacity: .9; transform: none; }
-  .cover-motion__frame:not(.cover-motion__frame--1), .cover-motion__road { display: none; }
+  .cover-commercial, .cover-stage__grid, .catalog-3d-field { opacity: .08; }
+  .cover-commercial__video { display: none; }
+  .cover-commercial__beam, .cover-commercial__road { display: none; }
 }

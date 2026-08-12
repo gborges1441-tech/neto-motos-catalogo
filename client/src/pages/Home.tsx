@@ -8,7 +8,10 @@ import { AssetImage } from "@/components/AssetImage";
 import { WhatsAppButton, whatsappHref } from "@/components/WhatsAppButton";
 import { catalogFamilies, familyFromCategory, formatChapter, type CatalogFamily } from "@/lib/catalog";
 
+// Arquivo de Performance: a capa trata o vídeo como um anúncio editorial silencioso, com a moto como assunto e o catálogo como moldura.
 const heroAtmosphere = "/manus-storage/neto-motos-hero-atmosphere_488dc940.jpg";
+const commercialVideo = "/manus-storage/neto-motos-commercial_e09bc38e.mp4";
+const commercialPoster = "/manus-storage/neto-motos-commercial-poster_c430828f.jpg";
 const coverIndex = 0;
 
 export default function Home() {
@@ -100,9 +103,12 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMe
     <main id="catalog-content" className="cover-stage" style={{ backgroundImage: `url(${heroAtmosphere})` }}>
       <div className="cover-stage__noise" />
       <div className="cover-stage__grid" aria-hidden="true" />
-      <div className="cover-motion" aria-hidden="true">
-        {coverMoto.images.slice(0, 3).map((image, index) => <div className={`cover-motion__frame cover-motion__frame--${index + 1}`} key={image.src}><AssetImage src={image.src} alt="" fallbackLabel={coverMoto.name} fetchPriority={index === 0 ? "high" : "auto"} /></div>)}
-        <span className="cover-motion__beam" /><span className="cover-motion__road" /><span className="cover-motion__grain" />
+      <div className="cover-commercial" style={{ backgroundImage: `url(${commercialPoster})` }} aria-hidden="true">
+        <video className="cover-commercial__video" autoPlay loop muted playsInline poster={commercialPoster} preload="metadata">
+          <source src={commercialVideo} type="video/mp4" />
+        </video>
+        <span className="cover-commercial__beam" /><span className="cover-commercial__road" /><span className="cover-commercial__grain" />
+        <div className="cover-commercial__caption"><span>FILME / SHI 250</span><b>É durabilidade. É confiança. É Shineray.</b></div>
       </div>
       <div className="cover-stage__redline" />
       <header className="cover-header">
