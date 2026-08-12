@@ -14,11 +14,12 @@ type BookFrameProps = {
   onIndexChange: (index: number) => void;
   onOpenIndex: () => void;
   onOpenAbout: () => void;
+  onBackToCover: () => void;
   soundEnabled: boolean;
   onToggleSound: () => void;
 };
 
-export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOpenAbout, soundEnabled, onToggleSound }: BookFrameProps) {
+export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOpenAbout, onBackToCover, soundEnabled, onToggleSound }: BookFrameProps) {
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
   const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -31,6 +32,10 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     setSelectedImage(0);
     setActiveHotspot(null);
   }, [activeIndex]);
+
+  useEffect(() => {
+    setActiveHotspot(null);
+  }, [selectedImage]);
 
   useEffect(() => {
     current.images.forEach((image) => {
@@ -85,8 +90,9 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     turnTimer.current = window.setTimeout(() => {
       onIndexChange(nextIndex);
       setTurning(null);
+      setTurnTarget(null);
       turnTimer.current = null;
-    }, 680);
+    }, 980);
   }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
@@ -123,6 +129,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <b>2026</b>
         </div>
         <div className="catalog-header__actions">
+          <button className="header-link" type="button" onClick={onBackToCover}><ArrowLeft size={14} /> <span>Capa</span></button>
           <button className="header-link" type="button" onClick={onOpenAbout}><Info size={14} /> <span>Sobre o Neto</span></button>
           <button className="header-link" type="button" onClick={onOpenIndex}><Grid2X2 size={14} /> <span>Índice</span></button>
           <button className="header-link header-link--sound" type="button" onClick={onToggleSound} aria-pressed={soundEnabled}><span className={`sound-led ${soundEnabled ? "sound-led--on" : ""}`} />{soundEnabled ? "Som" : "Mudo"}</button>
@@ -158,7 +165,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
               <div className="left-page__footer">
                 <div className="page-footer-note"><span>{formatChapter(activeIndex, motos.length).split(" /")[0]}</span><small>arquivo de performance</small></div>
-                <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait_06c154c2.jpg" alt="Neto, da Neto Motos" /></span><span><b>Atendimento de verdade.</b><small>Conheça o Neto</small></span><ArrowRight size={14} /></button>
+                <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Atendimento de verdade.</b><small>Conheça o Neto</small></span><ArrowRight size={14} /></button>
               </div>
             </div>
           </div>
@@ -171,7 +178,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="moto-visual">
               <div className="moto-visual__wash" />
               <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
-              <MotoHotspots hotspots={current.hotspots} activeId={activeHotspot} onSelect={(hotspot: MotoHotspot | null) => setActiveHotspot(hotspot?.id ?? null)} />
+              <MotoHotspots hotspots={selectedImage === 0 ? current.hotspots : []} activeId={activeHotspot} onSelect={(hotspot: MotoHotspot | null) => setActiveHotspot(hotspot?.id ?? null)} />
               <span className="image-caption">Imagem oficial Shineray <i>•</i> consulte autorização de uso</span>
             </div>
             <div className="gallery-strip">

@@ -121,11 +121,17 @@ function images(name: string, src: string, extra: MotoImage[] = []): MotoImage[]
   ];
 }
 
-function hotspots(name: string, primary: string, secondary: string): MotoHotspot[] {
-  return [
-    { id: "identity", label: "Design", detail: `Veja de perto a presença visual da ${name}.`, value: primary, x: 53, y: 31 },
-    { id: "choice", label: "Escolha", detail: "Quer saber se este modelo combina com a sua rotina? O Neto explica sem enrolação.", value: secondary, x: 69, y: 66 },
-  ];
+function specHotspots(specs: Array<{ label: string; value: string }>): MotoHotspot[] {
+  const factual = specs.filter(({ label, value }) => !/consultar|sob consulta|disponibilidade|cores/i.test(`${label} ${value}`));
+  const positions = [[42, 61], [70, 62], [58, 27]] as const;
+  return factual.slice(0, 3).map(({ label, value }, index) => ({
+    id: `spec-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+    label,
+    detail: `${label} informado na ficha oficial: ${value}. Confirme a configuração da unidade disponível com o Neto.`,
+    value,
+    x: positions[index][0],
+    y: positions[index][1],
+  }));
 }
 
 function makeMoto({ id, name, category, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [], customHotspots }: {
@@ -156,7 +162,7 @@ function makeMoto({ id, name, category, price, description, copyLine, audience, 
     highlights,
     images: images(name, image, [...(officialGalleries[id] ?? []), ...extraImages]),
     specs,
-    hotspots: customHotspots ?? hotspots(name, category, "Conversa direta"),
+    hotspots: customHotspots ?? specHotspots(specs),
     source,
     sourceLabel: "Fonte de produto e imagem: Shineray do Brasil",
   };

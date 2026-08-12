@@ -88,7 +88,7 @@ export default function Home() {
       ) : !opened ? (
         <Cover total={motos.length} onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => { setAboutOpen(true); setIndexOpen(false); }} onOpenIndex={() => { setIndexOpen(true); setAboutOpen(false); }} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
       ) : (
-        <BookFrame motos={motos} activeIndex={activeIndex} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} />
+        <BookFrame motos={motos} activeIndex={activeIndex} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} />
       )}
 
       {!listMode && <IndexDrawer open={indexOpen} activeIndex={activeIndex} onClose={() => setIndexOpen(false)} onSelect={(index) => { setIndexOpen(false); openCatalog(index); }} onListMode={() => { setIndexOpen(false); setListMode(true); }} />}
@@ -128,6 +128,7 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMe
           <h1><span>Seu próximo</span><em>capítulo</em><span>começa aqui.</span></h1>
           <p>Uma curadoria de motocicletas reais, atendimento direto e escolhas feitas para seguir em frente.</p>
           <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Abrir catálogo</b><small>Folhear a edição 2026</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Já sabe o que procura?</span><b>Fale com o Neto</b><ArrowRight size={14} /></a>
           <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> capítulos</span><span><b>100%</b> fotos oficiais</span><span><b>direto</b> no WhatsApp</span></div>
         </div>
         <div className="cover-object" aria-hidden="true">
@@ -196,8 +197,8 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
       <button className="overlay-backdrop" type="button" onClick={onClose} aria-label="Fechar apresentação" />
       <section className="about-card" role="dialog" aria-modal="true" aria-labelledby="about-title">
         <button ref={closeRef} type="button" className="icon-button about-card__close" onClick={onClose} aria-label="Fechar apresentação"><X size={18} /></button>
-        <div className="about-card__image"><AssetImage src="/manus-storage/neto-portrait_06c154c2.jpg" alt="Neto, da Neto Motos" fallbackLabel="Neto Motos" /><span>NETO / 2026</span></div>
-        <div className="about-card__copy"><span className="page-kicker">POR TRÁS DA ESCOLHA</span><h2 id="about-title">Quem é<br /><em>o Neto?</em></h2><p>Atendimento próximo, transparência e compromisso para ajudar cada cliente a encontrar a moto ideal — da primeira pergunta até a entrega.</p><div className="about-card__line" /><div className="about-card__contact"><span>WhatsApp direto</span><b>(11) 97847-3480</b></div><WhatsAppButton label="Falar com o Neto" /></div>
+        <div className="about-card__image"><AssetImage src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" fallbackLabel="Neto Motos" /><span>NETO / CONSULTOR</span></div>
+        <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO QUE AJUDA A DECIDIR</span><h2 id="about-title">Escolha com<br /><em>clareza.</em></h2><p>Você fala direto com quem conhece o catálogo, entende sua rotina e ajuda a comparar disponibilidade, condições e o modelo que realmente faz sentido para o seu caminho.</p><div className="about-card__line" /><div className="about-card__contact"><span>Converse agora no WhatsApp</span><b>(11) 97847-3480</b></div><WhatsAppButton label="Quero uma recomendação" /></div>
       </section>
     </div>
   );
@@ -212,7 +213,7 @@ function ListMode({ open, onClose, onSelect }: { open: boolean; onClose: () => v
       <header className="list-mode__header"><BrandMark light compact /><div><span>Modo lista</span><b>Catálogo sem animação</b></div><span className="list-mode__header-note">ARQUIVO / {motos.length} CAPÍTULOS</span><button type="button" className="icon-button" onClick={onClose} aria-label="Fechar modo lista"><X size={18} /></button></header>
       <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Toda a linha.<br /><em>Sem pressa.</em></h2><p>Uma alternativa acessível à experiência de folhear. Motos, scooters, elétricas e mobilidade com fotos reais, dados claros e um caminho direto para conversar.</p></div>
       <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por família">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => setFamily(item)}>{item}</button>)}<span>{entries.length} capítulos</span></div>
-      <div className="list-mode__grid">{entries.map(({ moto, index }) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading="lazy" /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver capítulo <ArrowRight size={14} /></button></div></div></article>)}</div>
+        <div className="list-mode__grid">{entries.map(({ moto, index }) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading="lazy" /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver detalhes e condições <ArrowRight size={14} /></button></div></div></article>)}</div>
       <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><WhatsAppButton compact label="Falar com o Neto" /></footer>
     </div>
   );

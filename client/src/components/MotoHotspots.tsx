@@ -11,9 +11,11 @@ type MotoHotspotsProps = {
 export function MotoHotspots({ hotspots, activeId, onSelect }: MotoHotspotsProps) {
   const active = hotspots.find((hotspot) => hotspot.id === activeId) ?? null;
 
+  if (hotspots.length === 0) return null;
+
   return (
     <div className={`moto-hotspots ${active ? "moto-hotspots--active" : ""}`}>
-      <div className="hotspot-note"><Crosshair size={12} /> explore a moto</div>
+      <div className="hotspot-note"><Crosshair size={12} /> toque para ver a ficha</div>
       {hotspots.map((hotspot) => (
         <button
           key={hotspot.id}
@@ -29,7 +31,7 @@ export function MotoHotspots({ hotspots, activeId, onSelect }: MotoHotspotsProps
         </button>
       ))}
       {active && (
-        <div className="hotspot-card" role="status">
+        <div className="hotspot-card" role="dialog" aria-label={`Detalhe técnico: ${active.label}`}>
           <button type="button" className="hotspot-close" onClick={() => onSelect(null)} aria-label="Fechar detalhe"><X size={14} /></button>
           <span className="hotspot-card__eyebrow">{active.label}</span>
           <strong>{active.value}</strong>
@@ -39,4 +41,3 @@ export function MotoHotspots({ hotspots, activeId, onSelect }: MotoHotspotsProps
     </div>
   );
 }
-

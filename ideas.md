@@ -81,3 +81,6 @@ O wordmark será tipográfico, com “NETO” em bloco condensado e “MOTOS” 
 - A fotografia real da moto é sempre o artefato dominante; papel, grid e sinais técnicos sustentam a leitura sem competir com o produto.
 - Vermelho Lombada `#D92E2E` permanece a cor principal de ação e navegação; o verde do WhatsApp fica restrito a uma pista de serviço discreta.
 - O masthead deve aparecer junto de edição, capítulo ou contexto Shineray, para que a marca leia como publicação e não como logo genérico de navbar.
+- A capa deve fazer a motocicleta ou a página impressa com a motocicleta ser o artefato visual dominante; vídeo e atmosfera são suporte.
+- O modo lista preserva a gramática de arquivo impresso, com textura, capítulos, molduras, marcadores e miniaturas reais.
+- O Vermelho Lombada permanece reservado a ação, progresso, capítulo e registro editorial.

@@ -1,5 +1,13 @@
 # Revisão ampliada — Neto Motos Shineray
 
+- [x] Auditar por que a capa desapareceu da jornada percebida e restaurá-la como primeira etapa.
+- [x] Substituir o retrato atual do Neto por um retrato profissional e coerente com a marca.
+- [x] Revisar hotspots por modelo e por foto, removendo mensagens genéricas ou sem base verificável.
+- [x] Reescrever hotspots usando somente especificações e benefícios confirmados nas fontes oficiais.
+- [x] Reforçar a jornada de venda com CTA, contato, prova de atendimento e próximos passos claros.
+- [x] Melhorar a virada para simular uma folha com curvatura, sombra, verso e arrasto natural.
+- [x] Validar hotspots, capa, livro, galeria e conversão em desktop e mobile.
+
 - [x] Auditar o MP4 fornecido, suas proporções e o poster mais adequado para a capa.
 - [x] Publicar o MP4 fora do diretório do projeto e referenciar a URL persistente do WebDev.
 - [x] Integrar vídeo muted/autoplay/loop com poster, overlay editorial e fallback de movimento reduzido.
