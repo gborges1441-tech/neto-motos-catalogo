@@ -5,6 +5,8 @@ import { Moto, MotoHotspot } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { MotoHotspots } from "@/components/MotoHotspots";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { AssetImage } from "@/components/AssetImage";
+import { formatChapter } from "@/lib/catalog";
 
 type BookFrameProps = {
   motos: Moto[];
@@ -22,6 +24,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
   const pointerStart = useRef<number | null>(null);
+  const turnTimer = useRef<number | null>(null);
   const current = motos[activeIndex];
 
   useEffect(() => {
@@ -30,7 +33,23 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   }, [activeIndex]);
 
   useEffect(() => {
+    current.images.forEach((image) => {
+      const preload = new Image();
+      preload.decoding = "async";
+      preload.src = image.src;
+    });
+  }, [current.images]);
+
+  useEffect(() => {
+    return () => {
+      if (turnTimer.current !== null) window.clearTimeout(turnTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest("button, a, input, textarea, select, [contenteditable='true']")) return;
       if (event.key === "ArrowRight") requestPage(activeIndex + 1, "next");
       if (event.key === "ArrowLeft") requestPage(activeIndex - 1, "prev");
     };
@@ -62,26 +81,40 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     setTurning(direction);
     setTurnTarget(nextIndex);
     pageSound(direction);
-    window.setTimeout(() => {
+    if (turnTimer.current !== null) window.clearTimeout(turnTimer.current);
+    turnTimer.current = window.setTimeout(() => {
       onIndexChange(nextIndex);
       setTurning(null);
+      turnTimer.current = null;
     }, 680);
   }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    const target = event.target as HTMLElement;
+    if (target.closest("button, a, input, textarea, select, [data-no-swipe]")) {
+      pointerStart.current = null;
+      return;
+    }
     pointerStart.current = event.clientX;
+    event.currentTarget.setPointerCapture?.(event.pointerId);
   }
 
   function onPointerUp(event: React.PointerEvent<HTMLDivElement>) {
     if (pointerStart.current === null) return;
     const distance = event.clientX - pointerStart.current;
     pointerStart.current = null;
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     if (Math.abs(distance) < 55) return;
     requestPage(activeIndex + (distance < 0 ? 1 : -1), distance < 0 ? "next" : "prev");
   }
 
+  function onPointerCancel(event: React.PointerEvent<HTMLDivElement>) {
+    pointerStart.current = null;
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  }
+
   return (
-    <main className="catalog-workspace">
+    <main id="catalog-content" className="catalog-workspace">
       <div className="catalog-3d-field" aria-hidden="true"><span /><span /><span /></div>
       <header className="catalog-header">
         <BrandMark light compact />
@@ -98,7 +131,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
       <div className="catalog-rule" />
 
-      <section className="book-shell" aria-label="Catálogo interativo de motocicletas" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+        <section className="book-shell" aria-label="Catálogo interativo de motocicletas" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={onPointerCancel}>
         <div className="book-topline">
           <span><span className="live-dot" /> Neto Motos / Shineray</span>
           <span className="book-topline__hint"><MousePointer2 size={12} /> arraste para folhear</span>
@@ -123,7 +156,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             </div>
             <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
             <div className="left-page__footer">
-              <div className="page-footer-note"><span>01</span><small>arquivo de performance</small></div>
+              <div className="page-footer-note"><span>{formatChapter(activeIndex, motos.length).split(" /")[0]}</span><small>arquivo de performance</small></div>
               <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait_06c154c2.jpg" alt="Neto, da Neto Motos" /></span><span><b>Atendimento de verdade.</b><small>Conheça o Neto</small></span><ArrowRight size={14} /></button>
             </div>
           </div>
@@ -132,10 +165,10 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
           <div className="book-page book-page--right">
             <div className="page-grain" />
-            <div className="right-page__meta"><span>{current.category}</span><span>NETO / {String(activeIndex + 1).padStart(2, "0")} — 04</span></div>
+            <div className="right-page__meta"><span>{current.category}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
-              <img key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} loading={activeIndex === 0 ? "eager" : "lazy"} />
+              <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               <MotoHotspots hotspots={current.hotspots} activeId={activeHotspot} onSelect={(hotspot: MotoHotspot | null) => setActiveHotspot(hotspot?.id ?? null)} />
               <span className="image-caption">Imagem oficial Shineray <i>•</i> consulte autorização de uso</span>
             </div>
@@ -144,7 +177,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <div className="gallery-thumbs">
                 {current.images.map((image, index) => (
                   <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => setSelectedImage(index)} aria-label={`Abrir imagem: ${image.label}`}>
-                    <img src={image.src} alt="" />
+                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" />
                     <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
                 ))}
@@ -152,13 +185,13 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             </div>
           </div>
 
-          {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><img src={current.images[selectedImage].src} alt="" /></div><div className="turn-sheet__back"><span>{motos[turnTarget ?? activeIndex]?.name}</span><img src={motos[turnTarget ?? activeIndex]?.images[0].src} alt="" /></div></div>}
+          {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={current.images[selectedImage].src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{motos[turnTarget ?? activeIndex]?.name}</span><AssetImage src={motos[turnTarget ?? activeIndex]?.images[0].src} alt="" fallbackLabel={motos[turnTarget ?? activeIndex]?.name} /></div></div>}
         </div>
 
         <div className="book-bottomline">
-          <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)}><ChevronLeft size={17} /><span>Anterior</span></button>
-          <div className="book-progress" aria-label={`Página ${activeIndex + 1} de ${motos.length}`}><span className="book-progress__count">{String(activeIndex + 1).padStart(2, "0")} <i>/</i> {String(motos.length).padStart(2, "0")}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
-          <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Quero entender esta moto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)}><span>Próxima</span><ChevronRight size={17} /></button></div>
+          <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)} aria-label="Abrir capítulo anterior"><ChevronLeft size={17} /><span>Anterior</span></button>
+          <div className="book-progress" aria-live="polite" aria-label={`Capítulo ${activeIndex + 1} de ${motos.length}`}><span className="book-progress__count">{formatChapter(activeIndex, motos.length)}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
+          <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Quero entender esta moto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
         </div>
       </section>
 

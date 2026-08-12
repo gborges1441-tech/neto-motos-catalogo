@@ -1,5 +1,15 @@
 # Revisão ampliada — Neto Motos Shineray
 
+- [x] Auditar todos os estados da aplicação: capa, livro, arraste, teclado, índice, lista, modais, som e WhatsApp.
+- [x] Medir problemas de hierarquia visual, sobreposição, contraste, leitura e clareza da conversão em desktop e mobile.
+- [x] Revisar o inventário atual e os assets oficiais contra as páginas de produto da Shineray.
+- [x] Definir uma arquitetura de conteúdo mais forte para cada modelo, incluindo objeções, prova e próximo passo.
+- [x] Refatorar a interação de virar página para uma metáfora física consistente e tolerante a interrupções.
+- [x] Melhorar o primeiro carregamento, lazy loading, estados de erro de imagem e comportamento offline parcial.
+- [x] Revisar acessibilidade: foco, teclado, reduced motion, nomes de botões, semântica e contraste.
+- [x] Validar a experiência com screenshots desktop/mobile, TypeScript, build e logs do navegador.
+- [x] Salvar uma nova versão de checkpoint após a auditoria aplicada.
+
 - [x] Auditar visualmente a sobreposição de preços e o comportamento da virada atual.
 - [x] Confirmar no site oficial se existe algum modelo de duas rodas ausente do banco atual.
 - [x] Buscar galerias oficiais adicionais para os modelos que hoje têm apenas uma imagem.

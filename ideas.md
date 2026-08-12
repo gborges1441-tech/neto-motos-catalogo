@@ -78,3 +78,6 @@ O wordmark será tipográfico, com “NETO” em bloco condensado e “MOTOS” 
 - O verde do WhatsApp é uma ação secundária de serviço; a cor de ação da marca permanece Vermelho Lombada `#D92E2E`.
 - Toda visualização fora do livro mantém sinais de arquivo impresso: capítulos numerados, superfícies de papel, etiquetas técnicas e marcadores vermelhos de progresso.
 - O wordmark Neto Motos se comporta como um masthead editorial, com tipografia condensada e um corte diagonal ligado à virada da página.
+- A fotografia real da moto é sempre o artefato dominante; papel, grid e sinais técnicos sustentam a leitura sem competir com o produto.
+- Vermelho Lombada `#D92E2E` permanece a cor principal de ação e navegação; o verde do WhatsApp fica restrito a uma pista de serviço discreta.
+- O masthead deve aparecer junto de edição, capítulo ou contexto Shineray, para que a marca leia como publicação e não como logo genérico de navbar.

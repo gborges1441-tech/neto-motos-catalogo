@@ -3,7 +3,7 @@ type BrandMarkProps = { light?: boolean; compact?: boolean };
 
 export function BrandMark({ light = false, compact = false }: BrandMarkProps) {
   return (
-    <div className={`brand-lockup ${light ? "brand-lockup--light" : ""} ${compact ? "brand-lockup--compact" : ""}`}>
+    <div className={`brand-lockup ${light ? "brand-lockup--light" : ""} ${compact ? "brand-lockup--compact" : ""}`} role="img" aria-label="Neto Motos">
       <span className="brand-symbol" aria-hidden="true"><i /><i /></span>
       <span className="brand-wordmark">
         <strong>NETO</strong>
@@ -12,4 +12,3 @@ export function BrandMark({ light = false, compact = false }: BrandMarkProps) {
     </div>
   );
 }
-
