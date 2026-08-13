@@ -171,3 +171,7 @@
 - [x] Preservar pinch, double tap, arraste e swipe no visualizador mobile.
 - [x] Ajustar o CTA da página da moto para “QUERO CONHECER ESSA MOTO” com mensagem dinâmica no WhatsApp.
 - [x] Validar 1920x1080, 1600x900, 1440x900, 1366x768, 1280x720, 1024x768, tablet portrait e mobile.
+
+- [x] Reauditar a implementação atual contra o briefing repetido e confirmar se não há lacunas reais.
+- [x] Revalidar lente, fotos inteiras, escala, CTA contextual e WhatsApp flutuante sem alterar copy ou arquitetura.
+- [x] Reexecutar build, logs e screenshots essenciais antes de reportar a entrega.
