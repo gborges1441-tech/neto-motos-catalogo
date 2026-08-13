@@ -101,3 +101,8 @@
 - [x] Criar formulário de orçamento com nome, WhatsApp, modelo, faixa de investimento, uso e mensagem.
 - [x] Validar o formulário no cliente, oferecer confirmação clara e manter alternativa direta pelo WhatsApp.
 - [x] Validar os novos fluxos em desktop, tablet, mobile, teclado, reduced motion e build.
+
+- [x] Aumentar a logo no cabeçalho da capa, livro e modo lista sem desequilibrar a navegação.
+- [x] Ajustar a escala compacta da marca no celular e preservar contraste no fundo escuro.
+- [x] Refinar espaçamento, alinhamento e presença dos CTAs após ampliar a logo.
+- [x] Validar visualmente a harmonia da nova escala em desktop, tablet e mobile.

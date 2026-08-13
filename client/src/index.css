@@ -113,9 +113,9 @@ button { border: 0; }
 
 .site-shell { min-height: 100svh; background: var(--ink); overflow: hidden; }
 .site-shell--opened { background: #171716; }
-.brand-lockup { display: inline-flex; align-items: center; width: 154px; height: 54px; overflow: hidden; color: var(--ink); }
+.brand-lockup { display: inline-flex; align-items: center; width: 190px; height: 68px; overflow: hidden; color: var(--ink); }
 .brand-lockup--light { color: var(--paper); }
-.brand-lockup--compact { width: 112px; height: 40px; }
+.brand-lockup--compact { width: 145px; height: 52px; }
 .brand-lockup__asset { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .brand-symbol { width: 31px; height: 28px; display: inline-flex; align-items: center; justify-content: center; position: relative; transform: skewX(-9deg); }
 .brand-symbol::before, .brand-symbol::after, .brand-symbol i { content: ""; position: absolute; width: 19px; height: 7px; border-radius: 0 1px 1px 0; background: var(--red); transform: rotate(45deg); }
@@ -507,6 +507,8 @@ button { border: 0; }
 }
 
 @media (max-width: 680px) {
+  .brand-lockup { width: 158px; height: 56px; }
+  .brand-lockup--compact { width: 128px; height: 46px; }
   .cover-header { height: 70px; padding: 0 20px; }
   .cover-header__edition { display: none; }
   .cover-menu-toggle { display: grid; place-items: center; }
