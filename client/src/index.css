@@ -414,7 +414,9 @@ button { border: 0; }
 .about-card__contact { display: flex; flex-direction: column; gap: 4px; margin: 25px 0 18px; }
 .about-card__contact span { color: rgba(21,21,20,.45); font-size: 8px; text-transform: uppercase; letter-spacing: .18em; }
 .about-card__contact b { font-family: "Barlow Condensed", sans-serif; font-size: 22px; font-weight: 500; }
-.about-card__copy .whatsapp-button { width: fit-content; }
+.about-card__copy .whatsapp-button, .about-card__whatsapp { display: inline-flex !important; align-items: center; justify-content: center; width: max-content !important; min-width: 250px; min-height: 54px; color: #fff !important; opacity: 1 !important; visibility: visible !important; line-height: 1.1; }
+.about-card__whatsapp > span, .about-card__whatsapp > svg { display: inline-flex !important; align-items: center; opacity: 1 !important; visibility: visible !important; color: #fff !important; }
+.about-card__whatsapp .whatsapp-mark { display: inline-flex !important; opacity: 1 !important; visibility: visible !important; }
 .about-card__faq { margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(21,21,20,.13); }
 .about-card__faq details { padding: 10px 0; border-bottom: 1px solid rgba(21,21,20,.1); }
 .about-card__faq summary { color: rgba(21,21,20,.78); font-size: 11px; font-weight: 800; cursor: pointer; list-style: none; }

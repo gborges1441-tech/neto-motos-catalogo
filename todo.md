@@ -190,3 +190,7 @@
 - [x] Adicionar halo neon verde e pulsação suave ao CTA WhatsApp da ficha, formulário e botão flutuante.
 - [x] Preservar contraste, hover, active, foco visível e reduced motion sem animação agressiva.
 - [x] Validar desktop, mobile, build e logs antes de salvar o checkpoint.
+
+- [x] Corrigir o CTA de WhatsApp vazio na página específica, restaurando ícone e texto.
+- [x] Garantir empilhamento, contraste e visibilidade do conteúdo com o neon ativo.
+- [x] Validar a página problemática, os demais CTAs, build e logs antes do checkpoint.

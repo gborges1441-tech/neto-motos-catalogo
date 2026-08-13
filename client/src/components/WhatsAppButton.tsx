@@ -7,6 +7,7 @@ type WhatsAppButtonProps = {
   model?: string;
   compact?: boolean;
   label?: string;
+  className?: string;
 };
 
 export function whatsappHref(model?: string) {
@@ -38,10 +39,10 @@ export function quoteHref(details: QuoteDetails) {
   return `https://wa.me/5511978473480?text=${encodeURIComponent(message)}`;
 }
 
-export function WhatsAppButton({ model, compact = false, label }: WhatsAppButtonProps) {
+export function WhatsAppButton({ model, compact = false, label, className = "" }: WhatsAppButtonProps) {
   return (
     <a
-      className={`whatsapp-button ${compact ? "whatsapp-button--compact" : ""}`}
+      className={`whatsapp-button ${compact ? "whatsapp-button--compact" : ""} ${className}`.trim()}
       href={whatsappHref(model)}
       target="_blank"
       rel="noreferrer"
