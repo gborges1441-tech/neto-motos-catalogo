@@ -75,7 +75,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         return;
       }
       const availableWidth = Math.min(shell.clientWidth, 1320);
-      const reservedHeight = window.innerWidth <= 1100 ? 222 : 232;
+      const reservedHeight = window.innerWidth <= 1100 ? 194 : 202;
       const availableHeight = Math.max(360, window.innerHeight - reservedHeight);
       const widthScale = availableWidth / 1320;
       const heightScale = availableHeight / 710;

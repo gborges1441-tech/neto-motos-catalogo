@@ -194,3 +194,8 @@
 - [x] Corrigir o CTA de WhatsApp vazio na página específica, restaurando ícone e texto.
 - [x] Garantir empilhamento, contraste e visibilidade do conteúdo com o neon ativo.
 - [x] Validar a página problemática, os demais CTAs, build e logs antes do checkpoint.
+
+- [x] Aumentar o spread desktop pela área útil real, reduzindo o vazio ao redor do livro.
+- [x] Ajustar o gutter central para uma separação física estreita e proporcional entre as páginas.
+- [x] Reposicionar o WhatsApp flutuante no desktop para não sobrepor o CTA inferior.
+- [x] Manter as regras mobile intactas e validar desktop em 1280, 1366 e 1440 pixels.
