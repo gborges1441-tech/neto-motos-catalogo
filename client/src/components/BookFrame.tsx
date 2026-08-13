@@ -24,7 +24,8 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
   const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
-  const pointerStart = useRef<number | null>(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
   const current = motos[activeIndex];
 
@@ -38,9 +39,10 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
       preload.decoding = "async";
       preload.src = image.src;
     };
-    current.images.forEach(preload);
-    return undefined;
-  }, [current.images]);
+    const nextMoto = motos[activeIndex + 1];
+    const priorityImages = [current.images[selectedImage], current.images[0], nextMoto?.images[0]].filter(Boolean) as Moto["images"][number][];
+    priorityImages.forEach(preload);
+  }, [activeIndex, current.images, motos, selectedImage]);
 
   useEffect(() => {
     return () => {
@@ -99,16 +101,18 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
       pointerStart.current = null;
       return;
     }
-    pointerStart.current = event.clientX;
+    pointerStart.current = { x: event.clientX, y: event.clientY };
     event.currentTarget.setPointerCapture?.(event.pointerId);
   }
 
   function onPointerUp(event: React.PointerEvent<HTMLDivElement>) {
     if (pointerStart.current === null) return;
-    const distance = event.clientX - pointerStart.current;
+    const distance = event.clientX - pointerStart.current.x;
+    const verticalDistance = event.clientY - pointerStart.current.y;
     pointerStart.current = null;
+    setHasInteracted(true);
     if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-    if (Math.abs(distance) < 55) return;
+    if (Math.abs(distance) < 55 || Math.abs(distance) < Math.abs(verticalDistance) * 1.15) return;
     requestPage(activeIndex + (distance < 0 ? 1 : -1), distance < 0 ? "next" : "prev");
   }
 
@@ -184,7 +188,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <div className="gallery-thumbs">
                 {current.images.map((image, index) => (
                   <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}>
-                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" fetchPriority="high" decoding="sync" />
+                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading={selectedImage === index ? "eager" : "lazy"} fetchPriority={selectedImage === index ? "high" : "low"} />
                     <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
                 ))}
@@ -194,6 +198,28 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
           {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={current.images[selectedImage].src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{motos[turnTarget ?? activeIndex]?.name}</span><AssetImage src={motos[turnTarget ?? activeIndex]?.images[0].src} alt="" fallbackLabel={motos[turnTarget ?? activeIndex]?.name} /></div></div>}
         </div>
+
+        <article className={`book-mobile-page ${turning ? `book-mobile-page--turning-${turning}` : ""}`} aria-label={`Página única do catálogo: ${current.name}`}>
+          <div className="book-mobile-page__topline"><span>{current.eyebrow}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
+          {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
+          <div className="book-mobile-page__visual">
+            <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+            <span>Imagem oficial Shineray <i>•</i> consulte autorização de uso</span>
+          </div>
+          <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
+            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading={selectedImage === index ? "eager" : "lazy"} fetchPriority={selectedImage === index ? "high" : "low"} /><span>{String(index + 1).padStart(2, "0")}</span></button>)}
+          </div>
+          <div className="book-mobile-page__copy">
+            <span className="page-kicker">NETO MOTOS / SHINERAY</span>
+            <h1>{current.name}</h1>
+            <p className="lead-copy">{current.description}</p>
+            <div className="red-stroke" />
+            <p className="copy-line">{current.copyLine}</p>
+            <p className="editorial-copy">{current.audience}</p>
+            <div className="highlight-list">{current.highlights.map((highlight) => <span key={`mobile-${highlight}`}>{highlight}</span>)}</div>
+            <div className="book-mobile-page__commercial"><div className="price-block"><span>A partir de</span><b>{current.price}</b><small>Preço de referência.<br />Confirme condições com o Neto.</small></div><button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button></div>
+          </div>
+        </article>
 
         <div className="book-bottomline">
           <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)} aria-label="Abrir capítulo anterior"><ChevronLeft size={17} /><span>Anterior</span></button>

@@ -131,3 +131,9 @@
 - [x] Fortalecer CTAs com verbos, resultado esperado e próximo passo concreto.
 - [x] Revisar as linhas comerciais dos modelos para benefício, público e contexto de uso.
 - [x] Validar copy final em desktop, mobile, lista, livro, formulário e build.
+
+- [x] Ler e estruturar todo o conteúdo do arquivo enviado pelo usuário.
+- [x] Separar copy, especificações, preços, modelos, contatos e instruções comerciais.
+- [x] Comparar cada informação com o catálogo atual e preservar o arquivo como fonte prioritária.
+- [x] Aplicar as informações autorizadas sem inventar ou completar lacunas com dados genéricos.
+- [x] Validar texto, dados, layout, responsividade e build após a integração.
