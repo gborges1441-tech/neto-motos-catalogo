@@ -1,6 +1,7 @@
 // Style reminder: WhatsApp is a restrained utility accent, never a replacement for the charcoal / paper / vermilion editorial system.
-import { ArrowUpRight, PhoneCall } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { WhatsAppMark } from "@/components/WhatsAppMark";
 
 type WhatsAppButtonProps = {
   model?: string;
@@ -48,7 +49,7 @@ export function WhatsAppButton({ model, compact = false, label }: WhatsAppButton
       onClick={() => trackEvent("whatsapp_click", { model: model ?? "catalogo" })}
       aria-label={label ?? `Falar com o Neto sobre ${model ?? "o catálogo"}`}
     >
-      <span className="whatsapp-mark" aria-hidden="true"><PhoneCall size={compact ? 13 : 15} strokeWidth={2.4} /></span>
+      <span className="whatsapp-mark" aria-hidden="true"><WhatsAppMark size={compact ? 15 : 18} /></span>
       <span>{label ?? "Falar com o Neto"}</span>
       {!compact && <ArrowUpRight size={15} strokeWidth={1.8} />}
     </a>

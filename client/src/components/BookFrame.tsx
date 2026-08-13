@@ -28,6 +28,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [lightboxZoom, setLightboxZoom] = useState(1);
   const [lightboxPan, setLightboxPan] = useState({ x: 0, y: 0 });
   const [lens, setLens] = useState<{ left: number; top: number; size: number; backgroundSize: string; backgroundPosition: string; src: string } | null>(null);
+  const [mobilePhotoRatio, setMobilePhotoRatio] = useState(4 / 3);
   const [spreadScale, setSpreadScale] = useState(1);
   const [hasInteracted, setHasInteracted] = useState(false);
   const bookShellRef = useRef<HTMLElement>(null);
@@ -41,11 +42,27 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const lightboxCloseRef = useRef<HTMLButtonElement>(null);
   const lightboxPreviousFocus = useRef<HTMLElement | null>(null);
   const current = motos[activeIndex];
+  const activeImage = current.images[Math.min(selectedImage, current.images.length - 1)] ?? current.images[0];
+  const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, current.images.length - 1);
+  const lightboxImage = current.images[safeLightboxIndex] ?? activeImage;
+  const turnMoto = motos[turnTarget ?? activeIndex] ?? current;
 
   useEffect(() => {
     setSelectedImage(0);
     setLightboxIndex(null);
   }, [activeIndex]);
+
+  useEffect(() => {
+    const imageData = current.images[Math.min(selectedImage, current.images.length - 1)];
+    setMobilePhotoRatio(4 / 3);
+    if (!imageData) return;
+    const probe = new Image();
+    probe.onload = () => {
+      if (probe.naturalWidth > 0 && probe.naturalHeight > 0) setMobilePhotoRatio(probe.naturalWidth / probe.naturalHeight);
+    };
+    probe.src = imageData.src;
+    return () => { probe.onload = null; };
+  }, [current.images, selectedImage]);
 
   useEffect(() => {
     const measureSpread = () => {
@@ -264,7 +281,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
       size: lensSize,
       backgroundSize: `${renderedWidth * zoom}px ${renderedHeight * zoom}px`,
       backgroundPosition: `${lensSize / 2 - imageX * zoom}px ${lensSize / 2 - imageY * zoom}px`,
-      src: current.images[selectedImage].src,
+      src: activeImage.src,
     });
   }
 
@@ -385,7 +402,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="moto-visual">
               <div className="moto-visual__wash" />
               <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
-                <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+                <AssetImage key={activeImage.src} src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               </button>
               {lens && <span className="moto-lens" aria-hidden="true" style={{ left: lens.left, top: lens.top, width: lens.size, height: lens.size, backgroundImage: `url(${lens.src})`, backgroundSize: lens.backgroundSize, backgroundPosition: lens.backgroundPosition }} />}
             </div>
@@ -401,16 +418,16 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             </div>
           </div>
 
-          {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={current.images[selectedImage].src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{motos[turnTarget ?? activeIndex]?.name}</span><AssetImage src={motos[turnTarget ?? activeIndex]?.images[0].src} alt="" fallbackLabel={motos[turnTarget ?? activeIndex]?.name} /></div></div>}
+          {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={activeImage.src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{turnMoto.name}</span><AssetImage src={turnMoto.images[0].src} alt="" fallbackLabel={turnMoto.name} /></div></div>}
         </div>
         </div>
 
         <article className={`book-mobile-page ${turning ? `book-mobile-page--turning-${turning}` : ""}`} aria-label={`Página única do catálogo: ${current.name}`}>
           <div className="book-mobile-page__topline"><span>{current.eyebrow}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
-          <div className="book-mobile-page__visual">
+          <div className="book-mobile-page__visual" style={{ aspectRatio: mobilePhotoRatio }}>
               <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
-                <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+                <AssetImage key={`mobile-${activeImage.src}`} src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               </button>
           </div>
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
@@ -441,10 +458,10 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <button ref={lightboxCloseRef} className="photo-lightbox__close" type="button" onClick={() => setLightboxIndex(null)} aria-label="Fechar foto ampliada"><X size={21} /></button>
           <button className="photo-lightbox__nav photo-lightbox__nav--prev" type="button" onClick={() => changeLightbox(-1)} aria-label="Ver foto anterior"><ChevronLeft size={25} /></button>
           <div className="photo-lightbox__stage" onPointerDown={onLightboxPointerDown} onPointerMove={onLightboxPointerMove} onPointerUp={onLightboxPointerUp} onPointerCancel={onLightboxPointerUp} onDoubleClick={onLightboxDoubleClick}>
-            <AssetImage key={`lightbox-${current.images[lightboxIndex].src}`} src={current.images[lightboxIndex].src} alt={current.images[lightboxIndex].alt} fallbackLabel={current.name} loading="eager" decoding="async" fetchPriority="high" style={{ transform: `translate3d(${lightboxPan.x}px, ${lightboxPan.y}px, 0) scale(${lightboxZoom})`, cursor: lightboxZoom > 1 ? "grab" : "zoom-in" }} />
+            <AssetImage key={`lightbox-${lightboxImage.src}`} src={lightboxImage.src} alt={lightboxImage.alt} fallbackLabel={current.name} loading="eager" decoding="async" fetchPriority="high" style={{ transform: `translate3d(${lightboxPan.x}px, ${lightboxPan.y}px, 0) scale(${lightboxZoom})`, cursor: lightboxZoom > 1 ? "grab" : "zoom-in" }} />
           </div>
           <button className="photo-lightbox__nav photo-lightbox__nav--next" type="button" onClick={() => changeLightbox(1)} aria-label="Ver próxima foto"><ChevronRight size={25} /></button>
-          <div className="photo-lightbox__caption"><span>{current.images[lightboxIndex].label}</span><small>Pinça ou duplo toque para ampliar · arraste para explorar · deslize para trocar</small></div>
+          <div className="photo-lightbox__caption"><span>{lightboxImage.label}</span><small>Pinça ou duplo toque para ampliar · arraste para explorar · deslize para trocar</small></div>
         </div>
       </div>}
 

@@ -175,3 +175,9 @@
 - [x] Reauditar a implementação atual contra o briefing repetido e confirmar se não há lacunas reais.
 - [x] Revalidar lente, fotos inteiras, escala, CTA contextual e WhatsApp flutuante sem alterar copy ou arquitetura.
 - [x] Reexecutar build, logs e screenshots essenciais antes de reportar a entrega.
+
+- [x] Auditar a aparência real do WhatsApp em ficha, botão flutuante e header, removendo qualquer ícone genérico ou fraco.
+- [x] Aplicar um lockup de logo profissional, alinhado e com escala correta no header desktop e mobile.
+- [x] Corrigir a área de fotografia mobile com cálculo responsivo e contain sem cortar rodas, guidão, espelhos ou partes inferiores.
+- [x] Conferir o encaixe do livro inteiro e da fotografia como camadas independentes em desktop e mobile.
+- [x] Validar visualmente 375, 390, 430, 768, 1024, 1280, 1366, 1440 e 1920 antes do checkpoint.

@@ -1,11 +1,12 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
-import { ArrowDown, ArrowRight, Check, ChevronRight, FileText, Grid2X2, Menu, MessageCircle, PhoneCall, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, ChevronRight, FileText, Grid2X2, Menu, Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { BookFrame } from "@/components/BookFrame";
 import { AssetImage } from "@/components/AssetImage";
 import { WhatsAppButton, quoteHref, whatsappHref, type QuoteDetails } from "@/components/WhatsAppButton";
+import { WhatsAppMark } from "@/components/WhatsAppMark";
 import { catalogFamilies, catalogPriceRanges, familyFromCategory, formatChapter, priceInRange, type CatalogFamily, type PriceRange } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
@@ -113,7 +114,7 @@ export default function Home() {
       {!listMode && <IndexDrawer open={indexOpen} activeIndex={activeIndex} onClose={() => setIndexOpen(false)} onSelect={(index) => { setIndexOpen(false); openCatalog(index); }} onListMode={() => { setIndexOpen(false); setListMode(true); }} />}
       {!listMode && <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />}
       {!listMode && <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} />}
-      {opened && <a className="floating-whatsapp" href={whatsappHref()} target="_blank" rel="noreferrer" aria-label="Falar com o Neto pelo WhatsApp"><span className="floating-whatsapp__ping" /><span className="whatsapp-mark" aria-hidden="true"><PhoneCall size={15} strokeWidth={2.4} /></span><span>Falar com o Neto</span></a>}
+      {opened && <a className="floating-whatsapp" href={whatsappHref()} target="_blank" rel="noreferrer" aria-label="Falar com o Neto pelo WhatsApp"><span className="floating-whatsapp__ping" /><span className="whatsapp-mark" aria-hidden="true"><WhatsAppMark size={19} /></span><span>Falar com o Neto</span></a>}
     </div>
   );
 }
@@ -335,7 +336,7 @@ function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
             </div>
             <label><span>Como pretende usar?</span><select value={form.use} onChange={(event) => updateField("use", event.target.value)}><option value="">Escolha uma opção</option><option>Deslocamento na cidade</option><option>Trabalho e entregas</option><option>Viagens e estrada</option><option>Uso misto</option><option>Mobilidade elétrica</option></select></label>
             <label><span>O que você precisa saber?</span><textarea value={form.message} onChange={(event) => updateField("message", event.target.value)} placeholder="Ex.: quero entender disponibilidade, cores e condições atuais." rows={3} /></label>
-            <button className="quote-form__submit" type="submit"><span className="whatsapp-mark" aria-hidden="true"><PhoneCall size={14} strokeWidth={2.4} /></span> Solicitar orçamento pelo WhatsApp <ArrowRight size={15} /></button>
+            <button className="quote-form__submit" type="submit"><span className="whatsapp-mark" aria-hidden="true"><WhatsAppMark size={18} /></span> Solicitar orçamento pelo WhatsApp <ArrowRight size={15} /></button>
             <small className="quote-form__privacy">Seus dados serão usados apenas para responder ao seu pedido de atendimento.</small>
           </form>
         )}
