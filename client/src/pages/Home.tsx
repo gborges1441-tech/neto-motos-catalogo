@@ -1,7 +1,7 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
 import { ArrowDown, ArrowRight, BookOpen, Check, ChevronRight, Grid2X2, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { coverMoto, motos } from "@/data/motos";
+import { motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { BookFrame } from "@/components/BookFrame";
 import { AssetImage } from "@/components/AssetImage";
@@ -130,11 +130,6 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMe
           <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Prefere uma indicação?</span><b>Quero falar com o Neto</b><ArrowRight size={14} /></a>
           <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> modelos</span><span><b>fotos</b> oficiais</span><span><b>atendimento</b> direto</span></div>
         </div>
-        <div className="cover-paper-artifact" aria-hidden="true">
-          <div className="cover-paper-artifact__registration">NETO MOTOS / SHINERAY <span>EDIÇÃO 2026</span></div>
-          <AssetImage src={coverMoto.images[0].src} alt="" fallbackLabel={coverMoto.name} />
-          <div className="cover-paper-artifact__footer"><b>{coverMoto.name}</b><span>CAPÍTULO 01 / {String(total).padStart(2, "0")}</span></div>
-        </div>
       </div>
       <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><span>SCROLL <ArrowDown size={12} /></span></footer>
     </main>
@@ -209,7 +204,7 @@ function ListMode({ open, onClose, onSelect }: { open: boolean; onClose: () => v
       <header className="list-mode__header"><BrandMark light compact /><div><span>Modo lista</span><b>Catálogo sem animação</b></div><span className="list-mode__header-note">ARQUIVO / {motos.length} CAPÍTULOS</span><button type="button" className="icon-button" onClick={onClose} aria-label="Fechar modo lista"><X size={18} /></button></header>
       <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Encontre a sua.<br /><em>Compare sem dúvida.</em></h2><p>Veja motos, scooters, elétricas e mobilidade com fotos reais, preços de referência e um caminho direto para confirmar a melhor escolha com o Neto.</p></div>
       <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por família">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => setFamily(item)}>{item}</button>)}<span>{entries.length} capítulos</span></div>
-        <div className="list-mode__grid">{entries.map(({ moto, index }) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading="lazy" /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver detalhes e condições <ArrowRight size={14} /></button></div></div></article>)}</div>
+        <div className="list-mode__grid">{entries.map(({ moto, index }) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading={index === 0 ? "eager" : "lazy"} /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver detalhes e condições <ArrowRight size={14} /></button></div></div></article>)}</div>
       <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><WhatsAppButton compact label="Falar com o Neto" /></footer>
     </div>
   );

@@ -79,3 +79,17 @@
 - [x] Melhorar pré-carregamento da imagem ativa e das miniaturas sem bloquear a abertura do capítulo.
 - [x] Refinar o acabamento visual do livro, do gutter, das margens e dos controles de navegação.
 - [x] Validar todas as rotas, galerias, viradas, desktop, mobile e build antes do checkpoint.
+
+- [x] Selecionar a melhor direção entre as referências de logo enviadas, priorizando legibilidade e escalabilidade.
+- [x] Evitar usar montagens com múltiplas logos, pessoas ou telefones fictícios dentro do cabeçalho do site.
+- [x] Preparar uma marca principal horizontal para desktop e uma variação compacta/circular para mobile e avatar.
+- [x] Integrar a nova marca sem substituir a identificação oficial da Shineray nem inventar dados de contato.
+- [x] Corrigir todos os CTAs visuais para usar o WhatsApp oficial (11) 97847-3480.
+
+- [x] Remover a página física sobreposta ao vídeo da capa e devolver protagonismo ao comercial enviado.
+- [x] Aumentar a tipografia e o espaçamento das fichas para leitura confortável em desktop e celular.
+- [x] Corrigir o recorte da moto no celular para preservar o produto e manter as opções inferiores acessíveis.
+- [x] Reorganizar controles e opções da capa/book no celular sem esconder ações importantes.
+- [x] Tornar os botões de WhatsApp mais chamativos, claros e coerentes com a paleta premium.
+- [x] Revisar logo, wordmark e sistema de marca quando as referências visuais do usuário forem enviadas.
+- [x] Validar harmonia de paleta, legibilidade, recortes, CTA e build em múltiplas larguras.
