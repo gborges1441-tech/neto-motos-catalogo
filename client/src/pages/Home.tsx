@@ -1,15 +1,14 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
 import { ArrowDown, ArrowRight, BookOpen, Check, ChevronRight, Grid2X2, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { coverMoto, motos } from "@/data/motos";
+import { motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { BookFrame } from "@/components/BookFrame";
 import { AssetImage } from "@/components/AssetImage";
 import { WhatsAppButton, whatsappHref } from "@/components/WhatsAppButton";
 import { catalogFamilies, familyFromCategory, formatChapter, type CatalogFamily } from "@/lib/catalog";
 
-// Arquivo de Performance: a capa trata o vídeo como um anúncio editorial silencioso, com a moto como assunto e o catálogo como moldura.
-const heroAtmosphere = "/manus-storage/neto-motos-hero-atmosphere_488dc940.jpg";
+// Arquivo de Performance: o comercial é a peça principal da capa; texto e CTA conduzem a uma decisão de compra, sem competir com o produto.
 const commercialVideo = "/manus-storage/neto-motos-commercial_e09bc38e.mp4";
 const commercialPoster = "/manus-storage/neto-motos-commercial-poster_c430828f.jpg";
 const coverIndex = 0;
@@ -100,7 +99,7 @@ export default function Home() {
 
 function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMenuOpen }: { total: number; onOpen: () => void; onOpenAbout: () => void; onOpenIndex: () => void; onToggleMenu: () => void; mobileMenuOpen: boolean }) {
   return (
-    <main id="catalog-content" className="cover-stage" style={{ backgroundImage: `url(${heroAtmosphere})` }}>
+    <main id="catalog-content" className="cover-stage">
       <div className="cover-stage__noise" />
       <div className="cover-stage__grid" aria-hidden="true" />
       <div className="cover-commercial" style={{ backgroundImage: `url(${commercialPoster})` }} aria-hidden="true">
@@ -108,7 +107,7 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMe
           <source src={commercialVideo} type="video/mp4" />
         </video>
         <span className="cover-commercial__beam" /><span className="cover-commercial__road" /><span className="cover-commercial__grain" />
-        <div className="cover-commercial__caption"><span>FILME / SHI 250</span><b>É durabilidade. É confiança. É Shineray.</b></div>
+        <div className="cover-commercial__caption"><span>VÍDEO COMERCIAL / SHI 250</span><b>Veja a linha. Escolha com clareza.</b></div>
       </div>
       <div className="cover-stage__redline" />
       <header className="cover-header">
@@ -124,20 +123,12 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMe
       <div className="cover-vertical">SHINERAY / BRASIL <span>—</span> NETO MOTOS</div>
       <div className="cover-content">
         <div className="cover-copy">
-          <div className="cover-kicker"><span className="live-dot" /> catálogo digital premium / {total} capítulos</div>
-          <h1><span>Seu próximo</span><em>capítulo</em><span>começa aqui.</span></h1>
-          <p>Uma curadoria de motocicletas reais, atendimento direto e escolhas feitas para seguir em frente.</p>
-          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Abrir catálogo</b><small>Folhear a edição 2026</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
-          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Já sabe o que procura?</span><b>Fale com o Neto</b><ArrowRight size={14} /></a>
-          <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> capítulos</span><span><b>100%</b> fotos oficiais</span><span><b>direto</b> no WhatsApp</span></div>
-        </div>
-        <div className="cover-object" aria-hidden="true">
-          <div className="cover-object__shadow" />
-          <div className="cover-object__page-stack" />
-          <div className="cover-object__folio"><span>NETO MOTOS / PLACA 01</span><AssetImage src={coverMoto.images[0].src} alt="" fallbackLabel={coverMoto.name} /><b>{coverMoto.name} <i>{coverMoto.category}</i></b></div>
-          <div className="cover-object__meta"><span>ARQUIVO / CAPÍTULOS</span><b>{formatChapter(0, total)}</b></div>
-          <div className="cover-object__line" />
-          <div className="cover-object__hint"><ArrowDown size={14} /> deslize para explorar</div>
+          <div className="cover-kicker"><span className="live-dot" /> catálogo de vendas / {total} modelos Shineray</div>
+          <h1><span>A moto certa</span><em>muda o seu</em><span>caminho.</span></h1>
+          <p>Compare 29 modelos Shineray com fotos reais, preços de referência e orientação direta para comprar com segurança.</p>
+          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Ver modelos e preços</b><small>Folheie o catálogo completo</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Prefere uma indicação?</span><b>Fale com o Neto</b><ArrowRight size={14} /></a>
+          <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> modelos</span><span><b>fotos</b> oficiais</span><span><b>atendimento</b> direto</span></div>
         </div>
       </div>
       <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><span>SCROLL <ArrowDown size={12} /></span></footer>
@@ -211,7 +202,7 @@ function ListMode({ open, onClose, onSelect }: { open: boolean; onClose: () => v
   return (
     <div className={`list-mode ${open ? "list-mode--open" : ""}`} aria-hidden={!open} inert={!open}>
       <header className="list-mode__header"><BrandMark light compact /><div><span>Modo lista</span><b>Catálogo sem animação</b></div><span className="list-mode__header-note">ARQUIVO / {motos.length} CAPÍTULOS</span><button type="button" className="icon-button" onClick={onClose} aria-label="Fechar modo lista"><X size={18} /></button></header>
-      <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Toda a linha.<br /><em>Sem pressa.</em></h2><p>Uma alternativa acessível à experiência de folhear. Motos, scooters, elétricas e mobilidade com fotos reais, dados claros e um caminho direto para conversar.</p></div>
+      <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Encontre a sua.<br /><em>Compare sem dúvida.</em></h2><p>Veja motos, scooters, elétricas e mobilidade com fotos reais, preços de referência e um caminho direto para confirmar a melhor escolha com o Neto.</p></div>
       <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por família">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => setFamily(item)}>{item}</button>)}<span>{entries.length} capítulos</span></div>
         <div className="list-mode__grid">{entries.map(({ moto, index }) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading="lazy" /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver detalhes e condições <ArrowRight size={14} /></button></div></div></article>)}</div>
       <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><WhatsAppButton compact label="Falar com o Neto" /></footer>

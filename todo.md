@@ -64,3 +64,11 @@
 - [x] Melhorar a virada de página para comunicar dobra, perspectiva, sombra e estado de navegação.
 - [x] Validar livro, índice, modo lista e mobile com as motos ampliadas.
 - [x] Rodar TypeScript, build de produção e capturas finais antes do novo checkpoint.
+
+- [x] Auditar a capa em viewport desktop e mobile, identificando sobreposições entre vídeo, poster, imagem da SHI 250 e overlays.
+- [x] Corrigir o vídeo comercial para ficar legível, sem camada opaca ou imagem duplicada, com enquadramento responsivo por viewport.
+- [x] Reestruturar a capa mobile para priorizar headline, proposta de valor, moto e CTA, sem cortes ou elementos decorativos que prejudiquem a venda.
+- [x] Remover hotspots e ícones sem valor comercial da experiência mobile, mantendo apenas informação técnica útil em contextos adequados.
+- [x] Reescrever headline, subheadline, prova, CTA e microcopy com abordagem consultiva de alta conversão, sem frases genéricas.
+- [x] Revisar o modo livro e o modo lista em desktop, corrigindo cortes, sobreposições, excesso de elementos e legibilidade.
+- [x] Validar a nova composição em 1280px, 1024px, 768px e 390px antes de salvar o próximo checkpoint.
