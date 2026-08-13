@@ -147,7 +147,7 @@ const rawMotos: Moto[] = [
   makeMoto({
     id: "jef-170", name: "JEF 170", category: "Street / 170 cc", price: "R$ 15.390,00", image: catalog.jef170, source: "https://www.shineray.com.br/produto/jef-170/",
     description: "A cidade não precisa ser previsível. A JEF 170 chega com atitude urbana e presença suficiente para transformar o caminho de todos os dias em uma escolha com assinatura.",
-    copyLine: "Uma street com presença para resolver a cidade todos os dias.", audience: "Para quem quer painel digital, rodas 17 e freio dianteiro a disco em uma compra sem complicação.",
+    copyLine: "Uma street com presença para resolver a cidade todos os dias.", audience: "Para quem quer painel digital, rodas 17 e freio dianteiro a disco para encarar o trânsito com mais confiança.",
     highlights: ["Painel digital", "Rodas 17”", "Freio dianteiro a disco", "Monoshock traseiro"],
     specs: [{ label: "Cilindrada", value: "Consultar ficha vigente" }, { label: "Painel", value: "Digital" }, { label: "Rodas", value: "17”" }, { label: "Freio dianteiro", value: "Disco" }, { label: "Suspensão traseira", value: "Monoshock" }, { label: "Disponibilidade", value: "Consultar Neto Motos" }],
     extraImages: [{ src: detail.jef170Hero, label: "Ângulo editorial", alt: "Shineray JEF 170 em foto oficial de produto" }, { src: detail.jef170Gallery, label: "Detalhes", alt: "Detalhe oficial da Shineray JEF 170" }, { src: detail.jef170Detail, label: "Acabamento", alt: "Acabamento oficial da Shineray JEF 170" }],
@@ -155,7 +155,7 @@ const rawMotos: Moto[] = [
   makeMoto({
     id: "shi-400sc", name: "SHI 400SC", category: "Motocicleta / linha SHI", price: "R$ 24.990,00", image: catalog.shi400sc, source: "https://www.shineray.com.br/produto/shi-400sc/",
     description: "Há escolhas que não precisam levantar a voz. A SHI 400SC tem a presença de quem já sabe o que procura e quer uma experiência mais marcante sobre duas rodas.",
-    copyLine: "Suba de categoria com uma presença que você percebe antes de ligar o motor.", audience: "Para quem quer uma motocicleta mais marcante e prefere decidir com atendimento próximo e ficha clara.",
+    copyLine: "Suba de categoria com uma presença que você percebe antes de ligar o motor.", audience: "Para quem quer uma motocicleta mais marcante e prefere conhecer conjunto, condição e disponibilidade antes de fechar.",
   }),
   makeMoto({
     id: "shi-175", name: "SHI 175", category: "Trail / 175 cc", price: "R$ 16.490,00", image: catalog.shi175, source: "https://www.shineray.com.br/produto/shi-175/",
@@ -178,7 +178,7 @@ const rawMotos: Moto[] = [
   makeMoto({
     id: "jet-50", name: "JET 50", category: "Ciclomotor / urbano", price: "R$ 11.090,00", image: catalog.jet50, source: "https://www.shineray.com.br/produto/jet-50/",
     description: "A distância pode ser curta. A vontade de viver a cidade do seu jeito, não. A JET 50 é uma porta de entrada para mais autonomia na rotina.",
-    copyLine: "Sua primeira autonomia começa na cidade.", audience: "Para quem procura uma porta de entrada objetiva e quer sair da conversa com uma decisão clara.",
+    copyLine: "Sua primeira autonomia começa na cidade.", audience: "Para quem procura uma porta de entrada objetiva e quer sair da conversa sabendo qual é o próximo passo.",
   }),
   makeMoto({
     id: "jet-125", name: "JET 125", category: "Scooter / 125 cc", price: "R$ 11.490,00", image: catalog.jet125, source: "https://www.shineray.com.br/produto/jet-125/",
@@ -188,7 +188,7 @@ const rawMotos: Moto[] = [
   }),
   makeMoto({
     id: "shi-250", name: "SHI 250", category: "Trail / 250 cc", price: "R$ 21.490,00", image: detail.shi250Hero, source: "https://www.shineray.com.br/produto/shi-250/",
-    description: "Uma trail de 250 cc para quem quer sair do asfalto sem abrir mão de controle, informação e uma conversa clara antes da compra.",
+    description: "Uma trail de 250 cc para quem quer sair do asfalto sem abrir mão de controle, informação e orientação direta antes da compra.",
     copyLine: "Versatilidade de verdade para o asfalto e o próximo destino.", audience: "249,9 cc, seis marchas e freios a disco nas duas rodas: uma escolha para quem quer liberdade com ficha técnica na mesa.",
     highlights: ["Motor 249,9 cc", "6 marchas", "Full LED + DRL", "Freios a disco nas duas rodas"],
     specs: [{ label: "Cilindrada", value: "249,9 cc" }, { label: "Potência", value: "19,3 CV / 8.000 rpm" }, { label: "Torque", value: "18 N.m / 6.000 rpm" }, { label: "Câmbio", value: "6 marchas" }, { label: "Freios", value: "Disco dianteiro e traseiro" }, { label: "Suspensão", value: "Invertida / monoshock" }, { label: "Rodas", value: "Raiadas" }, { label: "Iluminação", value: "Full LED + DRL" }],
@@ -225,18 +225,18 @@ const rawMotos: Moto[] = [
   }),
   makeMoto({
     id: "free-150-efi", name: "FREE 150 EFI", category: "Street / 150 cc", price: "R$ 12.990,00", image: catalog.free150, source: "https://www.shineray.com.br/produto/free-150-efi/",
-    description: "A FREE 150 EFI é para quem quer começar uma nova rotina com mais independência e uma escolha que faz sentido desde o primeiro contato.",
-    copyLine: "A primeira moto pode ser uma decisão sem complicação.", audience: "Para quem busca autonomia na rotina e quer comparar com calma antes de escolher a versão certa.",
+    description: "A FREE 150 EFI é para quem quer começar uma nova rotina com mais independência e uma moto para usar todos os dias.",
+    copyLine: "A primeira moto pode colocar sua rotina em movimento.", audience: "Para quem busca autonomia na rotina e quer comparar preço, uso e condições antes de escolher a versão certa.",
   }),
   makeMoto({
     id: "jef-150s-efi", name: "JEF 150S EFI", category: "Street / 150 cc", price: "R$ 15.990,00", image: catalog.jef150s, source: "https://www.shineray.com.br/produto/jef-150s-efi/",
     description: "A JEF 150S EFI coloca atitude urbana em uma escolha que conversa com quem quer subir na moto e seguir o próprio ritmo.",
-    copyLine: "Street com atitude para quem quer marcar presença.", audience: "Para quem quer personalidade na cidade e atendimento claro na hora de escolher a próxima moto.",
+    copyLine: "Street com atitude para quem quer marcar presença.", audience: "Para quem quer personalidade na cidade e uma recomendação direta na hora de escolher a próxima moto.",
   }),
   makeMoto({
     id: "rio-125-efi", name: "RIO 125 EFI", category: "Street / 125 cc", price: "R$ 12.990,00", image: catalog.rio125, source: "https://www.shineray.com.br/produto/rio-125-efi/",
     description: "A RIO 125 EFI foi feita para entrar na vida real: aquela dos compromissos, das voltas rápidas e dos planos que merecem um pouco mais de liberdade.",
-    copyLine: "Uma escolha equilibrada para a cidade real.", audience: "Para quem quer injeção eletrônica, painel digital e iluminação LED/DRL com uma conversa transparente.",
+    copyLine: "Uma escolha equilibrada para a cidade real.", audience: "Para quem quer injeção eletrônica, painel digital e iluminação LED/DRL com explicação direta de custos e condições.",
     highlights: ["Injeção eletrônica", "Painel digital", "LED / DRL", "Disponibilidade sob consulta"],
   }),
   makeMoto({
@@ -257,7 +257,7 @@ const rawMotos: Moto[] = [
   makeMoto({
     id: "phoenix-s", name: "PHOENIX S", category: "Urbana / acessível", price: "R$ 8.790,00", image: catalog.phoenix, source: "https://www.shineray.com.br/produto/phoenix-s/",
     description: "A PHOENIX S é um convite para colocar mais movimento nos seus dias, com uma proposta urbana que cabe no plano e abre caminho para novas rotas.",
-    copyLine: "Comece a rodar com uma escolha que cabe no seu plano.", audience: "Para quem quer dar o primeiro passo com clareza, mobilidade e atendimento próximo.",
+    copyLine: "Comece a rodar com uma escolha que cabe no seu plano.", audience: "Para quem quer comprar bem, usar todos os dias e contar com atendimento próximo.",
   }),
   makeMoto({
     id: "se2", name: "SE2", category: "Elétrica", price: "R$ 16.990,00", image: catalog.se2, source: "https://www.shineray.com.br/produto/se2/",
@@ -267,7 +267,7 @@ const rawMotos: Moto[] = [
   makeMoto({
     id: "se1", name: "SE1", category: "Elétrica", price: "R$ 15.990,00", image: catalog.se1, source: "https://www.shineray.com.br/produto/se1/",
     description: "A SE1 entra para quem quer simplificar a mobilidade e começar a considerar uma escolha elétrica para a rotina urbana.",
-    copyLine: "Seu primeiro passo elétrico pode ser mais simples.", audience: "Para quem quer entender se a mobilidade elétrica combina com o dia a dia, sem promessa exagerada e sem pressão.",
+    copyLine: "Uma forma econômica de testar outro jeito de circular.", audience: "Para quem quer avaliar se a mobilidade elétrica combina com o dia a dia e entender autonomia, recarga e condições.",
   }),
   makeMoto({
     id: "she-s", name: "SHE-S", category: "Elétrica", price: "R$ 16.490,00", image: catalog.sheS, source: "https://www.shineray.com.br/produto/she-s/",
@@ -306,7 +306,7 @@ const rawMotos: Moto[] = [
   makeMoto({
     id: "pt1s", name: "PT1S", category: "Mobilidade elétrica", price: "R$ 6.990,00", image: "/manus-storage/pt1s_b09f480c.webp", source: "https://www.shineray.com.br/produto/pt1s/",
     description: "A PT1S é a escolha para quem quer reduzir o atrito do deslocamento e colocar uma solução elétrica compacta dentro da rotina.",
-    copyLine: "Uma solução elétrica para reduzir o atrito do dia a dia.", audience: "Para quem procura praticidade, motor de 800 W e até 25 km de autonomia com informação transparente.",
+    copyLine: "Uma solução elétrica para resolver deslocamentos curtos.", audience: "Para quem procura praticidade, motor de 800 W e até 25 km de autonomia com dados para decidir a compra.",
     highlights: ["Motor 800 W", "Até 25 km de autonomia", "Painel digital", "Cesta dianteira"],
     specs: [{ label: "Motor", value: "Elétrico Brushless" }, { label: "Potência", value: "800 W" }, { label: "Velocidade", value: "Até 32 km/h" }, { label: "Autonomia", value: "Até 25 km" }, { label: "Bateria", value: "Chumbo ácido" }, { label: "Freio dianteiro", value: "Disco hidráulico" }],
   }),

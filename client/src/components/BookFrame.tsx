@@ -164,7 +164,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
               <div className="left-page__footer">
                 <div className="page-footer-note"><span>{formatChapter(activeIndex, motos.length).split(" /")[0]}</span><small>arquivo de performance</small></div>
-                <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Atendimento de verdade.</b><small>Conheça o Neto</small></span><ArrowRight size={14} /></button>
+                <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button>
               </div>
             </div>
           </div>
@@ -184,7 +184,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <div className="gallery-thumbs">
                 {current.images.map((image, index) => (
                   <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}>
-                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" fetchPriority={index < 2 ? "high" : "auto"} />
+                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" fetchPriority="high" decoding="sync" />
                     <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
                 ))}
@@ -198,7 +198,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         <div className="book-bottomline">
           <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)} aria-label="Abrir capítulo anterior"><ChevronLeft size={17} /><span>Anterior</span></button>
           <div className="book-progress" aria-live="polite" aria-label={`Capítulo ${activeIndex + 1} de ${motos.length}`}><span className="book-progress__count">{formatChapter(activeIndex, motos.length)}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
-          <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Quero entender esta moto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
+          <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Consultar condições" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
         </div>
       </section>
 

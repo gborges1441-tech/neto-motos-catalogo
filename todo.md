@@ -124,3 +124,10 @@
 - [x] Melhorar a presença visual do CTA fixo, do botão do livro e do formulário.
 - [x] Adicionar estados hover, focus-visible, active e reduced-motion coerentes.
 - [x] Validar contraste, toque mobile, posicionamento e build em todas as superfícies.
+
+- [x] Mapear e remover “clareza” e outros clichês abstratos de todas as frases comerciais.
+- [x] Reescrever a headline da capa com benefício, desejo e ação de compra específicos.
+- [x] Reescrever a descrição do Neto com voz humana de vendedor consultivo, sem slogan genérico.
+- [x] Fortalecer CTAs com verbos, resultado esperado e próximo passo concreto.
+- [x] Revisar as linhas comerciais dos modelos para benefício, público e contexto de uso.
+- [x] Validar copy final em desktop, mobile, lista, livro, formulário e build.

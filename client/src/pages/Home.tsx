@@ -118,7 +118,7 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleM
           <source src={commercialVideo} type="video/mp4" />
         </video>
         <span className="cover-commercial__beam" /><span className="cover-commercial__road" /><span className="cover-commercial__grain" />
-        <div className="cover-commercial__caption"><span>VÍDEO COMERCIAL / SHI 250</span><b>Veja a linha. Escolha com clareza.</b></div>
+        <div className="cover-commercial__caption"><span>VÍDEO COMERCIAL / SHI 250</span><b>Veja a linha. Encontre o modelo para a sua rotina.</b></div>
       </div>
       <div className="cover-stage__redline" />
       <header className="cover-header">
@@ -136,9 +136,9 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleM
       <div className="cover-content">
         <div className="cover-copy">
           <div className="cover-kicker"><span className="live-dot" /> catálogo de vendas / {total} modelos Shineray</div>
-          <h1><span>Escolha sua</span><em>Shineray.</em><span>Saia com clareza.</span></h1>
-          <p>Compare 29 modelos reais, veja preços de referência e fale com o Neto para descobrir qual combina com a sua rotina.</p>
-          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Começar pelo catálogo</b><small>Folheie com orientação do Neto</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <h1><span>Compare 29</span><em>Shineray.</em><span>Encontre a sua.</span></h1>
+          <p>Street, trail, scooter e elétrica com preço de referência, fotos reais e atendimento do Neto para você decidir sem comprar no escuro.</p>
+          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Ver modelos e preços</b><small>Escolha pelo seu uso</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
           <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Prefere uma indicação?</span><b>Quero falar com o Neto</b><ArrowRight size={14} /></a>
           <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> modelos</span><span><b>fotos</b> oficiais</span><span><b>atendimento</b> direto</span></div>
         </div>
@@ -201,7 +201,7 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
       <section className="about-card" role="dialog" aria-modal="true" aria-labelledby="about-title">
         <button ref={closeRef} type="button" className="icon-button about-card__close" onClick={onClose} aria-label="Fechar apresentação"><X size={18} /></button>
         <div className="about-card__image"><AssetImage src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" fallbackLabel="Neto Motos" /><span>NETO / CONSULTOR</span></div>
-        <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO QUE AJUDA A DECIDIR</span><h2 id="about-title">Escolha com<br /><em>clareza.</em></h2><p>Você fala direto com quem conhece o catálogo, entende sua rotina e ajuda a comparar disponibilidade, condições e o modelo que realmente faz sentido para o seu caminho.</p><div className="about-card__line" /><div className="about-card__contact"><span>Converse agora no WhatsApp</span><b>(11) 97847-3480</b></div><WhatsAppButton label="Quero uma recomendação" /></div>
+        <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO QUE AJUDA A DECIDIR</span><h2 id="about-title">Me diga o<br /><em>seu uso.</em></h2><p>Você trabalha, estuda, entrega, viaja ou quer uma elétrica? O Neto cruza sua rotina com os modelos disponíveis e mostra as condições antes de você decidir.</p><div className="about-card__line" /><div className="about-card__contact"><span>Converse agora no WhatsApp</span><b>(11) 97847-3480</b></div><WhatsAppButton label="Quero uma indicação" /></div>
       </section>
     </div>
   );
@@ -231,7 +231,7 @@ function ListMode({ open, onClose, onSelect, onOpenQuote }: { open: boolean; onC
   return (
     <div className={`list-mode ${open ? "list-mode--open" : ""}`} aria-hidden={!open} inert={!open}>
       <header className="list-mode__header"><BrandMark light compact /><div><span>Modo lista</span><b>Catálogo sem animação</b></div><span className="list-mode__header-note">ARQUIVO / {motos.length} CAPÍTULOS</span><button type="button" className="icon-button" onClick={onClose} aria-label="Fechar modo lista"><X size={18} /></button></header>
-      <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Encontre a sua.<br /><em>Compare sem dúvida.</em></h2><p>Veja motos, scooters, elétricas e mobilidade com fotos reais, preços de referência e um caminho direto para confirmar a melhor escolha com o Neto.</p></div>
+      <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Veja o que cabe<br /><em>na sua rotina.</em></h2><p>Filtre por estilo, faixa de preço e modelo. Depois, fale com o Neto para confirmar disponibilidade, condições e o próximo passo.</p></div>
       <div className="list-mode__filter-panel">
         <label className="list-search"><Search size={16} /><span className="sr-only">Buscar modelo</span><input value={query} onChange={(event) => { setQuery(event.target.value); trackEvent("catalog_search", { has_query: Boolean(event.target.value) }); }} placeholder="Buscar por modelo ou uso" /></label>
         <label className="list-select"><span>Marca</span><select value={brand} onChange={(event) => { setBrand(event.target.value); trackEvent("catalog_filter", { filter: "brand", value: event.target.value }); }}><option>Todas as marcas</option><option>Shineray</option></select></label>
