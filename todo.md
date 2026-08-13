@@ -113,3 +113,9 @@
 - [x] Reescrever a headline da capa com uma promessa mais específica, persuasiva e ligada ao atendimento do Neto.
 - [x] Pesquisar referências atuais de CTA e catálogos premium sem copiar elementos inadequados.
 - [x] Validar novamente desktop, tablet, mobile, filtros, formulário, acessibilidade e build.
+
+- [x] Auditar a experiência atual por funil: entrada, exploração, filtro, detalhe, orçamento e WhatsApp.
+- [x] Definir eventos mensuráveis para CTA, filtros, abertura de formulário, envio de orçamento e troca de capítulo.
+- [x] Comparar referências de mercado e aplicar somente padrões úteis de clareza, baixo atrito e hierarquia mobile.
+- [x] Otimizar carregamento inicial, vídeo, imagens críticas e sensação de resposta nos dispositivos móveis.
+- [x] Validar a nova experiência com métricas de interface, acessibilidade, responsividade e build.

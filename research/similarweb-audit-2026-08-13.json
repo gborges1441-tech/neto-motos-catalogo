@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-08-13",
+  "domains": {
+    "shineray.com.br": {
+      "visits_total": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      },
+      "bounce_rate": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      },
+      "traffic_sources_desktop": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      },
+      "traffic_sources_mobile": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      }
+    },
+    "webmotors.com.br": {
+      "visits_total": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      },
+      "bounce_rate": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      },
+      "traffic_sources_desktop": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      },
+      "traffic_sources_mobile": {
+        "code": "failed_precondition",
+        "message": "Credit check passed but current user has insufficient Manus credits. Request was stooped before API call."
+      }
+    }
+  },
+  "limitations": [
+    "SimilarWeb reports competitor/market benchmarks, not this private preview domain.",
+    "Monthly estimates can be unavailable for smaller domains; missing responses are preserved as errors.",
+    "No conversion or WhatsApp lead data is inferred from SimilarWeb; those require first-party analytics."
+  ]
+}

@@ -6,6 +6,7 @@ import { BrandMark } from "@/components/BrandMark";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AssetImage } from "@/components/AssetImage";
 import { formatChapter } from "@/lib/catalog";
+import { trackEvent } from "@/lib/analytics";
 
 type BookFrameProps = {
   motos: Moto[];
@@ -32,20 +33,13 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   }, [activeIndex]);
 
   useEffect(() => {
-    let cancelled = false;
     const preload = (image: Moto["images"][number]) => {
       const preload = new Image();
       preload.decoding = "async";
       preload.src = image.src;
     };
-    current.images.slice(0, 2).forEach(preload);
-    const deferred = window.setTimeout(() => {
-      if (!cancelled) current.images.slice(2).forEach(preload);
-    }, 180);
-    return () => {
-      cancelled = true;
-      window.clearTimeout(deferred);
-    };
+    current.images.forEach(preload);
+    return undefined;
   }, [current.images]);
 
   useEffect(() => {
@@ -92,6 +86,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     if (turnTimer.current !== null) window.clearTimeout(turnTimer.current);
     turnTimer.current = window.setTimeout(() => {
       onIndexChange(nextIndex);
+      trackEvent("chapter_change", { direction, chapter: nextIndex + 1, model: motos[nextIndex]?.name ?? "catalogo" });
       setTurning(null);
       setTurnTarget(null);
       turnTimer.current = null;
@@ -188,8 +183,8 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>
               <div className="gallery-thumbs">
                 {current.images.map((image, index) => (
-                  <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => setSelectedImage(index)} aria-label={`Abrir imagem: ${image.label}`}>
-                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading={selectedImage === index ? "eager" : "lazy"} />
+                  <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}>
+                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" fetchPriority={index < 2 ? "high" : "auto"} />
                     <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
                 ))}

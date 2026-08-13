@@ -7,6 +7,7 @@ import { BookFrame } from "@/components/BookFrame";
 import { AssetImage } from "@/components/AssetImage";
 import { WhatsAppButton, quoteHref, whatsappHref, type QuoteDetails } from "@/components/WhatsAppButton";
 import { catalogFamilies, catalogPriceRanges, familyFromCategory, formatChapter, priceInRange, type CatalogFamily, type PriceRange } from "@/lib/catalog";
+import { trackEvent } from "@/lib/analytics";
 
 // Arquivo de Performance: o comercial é a peça principal da capa; texto e CTA conduzem a uma decisão de compra, sem competir com o produto.
 const commercialVideo = "/manus-storage/neto-motos-commercial_e09bc38e.mp4";
@@ -74,6 +75,7 @@ export default function Home() {
   }, [listMode]);
 
   function openCatalog(index = 0) {
+    trackEvent("catalog_open", { source: index === 0 ? "cover" : "index", chapter: index + 1 });
     setActiveIndex(index);
     setOpened(true);
     setIndexOpen(false);
@@ -82,15 +84,20 @@ export default function Home() {
     window.setTimeout(() => document.querySelector(".catalog-workspace")?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
   }
 
+  function openQuote(source: string) {
+    trackEvent("quote_open", { source });
+    setQuoteOpen(true);
+  }
+
   return (
     <div className={`site-shell ${opened ? "site-shell--opened" : ""}`}>
       <a className="skip-link" href="#catalog-content">Pular para o catálogo</a>
       {listMode ? (
-        <ListMode open={listMode} onClose={() => setListMode(false)} onSelect={(index) => { setListMode(false); openCatalog(index); }} onOpenQuote={() => setQuoteOpen(true)} />
+        <ListMode open={listMode} onClose={() => setListMode(false)} onSelect={(index) => { setListMode(false); openCatalog(index); }} onOpenQuote={() => openQuote("list")} />
       ) : !opened ? (
-        <Cover total={motos.length} onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => { setAboutOpen(true); setIndexOpen(false); }} onOpenIndex={() => { setIndexOpen(true); setAboutOpen(false); }} onOpenQuote={() => setQuoteOpen(true)} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
+        <Cover total={motos.length} onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => { setAboutOpen(true); setIndexOpen(false); }} onOpenIndex={() => { setIndexOpen(true); setAboutOpen(false); }} onOpenQuote={() => openQuote("cover")} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
       ) : (
-        <BookFrame motos={motos} activeIndex={activeIndex} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} onOpenQuote={() => setQuoteOpen(true)} />
+        <BookFrame motos={motos} activeIndex={activeIndex} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} onOpenQuote={() => openQuote("book")} />
       )}
 
       {!listMode && <IndexDrawer open={indexOpen} activeIndex={activeIndex} onClose={() => setIndexOpen(false)} onSelect={(index) => { setIndexOpen(false); openCatalog(index); }} onListMode={() => { setIndexOpen(false); setListMode(true); }} />}
@@ -218,6 +225,7 @@ function ListMode({ open, onClose, onSelect, onOpenQuote }: { open: boolean; onC
     setBrand("Todas as marcas");
     setPriceRange("Todos");
     setQuery("");
+    trackEvent("catalog_filter_clear");
   }
 
   return (
@@ -225,12 +233,12 @@ function ListMode({ open, onClose, onSelect, onOpenQuote }: { open: boolean; onC
       <header className="list-mode__header"><BrandMark light compact /><div><span>Modo lista</span><b>Catálogo sem animação</b></div><span className="list-mode__header-note">ARQUIVO / {motos.length} CAPÍTULOS</span><button type="button" className="icon-button" onClick={onClose} aria-label="Fechar modo lista"><X size={18} /></button></header>
       <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Encontre a sua.<br /><em>Compare sem dúvida.</em></h2><p>Veja motos, scooters, elétricas e mobilidade com fotos reais, preços de referência e um caminho direto para confirmar a melhor escolha com o Neto.</p></div>
       <div className="list-mode__filter-panel">
-        <label className="list-search"><Search size={16} /><span className="sr-only">Buscar modelo</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar por modelo ou uso" /></label>
-        <label className="list-select"><span>Marca</span><select value={brand} onChange={(event) => setBrand(event.target.value)}><option>Todas as marcas</option><option>Shineray</option></select></label>
-        <label className="list-select"><span>Preço</span><select value={priceRange} onChange={(event) => setPriceRange(event.target.value as PriceRange)}>{catalogPriceRanges.map((item) => <option key={item}>{item}</option>)}</select></label>
+        <label className="list-search"><Search size={16} /><span className="sr-only">Buscar modelo</span><input value={query} onChange={(event) => { setQuery(event.target.value); trackEvent("catalog_search", { has_query: Boolean(event.target.value) }); }} placeholder="Buscar por modelo ou uso" /></label>
+        <label className="list-select"><span>Marca</span><select value={brand} onChange={(event) => { setBrand(event.target.value); trackEvent("catalog_filter", { filter: "brand", value: event.target.value }); }}><option>Todas as marcas</option><option>Shineray</option></select></label>
+        <label className="list-select"><span>Preço</span><select value={priceRange} onChange={(event) => { setPriceRange(event.target.value as PriceRange); trackEvent("catalog_filter", { filter: "price", value: event.target.value }); }}>{catalogPriceRanges.map((item) => <option key={item}>{item}</option>)}</select></label>
         <span className="list-filter-panel__label"><SlidersHorizontal size={14} /> Estilo</span>
       </div>
-      <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por estilo">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => setFamily(item)}>{item}</button>)}<span>{entries.length} {entries.length === 1 ? "resultado" : "resultados"}</span><button className="list-filter-clear" type="button" onClick={clearFilters}>Limpar filtros</button></div>
+      <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por estilo">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => { setFamily(item); trackEvent("catalog_filter", { filter: "style", value: item }); }}>{item}</button>)}<span>{entries.length} {entries.length === 1 ? "resultado" : "resultados"}</span><button className="list-filter-clear" type="button" onClick={clearFilters}>Limpar filtros</button></div>
       {entries.length === 0 && <div className="list-empty"><b>Nenhuma moto encontrada.</b><span>Tente outra faixa de preço, estilo ou termo de busca.</span><button type="button" onClick={clearFilters}>Ver o catálogo completo</button></div>}
         <div className="list-mode__grid">{entries.map(({ moto, index }, entryIndex) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading={entryIndex === 0 ? "eager" : "lazy"} /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver detalhes e condições <ArrowRight size={14} /></button></div></div></article>)}</div>
       <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><div className="list-mode__footer-actions"><button type="button" className="list-mode__quote" onClick={onOpenQuote}><FileText size={14} /> Pedir orçamento</button><WhatsAppButton compact label="Falar com o Neto" /></div></footer>
@@ -264,6 +272,7 @@ function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     window.open(quoteHref(form), "_blank", "noopener,noreferrer");
+    trackEvent("quote_submit", { model: form.model || "nao_informado", budget: form.budget || "nao_informado", use: form.use || "nao_informado" });
     setSubmitted(true);
   }
 
