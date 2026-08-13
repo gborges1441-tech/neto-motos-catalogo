@@ -1,5 +1,5 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
-import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, X, ZoomIn } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
@@ -24,6 +24,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
   const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [hasInteracted, setHasInteracted] = useState(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
@@ -32,7 +33,24 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
   useEffect(() => {
     setSelectedImage(0);
+    setLightboxIndex(null);
   }, [activeIndex]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setLightboxIndex(null);
+      if (event.key === "ArrowRight") setLightboxIndex((index) => index === null ? null : (index + 1) % current.images.length);
+      if (event.key === "ArrowLeft") setLightboxIndex((index) => index === null ? null : (index - 1 + current.images.length) % current.images.length);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [current.images.length, lightboxIndex]);
 
   useEffect(() => {
     const preload = (image: Moto["images"][number]) => {
@@ -147,6 +165,12 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
   }
 
+  function openLightbox(index: number) {
+    setSelectedImage(index);
+    setLightboxIndex(index);
+    trackEvent("gallery_view", { model: current.name, image: index + 1, mode: "lightbox" });
+  }
+
   return (
     <main id="catalog-content" className="catalog-workspace">
       <div className="catalog-3d-field" aria-hidden="true"><span /><span /><span /></div>
@@ -206,14 +230,17 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="right-page__meta"><span>{current.category}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
-              <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+              <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Ampliar foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
+                <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+                <span><ZoomIn size={14} /> Ampliar foto</span>
+              </button>
               <span className="image-caption"><b>{String(selectedImage + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</b><i>•</i> Fotos de catálogo</span>
             </div>
             <div className="gallery-strip">
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>
               <div className="gallery-thumbs">
                 {current.images.map((image, index) => (
-                  <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}>
+                  <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}>
                     <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" />
                     <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
@@ -229,11 +256,14 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <div className="book-mobile-page__topline"><span>{current.eyebrow}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
           <div className="book-mobile-page__visual">
-            <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+            <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Ampliar foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
+              <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+              <span><ZoomIn size={14} /> Ampliar foto</span>
+            </button>
             <span><b>{String(selectedImage + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</b><i>•</i> Fotos de catálogo</span>
           </div>
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
-            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /><span>{String(index + 1).padStart(2, "0")}</span></button>)}
+            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /><span>{String(index + 1).padStart(2, "0")}</span></button>)}
           </div>
           <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / SHINERAY</span>
@@ -253,6 +283,19 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Falar com o Neto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
         </div>
       </section>
+
+      {lightboxIndex !== null && <div className="photo-lightbox" role="dialog" aria-modal="true" aria-label={`Galeria ampliada da ${current.name}`} onMouseDown={(event) => { if (event.target === event.currentTarget) setLightboxIndex(null); }}>
+        <div className="photo-lightbox__panel">
+          <div className="photo-lightbox__topline"><span><span className="live-dot" /> {current.name} / Fotos de catálogo</span><span>{String(lightboxIndex + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</span></div>
+          <button className="photo-lightbox__close" type="button" onClick={() => setLightboxIndex(null)} aria-label="Fechar foto ampliada"><X size={21} /></button>
+          <button className="photo-lightbox__nav photo-lightbox__nav--prev" type="button" onClick={() => setLightboxIndex((index) => index === null ? null : (index - 1 + current.images.length) % current.images.length)} aria-label="Ver foto anterior"><ChevronLeft size={25} /></button>
+          <div className="photo-lightbox__stage">
+            <AssetImage key={`lightbox-${current.images[lightboxIndex].src}`} src={current.images[lightboxIndex].src} alt={current.images[lightboxIndex].alt} fallbackLabel={current.name} loading="eager" decoding="async" fetchPriority="high" />
+          </div>
+          <button className="photo-lightbox__nav photo-lightbox__nav--next" type="button" onClick={() => setLightboxIndex((index) => index === null ? null : (index + 1) % current.images.length)} aria-label="Ver próxima foto"><ChevronRight size={25} /></button>
+          <div className="photo-lightbox__caption"><span>{current.images[lightboxIndex].label}</span><small>Use ← → ou deslize pelas imagens</small></div>
+        </div>
+      </div>}
 
       <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY</span><span>Especificações e condições sujeitas a confirmação.</span><span>Arraste / ← →</span></div>
     </main>

@@ -143,3 +143,8 @@
 - [ ] Aplicar as prioridades do arquivo à estrutura, copy, mobile, navegação e conversão sem inventar informações.
 - [ ] Validar visualmente e funcionalmente as mudanças em desktop, tablet e celular.
 - [ ] Rodar TypeScript, build e auditoria de logs antes de salvar a nova versão.
+
+- [x] Implementar lightbox premium para ampliar a foto ativa da moto sem perder a composição editorial.
+- [x] Adicionar navegação anterior/próxima, contador, fechamento por botão, Escape e clique fora.
+- [x] Preservar swipe mobile, foco acessível, rolagem bloqueada e suporte a prefers-reduced-motion.
+- [x] Validar o lightbox em desktop, tablet, celular, teclado e build antes do checkpoint.
