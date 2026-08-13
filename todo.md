@@ -186,3 +186,7 @@
 - [x] Remover a sensação de retângulo colado com transparência, máscara e respiro óptico, sem redesenhar a marca.
 - [x] Ajustar escala e alinhamento da logo restaurada na capa, catálogo, modo lista, desktop e mobile.
 - [x] Validar visualmente a integração da logo e salvar checkpoint sem alterar o restante do produto.
+
+- [x] Adicionar halo neon verde e pulsação suave ao CTA WhatsApp da ficha, formulário e botão flutuante.
+- [x] Preservar contraste, hover, active, foco visível e reduced motion sem animação agressiva.
+- [x] Validar desktop, mobile, build e logs antes de salvar o checkpoint.
