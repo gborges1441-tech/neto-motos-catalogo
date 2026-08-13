@@ -1,5 +1,5 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
-import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, X, ZoomIn } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, X } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
@@ -27,6 +27,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxZoom, setLightboxZoom] = useState(1);
   const [lightboxPan, setLightboxPan] = useState({ x: 0, y: 0 });
+  const [lens, setLens] = useState<{ left: number; top: number; size: number; backgroundSize: string; backgroundPosition: string; src: string } | null>(null);
   const [spreadScale, setSpreadScale] = useState(1);
   const [hasInteracted, setHasInteracted] = useState(false);
   const bookShellRef = useRef<HTMLElement>(null);
@@ -229,7 +230,42 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   }
 
   function changeLightbox(delta: number) {
-    setLightboxIndex((index) => index === null ? null : (index + delta + current.images.length) % current.images.length);
+    setLightboxIndex((index) => {
+      if (index === null) return null;
+      const nextIndex = (index + delta + current.images.length) % current.images.length;
+      setSelectedImage(nextIndex);
+      return nextIndex;
+    });
+  }
+
+  function handleLensMove(event: React.MouseEvent<HTMLButtonElement>) {
+    const image = event.currentTarget.querySelector("img");
+    const rect = image?.getBoundingClientRect() ?? event.currentTarget.getBoundingClientRect();
+    const naturalWidth = image?.naturalWidth || rect.width;
+    const naturalHeight = image?.naturalHeight || rect.height;
+    const ratio = naturalWidth / Math.max(naturalHeight, 1);
+    const boxRatio = rect.width / Math.max(rect.height, 1);
+    const renderedWidth = ratio > boxRatio ? rect.width : rect.height * ratio;
+    const renderedHeight = ratio > boxRatio ? rect.width / ratio : rect.height;
+    const offsetX = (rect.width - renderedWidth) / 2;
+    const offsetY = (rect.height - renderedHeight) / 2;
+    const imageX = event.clientX - rect.left - offsetX;
+    const imageY = event.clientY - rect.top - offsetY;
+    if (imageX < 0 || imageY < 0 || imageX > renderedWidth || imageY > renderedHeight) {
+      setLens(null);
+      return;
+    }
+    const lensSize = Math.min(190, Math.max(138, rect.width * .28));
+    const containerRect = event.currentTarget.parentElement?.getBoundingClientRect() ?? rect;
+    const zoom = 2.45;
+    setLens({
+      left: event.clientX - containerRect.left - lensSize / 2,
+      top: event.clientY - containerRect.top - lensSize / 2,
+      size: lensSize,
+      backgroundSize: `${renderedWidth * zoom}px ${renderedHeight * zoom}px`,
+      backgroundPosition: `${lensSize / 2 - imageX * zoom}px ${lensSize / 2 - imageY * zoom}px`,
+      src: current.images[selectedImage].src,
+    });
   }
 
   function onLightboxPointerDown(event: React.PointerEvent<HTMLDivElement>) {
@@ -348,10 +384,10 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="right-page__meta"><span>{current.category}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
-              <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Ampliar foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
+              <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
                 <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
-                <span><ZoomIn size={14} /> Ampliar foto</span>
               </button>
+              {lens && <span className="moto-lens" aria-hidden="true" style={{ left: lens.left, top: lens.top, width: lens.size, height: lens.size, backgroundImage: `url(${lens.src})`, backgroundSize: lens.backgroundSize, backgroundPosition: lens.backgroundPosition }} />}
             </div>
             <div className="gallery-strip">
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>
@@ -373,10 +409,9 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <div className="book-mobile-page__topline"><span>{current.eyebrow}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
           <div className="book-mobile-page__visual">
-            <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Ampliar foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
-              <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
-              <span><ZoomIn size={14} /> Ampliar foto</span>
-            </button>
+              <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
+                <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+              </button>
           </div>
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
             {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
@@ -396,7 +431,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         <div className="book-bottomline">
           <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)} aria-label="Abrir capítulo anterior"><ChevronLeft size={17} /><span>Anterior</span></button>
           <div className="book-progress" aria-live="polite" aria-label={`Capítulo ${activeIndex + 1} de ${motos.length}`}><span className="book-progress__count">{formatChapter(activeIndex, motos.length)}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
-          <div className="book-bottomline__cta"><span className="book-cta-microcopy">Consulte disponibilidade e condições atuais diretamente com o Neto.</span><WhatsAppButton model={current.name} compact label="Falar com o Neto sobre essa moto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
+          <div className="book-bottomline__cta"><span className="book-cta-microcopy">Consulte disponibilidade e condições atuais diretamente com o Neto.</span><WhatsAppButton model={current.name} compact label="Quero conhecer essa moto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
         </div>
       </section>
 

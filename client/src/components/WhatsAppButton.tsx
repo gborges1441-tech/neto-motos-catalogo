@@ -10,8 +10,8 @@ type WhatsAppButtonProps = {
 
 export function whatsappHref(model?: string) {
   const message = model
-    ? `Olá, Neto! Estou avaliando a ${model} no catálogo e quero entender se ela faz sentido para o meu uso. Pode confirmar disponibilidade, cores e condições atuais? Se houver outra opção mais adequada, pode me indicar também.`
-    : "Olá, Neto! Quero encontrar uma Shineray que faça sentido para minha rotina. Pode me mostrar as opções, confirmar disponibilidade e condições atuais e me orientar na escolha?";
+    ? `Olá, Neto! Vi a ${model} no catálogo e gostaria de saber mais sobre ela.`
+    : "Olá, Neto! Estou vendo o catálogo e gostaria de uma orientação para escolher um modelo.";
   return `https://wa.me/5511978473480?text=${encodeURIComponent(message)}`;
 }
 

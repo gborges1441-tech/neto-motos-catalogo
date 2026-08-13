@@ -292,12 +292,11 @@ button { border: 0; }
 .moto-visual { position: absolute; top: 12%; left: 2%; right: 2%; bottom: 16%; overflow: hidden; }
 .moto-visual::before { content: ""; position: absolute; inset: 5% 7%; border-top: 1px solid rgba(21,21,20,.08); border-bottom: 1px solid rgba(21,21,20,.08); }
 .moto-visual__wash { position: absolute; inset: 15% 10%; background: radial-gradient(ellipse, rgba(255,255,255,.78), transparent 63%); z-index: 0; }
-.moto-visual__zoom { position: absolute; inset: 4% 3% 3%; z-index: 1; display: block; width: 94%; height: 94%; padding: 0; background: transparent; border: 0; cursor: zoom-in; }
+.moto-visual__zoom { position: absolute; inset: 4% 3% 3%; z-index: 1; display: block; width: 94%; height: 94%; padding: 0; background: transparent; border: 0; cursor: crosshair; }
 .moto-visual__zoom > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; background: transparent; mix-blend-mode: normal; filter: none; transition: opacity .3s ease, transform .45s var(--ease-out); animation: image-in .6s var(--ease-out) both; }
 .moto-visual__zoom > .asset-image-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: radial-gradient(ellipse at center, rgba(255,255,255,.72), rgba(226,219,210,.52)); }
-.moto-visual__zoom > span, .book-mobile-page__zoom > span { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; color: rgba(255,255,255,.92); background: rgba(21,21,20,.7); border: 1px solid rgba(255,255,255,.22); font-size: 8px; text-transform: uppercase; letter-spacing: .12em; opacity: 0; transform: translateY(5px); transition: opacity .2s ease, transform .2s var(--ease-out); }
-.moto-visual__zoom:hover > span, .moto-visual__zoom:focus-visible > span, .book-mobile-page__zoom:hover > span, .book-mobile-page__zoom:focus-visible > span { opacity: 1; transform: translateY(0); }
 .moto-visual__zoom:focus-visible, .book-mobile-page__zoom:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+.moto-lens { position: absolute; z-index: 3; pointer-events: none; border: 1px solid rgba(255,255,255,.76); border-radius: 50%; background-repeat: no-repeat; box-shadow: 0 10px 26px rgba(0,0,0,.26), inset 0 0 0 5px rgba(255,255,255,.08); opacity: 1; transform: translateZ(0); animation: lens-in .18s var(--ease-out) both; }
 .moto-visual > .asset-image-fallback { position: absolute; inset: 4% 3% 3%; width: 94%; height: 94%; object-fit: contain; background: radial-gradient(ellipse at center, rgba(255,255,255,.72), rgba(226,219,210,.52)); mix-blend-mode: normal; filter: none; transition: opacity .3s ease, transform .45s var(--ease-out); animation: image-in .6s var(--ease-out) both; }
 .gallery-strip { position: absolute; z-index: 2; bottom: 2%; left: 1%; right: 1%; display: flex; align-items: end; gap: 19px; }
 .gallery-strip__label { display: flex; align-items: center; gap: 7px; color: rgba(21,21,20,.56); text-transform: uppercase; font-size: 8px; letter-spacing: .14em; padding-bottom: 6px; }
@@ -307,7 +306,7 @@ button { border: 0; }
 .gallery-thumb:hover, .gallery-thumb--active { border-color: var(--red); transform: translateY(-3px); }
 .gallery-thumb img, .gallery-thumb .asset-image-fallback { width: 100%; height: 100%; object-fit: contain; object-position: center; background: #f0ebe4; mix-blend-mode: normal; }
 .gallery-thumb span { position: absolute; bottom: 3px; left: 4px; color: rgba(255,255,255,.78); text-shadow: 0 1px 3px #000; font-size: 7px; }
-.book-mobile-page__zoom { position: relative; display: block; width: 100%; height: 100%; min-height: 260px; padding: 0; background: transparent; border: 0; cursor: zoom-in; }
+.book-mobile-page__zoom { position: relative; display: block; width: 100%; height: 100%; min-height: 260px; padding: 0; background: transparent; border: 0; cursor: pointer; }
 .book-mobile-page__zoom > img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
   .book-mobile-page__zoom > span { top: 12px; right: 12px; }
 .photo-lightbox { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 28px; background: rgba(7,7,6,.88); backdrop-filter: blur(13px); animation: lightbox-fade .24s var(--ease-out) both; }
@@ -330,6 +329,7 @@ button { border: 0; }
 @keyframes lightbox-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes lightbox-rise { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes lightbox-image-in { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: scale(1); } }
+@keyframes lens-in { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
 .turn-sheet { position: absolute; z-index: 10; top: -2px; bottom: -2px; width: calc(50% + 2px); transform-style: preserve-3d; backface-visibility: hidden; pointer-events: none; background: transparent; box-shadow: none; will-change: transform, box-shadow; overflow: visible; }
 .turn-sheet--next { left: 50%; transform-origin: left center; animation: turn-next 1.08s cubic-bezier(.22,.78,.17,1) both; }
 .turn-sheet--prev { right: 50%; transform-origin: right center; animation: turn-prev 1.08s cubic-bezier(.22,.78,.17,1) both; }
@@ -659,9 +659,9 @@ button { border: 0; }
   .book-nav--next { grid-column: 3; }
   .book-bottomline__cta .whatsapp-button { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 8px; letter-spacing: .08em; }
   .book-bottomline { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; margin: 0; padding: 10px max(18px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-right)); background: rgba(23,23,22,.98); border-top: 1px solid rgba(241,236,228,.16); box-shadow: 0 -12px 24px rgba(0,0,0,.24); }
-  .floating-whatsapp { right: 14px; bottom: calc(82px + env(safe-area-inset-bottom)); z-index: 26; display: flex; max-width: 178px; padding: 10px 12px; font-size: 8px; letter-spacing: .08em; }
-  .site-shell--floating-compact .floating-whatsapp { width: 44px; height: 44px; padding: 7px; }
-  .site-shell--floating-compact .floating-whatsapp .whatsapp-mark { width: 27px; height: 27px; }
+  .floating-whatsapp { right: 14px; bottom: calc(104px + env(safe-area-inset-bottom)); z-index: 26; display: flex; width: 44px; height: 44px; padding: 7px; justify-content: center; border-radius: 50%; }
+  .floating-whatsapp > span:last-child, .floating-whatsapp__ping { display: none; }
+  .floating-whatsapp .whatsapp-mark, .site-shell--floating-compact .floating-whatsapp .whatsapp-mark { width: 27px; height: 27px; }
   .catalog-footer { margin-top: 16px; }
   .catalog-footer span:nth-child(2) { display: none; }
   .index-panel { padding: 25px 22px; }

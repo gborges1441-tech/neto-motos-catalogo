@@ -164,3 +164,10 @@
 - [x] Ajustar a divisão copy/vídeo, o header/logo e o fundo editorial sem alterar páginas internas ou mobile.
 - [x] Dimensionar o spread desktop pela área útil real do viewport, preservando proporção e rodapé visível.
 - [x] Validar a capa em 1920x1080, 1440x900, 1366x768, 1280x800, tablet e mobile antes do checkpoint.
+
+- [x] Reauditar a escala do livro desktop e manter o spread dominante sem cortar topo, rodapé ou laterais.
+- [x] Garantir que as fotografias de produto usem contain e mostrem a moto inteira no desktop e no mobile.
+- [x] Implementar lente circular real acompanhando o cursor, sem texto ou ícone de lupa como mecanismo principal.
+- [x] Preservar pinch, double tap, arraste e swipe no visualizador mobile.
+- [x] Ajustar o CTA da página da moto para “QUERO CONHECER ESSA MOTO” com mensagem dinâmica no WhatsApp.
+- [x] Validar 1920x1080, 1600x900, 1440x900, 1366x768, 1280x720, 1024x768, tablet portrait e mobile.
