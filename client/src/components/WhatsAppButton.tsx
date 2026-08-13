@@ -14,6 +14,28 @@ export function whatsappHref(model?: string) {
   return `https://wa.me/5511978473480?text=${encodeURIComponent(message)}`;
 }
 
+export type QuoteDetails = {
+  name: string;
+  phone: string;
+  model: string;
+  budget: string;
+  use: string;
+  message: string;
+};
+
+export function quoteHref(details: QuoteDetails) {
+  const message = [
+    "Olá, Neto! Quero solicitar um orçamento.",
+    `Nome: ${details.name}`,
+    `Meu WhatsApp: ${details.phone}`,
+    `Modelo de interesse: ${details.model}`,
+    `Faixa de investimento: ${details.budget || "Ainda não defini"}`,
+    `Uso principal: ${details.use || "Quero orientação"}`,
+    details.message ? `Observações: ${details.message}` : "",
+  ].filter(Boolean).join("\n");
+  return `https://wa.me/5511978473480?text=${encodeURIComponent(message)}`;
+}
+
 export function WhatsAppButton({ model, compact = false, label }: WhatsAppButtonProps) {
   return (
     <a

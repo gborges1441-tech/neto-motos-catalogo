@@ -93,3 +93,11 @@
 - [x] Tornar os botões de WhatsApp mais chamativos, claros e coerentes com a paleta premium.
 - [x] Revisar logo, wordmark e sistema de marca quando as referências visuais do usuário forem enviadas.
 - [x] Validar harmonia de paleta, legibilidade, recortes, CTA e build em múltiplas larguras.
+
+- [x] Refinar a transição entre capítulos com curva, profundidade, sombra e feedback de direção mais natural.
+- [x] Evitar conflitos entre clique, arraste, teclado e troca de página durante a animação.
+- [x] Implementar busca por marca, estilo/família e faixa de preço no modo lista e no índice.
+- [x] Exibir estado vazio, contagem de resultados e limpar filtros de forma acessível.
+- [x] Criar formulário de orçamento com nome, WhatsApp, modelo, faixa de investimento, uso e mensagem.
+- [x] Validar o formulário no cliente, oferecer confirmação clara e manter alternativa direta pelo WhatsApp.
+- [x] Validar os novos fluxos em desktop, tablet, mobile, teclado, reduced motion e build.

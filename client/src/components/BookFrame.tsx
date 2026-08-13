@@ -1,5 +1,5 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
-import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, Grid2X2, Image as ImageIcon, Info, MousePointer2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
@@ -16,9 +16,10 @@ type BookFrameProps = {
   onBackToCover: () => void;
   soundEnabled: boolean;
   onToggleSound: () => void;
+  onOpenQuote: () => void;
 };
 
-export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOpenAbout, onBackToCover, soundEnabled, onToggleSound }: BookFrameProps) {
+export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOpenAbout, onBackToCover, soundEnabled, onToggleSound, onOpenQuote }: BookFrameProps) {
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
   const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -134,6 +135,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <button className="header-link" type="button" onClick={onBackToCover}><ArrowLeft size={14} /> <span>Capa</span></button>
           <button className="header-link" type="button" onClick={onOpenAbout}><Info size={14} /> <span>Sobre o Neto</span></button>
           <button className="header-link" type="button" onClick={onOpenIndex}><Grid2X2 size={14} /> <span>Índice</span></button>
+          <button className="header-link header-link--quote" type="button" onClick={onOpenQuote}><FileText size={14} /> <span>Orçamento</span></button>
           <button className="header-link header-link--sound" type="button" onClick={onToggleSound} aria-pressed={soundEnabled}><span className={`sound-led ${soundEnabled ? "sound-led--on" : ""}`} />{soundEnabled ? "Som" : "Mudo"}</button>
         </div>
       </header>

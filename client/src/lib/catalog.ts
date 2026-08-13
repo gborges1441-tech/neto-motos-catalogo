@@ -16,3 +16,21 @@ export function familyFromCategory(category: string): Exclude<CatalogFamily, "To
 }
 
 export const catalogFamilies: CatalogFamily[] = ["Todos", "Street", "Trail", "Scooter", "Elétrica", "Mobilidade", "Urbana"];
+
+export type PriceRange = "Todos" | "Até R$ 15 mil" | "R$ 15–25 mil" | "Acima de R$ 25 mil";
+
+export const catalogPriceRanges: PriceRange[] = ["Todos", "Até R$ 15 mil", "R$ 15–25 mil", "Acima de R$ 25 mil"];
+
+export function numericPrice(price: string) {
+  const normalized = price.replace(/[^\d,]/g, "").replace(/\./g, "").replace(",", ".");
+  const value = Number(normalized);
+  return Number.isFinite(value) ? value : 0;
+}
+
+export function priceInRange(price: string, range: PriceRange) {
+  if (range === "Todos") return true;
+  const value = numericPrice(price);
+  if (range === "Até R$ 15 mil") return value > 0 && value <= 15000;
+  if (range === "R$ 15–25 mil") return value > 15000 && value <= 25000;
+  return value > 25000;
+}
