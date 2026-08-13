@@ -129,8 +129,8 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleM
       <div className="cover-content">
         <div className="cover-copy">
           <div className="cover-kicker"><span className="live-dot" /> catálogo de vendas / {total} modelos Shineray</div>
-          <h1><span>A moto certa</span><em>muda o seu</em><span>caminho.</span></h1>
-          <p>Compare 29 modelos Shineray com fotos reais, preços de referência e orientação direta para comprar com segurança.</p>
+          <h1><span>Escolha sua</span><em>Shineray.</em><span>Saia com clareza.</span></h1>
+          <p>Compare 29 modelos reais, veja preços de referência e fale com o Neto para descobrir qual combina com a sua rotina.</p>
           <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Começar pelo catálogo</b><small>Folheie com orientação do Neto</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
           <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Prefere uma indicação?</span><b>Quero falar com o Neto</b><ArrowRight size={14} /></a>
           <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> modelos</span><span><b>fotos</b> oficiais</span><span><b>atendimento</b> direto</span></div>

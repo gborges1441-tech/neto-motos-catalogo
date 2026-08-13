@@ -106,3 +106,10 @@
 - [x] Ajustar a escala compacta da marca no celular e preservar contraste no fundo escuro.
 - [x] Refinar espaçamento, alinhamento e presença dos CTAs após ampliar a logo.
 - [x] Validar visualmente a harmonia da nova escala em desktop, tablet e mobile.
+
+- [x] Corrigir a altura e a rolagem da página direita no mobile para mostrar a moto inteira e a galeria inferior.
+- [x] Remover a sobreposição entre preço, texto, rodapé e controles nas fichas em todos os tamanhos.
+- [x] Redesenhar o CTA de WhatsApp com verde mais sofisticado, contraste e hierarquia comercial melhores.
+- [x] Reescrever a headline da capa com uma promessa mais específica, persuasiva e ligada ao atendimento do Neto.
+- [x] Pesquisar referências atuais de CTA e catálogos premium sem copiar elementos inadequados.
+- [x] Validar novamente desktop, tablet, mobile, filtros, formulário, acessibilidade e build.
