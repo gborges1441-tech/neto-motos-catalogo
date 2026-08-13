@@ -113,10 +113,11 @@ button { border: 0; }
 
 .site-shell { min-height: 100svh; background: var(--ink); overflow: hidden; }
 .site-shell--opened { background: #171716; }
-.brand-lockup { display: inline-flex; align-items: center; width: 174px; height: 56px; gap: 8px; overflow: visible; color: var(--ink); }
+.brand-lockup { position: relative; display: inline-flex; align-items: center; width: 190px; height: 68px; overflow: visible; color: var(--ink); }
+.brand-lockup::before { content: ""; position: absolute; z-index: -1; inset: 17% -5%; background: radial-gradient(ellipse, rgba(255,255,255,.14), transparent 68%); filter: blur(10px); opacity: .7; pointer-events: none; }
 .brand-lockup--light { color: var(--paper); }
-.brand-lockup--compact { width: 150px; height: 48px; gap: 5px; }
-.brand-lockup__asset { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; mix-blend-mode: screen; filter: drop-shadow(0 4px 10px rgba(0,0,0,.24)); transform: scale(1.04); }
+.brand-lockup--compact { width: 145px; height: 52px; }
+.brand-lockup__asset { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; mix-blend-mode: normal; filter: drop-shadow(0 4px 10px rgba(0,0,0,.28)); transform: scale(1.02); }
 .brand-symbol { width: 31px; height: 28px; display: inline-flex; align-items: center; justify-content: center; position: relative; transform: skewX(-9deg); }
 .brand-symbol::before, .brand-symbol::after, .brand-symbol i { content: ""; position: absolute; width: 19px; height: 7px; border-radius: 0 1px 1px 0; background: var(--red); transform: rotate(45deg); }
 .brand-symbol::before { top: 5px; left: 2px; }
@@ -161,7 +162,7 @@ button { border: 0; }
 .cover-motion__road { position: absolute; left: -10%; right: -10%; bottom: -24%; height: 70%; transform: perspective(520px) rotateX(61deg) rotateZ(-7deg); transform-origin: bottom center; background-image: linear-gradient(rgba(217,46,46,.24) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.2) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to top, #000, transparent 85%); opacity: .34; animation: road-drift 9s linear infinite; }
 .cover-motion__grain { position: absolute; inset: 0; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 460px; opacity: .45; mix-blend-mode: soft-light; }
 .cover-header { height: 84px; position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; background: rgba(10,10,9,.56); border-bottom: 1px solid rgba(255,255,255,.13); box-shadow: 0 8px 30px rgba(0,0,0,.12); backdrop-filter: blur(10px); }
-.cover-header .brand-lockup { width: 174px; height: 56px; padding: 0; border: 0; background: transparent; }
+.cover-header .brand-lockup { width: 190px; height: 64px; padding: 0; border: 0; background: transparent; }
 .cover-header__edition { color: rgba(245,239,230,.54); text-transform: uppercase; font-size: 9px; letter-spacing: .18em; margin-left: auto; margin-right: 46px; }
 .cover-header__edition span { color: var(--red); padding: 0 7px; }
 .cover-nav { display: flex; align-items: center; gap: 26px; }

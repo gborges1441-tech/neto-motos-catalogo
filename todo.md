@@ -181,3 +181,8 @@
 - [x] Corrigir a área de fotografia mobile com cálculo responsivo e contain sem cortar rodas, guidão, espelhos ou partes inferiores.
 - [x] Conferir o encaixe do livro inteiro e da fotografia como camadas independentes em desktop e mobile.
 - [x] Validar visualmente 375, 390, 430, 768, 1024, 1280, 1366, 1440 e 1920 antes do checkpoint.
+
+- [x] Restaurar a logo horizontal original trabalhada no BrandMark.
+- [x] Remover a sensação de retângulo colado com transparência, máscara e respiro óptico, sem redesenhar a marca.
+- [x] Ajustar escala e alinhamento da logo restaurada na capa, catálogo, modo lista, desktop e mobile.
+- [x] Validar visualmente a integração da logo e salvar checkpoint sem alterar o restante do produto.
