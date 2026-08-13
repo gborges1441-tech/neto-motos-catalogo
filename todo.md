@@ -138,13 +138,22 @@
 - [x] Aplicar as informações autorizadas sem inventar ou completar lacunas com dados genéricos.
 - [x] Validar texto, dados, layout, responsividade e build após a integração.
 
-- [ ] Ler novamente o arquivo reenviado e extrair suas intenções atuais, prioridades e critérios de sucesso.
-- [ ] Comparar cada intenção do briefing com a versão atual do site e listar lacunas ainda não resolvidas.
-- [ ] Aplicar as prioridades do arquivo à estrutura, copy, mobile, navegação e conversão sem inventar informações.
-- [ ] Validar visualmente e funcionalmente as mudanças em desktop, tablet e celular.
-- [ ] Rodar TypeScript, build e auditoria de logs antes de salvar a nova versão.
+- [x] Ler novamente o arquivo reenviado e extrair suas intenções atuais, prioridades e critérios de sucesso.
+- [x] Comparar cada intenção do briefing com a versão atual do site e listar lacunas ainda não resolvidas.
+- [x] Aplicar as prioridades do arquivo à estrutura, copy, mobile, navegação e conversão sem inventar informações.
+- [x] Validar visualmente e funcionalmente as mudanças em desktop, tablet e celular.
+- [x] Rodar TypeScript, build e auditoria de logs antes de salvar a nova versão.
 
 - [x] Implementar lightbox premium para ampliar a foto ativa da moto sem perder a composição editorial.
 - [x] Adicionar navegação anterior/próxima, contador, fechamento por botão, Escape e clique fora.
 - [x] Preservar swipe mobile, foco acessível, rolagem bloqueada e suporte a prefers-reduced-motion.
 - [x] Validar o lightbox em desktop, tablet, celular, teclado e build antes do checkpoint.
+
+- [x] Reescrever a capa conforme o briefing, sem quantidade na headline e sem alterar a estrutura do livro.
+- [x] Remover a textura repetitiva sobre o vídeo e deixar o fundo editorial mais sutil.
+- [x] Ajustar o vídeo hero para contraste localizado, cores naturais e fallback coerente em baixa capacidade.
+- [x] Refinar a integração editorial do header e preservar o livro como protagonista.
+- [x] Fazer a lupa aparecer apenas em hover/foco sobre a foto, mantendo a affordance mobile discreta.
+- [x] Revisar a galeria para não colocar contador ou texto sobre a fotografia e manter miniaturas abaixo.
+- [x] Auditar cópia e CTAs de produto para seguir promessa, benefício, detalhe, ficha e contato.
+- [x] Validar o refinamento em desktop, tablet, mobile, acessibilidade, performance e build antes do checkpoint.

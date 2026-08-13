@@ -24,6 +24,7 @@ export default function Home() {
   const [quoteOpen, setQuoteOpen] = useState(() => new URLSearchParams(window.location.search).get("quote") === "1");
   const [listMode, setListMode] = useState(() => initialMode === "list");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [floatingCompact, setFloatingCompact] = useState(false);
   const lastUrlMode = useRef(initialMode === "book" || initialMode === "list" ? initialMode : "");
 
   useEffect(() => {
@@ -61,6 +62,15 @@ export default function Home() {
   }, [activeIndex, listMode, opened]);
 
   useEffect(() => {
+    if (!opened) {
+      setFloatingCompact(false);
+      return;
+    }
+    const timer = window.setTimeout(() => setFloatingCompact(true), 5200);
+    return () => window.clearTimeout(timer);
+  }, [opened]);
+
+  useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIndexOpen(false);
@@ -90,12 +100,12 @@ export default function Home() {
   }
 
   return (
-    <div className={`site-shell ${opened ? "site-shell--opened" : ""}`}>
+    <div className={`site-shell ${opened ? "site-shell--opened" : ""} ${floatingCompact ? "site-shell--floating-compact" : ""}`}>
       <a className="skip-link" href="#catalog-content">Pular para o catálogo</a>
       {listMode ? (
         <ListMode open={listMode} onClose={() => setListMode(false)} onSelect={(index) => { setListMode(false); openCatalog(index); }} onOpenQuote={() => openQuote("list")} />
       ) : !opened ? (
-        <Cover total={motos.length} onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => { setAboutOpen(true); setIndexOpen(false); }} onOpenIndex={() => { setIndexOpen(true); setAboutOpen(false); }} onOpenQuote={() => openQuote("cover")} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
+        <Cover onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => { setAboutOpen(true); setIndexOpen(false); }} onOpenIndex={() => { setIndexOpen(true); setAboutOpen(false); }} onOpenQuote={() => openQuote("cover")} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
       ) : (
         <BookFrame motos={motos} activeIndex={activeIndex} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} onOpenQuote={() => openQuote("book")} />
       )}
@@ -108,17 +118,31 @@ export default function Home() {
   );
 }
 
-function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleMenu, mobileMenuOpen }: { total: number; onOpen: () => void; onOpenAbout: () => void; onOpenIndex: () => void; onOpenQuote: () => void; onToggleMenu: () => void; mobileMenuOpen: boolean }) {
+function Cover({ onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleMenu, mobileMenuOpen }: { onOpen: () => void; onOpenAbout: () => void; onOpenIndex: () => void; onOpenQuote: () => void; onToggleMenu: () => void; mobileMenuOpen: boolean }) {
+  const [posterOnly, setPosterOnly] = useState(() => {
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    return Boolean(connection?.saveData) || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => {
+      const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+      setPosterOnly(Boolean(connection?.saveData) || media.matches);
+    };
+    media.addEventListener?.("change", update);
+    return () => media.removeEventListener?.("change", update);
+  }, []);
+
   return (
     <main id="catalog-content" className="cover-stage">
       <div className="cover-stage__noise" />
       <div className="cover-stage__grid" aria-hidden="true" />
       <div className="cover-commercial" style={{ backgroundImage: `url(${commercialPoster})` }} aria-hidden="true">
-        <video className="cover-commercial__video" autoPlay loop muted playsInline poster={commercialPoster} preload="metadata">
+        {!posterOnly && <video className="cover-commercial__video" autoPlay loop muted playsInline poster={commercialPoster} preload="metadata">
           <source src={commercialVideo} type="video/mp4" />
-        </video>
+        </video>}
         <span className="cover-commercial__beam" /><span className="cover-commercial__road" /><span className="cover-commercial__grain" />
-        <div className="cover-commercial__caption"><span>VÍDEO COMERCIAL / SHI 250</span><b>Veja a linha. Encontre o modelo para a sua rotina.</b></div>
       </div>
       <div className="cover-stage__redline" />
       <header className="cover-header">
@@ -135,12 +159,12 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleM
       <div className="cover-vertical">SHINERAY / BRASIL <span>—</span> NETO MOTOS</div>
       <div className="cover-content">
         <div className="cover-copy">
-          <div className="cover-kicker"><span className="live-dot" /> catálogo de vendas / {total} modelos Shineray</div>
-          <h1><span>Compare 29</span><em>Shineray.</em><span>Encontre a sua.</span></h1>
-          <p>Street, trail, scooter e elétrica com preço de referência, fotos reais e atendimento do Neto para você decidir sem comprar no escuro.</p>
-          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Conheça as motos</b><small>Escolha pelo seu uso</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
-          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Quer tirar uma dúvida?</span><b>Falar com o Neto</b><ArrowRight size={14} /></a>
-          <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> modelos</span><span><b>fotos</b> oficiais</span><span><b>atendimento</b> direto</span></div>
+          <div className="cover-kicker"><span className="live-dot" /> catálogo Neto Motos · Shineray</div>
+          <h1><span>Encontre a moto que</span><em>faz sentido para você.</em></h1>
+          <p>Explore modelos para diferentes estilos de vida, descubra os detalhes de cada um e, quando encontrar o seu, fale diretamente com o Neto.</p>
+          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Explorar modelos</b></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Não sei qual escolher</span><b>Fale com o Neto</b><ArrowRight size={14} /></a>
+          <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>fotos</b> reais</span><span><b>atendimento</b> direto</span></div>
         </div>
       </div>
       <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><span>SCROLL <ArrowDown size={12} /></span></footer>
@@ -201,7 +225,7 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
       <section className="about-card" role="dialog" aria-modal="true" aria-labelledby="about-title">
         <button ref={closeRef} type="button" className="icon-button about-card__close" onClick={onClose} aria-label="Fechar apresentação"><X size={18} /></button>
         <div className="about-card__image"><AssetImage src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" fallbackLabel="Neto Motos" /><span>NETO / CONSULTOR</span></div>
-        <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO QUE AJUDA A DECIDIR</span><h2 id="about-title">Antes de escolher,<br /><em>fale com quem orienta.</em></h2><p>Você fala diretamente com o Neto para tirar dúvidas, comparar modelos, confirmar disponibilidade e entender as condições da moto que combina com a sua rotina.</p><div className="about-card__line" /><div className="about-card__contact"><span>WhatsApp de atendimento</span><b>(11) 97847-3480</b></div><WhatsAppButton label="Falar diretamente com o Neto" /><div className="about-card__faq"><span className="page-kicker">ANTES DE COMPRAR</span><details><summary>Posso falar diretamente com o Neto?</summary><p>Sim. O atendimento acontece pelo WhatsApp oficial da Neto Motos.</p></details><details><summary>Como confirmo disponibilidade e preço?</summary><p>Envie o modelo de interesse. O Neto confirma estoque, cores, documentação, frete e condições vigentes.</p></details><details><summary>Posso perguntar sobre financiamento?</summary><p>Sim. Consulte as opções disponíveis para o seu caso diretamente no atendimento.</p></details></div></div>
+        <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO DIRETO COM O NETO</span><h2 id="about-title">A moto certa<br /><em>começa com uma boa escolha.</em></h2><p>Não precisa escolher sozinho. Conte ao Neto como você pretende usar sua moto — para trabalhar, estudar, se locomover pela cidade, viajar ou simplesmente aproveitar mais a liberdade de estar sobre duas rodas. Ele pode te ajudar a conhecer os modelos que fazem sentido para você, tirar suas dúvidas e apresentar as condições disponíveis.</p><div className="about-card__line" /><div className="about-card__contact"><span>WhatsApp</span><b>(11) 97847-3480</b></div><small className="about-card__microcopy">Atendimento pelo WhatsApp</small><WhatsAppButton label="Quero encontrar minha moto" /><div className="about-card__faq"><span className="page-kicker">ANTES DE COMPRAR</span><details><summary>Posso falar diretamente com o Neto?</summary><p>Sim. O atendimento acontece pelo WhatsApp oficial da Neto Motos.</p></details><details><summary>Como confirmo disponibilidade e condições?</summary><p>Envie o modelo de interesse e o Neto confirma as informações atuais diretamente no atendimento.</p></details><details><summary>Posso pedir uma indicação?</summary><p>Conte como pretende usar o veículo. O Neto ajuda você a comparar os modelos que fazem sentido para a sua rotina.</p></details></div></div>
       </section>
     </div>
   );
@@ -240,7 +264,7 @@ function ListMode({ open, onClose, onSelect, onOpenQuote }: { open: boolean; onC
       </div>
       <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por estilo">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => { setFamily(item); trackEvent("catalog_filter", { filter: "style", value: item }); }}>{item}</button>)}<span>{entries.length} {entries.length === 1 ? "resultado" : "resultados"}</span><button className="list-filter-clear" type="button" onClick={clearFilters}>Limpar filtros</button></div>
       {entries.length === 0 && <div className="list-empty"><b>Nenhuma moto encontrada.</b><span>Tente outra faixa de preço, estilo ou termo de busca.</span><button type="button" onClick={clearFilters}>Ver o catálogo completo</button></div>}
-        <div className="list-mode__grid">{entries.map(({ moto, index }, entryIndex) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading={entryIndex === 0 ? "eager" : "lazy"} /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver detalhes e condições <ArrowRight size={14} /></button></div></div></article>)}</div>
+        <div className="list-mode__grid">{entries.map(({ moto, index }, entryIndex) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading={entryIndex === 0 ? "eager" : "lazy"} /></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Quero conhecer essa moto <ArrowRight size={14} /></button></div></div></article>)}</div>
         <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><div className="list-mode__footer-actions"><button type="button" className="list-mode__quote" onClick={onOpenQuote}><FileText size={14} /> Pedir orçamento</button><WhatsAppButton compact label="Falar com o Neto" /></div><small className="catalog-signature">Neto Motos | revenda de motocicletas Shineray</small></footer>
     </div>
   );
@@ -311,7 +335,7 @@ function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
               <label><span>Faixa de investimento</span><select value={form.budget} onChange={(event) => updateField("budget", event.target.value)}><option value="">Prefiro conversar</option><option>Até R$ 15 mil</option><option>R$ 15 mil a R$ 25 mil</option><option>Acima de R$ 25 mil</option></select></label>
             </div>
             <label><span>Como pretende usar?</span><select value={form.use} onChange={(event) => updateField("use", event.target.value)}><option value="">Escolha uma opção</option><option>Deslocamento na cidade</option><option>Trabalho e entregas</option><option>Viagens e estrada</option><option>Uso misto</option><option>Mobilidade elétrica</option></select></label>
-            <label><span>O que você precisa saber?</span><textarea value={form.message} onChange={(event) => updateField("message", event.target.value)} placeholder="Ex.: quero saber entrada, parcelas, cores e prazo de entrega." rows={3} /></label>
+            <label><span>O que você precisa saber?</span><textarea value={form.message} onChange={(event) => updateField("message", event.target.value)} placeholder="Ex.: quero entender disponibilidade, cores e condições atuais." rows={3} /></label>
             <button className="quote-form__submit" type="submit"><span className="whatsapp-mark" aria-hidden="true"><PhoneCall size={14} strokeWidth={2.4} /></span> Solicitar orçamento pelo WhatsApp <ArrowRight size={15} /></button>
             <small className="quote-form__privacy">Seus dados serão usados apenas para responder ao seu pedido de atendimento.</small>
           </form>

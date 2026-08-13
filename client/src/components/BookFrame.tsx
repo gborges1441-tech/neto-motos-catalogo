@@ -25,10 +25,18 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightboxZoom, setLightboxZoom] = useState(1);
+  const [lightboxPan, setLightboxPan] = useState({ x: 0, y: 0 });
   const [hasInteracted, setHasInteracted] = useState(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const lightboxGesture = useRef<{ x: number; y: number; panX: number; panY: number; scale: number; pointerType: string } | null>(null);
+  const pinchPointers = useRef(new Map<number, { x: number; y: number }>());
+  const pinchStart = useRef<{ distance: number; scale: number } | null>(null);
+  const lightboxTap = useRef<{ time: number; x: number; y: number } | null>(null);
+  const lightboxCloseRef = useRef<HTMLButtonElement>(null);
+  const lightboxPreviousFocus = useRef<HTMLElement | null>(null);
   const current = motos[activeIndex];
 
   useEffect(() => {
@@ -38,6 +46,8 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
   useEffect(() => {
     if (lightboxIndex === null) return;
+    lightboxPreviousFocus.current = document.activeElement as HTMLElement | null;
+    window.requestAnimationFrame(() => lightboxCloseRef.current?.focus());
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
@@ -49,8 +59,17 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      window.requestAnimationFrame(() => lightboxPreviousFocus.current?.focus());
     };
   }, [current.images.length, lightboxIndex]);
+
+  useEffect(() => {
+    setLightboxZoom(1);
+    setLightboxPan({ x: 0, y: 0 });
+    lightboxGesture.current = null;
+    pinchPointers.current.clear();
+    pinchStart.current = null;
+  }, [lightboxIndex]);
 
   useEffect(() => {
     const preload = (image: Moto["images"][number]) => {
@@ -171,6 +190,66 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     trackEvent("gallery_view", { model: current.name, image: index + 1, mode: "lightbox" });
   }
 
+  function changeLightbox(delta: number) {
+    setLightboxIndex((index) => index === null ? null : (index + delta + current.images.length) % current.images.length);
+  }
+
+  function onLightboxPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    const point = { x: event.clientX, y: event.clientY };
+    pinchPointers.current.set(event.pointerId, point);
+    if (pinchPointers.current.size === 2) {
+      const [first, second] = Array.from(pinchPointers.current.values());
+      pinchStart.current = { distance: Math.hypot(first.x - second.x, first.y - second.y), scale: lightboxZoom };
+    } else {
+      lightboxGesture.current = { x: event.clientX, y: event.clientY, panX: lightboxPan.x, panY: lightboxPan.y, scale: lightboxZoom, pointerType: event.pointerType };
+    }
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  }
+
+  function onLightboxPointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    if (pinchPointers.current.has(event.pointerId)) pinchPointers.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pinchPointers.current.size === 2 && pinchStart.current) {
+      const [first, second] = Array.from(pinchPointers.current.values());
+      const distance = Math.hypot(first.x - second.x, first.y - second.y);
+      const nextZoom = Math.min(3.2, Math.max(1, pinchStart.current.scale * (distance / pinchStart.current.distance)));
+      setLightboxZoom(nextZoom);
+      if (nextZoom === 1) setLightboxPan({ x: 0, y: 0 });
+      return;
+    }
+    const gesture = lightboxGesture.current;
+    if (!gesture || gesture.scale <= 1) return;
+    setLightboxPan({ x: gesture.panX + (event.clientX - gesture.x), y: gesture.panY + (event.clientY - gesture.y) });
+  }
+
+  function onLightboxPointerUp(event: React.PointerEvent<HTMLDivElement>) {
+    const gesture = lightboxGesture.current;
+    const distanceX = gesture ? event.clientX - gesture.x : 0;
+    const distanceY = gesture ? event.clientY - gesture.y : 0;
+    const wasPinching = pinchPointers.current.size === 2 || Boolean(pinchStart.current);
+    pinchPointers.current.delete(event.pointerId);
+    if (pinchPointers.current.size < 2) pinchStart.current = null;
+    lightboxGesture.current = null;
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    if (!wasPinching && event.pointerType === "touch" && Math.abs(distanceX) < 20 && Math.abs(distanceY) < 20) {
+      const now = performance.now();
+      const previousTap = lightboxTap.current;
+      if (previousTap && now - previousTap.time < 340 && Math.hypot(event.clientX - previousTap.x, event.clientY - previousTap.y) < 28) {
+        setLightboxZoom((zoom) => zoom > 1 ? 1 : 2.2);
+        setLightboxPan({ x: 0, y: 0 });
+        lightboxTap.current = null;
+      } else {
+        lightboxTap.current = { time: now, x: event.clientX, y: event.clientY };
+      }
+    }
+    if (!wasPinching && event.pointerType === "touch" && lightboxZoom === 1 && Math.abs(distanceX) > 60 && Math.abs(distanceX) > Math.abs(distanceY) * 1.25) changeLightbox(distanceX < 0 ? 1 : -1);
+  }
+
+  function onLightboxDoubleClick(event: React.MouseEvent<HTMLDivElement>) {
+    event.preventDefault();
+    setLightboxZoom((zoom) => zoom > 1 ? 1 : 2.2);
+    setLightboxPan({ x: 0, y: 0 });
+  }
+
   return (
     <main id="catalog-content" className="catalog-workspace">
       <div className="catalog-3d-field" aria-hidden="true"><span /><span /><span /></div>
@@ -234,7 +313,6 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
                 <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
                 <span><ZoomIn size={14} /> Ampliar foto</span>
               </button>
-              <span className="image-caption"><b>{String(selectedImage + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</b><i>•</i> Fotos de catálogo</span>
             </div>
             <div className="gallery-strip">
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>
@@ -242,7 +320,6 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
                 {current.images.map((image, index) => (
                   <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}>
                     <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" />
-                    <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
                 ))}
               </div>
@@ -260,10 +337,9 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               <span><ZoomIn size={14} /> Ampliar foto</span>
             </button>
-            <span><b>{String(selectedImage + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</b><i>•</i> Fotos de catálogo</span>
           </div>
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
-            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /><span>{String(index + 1).padStart(2, "0")}</span></button>)}
+            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
           </div>
           <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / SHINERAY</span>
@@ -280,20 +356,20 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         <div className="book-bottomline">
           <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)} aria-label="Abrir capítulo anterior"><ChevronLeft size={17} /><span>Anterior</span></button>
           <div className="book-progress" aria-live="polite" aria-label={`Capítulo ${activeIndex + 1} de ${motos.length}`}><span className="book-progress__count">{formatChapter(activeIndex, motos.length)}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
-          <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Falar com o Neto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
+          <div className="book-bottomline__cta"><span className="book-cta-microcopy">Consulte disponibilidade e condições atuais diretamente com o Neto.</span><WhatsAppButton model={current.name} compact label="Falar com o Neto sobre essa moto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
         </div>
       </section>
 
       {lightboxIndex !== null && <div className="photo-lightbox" role="dialog" aria-modal="true" aria-label={`Galeria ampliada da ${current.name}`} onMouseDown={(event) => { if (event.target === event.currentTarget) setLightboxIndex(null); }}>
         <div className="photo-lightbox__panel">
-          <div className="photo-lightbox__topline"><span><span className="live-dot" /> {current.name} / Fotos de catálogo</span><span>{String(lightboxIndex + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</span></div>
-          <button className="photo-lightbox__close" type="button" onClick={() => setLightboxIndex(null)} aria-label="Fechar foto ampliada"><X size={21} /></button>
-          <button className="photo-lightbox__nav photo-lightbox__nav--prev" type="button" onClick={() => setLightboxIndex((index) => index === null ? null : (index - 1 + current.images.length) % current.images.length)} aria-label="Ver foto anterior"><ChevronLeft size={25} /></button>
-          <div className="photo-lightbox__stage">
-            <AssetImage key={`lightbox-${current.images[lightboxIndex].src}`} src={current.images[lightboxIndex].src} alt={current.images[lightboxIndex].alt} fallbackLabel={current.name} loading="eager" decoding="async" fetchPriority="high" />
+          <div className="photo-lightbox__topline"><span><span className="live-dot" /> {current.name} / {current.category}</span><span>{String(lightboxIndex + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</span></div>
+          <button ref={lightboxCloseRef} className="photo-lightbox__close" type="button" onClick={() => setLightboxIndex(null)} aria-label="Fechar foto ampliada"><X size={21} /></button>
+          <button className="photo-lightbox__nav photo-lightbox__nav--prev" type="button" onClick={() => changeLightbox(-1)} aria-label="Ver foto anterior"><ChevronLeft size={25} /></button>
+          <div className="photo-lightbox__stage" onPointerDown={onLightboxPointerDown} onPointerMove={onLightboxPointerMove} onPointerUp={onLightboxPointerUp} onPointerCancel={onLightboxPointerUp} onDoubleClick={onLightboxDoubleClick}>
+            <AssetImage key={`lightbox-${current.images[lightboxIndex].src}`} src={current.images[lightboxIndex].src} alt={current.images[lightboxIndex].alt} fallbackLabel={current.name} loading="eager" decoding="async" fetchPriority="high" style={{ transform: `translate3d(${lightboxPan.x}px, ${lightboxPan.y}px, 0) scale(${lightboxZoom})`, cursor: lightboxZoom > 1 ? "grab" : "zoom-in" }} />
           </div>
-          <button className="photo-lightbox__nav photo-lightbox__nav--next" type="button" onClick={() => setLightboxIndex((index) => index === null ? null : (index + 1) % current.images.length)} aria-label="Ver próxima foto"><ChevronRight size={25} /></button>
-          <div className="photo-lightbox__caption"><span>{current.images[lightboxIndex].label}</span><small>Use ← → ou deslize pelas imagens</small></div>
+          <button className="photo-lightbox__nav photo-lightbox__nav--next" type="button" onClick={() => changeLightbox(1)} aria-label="Ver próxima foto"><ChevronRight size={25} /></button>
+          <div className="photo-lightbox__caption"><span>{current.images[lightboxIndex].label}</span><small>Pinça ou duplo toque para ampliar · arraste para explorar · deslize para trocar</small></div>
         </div>
       </div>}
 

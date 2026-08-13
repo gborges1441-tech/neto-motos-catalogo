@@ -134,22 +134,22 @@ button { border: 0; }
 .live-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px rgba(217,46,46,.16); margin-right: 8px; }
 
 /* Cover */
-.cover-stage { min-height: 100svh; position: relative; overflow: hidden; background: #141414; isolation: isolate; }
-.cover-stage::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,12,12,.92) 0%, rgba(12,12,12,.68) 34%, rgba(12,12,12,.2) 78%, rgba(12,12,12,.76) 100%); z-index: -1; }
-.cover-stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 72%, rgba(12,12,12,.82) 100%); z-index: -1; }
-.cover-stage__noise { pointer-events: none; position: absolute; inset: 0; opacity: .12; mix-blend-mode: soft-light; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 520px; z-index: 0; }
-.cover-stage__grid { pointer-events: none; position: absolute; inset: 0; z-index: 0; opacity: .16; overflow: hidden; perspective: 900px; }
+.cover-stage { min-height: 100svh; position: relative; overflow: hidden; background: radial-gradient(circle at 77% 44%, rgba(58,54,50,.34), transparent 34%), radial-gradient(circle at 74% 18%, rgba(217,46,46,.08), transparent 28%), #0e0e0d; isolation: isolate; }
+.cover-stage::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,7,7,.86) 0%, rgba(7,7,7,.64) 28%, rgba(7,7,7,.08) 56%, transparent 78%); z-index: -1; }
+.cover-stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 70%, rgba(7,7,7,.48) 100%); z-index: -1; }
+.cover-stage__noise { pointer-events: none; position: absolute; inset: 0; opacity: .025; mix-blend-mode: soft-light; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 640px; z-index: 0; }
+.cover-stage__grid { pointer-events: none; position: absolute; inset: 0; z-index: 0; opacity: .06; overflow: hidden; perspective: 900px; }
 .cover-stage__grid::before { content: ""; position: absolute; left: -35%; right: -35%; bottom: -28%; height: 70%; background-image: linear-gradient(rgba(217,46,46,.27) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.22) 1px, transparent 1px); background-size: 76px 76px; transform: rotateX(66deg) rotateZ(-8deg); transform-origin: bottom center; mask-image: linear-gradient(to top, black 4%, transparent 88%); animation: grid-drift 18s linear infinite; }
 .cover-stage__grid::after { content: ""; position: absolute; left: 61%; top: 8%; width: 1px; height: 120%; background: linear-gradient(transparent, rgba(217,46,46,.75), transparent); transform: rotate(24deg); animation: light-sweep 8s ease-in-out infinite; }
-.cover-stage__redline { position: absolute; top: -20%; right: 22%; width: 1px; height: 140%; background: linear-gradient(transparent, rgba(217,46,46,.7), transparent); transform: rotate(27deg); opacity: .5; z-index: 0; }
+.cover-stage__redline { position: absolute; top: -20%; right: 22%; width: 1px; height: 140%; background: linear-gradient(transparent, rgba(217,46,46,.7), transparent); transform: rotate(27deg); opacity: .2; z-index: 0; }
 .cover-commercial { pointer-events: none; position: absolute; z-index: 1; right: -1vw; top: 84px; width: 61vw; height: calc(100svh - 112px); overflow: hidden; opacity: 1; transform: none; background-position: center; background-size: cover; mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.88) 15%, #000 34%, #000 86%, transparent 100%); }
-.cover-commercial::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.62), rgba(10,10,10,.06) 35%, rgba(10,10,10,.03) 70%, rgba(10,10,10,.3)), linear-gradient(180deg, rgba(10,10,10,.08), transparent 48%, rgba(10,10,10,.58)); z-index: 1; }
-.cover-commercial__video { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(1.02) contrast(1.04) brightness(.92); animation: commercial-dolly 12s ease-in-out infinite alternate; }
+.cover-commercial::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.18), transparent 28%, transparent 82%, rgba(10,10,10,.16)), linear-gradient(180deg, rgba(10,10,10,.05), transparent 58%, rgba(10,10,10,.24)); z-index: 1; }
+.cover-commercial__video { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(1) contrast(1.02) brightness(1); animation: commercial-dolly 12s ease-in-out infinite alternate; will-change: transform; }
 .cover-commercial__caption { position: absolute; z-index: 3; right: 10%; bottom: 13%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; color: rgba(245,239,230,.64); text-align: right; text-transform: uppercase; letter-spacing: .18em; font-size: 7px; }
 .cover-commercial__caption b { color: var(--paper); font-family: "Barlow Condensed", sans-serif; font-size: 16px; font-weight: 500; letter-spacing: .06em; }
 .cover-commercial__beam { display: none; }
-.cover-commercial__road { position: absolute; z-index: 2; left: -10%; right: -10%; bottom: -24%; height: 70%; transform: perspective(520px) rotateX(61deg) rotateZ(-7deg); transform-origin: bottom center; background-image: linear-gradient(rgba(217,46,46,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.12) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to top, #000, transparent 85%); opacity: .12; animation: road-drift 9s linear infinite; }
-.cover-commercial__grain { position: absolute; z-index: 2; inset: 0; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 460px; opacity: .38; mix-blend-mode: soft-light; }
+.cover-commercial__road { display: none; }
+.cover-commercial__grain { display: none; }
 .cover-motion { display: none; }
 .cover-motion__frame { position: absolute; inset: 0; opacity: 0; transform: scale(1.07) translate3d(1%, 0, 0); animation: commercial-frame 18s ease-in-out infinite; }
 .cover-motion__frame--1 { animation-delay: 0s; }
@@ -159,7 +159,7 @@ button { border: 0; }
 .cover-motion__beam { position: absolute; inset: -40% 32% -40% 53%; background: linear-gradient(90deg, transparent, rgba(217,46,46,.62), transparent); transform: rotate(18deg); filter: blur(10px); animation: cover-beam 7s ease-in-out infinite; }
 .cover-motion__road { position: absolute; left: -10%; right: -10%; bottom: -24%; height: 70%; transform: perspective(520px) rotateX(61deg) rotateZ(-7deg); transform-origin: bottom center; background-image: linear-gradient(rgba(217,46,46,.24) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.2) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to top, #000, transparent 85%); opacity: .34; animation: road-drift 9s linear infinite; }
 .cover-motion__grain { position: absolute; inset: 0; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 460px; opacity: .45; mix-blend-mode: soft-light; }
-.cover-header { height: 84px; position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; border-bottom: 1px solid rgba(255,255,255,.13); }
+.cover-header { height: 84px; position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; background: rgba(10,10,9,.56); border-bottom: 1px solid rgba(255,255,255,.13); box-shadow: 0 8px 30px rgba(0,0,0,.12); backdrop-filter: blur(10px); }
 .cover-header__edition { color: rgba(245,239,230,.54); text-transform: uppercase; font-size: 9px; letter-spacing: .18em; margin-left: auto; margin-right: 46px; }
 .cover-header__edition span { color: var(--red); padding: 0 7px; }
 .cover-nav { display: flex; align-items: center; gap: 26px; }
@@ -172,8 +172,9 @@ button { border: 0; }
 .cover-content { position: relative; z-index: 2; min-height: calc(100svh - 160px); display: flex; align-items: center; padding: 5vh 12vw 10vh; }
 .cover-copy { max-width: 500px; margin-left: 2vw; margin-top: -2vh; animation: reveal-up 900ms var(--ease-out) both; }
 .cover-kicker { display: flex; align-items: center; color: rgba(245,239,230,.64); font-size: 9px; text-transform: uppercase; letter-spacing: .22em; margin-bottom: 26px; }
-.cover-copy h1 { margin: 0; color: var(--paper); font-family: "Barlow Condensed", sans-serif; font-weight: 500; font-size: clamp(64px, 8.4vw, 132px); line-height: .86; letter-spacing: -.045em; text-transform: uppercase; }
+.cover-copy h1 { margin: 0; color: var(--paper); font-family: "Barlow Condensed", sans-serif; font-weight: 500; font-size: clamp(58px, 7.5vw, 116px); line-height: .86; letter-spacing: -.045em; text-transform: uppercase; }
 .cover-copy h1 span, .cover-copy h1 em { display: block; }
+.cover-copy h1 span:first-child { white-space: nowrap; }
 .cover-copy h1 em { color: var(--red); font-style: normal; padding-left: .44em; }
 .cover-copy p { max-width: 320px; color: rgba(245,239,230,.68); font-size: 14px; line-height: 1.62; margin: 30px 0 36px 10px; }
 .open-book-button { display: inline-flex; align-items: center; gap: 14px; background: rgba(22,22,21,.7); border: 1px solid rgba(255,255,255,.22); color: var(--paper); padding: 11px 14px 11px 10px; cursor: pointer; transition: background .25s var(--ease-out), border-color .25s ease, transform .25s var(--ease-out); }
@@ -291,13 +292,10 @@ button { border: 0; }
 .moto-visual__zoom { position: absolute; inset: 4% 3% 3%; z-index: 1; display: block; width: 94%; height: 94%; padding: 0; background: transparent; border: 0; cursor: zoom-in; }
 .moto-visual__zoom > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; background: transparent; mix-blend-mode: normal; filter: none; transition: opacity .3s ease, transform .45s var(--ease-out); animation: image-in .6s var(--ease-out) both; }
 .moto-visual__zoom > .asset-image-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: radial-gradient(ellipse at center, rgba(255,255,255,.72), rgba(226,219,210,.52)); }
-.moto-visual__zoom > span, .book-mobile-page__zoom > span { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; color: rgba(255,255,255,.92); background: rgba(21,21,20,.7); border: 1px solid rgba(255,255,255,.22); font-size: 8px; text-transform: uppercase; letter-spacing: .12em; opacity: .74; transform: translateY(0); transition: opacity .2s ease, transform .2s var(--ease-out); }
+.moto-visual__zoom > span, .book-mobile-page__zoom > span { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; color: rgba(255,255,255,.92); background: rgba(21,21,20,.7); border: 1px solid rgba(255,255,255,.22); font-size: 8px; text-transform: uppercase; letter-spacing: .12em; opacity: 0; transform: translateY(5px); transition: opacity .2s ease, transform .2s var(--ease-out); }
 .moto-visual__zoom:hover > span, .moto-visual__zoom:focus-visible > span, .book-mobile-page__zoom:hover > span, .book-mobile-page__zoom:focus-visible > span { opacity: 1; transform: translateY(0); }
 .moto-visual__zoom:focus-visible, .book-mobile-page__zoom:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
 .moto-visual > .asset-image-fallback { position: absolute; inset: 4% 3% 3%; width: 94%; height: 94%; object-fit: contain; background: radial-gradient(ellipse at center, rgba(255,255,255,.72), rgba(226,219,210,.52)); mix-blend-mode: normal; filter: none; transition: opacity .3s ease, transform .45s var(--ease-out); animation: image-in .6s var(--ease-out) both; }
-.image-caption { position: absolute; left: 1%; bottom: 0; z-index: 2; color: rgba(21,21,20,.48); font-size: 8px; text-transform: uppercase; letter-spacing: .12em; }
-.image-caption b, .book-mobile-page__visual b { color: var(--red); font-family: "Barlow Condensed", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: .04em; }
-.image-caption i, .book-mobile-page__visual i { color: var(--red); font-style: normal; margin: 0 5px; }
 .gallery-strip { position: absolute; z-index: 2; bottom: 2%; left: 1%; right: 1%; display: flex; align-items: end; gap: 19px; }
 .gallery-strip__label { display: flex; align-items: center; gap: 7px; color: rgba(21,21,20,.56); text-transform: uppercase; font-size: 8px; letter-spacing: .14em; padding-bottom: 6px; }
 .gallery-strip__label svg { color: var(--red); }
@@ -316,7 +314,7 @@ button { border: 0; }
 .photo-lightbox__close { position: absolute; top: 14px; right: 15px; z-index: 2; display: grid; place-items: center; width: 34px; height: 34px; color: var(--paper); background: transparent; border: 1px solid rgba(241,236,228,.16); cursor: pointer; transition: color .2s ease, background .2s ease, transform .2s var(--ease-out); }
 .photo-lightbox__close:hover { color: #fff; background: rgba(217,46,46,.22); transform: rotate(4deg); }
 .photo-lightbox__close:focus-visible, .photo-lightbox__nav:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-.photo-lightbox__stage { grid-column: 2; grid-row: 2; min-width: 0; min-height: 0; display: grid; place-items: center; padding: 22px 10px 12px; }
+.photo-lightbox__stage { grid-column: 2; grid-row: 2; min-width: 0; min-height: 0; display: grid; place-items: center; padding: 22px 10px 12px; overflow: hidden; touch-action: none; }
 .photo-lightbox__stage img, .photo-lightbox__stage .asset-image-fallback { display: block; width: 100%; height: 100%; max-height: 100%; object-fit: contain; object-position: center; background: transparent; animation: lightbox-image-in .3s var(--ease-out) both; }
 .photo-lightbox__nav { align-self: center; display: grid; place-items: center; width: 42px; height: 42px; color: var(--paper); background: rgba(241,236,228,.06); border: 1px solid rgba(241,236,228,.18); cursor: pointer; transition: color .2s ease, background .2s ease, transform .2s var(--ease-out); }
 .photo-lightbox__nav:hover { color: #fff; background: var(--red); }
@@ -349,6 +347,7 @@ button { border: 0; }
 .book-nav--next:hover:not(:disabled) { transform: translateX(3px); }
 .book-nav:disabled { color: rgba(241,236,228,.2); cursor: not-allowed; }
 .book-bottomline__cta { display: flex; align-items: center; gap: 24px; }
+.book-cta-microcopy { max-width: 190px; color: rgba(241,236,228,.42); font-size: 8px; line-height: 1.35; letter-spacing: .03em; }
 .book-progress { display: flex; align-items: center; gap: 15px; }
 .book-progress__count { font-family: "Barlow Condensed", sans-serif; color: var(--paper); letter-spacing: .05em; font-size: 19px; }
 .book-progress__count i { color: var(--red); font-style: normal; font-size: 12px; margin: 0 3px; }
@@ -504,9 +503,9 @@ button { border: 0; }
 .floating-whatsapp { position: fixed; z-index: 20; right: 22px; bottom: 22px; display: flex; align-items: center; gap: 9px; padding: 12px 16px; color: #fff; background: linear-gradient(135deg, #1fc463, #159b4f); border: 1px solid rgba(181,255,206,.78); box-shadow: 0 0 0 3px rgba(37,211,102,.1), 0 10px 28px rgba(0,0,0,.28); text-decoration: none; text-transform: uppercase; font-size: 10px; font-weight: 800; letter-spacing: .1em; transition: background .2s ease, border-color .2s ease, transform .2s var(--ease-out); animation: whatsapp-float 3.6s ease-in-out infinite; }
 .floating-whatsapp:hover { background: linear-gradient(135deg, #25d366, #1aad59); border-color: rgba(225,255,235,.96); transform: translateY(-3px); }
 .floating-whatsapp__ping { width: 6px; height: 6px; background: #c9ffdb; border-radius: 50%; box-shadow: 0 0 0 4px rgba(169,240,201,.14); animation: whatsapp-ping 2.4s ease-out infinite; }
-.site-shell--opened .floating-whatsapp { width: 48px; height: 48px; padding: 9px; justify-content: center; border-radius: 50%; }
-.site-shell--opened .floating-whatsapp > span:last-child, .site-shell--opened .floating-whatsapp__ping { display: none; }
-.site-shell--opened .floating-whatsapp .whatsapp-mark { width: 28px; height: 28px; }
+.site-shell--floating-compact .floating-whatsapp { width: 48px; height: 48px; padding: 9px; justify-content: center; border-radius: 50%; }
+.site-shell--floating-compact .floating-whatsapp > span:last-child, .site-shell--floating-compact .floating-whatsapp__ping { display: none; }
+.site-shell--floating-compact .floating-whatsapp .whatsapp-mark { width: 28px; height: 28px; }
 .asset-image { background: transparent; transition: opacity .24s ease, filter .24s ease; }
 .asset-image--loading { opacity: 1; filter: none; }
 .asset-image--loaded { opacity: 1; filter: none; }
@@ -580,7 +579,7 @@ button { border: 0; }
   .cover-vertical { display: none; }
   .cover-content { min-height: 100svh; align-items: flex-start; padding: 112px 24px 365px 28px; }
   .cover-copy { margin: 0; }
-  .cover-copy h1 { font-size: clamp(55px, 15.2vw, 78px); line-height: .88; }
+  .cover-copy h1 { max-width: 100%; font-size: clamp(44px, 11.4vw, 64px); line-height: .88; letter-spacing: -.06em; }
   .cover-copy p { margin: 24px 0 27px 2px; max-width: 304px; font-size: 13px; line-height: 1.58; }
   .open-book-button { width: 100%; max-width: 305px; }
   .cover-sales-cta { margin-top: 15px; font-size: 8px; }
@@ -617,6 +616,7 @@ button { border: 0; }
   .book-mobile-page__visual { position: relative; z-index: 1; width: 100%; aspect-ratio: 4 / 3; margin-top: 17px; overflow: hidden; background: radial-gradient(ellipse at center, rgba(255,255,255,.76), rgba(219,211,201,.55)); border-top: 1px solid rgba(21,21,20,.08); border-bottom: 1px solid rgba(21,21,20,.08); }
 .book-mobile-page__visual img, .book-mobile-page__visual .asset-image-fallback { width: 100%; height: 100%; object-fit: contain; object-position: center; background: transparent; mix-blend-mode: normal; filter: none; }
   .book-mobile-page__visual > span { position: absolute; left: 8px; bottom: 7px; color: rgba(21,21,20,.48); font-size: 7px; text-transform: uppercase; letter-spacing: .1em; }
+  .moto-visual__zoom > span, .book-mobile-page__zoom > span { opacity: .68; transform: translateY(0); }
   .book-mobile-page__visual i { color: var(--red); font-style: normal; margin: 0 4px; }
   .book-mobile-page__gallery { position: relative; z-index: 1; display: flex; gap: 5px; overflow-x: auto; padding: 13px 0 4px; scrollbar-width: none; }
   .book-mobile-page__gallery::-webkit-scrollbar { display: none; }
@@ -649,13 +649,16 @@ button { border: 0; }
   .book-progress { order: initial; width: auto; grid-column: 2; justify-content: center; gap: 8px; }
   .book-progress__track { width: 58px; }
   .book-bottomline__cta { display: contents; }
+  .book-cta-microcopy { display: none; }
   .book-bottomline__cta .whatsapp-button { grid-column: 1 / -1; justify-self: stretch; width: 100%; order: 2; }
   .book-nav { font-size: 9px; letter-spacing: .1em; }
   .book-nav--prev { grid-column: 1; }
   .book-nav--next { grid-column: 3; }
   .book-bottomline__cta .whatsapp-button { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 8px; letter-spacing: .08em; }
   .book-bottomline { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; margin: 0; padding: 10px max(18px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-right)); background: rgba(23,23,22,.98); border-top: 1px solid rgba(241,236,228,.16); box-shadow: 0 -12px 24px rgba(0,0,0,.24); }
-  .floating-whatsapp { display: none; }
+  .floating-whatsapp { right: 14px; bottom: calc(82px + env(safe-area-inset-bottom)); z-index: 26; display: flex; max-width: 178px; padding: 10px 12px; font-size: 8px; letter-spacing: .08em; }
+  .site-shell--floating-compact .floating-whatsapp { width: 44px; height: 44px; padding: 7px; }
+  .site-shell--floating-compact .floating-whatsapp .whatsapp-mark { width: 27px; height: 27px; }
   .catalog-footer { margin-top: 16px; }
   .catalog-footer span:nth-child(2) { display: none; }
   .index-panel { padding: 25px 22px; }
