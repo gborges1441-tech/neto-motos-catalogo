@@ -27,6 +27,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [hasInteracted, setHasInteracted] = useState(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
   const current = motos[activeIndex];
 
   useEffect(() => {
@@ -40,13 +41,15 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
       preload.src = image.src;
     };
     const nextMoto = motos[activeIndex + 1];
-    const priorityImages = [current.images[selectedImage], current.images[0], nextMoto?.images[0]].filter(Boolean) as Moto["images"][number][];
+    const priorityImages = [...current.images, nextMoto?.images[0]].filter(Boolean) as Moto["images"][number][];
     priorityImages.forEach(preload);
   }, [activeIndex, current.images, motos, selectedImage]);
 
   useEffect(() => {
     return () => {
       if (turnTimer.current !== null) window.clearTimeout(turnTimer.current);
+      void audioContextRef.current?.close();
+      audioContextRef.current = null;
     };
   }, []);
 
@@ -65,19 +68,42 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     if (!soundEnabled || typeof window === "undefined") return;
     const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AudioContextClass) return;
-    const context = new AudioContextClass();
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-    oscillator.type = "triangle";
-    oscillator.frequency.setValueAtTime(direction === "next" ? 720 : 520, context.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(160, context.currentTime + 0.12);
-    gain.gain.setValueAtTime(0.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.045, context.currentTime + 0.018);
-    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.14);
-    oscillator.connect(gain).connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.16);
-    window.setTimeout(() => void context.close(), 260);
+    const context = audioContextRef.current ?? new AudioContextClass();
+    audioContextRef.current = context;
+    void context.resume();
+    const now = context.currentTime;
+    const duration = 0.18;
+    const buffer = context.createBuffer(1, Math.floor(context.sampleRate * duration), context.sampleRate);
+    const channel = buffer.getChannelData(0);
+    for (let index = 0; index < channel.length; index += 1) {
+      const envelope = Math.sin((index / channel.length) * Math.PI);
+      channel[index] = (Math.random() * 2 - 1) * envelope;
+    }
+    const paper = context.createBufferSource();
+    const paperFilter = context.createBiquadFilter();
+    const paperGain = context.createGain();
+    paper.buffer = buffer;
+    paperFilter.type = "bandpass";
+    paperFilter.frequency.setValueAtTime(direction === "next" ? 1800 : 1450, now);
+    paperFilter.Q.setValueAtTime(0.7, now);
+    paperGain.gain.setValueAtTime(0.0001, now);
+    paperGain.gain.exponentialRampToValueAtTime(0.028, now + 0.018);
+    paperGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    paper.connect(paperFilter).connect(paperGain).connect(context.destination);
+    paper.start(now);
+    paper.stop(now + duration);
+
+    const rev = context.createOscillator();
+    const revGain = context.createGain();
+    rev.type = "sine";
+    rev.frequency.setValueAtTime(direction === "next" ? 155 : 125, now);
+    rev.frequency.exponentialRampToValueAtTime(direction === "next" ? 230 : 190, now + 0.12);
+    revGain.gain.setValueAtTime(0.0001, now);
+    revGain.gain.exponentialRampToValueAtTime(0.012, now + 0.03);
+    revGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.17);
+    rev.connect(revGain).connect(context.destination);
+    rev.start(now);
+    rev.stop(now + 0.18);
   }
 
   function requestPage(nextIndex: number, direction: "next" | "prev") {
@@ -181,14 +207,14 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="moto-visual">
               <div className="moto-visual__wash" />
               <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
-              <span className="image-caption">Imagem oficial Shineray <i>•</i> consulte autorização de uso</span>
+              <span className="image-caption"><b>{String(selectedImage + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</b><i>•</i> Fotos de catálogo</span>
             </div>
             <div className="gallery-strip">
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>
               <div className="gallery-thumbs">
                 {current.images.map((image, index) => (
                   <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}>
-                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading={selectedImage === index ? "eager" : "lazy"} fetchPriority={selectedImage === index ? "high" : "low"} />
+                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" />
                     <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
                 ))}
@@ -204,10 +230,10 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
           <div className="book-mobile-page__visual">
             <AssetImage key={`mobile-${current.images[selectedImage].src}`} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
-            <span>Imagem oficial Shineray <i>•</i> consulte autorização de uso</span>
+            <span><b>{String(selectedImage + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</b><i>•</i> Fotos de catálogo</span>
           </div>
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
-            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading={selectedImage === index ? "eager" : "lazy"} fetchPriority={selectedImage === index ? "high" : "low"} /><span>{String(index + 1).padStart(2, "0")}</span></button>)}
+            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => { setSelectedImage(index); trackEvent("gallery_view", { model: current.name, image: index + 1 }); }} aria-label={`Abrir imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /><span>{String(index + 1).padStart(2, "0")}</span></button>)}
           </div>
           <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / SHINERAY</span>
@@ -224,7 +250,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         <div className="book-bottomline">
           <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)} aria-label="Abrir capítulo anterior"><ChevronLeft size={17} /><span>Anterior</span></button>
           <div className="book-progress" aria-live="polite" aria-label={`Capítulo ${activeIndex + 1} de ${motos.length}`}><span className="book-progress__count">{formatChapter(activeIndex, motos.length)}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
-          <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Consultar condições" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
+          <div className="book-bottomline__cta"><WhatsAppButton model={current.name} compact label="Falar com o Neto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
         </div>
       </section>
 

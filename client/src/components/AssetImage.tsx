@@ -16,9 +16,7 @@ export function AssetImage({ fallbackLabel = "Imagem indisponível", className =
 
   if (failed) {
     return (
-      <div className={`asset-image-fallback ${className}`} role="img" aria-label={alt || fallbackLabel}>
-        <span>{fallbackLabel}</span>
-      </div>
+      <div className={`asset-image-fallback ${className}`} role="img" aria-label={alt || fallbackLabel} />
     );
   }
 

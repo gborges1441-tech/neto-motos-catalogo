@@ -1,5 +1,5 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
-import { ArrowDown, ArrowRight, BookOpen, Check, ChevronRight, FileText, Grid2X2, Menu, MessageCircle, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowDown, ArrowRight, BookOpen, Check, ChevronRight, FileText, Grid2X2, Menu, MessageCircle, PhoneCall, Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
@@ -103,7 +103,7 @@ export default function Home() {
       {!listMode && <IndexDrawer open={indexOpen} activeIndex={activeIndex} onClose={() => setIndexOpen(false)} onSelect={(index) => { setIndexOpen(false); openCatalog(index); }} onListMode={() => { setIndexOpen(false); setListMode(true); }} />}
       {!listMode && <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />}
       {!listMode && <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} />}
-      {opened && <a className="floating-whatsapp" href={whatsappHref()} target="_blank" rel="noreferrer" aria-label="Falar com o Neto pelo WhatsApp"><span className="floating-whatsapp__ping" /><span>Falar com o Neto</span></a>}
+      {opened && <a className="floating-whatsapp" href={whatsappHref()} target="_blank" rel="noreferrer" aria-label="Falar com o Neto pelo WhatsApp"><span className="floating-whatsapp__ping" /><span className="whatsapp-mark" aria-hidden="true"><PhoneCall size={15} strokeWidth={2.4} /></span><span>Falar com o Neto</span></a>}
     </div>
   );
 }
@@ -138,8 +138,8 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleM
           <div className="cover-kicker"><span className="live-dot" /> catálogo de vendas / {total} modelos Shineray</div>
           <h1><span>Compare 29</span><em>Shineray.</em><span>Encontre a sua.</span></h1>
           <p>Street, trail, scooter e elétrica com preço de referência, fotos reais e atendimento do Neto para você decidir sem comprar no escuro.</p>
-          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Ver modelos e preços</b><small>Escolha pelo seu uso</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
-          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Prefere uma indicação?</span><b>Quero falar com o Neto</b><ArrowRight size={14} /></a>
+          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Conheça as motos</b><small>Escolha pelo seu uso</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Quer tirar uma dúvida?</span><b>Falar com o Neto</b><ArrowRight size={14} /></a>
           <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> modelos</span><span><b>fotos</b> oficiais</span><span><b>atendimento</b> direto</span></div>
         </div>
       </div>
@@ -201,7 +201,7 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
       <section className="about-card" role="dialog" aria-modal="true" aria-labelledby="about-title">
         <button ref={closeRef} type="button" className="icon-button about-card__close" onClick={onClose} aria-label="Fechar apresentação"><X size={18} /></button>
         <div className="about-card__image"><AssetImage src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" fallbackLabel="Neto Motos" /><span>NETO / CONSULTOR</span></div>
-        <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO QUE AJUDA A DECIDIR</span><h2 id="about-title">Me diga o<br /><em>seu uso.</em></h2><p>Você trabalha, estuda, entrega, viaja ou quer uma elétrica? O Neto cruza sua rotina com os modelos disponíveis e mostra as condições antes de você decidir.</p><div className="about-card__line" /><div className="about-card__contact"><span>Converse agora no WhatsApp</span><b>(11) 97847-3480</b></div><WhatsAppButton label="Quero uma indicação" /><div className="about-card__faq"><span className="page-kicker">ANTES DE COMPRAR</span><details><summary>Posso falar diretamente com o Neto?</summary><p>Sim. O atendimento acontece pelo WhatsApp oficial da Neto Motos.</p></details><details><summary>Como confirmo disponibilidade e preço?</summary><p>Envie o modelo de interesse. O Neto confirma estoque, cores, documentação, frete e condições vigentes.</p></details><details><summary>Posso perguntar sobre financiamento?</summary><p>Sim. Consulte as opções disponíveis para o seu caso diretamente no atendimento.</p></details></div></div>
+        <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO QUE AJUDA A DECIDIR</span><h2 id="about-title">Antes de escolher,<br /><em>fale com quem orienta.</em></h2><p>Você fala diretamente com o Neto para tirar dúvidas, comparar modelos, confirmar disponibilidade e entender as condições da moto que combina com a sua rotina.</p><div className="about-card__line" /><div className="about-card__contact"><span>WhatsApp de atendimento</span><b>(11) 97847-3480</b></div><WhatsAppButton label="Falar diretamente com o Neto" /><div className="about-card__faq"><span className="page-kicker">ANTES DE COMPRAR</span><details><summary>Posso falar diretamente com o Neto?</summary><p>Sim. O atendimento acontece pelo WhatsApp oficial da Neto Motos.</p></details><details><summary>Como confirmo disponibilidade e preço?</summary><p>Envie o modelo de interesse. O Neto confirma estoque, cores, documentação, frete e condições vigentes.</p></details><details><summary>Posso perguntar sobre financiamento?</summary><p>Sim. Consulte as opções disponíveis para o seu caso diretamente no atendimento.</p></details></div></div>
       </section>
     </div>
   );
@@ -241,7 +241,7 @@ function ListMode({ open, onClose, onSelect, onOpenQuote }: { open: boolean; onC
       <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por estilo">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => { setFamily(item); trackEvent("catalog_filter", { filter: "style", value: item }); }}>{item}</button>)}<span>{entries.length} {entries.length === 1 ? "resultado" : "resultados"}</span><button className="list-filter-clear" type="button" onClick={clearFilters}>Limpar filtros</button></div>
       {entries.length === 0 && <div className="list-empty"><b>Nenhuma moto encontrada.</b><span>Tente outra faixa de preço, estilo ou termo de busca.</span><button type="button" onClick={clearFilters}>Ver o catálogo completo</button></div>}
         <div className="list-mode__grid">{entries.map(({ moto, index }, entryIndex) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading={entryIndex === 0 ? "eager" : "lazy"} /><span>{formatChapter(index, motos.length).split(" /")[0]}</span></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Ver detalhes e condições <ArrowRight size={14} /></button></div></div></article>)}</div>
-      <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><div className="list-mode__footer-actions"><button type="button" className="list-mode__quote" onClick={onOpenQuote}><FileText size={14} /> Pedir orçamento</button><WhatsAppButton compact label="Falar com o Neto" /></div></footer>
+        <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><div className="list-mode__footer-actions"><button type="button" className="list-mode__quote" onClick={onOpenQuote}><FileText size={14} /> Pedir orçamento</button><WhatsAppButton compact label="Falar com o Neto" /></div><small className="catalog-signature">Neto Motos | revenda de motocicletas Shineray</small></footer>
     </div>
   );
 }
@@ -312,7 +312,7 @@ function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
             </div>
             <label><span>Como pretende usar?</span><select value={form.use} onChange={(event) => updateField("use", event.target.value)}><option value="">Escolha uma opção</option><option>Deslocamento na cidade</option><option>Trabalho e entregas</option><option>Viagens e estrada</option><option>Uso misto</option><option>Mobilidade elétrica</option></select></label>
             <label><span>O que você precisa saber?</span><textarea value={form.message} onChange={(event) => updateField("message", event.target.value)} placeholder="Ex.: quero saber entrada, parcelas, cores e prazo de entrega." rows={3} /></label>
-            <button className="quote-form__submit" type="submit"><MessageCircle size={17} /> Solicitar orçamento pelo WhatsApp <ArrowRight size={15} /></button>
+            <button className="quote-form__submit" type="submit"><span className="whatsapp-mark" aria-hidden="true"><PhoneCall size={14} strokeWidth={2.4} /></span> Solicitar orçamento pelo WhatsApp <ArrowRight size={15} /></button>
             <small className="quote-form__privacy">Seus dados serão usados apenas para responder ao seu pedido de atendimento.</small>
           </form>
         )}

@@ -137,3 +137,9 @@
 - [x] Comparar cada informação com o catálogo atual e preservar o arquivo como fonte prioritária.
 - [x] Aplicar as informações autorizadas sem inventar ou completar lacunas com dados genéricos.
 - [x] Validar texto, dados, layout, responsividade e build após a integração.
+
+- [ ] Ler novamente o arquivo reenviado e extrair suas intenções atuais, prioridades e critérios de sucesso.
+- [ ] Comparar cada intenção do briefing com a versão atual do site e listar lacunas ainda não resolvidas.
+- [ ] Aplicar as prioridades do arquivo à estrutura, copy, mobile, navegação e conversão sem inventar informações.
+- [ ] Validar visualmente e funcionalmente as mudanças em desktop, tablet e celular.
+- [ ] Rodar TypeScript, build e auditoria de logs antes de salvar a nova versão.

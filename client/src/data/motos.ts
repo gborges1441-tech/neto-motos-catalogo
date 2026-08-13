@@ -105,10 +105,16 @@ const genericSpecs = [
 ];
 
 function images(name: string, src: string, extra: MotoImage[] = []): MotoImage[] {
+  const seen = new Set<string>();
   return [
     { src, label: "Foto oficial", alt: `${name} em imagem oficial da Shineray` },
     ...extra,
-  ];
+  ].filter((image) => {
+    const key = image.src.trim().toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function makeMoto({ id, name, category, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [] }: {
