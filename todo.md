@@ -119,3 +119,8 @@
 - [x] Comparar referências de mercado e aplicar somente padrões úteis de clareza, baixo atrito e hierarquia mobile.
 - [x] Otimizar carregamento inicial, vídeo, imagens críticas e sensação de resposta nos dispositivos móveis.
 - [x] Validar a nova experiência com métricas de interface, acessibilidade, responsividade e build.
+
+- [x] Criar uma animação de atenção sutil para o WhatsApp, sem parecer anúncio invasivo.
+- [x] Melhorar a presença visual do CTA fixo, do botão do livro e do formulário.
+- [x] Adicionar estados hover, focus-visible, active e reduced-motion coerentes.
+- [x] Validar contraste, toque mobile, posicionamento e build em todas as superfícies.
