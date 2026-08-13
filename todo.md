@@ -72,3 +72,10 @@
 - [x] Reescrever headline, subheadline, prova, CTA e microcopy com abordagem consultiva de alta conversão, sem frases genéricas.
 - [x] Revisar o modo livro e o modo lista em desktop, corrigindo cortes, sobreposições, excesso de elementos e legibilidade.
 - [x] Validar a nova composição em 1280px, 1024px, 768px e 390px antes de salvar o próximo checkpoint.
+
+- [x] Remover completamente os hotspots, pinos, instruções e cards técnicos da interface do livro.
+- [x] Auditar URLs de imagens, assets sem resposta e estados brancos da galeria.
+- [x] Implementar fallback visual não branco e tratamento de erro por imagem sem quebrar o layout editorial.
+- [x] Melhorar pré-carregamento da imagem ativa e das miniaturas sem bloquear a abertura do capítulo.
+- [x] Refinar o acabamento visual do livro, do gutter, das margens e dos controles de navegação.
+- [x] Validar todas as rotas, galerias, viradas, desktop, mobile e build antes do checkpoint.

@@ -6,15 +6,6 @@ export type MotoImage = {
   alt: string;
 };
 
-export type MotoHotspot = {
-  id: string;
-  label: string;
-  detail: string;
-  value: string;
-  x: number;
-  y: number;
-};
-
 export type Moto = {
   id: string;
   name: string;
@@ -28,7 +19,6 @@ export type Moto = {
   highlights: string[];
   images: MotoImage[];
   specs: Array<{ label: string; value: string }>;
-  hotspots: MotoHotspot[];
   source: string;
   sourceLabel: string;
 };
@@ -121,20 +111,7 @@ function images(name: string, src: string, extra: MotoImage[] = []): MotoImage[]
   ];
 }
 
-function specHotspots(specs: Array<{ label: string; value: string }>): MotoHotspot[] {
-  const factual = specs.filter(({ label, value }) => !/consultar|sob consulta|disponibilidade|cores/i.test(`${label} ${value}`));
-  const positions = [[42, 61], [70, 62], [58, 27]] as const;
-  return factual.slice(0, 3).map(({ label, value }, index) => ({
-    id: `spec-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-    label,
-    detail: `${label} informado na ficha oficial: ${value}. Confirme a configuração da unidade disponível com o Neto.`,
-    value,
-    x: positions[index][0],
-    y: positions[index][1],
-  }));
-}
-
-function makeMoto({ id, name, category, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [], customHotspots }: {
+function makeMoto({ id, name, category, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [] }: {
   id: string;
   name: string;
   category: string;
@@ -147,7 +124,6 @@ function makeMoto({ id, name, category, price, description, copyLine, audience, 
   highlights?: string[];
   specs?: Array<{ label: string; value: string }>;
   extraImages?: MotoImage[];
-  customHotspots?: MotoHotspot[];
 }): Moto {
   return {
     id,
@@ -162,7 +138,6 @@ function makeMoto({ id, name, category, price, description, copyLine, audience, 
     highlights,
     images: images(name, image, [...(officialGalleries[id] ?? []), ...extraImages]),
     specs,
-    hotspots: customHotspots ?? specHotspots(specs),
     source,
     sourceLabel: "Fonte de produto e imagem: Shineray do Brasil",
   };
@@ -218,7 +193,6 @@ const rawMotos: Moto[] = [
     highlights: ["Motor 249,9 cc", "6 marchas", "Full LED + DRL", "Freios a disco nas duas rodas"],
     specs: [{ label: "Cilindrada", value: "249,9 cc" }, { label: "Potência", value: "19,3 CV / 8.000 rpm" }, { label: "Torque", value: "18 N.m / 6.000 rpm" }, { label: "Câmbio", value: "6 marchas" }, { label: "Freios", value: "Disco dianteiro e traseiro" }, { label: "Suspensão", value: "Invertida / monoshock" }, { label: "Rodas", value: "Raiadas" }, { label: "Iluminação", value: "Full LED + DRL" }],
     extraImages: [{ src: detail.shi250Gallery, label: "Ângulo editorial", alt: "Shineray SHI 250 em vista lateral oficial" }, { src: detail.shi250Detail, label: "Detalhes", alt: "Detalhe oficial da Shineray SHI 250" }, { src: detail.shi250Panel, label: "Painel", alt: "Painel digital oficial da Shineray SHI 250" }],
-    customHotspots: [{ id: "motor", label: "Motor", detail: "Monocilíndrico, 4T, 2 válvulas, SOHC balanceado.", value: "249,9 cc", x: 39, y: 56 }, { id: "freio", label: "Freios", detail: "Conjunto a disco nas rodas dianteira e traseira.", value: "Disco / disco", x: 69, y: 69 }, { id: "painel", label: "Painel", detail: "Leitura digital de combustível, velocidade, marcha e odômetro.", value: "100% digital", x: 55, y: 27 }],
   }),
   makeMoto({
     id: "sh4", name: "SH4", category: "Scooter / urbana", price: "R$ 8.990,00", image: catalog.shi4, source: "https://www.shineray.com.br/produto/sh4/",

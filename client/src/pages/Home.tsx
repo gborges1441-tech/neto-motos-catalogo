@@ -1,7 +1,7 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
 import { ArrowDown, ArrowRight, BookOpen, Check, ChevronRight, Grid2X2, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { motos } from "@/data/motos";
+import { coverMoto, motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { BookFrame } from "@/components/BookFrame";
 import { AssetImage } from "@/components/AssetImage";
@@ -126,9 +126,14 @@ function Cover({ total, onOpen, onOpenAbout, onOpenIndex, onToggleMenu, mobileMe
           <div className="cover-kicker"><span className="live-dot" /> catálogo de vendas / {total} modelos Shineray</div>
           <h1><span>A moto certa</span><em>muda o seu</em><span>caminho.</span></h1>
           <p>Compare 29 modelos Shineray com fotos reais, preços de referência e orientação direta para comprar com segurança.</p>
-          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Ver modelos e preços</b><small>Folheie o catálogo completo</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
-          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Prefere uma indicação?</span><b>Fale com o Neto</b><ArrowRight size={14} /></a>
+          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Começar pelo catálogo</b><small>Folheie com orientação do Neto</small></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Prefere uma indicação?</span><b>Quero falar com o Neto</b><ArrowRight size={14} /></a>
           <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>{total}</b> modelos</span><span><b>fotos</b> oficiais</span><span><b>atendimento</b> direto</span></div>
+        </div>
+        <div className="cover-paper-artifact" aria-hidden="true">
+          <div className="cover-paper-artifact__registration">NETO MOTOS / SHINERAY <span>EDIÇÃO 2026</span></div>
+          <AssetImage src={coverMoto.images[0].src} alt="" fallbackLabel={coverMoto.name} />
+          <div className="cover-paper-artifact__footer"><b>{coverMoto.name}</b><span>CAPÍTULO 01 / {String(total).padStart(2, "0")}</span></div>
         </div>
       </div>
       <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><span>SCROLL <ArrowDown size={12} /></span></footer>

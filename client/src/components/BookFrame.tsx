@@ -1,9 +1,8 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
 import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, Grid2X2, Image as ImageIcon, Info, MousePointer2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Moto, MotoHotspot } from "@/data/motos";
+import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
-import { MotoHotspots } from "@/components/MotoHotspots";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AssetImage } from "@/components/AssetImage";
 import { formatChapter } from "@/lib/catalog";
@@ -23,26 +22,29 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
   const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
   const pointerStart = useRef<number | null>(null);
   const turnTimer = useRef<number | null>(null);
   const current = motos[activeIndex];
 
   useEffect(() => {
     setSelectedImage(0);
-    setActiveHotspot(null);
   }, [activeIndex]);
 
   useEffect(() => {
-    setActiveHotspot(null);
-  }, [selectedImage]);
-
-  useEffect(() => {
-    current.images.forEach((image) => {
+    let cancelled = false;
+    const preload = (image: Moto["images"][number]) => {
       const preload = new Image();
       preload.decoding = "async";
       preload.src = image.src;
-    });
+    };
+    current.images.slice(0, 2).forEach(preload);
+    const deferred = window.setTimeout(() => {
+      if (!cancelled) current.images.slice(2).forEach(preload);
+    }, 180);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(deferred);
+    };
   }, [current.images]);
 
   useEffect(() => {
@@ -178,7 +180,6 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="moto-visual">
               <div className="moto-visual__wash" />
               <AssetImage key={current.images[selectedImage].src} src={current.images[selectedImage].src} alt={current.images[selectedImage].alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
-              <MotoHotspots hotspots={selectedImage === 0 ? current.hotspots : []} activeId={activeHotspot} onSelect={(hotspot: MotoHotspot | null) => setActiveHotspot(hotspot?.id ?? null)} />
               <span className="image-caption">Imagem oficial Shineray <i>•</i> consulte autorização de uso</span>
             </div>
             <div className="gallery-strip">
@@ -186,7 +187,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <div className="gallery-thumbs">
                 {current.images.map((image, index) => (
                   <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => setSelectedImage(index)} aria-label={`Abrir imagem: ${image.label}`}>
-                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" />
+                    <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading={selectedImage === index ? "eager" : "lazy"} />
                     <span>{String(index + 1).padStart(2, "0")}</span>
                   </button>
                 ))}
