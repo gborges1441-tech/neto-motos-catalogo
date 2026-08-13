@@ -157,3 +157,10 @@
 - [x] Revisar a galeria para não colocar contador ou texto sobre a fotografia e manter miniaturas abaixo.
 - [x] Auditar cópia e CTAs de produto para seguir promessa, benefício, detalhe, ficha e contato.
 - [x] Validar o refinamento em desktop, tablet, mobile, acessibilidade, performance e build antes do checkpoint.
+
+- [x] Substituir a headline da capa por “SUA PRÓXIMA MOTO / COMEÇA COM / A ESCOLHA CERTA.” com destaque vermelho correto.
+- [x] Trocar o eyebrow para “NETO MOTOS · SHINERAY” e aplicar o subhead exato do briefing.
+- [x] Simplificar CTA principal e secundário, removendo excesso de informação da capa.
+- [x] Ajustar a divisão copy/vídeo, o header/logo e o fundo editorial sem alterar páginas internas ou mobile.
+- [x] Dimensionar o spread desktop pela área útil real do viewport, preservando proporção e rodapé visível.
+- [x] Validar a capa em 1920x1080, 1440x900, 1366x768, 1280x800, tablet e mobile antes do checkpoint.

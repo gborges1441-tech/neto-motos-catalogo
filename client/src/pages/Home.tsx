@@ -1,5 +1,5 @@
 // Style reminder: Home composes Arquivo de Performance as a cinematic editorial journey—dark stage, warm paper, vermilion signal and real product imagery.
-import { ArrowDown, ArrowRight, BookOpen, Check, ChevronRight, FileText, Grid2X2, Menu, MessageCircle, PhoneCall, Search, SlidersHorizontal, X } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, ChevronRight, FileText, Grid2X2, Menu, MessageCircle, PhoneCall, Search, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motos } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
@@ -159,12 +159,11 @@ function Cover({ onOpen, onOpenAbout, onOpenIndex, onOpenQuote, onToggleMenu, mo
       <div className="cover-vertical">SHINERAY / BRASIL <span>—</span> NETO MOTOS</div>
       <div className="cover-content">
         <div className="cover-copy">
-          <div className="cover-kicker"><span className="live-dot" /> catálogo Neto Motos · Shineray</div>
-          <h1><span>Encontre a moto que</span><em>faz sentido para você.</em></h1>
-          <p>Explore modelos para diferentes estilos de vida, descubra os detalhes de cada um e, quando encontrar o seu, fale diretamente com o Neto.</p>
-          <button className="open-book-button" type="button" onClick={onOpen}><span className="open-book-button__icon"><BookOpen size={19} strokeWidth={1.4} /></span><span><b>Explorar modelos</b></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
-          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Não sei qual escolher</span><b>Fale com o Neto</b><ArrowRight size={14} /></a>
-          <div className="cover-proof" aria-label="Diferenciais do catálogo"><span><b>fotos</b> reais</span><span><b>atendimento</b> direto</span></div>
+          <div className="cover-kicker">NETO MOTOS <span className="cover-kicker__divider">·</span> SHINERAY</div>
+          <h1><span>Sua próxima moto</span><span>começa com</span><em>a escolha certa.</em></h1>
+          <p>Explore os modelos, descubra o que combina com sua rotina e fale diretamente com o Neto para encontrar a melhor opção para você.</p>
+          <button className="open-book-button" type="button" onClick={onOpen}><span><b>Explorar modelos</b></span><span className="open-book-button__arrow"><ArrowRight size={15} /></span></button>
+          <a className="cover-sales-cta" href={whatsappHref()} target="_blank" rel="noreferrer"><span>Ainda em dúvida?</span><b>Fale com o Neto</b><ArrowRight size={14} /></a>
         </div>
       </div>
       <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><span>SCROLL <ArrowDown size={12} /></span></footer>

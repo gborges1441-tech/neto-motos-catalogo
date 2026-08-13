@@ -1,6 +1,6 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
 import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, X, ZoomIn } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -27,7 +27,9 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxZoom, setLightboxZoom] = useState(1);
   const [lightboxPan, setLightboxPan] = useState({ x: 0, y: 0 });
+  const [spreadScale, setSpreadScale] = useState(1);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const bookShellRef = useRef<HTMLElement>(null);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -43,6 +45,42 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     setSelectedImage(0);
     setLightboxIndex(null);
   }, [activeIndex]);
+
+  useEffect(() => {
+    const measureSpread = () => {
+      const shell = bookShellRef.current;
+      if (!shell) return;
+      const isPortraitTablet = window.innerWidth > 680 && window.innerWidth <= 1100 && window.matchMedia("(orientation: portrait)").matches;
+      const canUseSpread = window.innerWidth > 680 && !isPortraitTablet;
+      if (!canUseSpread) {
+        setSpreadScale(1);
+        return;
+      }
+      const availableWidth = Math.min(shell.clientWidth, 1320);
+      const reservedHeight = window.innerWidth <= 1100 ? 222 : 232;
+      const availableHeight = Math.max(360, window.innerHeight - reservedHeight);
+      const widthScale = availableWidth / 1320;
+      const heightScale = availableHeight / 710;
+      const nextScale = Math.max(0.52, Math.min(1, widthScale, heightScale));
+      setSpreadScale(Number(nextScale.toFixed(4)));
+    };
+
+    measureSpread();
+    const observer = typeof ResizeObserver !== "undefined" && bookShellRef.current ? new ResizeObserver(measureSpread) : null;
+    if (observer && bookShellRef.current) observer.observe(bookShellRef.current);
+    window.addEventListener("resize", measureSpread);
+    window.addEventListener("orientationchange", measureSpread);
+    window.visualViewport?.addEventListener("resize", measureSpread);
+    window.visualViewport?.addEventListener("scroll", measureSpread);
+    document.fonts?.ready.then(measureSpread);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", measureSpread);
+      window.removeEventListener("orientationchange", measureSpread);
+      window.visualViewport?.removeEventListener("resize", measureSpread);
+      window.visualViewport?.removeEventListener("scroll", measureSpread);
+    };
+  }, []);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -270,11 +308,12 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
       <div className="catalog-rule" />
 
-        <section className="book-shell" aria-label="Catálogo interativo de motocicletas" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={onPointerCancel}>
+        <section ref={bookShellRef} className="book-shell" aria-label="Catálogo interativo de motocicletas" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={onPointerCancel}>
         <div className="book-topline">
           <span><span className="live-dot" /> Neto Motos / Shineray</span>
           <span className="book-topline__hint"><MousePointer2 size={12} /> arraste para folhear</span>
         </div>
+        <div className="book-spread-frame" style={{ "--spread-scale": spreadScale } as CSSProperties}>
         <div className="book-spread" data-turning={turning ?? "idle"}>
           <div className="book-page book-page--left">
             <div className="page-grain" />
@@ -327,6 +366,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           </div>
 
           {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={current.images[selectedImage].src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{motos[turnTarget ?? activeIndex]?.name}</span><AssetImage src={motos[turnTarget ?? activeIndex]?.images[0].src} alt="" fallbackLabel={motos[turnTarget ?? activeIndex]?.name} /></div></div>}
+        </div>
         </div>
 
         <article className={`book-mobile-page ${turning ? `book-mobile-page--turning-${turning}` : ""}`} aria-label={`Página única do catálogo: ${current.name}`}>

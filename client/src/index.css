@@ -142,7 +142,7 @@ button { border: 0; }
 .cover-stage__grid::before { content: ""; position: absolute; left: -35%; right: -35%; bottom: -28%; height: 70%; background-image: linear-gradient(rgba(217,46,46,.27) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.22) 1px, transparent 1px); background-size: 76px 76px; transform: rotateX(66deg) rotateZ(-8deg); transform-origin: bottom center; mask-image: linear-gradient(to top, black 4%, transparent 88%); animation: grid-drift 18s linear infinite; }
 .cover-stage__grid::after { content: ""; position: absolute; left: 61%; top: 8%; width: 1px; height: 120%; background: linear-gradient(transparent, rgba(217,46,46,.75), transparent); transform: rotate(24deg); animation: light-sweep 8s ease-in-out infinite; }
 .cover-stage__redline { position: absolute; top: -20%; right: 22%; width: 1px; height: 140%; background: linear-gradient(transparent, rgba(217,46,46,.7), transparent); transform: rotate(27deg); opacity: .2; z-index: 0; }
-.cover-commercial { pointer-events: none; position: absolute; z-index: 1; right: -1vw; top: 84px; width: 61vw; height: calc(100svh - 112px); overflow: hidden; opacity: 1; transform: none; background-position: center; background-size: cover; mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.88) 15%, #000 34%, #000 86%, transparent 100%); }
+.cover-commercial { pointer-events: none; position: absolute; z-index: 1; right: -1vw; top: 84px; width: 61vw; height: calc(100svh - 112px); overflow: hidden; opacity: 1; transform: none; background-position: center; background-size: cover; mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.9) 12%, #000 28%, #000 100%); }
 .cover-commercial::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,10,10,.18), transparent 28%, transparent 82%, rgba(10,10,10,.16)), linear-gradient(180deg, rgba(10,10,10,.05), transparent 58%, rgba(10,10,10,.24)); z-index: 1; }
 .cover-commercial__video { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(1) contrast(1.02) brightness(1); animation: commercial-dolly 12s ease-in-out infinite alternate; will-change: transform; }
 .cover-commercial__caption { position: absolute; z-index: 3; right: 10%; bottom: 13%; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; color: rgba(245,239,230,.64); text-align: right; text-transform: uppercase; letter-spacing: .18em; font-size: 7px; }
@@ -160,6 +160,7 @@ button { border: 0; }
 .cover-motion__road { position: absolute; left: -10%; right: -10%; bottom: -24%; height: 70%; transform: perspective(520px) rotateX(61deg) rotateZ(-7deg); transform-origin: bottom center; background-image: linear-gradient(rgba(217,46,46,.24) 1px, transparent 1px), linear-gradient(90deg, rgba(217,46,46,.2) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to top, #000, transparent 85%); opacity: .34; animation: road-drift 9s linear infinite; }
 .cover-motion__grain { position: absolute; inset: 0; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 460px; opacity: .45; mix-blend-mode: soft-light; }
 .cover-header { height: 84px; position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; background: rgba(10,10,9,.56); border-bottom: 1px solid rgba(255,255,255,.13); box-shadow: 0 8px 30px rgba(0,0,0,.12); backdrop-filter: blur(10px); }
+.cover-header .brand-lockup { width: 190px; height: 64px; padding: 4px 10px; border-left: 1px solid rgba(255,255,255,.1); border-right: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.025); }
 .cover-header__edition { color: rgba(245,239,230,.54); text-transform: uppercase; font-size: 9px; letter-spacing: .18em; margin-left: auto; margin-right: 46px; }
 .cover-header__edition span { color: var(--red); padding: 0 7px; }
 .cover-nav { display: flex; align-items: center; gap: 26px; }
@@ -171,21 +172,22 @@ button { border: 0; }
 .cover-vertical span { color: var(--red); margin: 12px 0; }
 .cover-content { position: relative; z-index: 2; min-height: calc(100svh - 160px); display: flex; align-items: center; padding: 5vh 12vw 10vh; }
 .cover-copy { max-width: 500px; margin-left: 2vw; margin-top: -2vh; animation: reveal-up 900ms var(--ease-out) both; }
-.cover-kicker { display: flex; align-items: center; color: rgba(245,239,230,.64); font-size: 9px; text-transform: uppercase; letter-spacing: .22em; margin-bottom: 26px; }
+.cover-kicker { display: flex; align-items: center; color: rgba(245,239,230,.7); font-size: 9px; text-transform: uppercase; letter-spacing: .22em; margin-bottom: 26px; }
+.cover-kicker__divider { color: var(--red); padding: 0 7px; }
 .cover-copy h1 { margin: 0; color: var(--paper); font-family: "Barlow Condensed", sans-serif; font-weight: 500; font-size: clamp(58px, 7.5vw, 116px); line-height: .86; letter-spacing: -.045em; text-transform: uppercase; }
 .cover-copy h1 span, .cover-copy h1 em { display: block; }
 .cover-copy h1 span:first-child { white-space: nowrap; }
-.cover-copy h1 em { color: var(--red); font-style: normal; padding-left: .44em; }
-.cover-copy p { max-width: 320px; color: rgba(245,239,230,.68); font-size: 14px; line-height: 1.62; margin: 30px 0 36px 10px; }
-.open-book-button { display: inline-flex; align-items: center; gap: 14px; background: rgba(22,22,21,.7); border: 1px solid rgba(255,255,255,.22); color: var(--paper); padding: 11px 14px 11px 10px; cursor: pointer; transition: background .25s var(--ease-out), border-color .25s ease, transform .25s var(--ease-out); }
-.open-book-button:hover { background: var(--red); border-color: var(--red); transform: translateY(-3px); }
+.cover-copy h1 em { color: var(--red); font-style: normal; padding-left: 0; }
+.cover-copy p { max-width: 350px; color: rgba(245,239,230,.72); font-size: 14px; line-height: 1.62; margin: 30px 0 36px 10px; }
+.open-book-button { display: inline-flex; align-items: center; gap: 26px; background: rgba(22,22,21,.72); border: 1px solid rgba(255,255,255,.24); color: var(--paper); padding: 13px 16px 13px 18px; cursor: pointer; transition: background .25s var(--ease-out), border-color .25s ease, transform .25s var(--ease-out), box-shadow .25s ease; }
+.open-book-button:hover { background: var(--red); border-color: var(--red); transform: translateY(-3px); box-shadow: 0 10px 26px rgba(217,46,46,.18); }
 .open-book-button__icon { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); }
 .open-book-button b, .open-book-button small { display: block; text-align: left; }
 .open-book-button b { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; }
 .open-book-button small { color: rgba(245,239,230,.55); font-size: 9px; margin-top: 5px; }
-.open-book-button__arrow { display: grid; place-items: center; padding-left: 20px; border-left: 1px solid rgba(255,255,255,.18); }
+.open-book-button__arrow { display: grid; place-items: center; padding-left: 26px; border-left: 1px solid rgba(255,255,255,.18); }
 .cover-sales-cta { display: inline-flex; align-items: center; gap: 9px; margin-top: 17px; color: rgba(241,236,228,.68); text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-size: 8px; transition: color .2s ease, transform .2s var(--ease-out); }
-.cover-sales-cta span { color: rgba(241,236,228,.42); text-transform: none; letter-spacing: .02em; font-size: 10px; }
+.cover-sales-cta span { color: rgba(241,236,228,.52); text-transform: none; letter-spacing: .02em; font-size: 10px; }
 .cover-sales-cta b { color: var(--red-soft); font-weight: 700; }
 .cover-sales-cta svg { color: var(--red); transition: transform .2s var(--ease-out); }
 .cover-sales-cta:hover { color: var(--paper); transform: translateX(3px); }
@@ -245,7 +247,8 @@ button { border: 0; }
 .book-topline, .book-bottomline { display: flex; align-items: center; justify-content: space-between; color: rgba(241,236,228,.47); text-transform: uppercase; font-size: 8px; letter-spacing: .18em; }
 .book-topline > span:first-child { display: flex; align-items: center; }
 .book-topline__hint { display: inline-flex; align-items: center; gap: 7px; }
-.book-spread { height: calc(100svh - 190px); max-height: 730px; min-height: 540px; margin-top: 13px; display: grid; grid-template-columns: 1fr 16px 1fr; position: relative; perspective: 1800px; transform-style: preserve-3d; filter: drop-shadow(0 30px 30px rgba(0,0,0,.28)); }
+.book-spread-frame { position: relative; width: calc(1320px * var(--spread-scale)); height: calc(710px * var(--spread-scale)); margin: 13px auto 0; }
+.book-spread { position: absolute; top: 0; left: 50%; width: 1320px; height: 710px; display: grid; grid-template-columns: 1fr 16px 1fr; transform: translateX(-50%) scale(var(--spread-scale)); transform-origin: top center; perspective: 1800px; transform-style: preserve-3d; filter: drop-shadow(0 30px 30px rgba(0,0,0,.28)); }
 .book-spread::before { content: ""; position: absolute; inset: -9px -6px; z-index: -1; pointer-events: none; border: 1px solid rgba(241,236,228,.11); box-shadow: 0 0 0 5px rgba(21,21,20,.34), 0 30px 50px rgba(0,0,0,.24); }
 .book-page { position: relative; overflow: hidden; background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12), inset 0 0 0 8px rgba(255,255,255,.08); }
 .book-page::before { content: ""; position: absolute; inset: 13px; z-index: 0; pointer-events: none; border: 1px solid rgba(21,21,20,.08); }
@@ -605,7 +608,7 @@ button { border: 0; }
   .header-link--quote { display: inline-flex; }
   .header-link--quote span { display: none; }
   .book-topline__hint { display: none; }
-  .book-spread { display: none; }
+  .book-spread-frame, .book-spread { display: none; }
   .book-gutter { display: none; }
   .turn-sheet { display: none; }
   .book-mobile-page { display: block; position: relative; min-height: 0; margin-top: 10px; padding: 18px 18px 30px; overflow: visible; color: var(--ink); background: linear-gradient(125deg, #f7f1e9, #e8e0d7); border: 1px solid rgba(241,236,228,.22); box-shadow: 0 22px 42px rgba(0,0,0,.28), inset 0 0 0 8px rgba(255,255,255,.08); animation: mobile-page-enter .72s var(--ease-out) both; }
