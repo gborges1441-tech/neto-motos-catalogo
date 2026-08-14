@@ -5,7 +5,7 @@ import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AssetImage } from "@/components/AssetImage";
-import { formatChapter } from "@/lib/catalog";
+import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
 type BookFrameProps = {
@@ -363,7 +363,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
         <section ref={bookShellRef} className="book-shell" aria-label="Catálogo interativo de motocicletas" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={onPointerCancel}>
         <div className="book-topline">
-          <span><span className="live-dot" /> Neto Motos / Shineray</span>
+          <span><span className="live-dot" /> Neto Motos / {current.brand}</span>
           <span className="book-topline__hint"><MousePointer2 size={12} /> arraste para folhear</span>
         </div>
         <div className="book-spread-frame" style={{ "--spread-scale": spreadScale } as CSSProperties}>
@@ -375,7 +375,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <Bookmark size={16} strokeWidth={1.3} />
             </div>
             <div className="left-page__content">
-              <span className="page-kicker">NETO MOTOS / SHINERAY</span>
+              <span className="page-kicker">NETO MOTOS / {current.brand}</span>
               <h1>{current.name}</h1>
               <p className="lead-copy">{current.description}</p>
               <div className="red-stroke" />
@@ -388,7 +388,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="left-page__lower">
               <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
               <div className="left-page__footer">
-                <div className="page-footer-note"><span>{formatChapter(activeIndex, motos.length).split(" /")[0]}</span><small>arquivo de performance</small></div>
+                <div className="page-footer-note"><span>{formatFolio(activeIndex)}</span><small>arquivo de performance</small></div>
                 <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button>
               </div>
             </div>
@@ -398,7 +398,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
           <div className="book-page book-page--right">
             <div className="page-grain" />
-            <div className="right-page__meta"><span>{current.category}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
+            <div className="right-page__meta"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
               <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
@@ -423,7 +423,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         </div>
 
         <article className={`book-mobile-page ${turning ? `book-mobile-page--turning-${turning}` : ""}`} aria-label={`Página única do catálogo: ${current.name}`}>
-          <div className="book-mobile-page__topline"><span>{current.eyebrow}</span><span>NETO / {formatChapter(activeIndex, motos.length)}</span></div>
+          <div className="book-mobile-page__topline"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
           <div className="book-mobile-page__visual" style={{ aspectRatio: mobilePhotoRatio }}>
               <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
@@ -434,7 +434,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
           </div>
           <div className="book-mobile-page__copy">
-            <span className="page-kicker">NETO MOTOS / SHINERAY</span>
+            <span className="page-kicker">NETO MOTOS / {current.brand}</span>
             <h1>{current.name}</h1>
             <p className="lead-copy">{current.description}</p>
             <div className="red-stroke" />
@@ -447,7 +447,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
         <div className="book-bottomline">
           <button className="book-nav book-nav--prev" type="button" onClick={() => requestPage(activeIndex - 1, "prev")} disabled={activeIndex === 0 || Boolean(turning)} aria-label="Abrir capítulo anterior"><ChevronLeft size={17} /><span>Anterior</span></button>
-          <div className="book-progress" aria-live="polite" aria-label={`Capítulo ${activeIndex + 1} de ${motos.length}`}><span className="book-progress__count">{formatChapter(activeIndex, motos.length)}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
+          <div className="book-progress" aria-live="polite" aria-label={`Capítulo ${activeIndex + 1}`}><span className="book-progress__count">{formatFolio(activeIndex)}</span><span className="book-progress__track"><i style={{ width: `${((activeIndex + 1) / motos.length) * 100}%` }} /></span></div>
           <div className="book-bottomline__cta"><span className="book-cta-microcopy">Consulte disponibilidade e condições atuais diretamente com o Neto.</span><WhatsAppButton model={current.name} compact label="Quero conhecer essa moto" /><button className="book-nav book-nav--next" type="button" onClick={() => requestPage(activeIndex + 1, "next")} disabled={activeIndex === motos.length - 1 || Boolean(turning)} aria-label="Abrir próximo capítulo"><span>Próxima</span><ChevronRight size={17} /></button></div>
         </div>
       </section>
@@ -465,7 +465,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         </div>
       </div>}
 
-      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY</span><span>Especificações e condições sujeitas a confirmação.</span><span>Arraste / ← →</span></div>
+      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY / SBM</span><span>Especificações e condições sujeitas a confirmação.</span><span>Arraste / ← →</span></div>
     </main>
   );
 }

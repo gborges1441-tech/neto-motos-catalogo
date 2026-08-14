@@ -7,7 +7,7 @@ import { BookFrame } from "@/components/BookFrame";
 import { AssetImage } from "@/components/AssetImage";
 import { WhatsAppButton, quoteHref, whatsappHref, type QuoteDetails } from "@/components/WhatsAppButton";
 import { WhatsAppMark } from "@/components/WhatsAppMark";
-import { catalogFamilies, catalogPriceRanges, familyFromCategory, formatChapter, priceInRange, type CatalogFamily, type PriceRange } from "@/lib/catalog";
+import { catalogBrands, catalogFamilies, catalogPriceRanges, familyFromCategory, formatChapter, priceInRange, type CatalogBrand, type CatalogFamily, type PriceRange } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
 // Arquivo de Performance: o comercial é a peça principal da capa; texto e CTA conduzem a uma decisão de compra, sem competir com o produto.
@@ -195,7 +195,7 @@ function IndexDrawer({ open, activeIndex, onClose, onSelect, onListMode }: { ope
         <div className="index-panel__top"><span className="page-kicker">ÍNDICE / 2026</span><button ref={closeRef} type="button" className="icon-button" onClick={onClose} aria-label="Fechar índice"><X size={18} /></button></div>
         <div className="index-panel__heading"><h2 id="index-title">Escolha<br /><em>seu capítulo.</em></h2><p>Folheie por proposta, descubra os detalhes e fale diretamente com o Neto quando encontrar a sua.</p></div>
         <div className="index-list">
-          {motos.map((moto, index) => <button key={moto.id} type="button" className={`index-item ${activeIndex === index ? "index-item--active" : ""}`} onClick={() => onSelect(index)} aria-current={activeIndex === index ? "page" : undefined}><span className="index-item__num">{formatChapter(index, motos.length).split(" /")[0]}</span><AssetImage className="index-item__image" src={moto.images[0].src} alt="" fallbackLabel={moto.name} loading="lazy" /><span className="index-item__copy"><b>{moto.name}</b><small>{moto.category}</small></span><ChevronRight size={16} /></button>)}
+          {motos.map((moto, index) => <button key={moto.id} type="button" className={`index-item ${activeIndex === index ? "index-item--active" : ""}`} onClick={() => onSelect(index)} aria-current={activeIndex === index ? "page" : undefined}><span className="index-item__num">{formatChapter(index, motos.length).split(" /")[0]}</span><AssetImage className="index-item__image" src={moto.images[0].src} alt="" fallbackLabel={moto.name} loading="lazy" /><span className="index-item__copy"><b>{moto.name}</b><small>{moto.brand} / {moto.category}</small></span><ChevronRight size={16} /></button>)}
         </div>
         <button type="button" className="index-list-mode" onClick={onListMode}><Grid2X2 size={15} /> Abrir modo lista <span>acessível</span></button>
       </aside>
@@ -233,14 +233,14 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
 
 function ListMode({ open, onClose, onSelect, onOpenQuote }: { open: boolean; onClose: () => void; onSelect: (index: number) => void; onOpenQuote: () => void }) {
   const [family, setFamily] = useState<CatalogFamily>("Todos");
-  const [brand, setBrand] = useState("Todas as marcas");
+  const [brand, setBrand] = useState<CatalogBrand>("Todas as marcas");
   const [priceRange, setPriceRange] = useState<PriceRange>("Todos");
   const [query, setQuery] = useState("");
   const entries = useMemo(() => motos.map((moto, index) => ({ moto, index })).filter(({ moto }) => {
-    const searchable = `${moto.name} ${moto.category} ${moto.description} ${moto.copyLine}`.toLowerCase();
+    const searchable = `${moto.brand} ${moto.name} ${moto.category} ${moto.description} ${moto.copyLine}`.toLowerCase();
     const matchesQuery = !query.trim() || searchable.includes(query.trim().toLowerCase());
     const matchesFamily = family === "Todos" || familyFromCategory(moto.category) === family;
-    const matchesBrand = brand === "Todas as marcas" || brand === "Shineray";
+    const matchesBrand = brand === "Todas as marcas" || moto.brand === brand;
     return matchesQuery && matchesFamily && matchesBrand && priceInRange(moto.price, priceRange);
   }), [brand, family, priceRange, query]);
 
@@ -254,18 +254,18 @@ function ListMode({ open, onClose, onSelect, onOpenQuote }: { open: boolean; onC
 
   return (
     <div className={`list-mode ${open ? "list-mode--open" : ""}`} aria-hidden={!open} inert={!open}>
-      <header className="list-mode__header"><BrandMark light compact /><div><span>Modo lista</span><b>Catálogo sem animação</b></div><span className="list-mode__header-note">ARQUIVO / {motos.length} CAPÍTULOS</span><button type="button" className="icon-button" onClick={onClose} aria-label="Fechar modo lista"><X size={18} /></button></header>
+      <header className="list-mode__header"><BrandMark light compact /><div><span>Modo lista</span><b>Motocicletas a combustão</b></div><span className="list-mode__header-note">SHINERAY / SBM</span><button type="button" className="icon-button" onClick={onClose} aria-label="Fechar modo lista"><X size={18} /></button></header>
       <div className="list-mode__intro"><span className="page-kicker">LEITURA DIRETA / ACESSIBILIDADE</span><h2>Veja o que cabe<br /><em>na sua rotina.</em></h2><p>Filtre por estilo, faixa de preço e modelo. Depois, fale com o Neto para confirmar disponibilidade, condições e o próximo passo.</p></div>
       <div className="list-mode__filter-panel">
         <label className="list-search"><Search size={16} /><span className="sr-only">Buscar modelo</span><input value={query} onChange={(event) => { setQuery(event.target.value); trackEvent("catalog_search", { has_query: Boolean(event.target.value) }); }} placeholder="Buscar por modelo ou uso" /></label>
-        <label className="list-select"><span>Marca</span><select value={brand} onChange={(event) => { setBrand(event.target.value); trackEvent("catalog_filter", { filter: "brand", value: event.target.value }); }}><option>Todas as marcas</option><option>Shineray</option></select></label>
+        <label className="list-select"><span>Marca</span><select value={brand} onChange={(event) => { setBrand(event.target.value as CatalogBrand); trackEvent("catalog_filter", { filter: "brand", value: event.target.value }); }}>{catalogBrands.map((item) => <option key={item}>{item}</option>)}</select></label>
         <label className="list-select"><span>Preço</span><select value={priceRange} onChange={(event) => { setPriceRange(event.target.value as PriceRange); trackEvent("catalog_filter", { filter: "price", value: event.target.value }); }}>{catalogPriceRanges.map((item) => <option key={item}>{item}</option>)}</select></label>
         <span className="list-filter-panel__label"><SlidersHorizontal size={14} /> Estilo</span>
       </div>
       <div className="list-mode__filters" role="tablist" aria-label="Filtrar catálogo por estilo">{catalogFamilies.map((item) => <button key={item} type="button" role="tab" aria-selected={family === item} className={family === item ? "list-filter--active" : ""} onClick={() => { setFamily(item); trackEvent("catalog_filter", { filter: "style", value: item }); }}>{item}</button>)}<span>{entries.length} {entries.length === 1 ? "resultado" : "resultados"}</span><button className="list-filter-clear" type="button" onClick={clearFilters}>Limpar filtros</button></div>
       {entries.length === 0 && <div className="list-empty"><b>Nenhuma moto encontrada.</b><span>Tente outra faixa de preço, estilo ou termo de busca.</span><button type="button" onClick={clearFilters}>Ver o catálogo completo</button></div>}
-        <div className="list-mode__grid">{entries.map(({ moto, index }, entryIndex) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading={entryIndex === 0 ? "eager" : "lazy"} /></div><div className="list-card__body"><span className="page-kicker">{moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Quero conhecer essa moto <ArrowRight size={14} /></button></div></div></article>)}</div>
-        <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY</span><div className="list-mode__footer-actions"><button type="button" className="list-mode__quote" onClick={onOpenQuote}><FileText size={14} /> Pedir orçamento</button><WhatsAppButton compact label="Falar com o Neto" /></div><small className="catalog-signature">Neto Motos | revenda de motocicletas Shineray</small></footer>
+        <div className="list-mode__grid">{entries.map(({ moto, index }, entryIndex) => <article className="list-card" key={moto.id}><div className="list-card__image"><AssetImage src={moto.images[0].src} alt={moto.images[0].alt} fallbackLabel={moto.name} loading={entryIndex === 0 ? "eager" : "lazy"} /></div><div className="list-card__body"><span className="page-kicker">{moto.brand} / {moto.category}</span><h3>{moto.name}</h3><p>{moto.description}</p><div className="list-card__specs">{moto.highlights.slice(0, 3).map((item) => <span key={item}><Check size={12} /> {item}</span>)}</div><div className="list-card__bottom"><b><small>A partir de</small>{moto.price}</b><button type="button" onClick={() => onSelect(index)}>Quero conhecer essa moto <ArrowRight size={14} /></button></div></div></article>)}</div>
+        <footer className="list-mode__footer"><span>NETO MOTOS / SHINERAY / SBM</span><div className="list-mode__footer-actions"><button type="button" className="list-mode__quote" onClick={onOpenQuote}><FileText size={14} /> Pedir orçamento</button><WhatsAppButton compact label="Falar com o Neto" /></div><small className="catalog-signature">Neto Motos | motocicletas Shineray e SBM</small></footer>
     </div>
   );
 }
@@ -331,10 +331,10 @@ function QuoteDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
               <label><span>WhatsApp</span><input required type="tel" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} placeholder="(11) 99999-9999" /></label>
             </div>
             <div className="quote-form__row">
-              <label><span>Modelo de interesse</span><select required value={form.model} onChange={(event) => updateField("model", event.target.value)}><option value="">Selecione uma moto</option>{motos.map((moto) => <option key={moto.id} value={moto.name}>{moto.name}</option>)}<option value="Ainda não sei">Ainda não sei — quero indicação</option></select></label>
+            <label><span>Modelo de interesse</span><select required value={form.model} onChange={(event) => updateField("model", event.target.value)}><option value="">Selecione uma moto</option>{motos.map((moto) => <option key={moto.id} value={moto.name}>{moto.brand} — {moto.name}</option>)}<option value="Ainda não sei">Ainda não sei — quero indicação</option></select></label>
               <label><span>Faixa de investimento</span><select value={form.budget} onChange={(event) => updateField("budget", event.target.value)}><option value="">Prefiro conversar</option><option>Até R$ 15 mil</option><option>R$ 15 mil a R$ 25 mil</option><option>Acima de R$ 25 mil</option></select></label>
             </div>
-            <label><span>Como pretende usar?</span><select value={form.use} onChange={(event) => updateField("use", event.target.value)}><option value="">Escolha uma opção</option><option>Deslocamento na cidade</option><option>Trabalho e entregas</option><option>Viagens e estrada</option><option>Uso misto</option><option>Mobilidade elétrica</option></select></label>
+            <label><span>Como pretende usar?</span><select value={form.use} onChange={(event) => updateField("use", event.target.value)}><option value="">Escolha uma opção</option><option>Deslocamento na cidade</option><option>Trabalho e entregas</option><option>Viagens e estrada</option><option>Uso misto</option></select></label>
             <label><span>O que você precisa saber?</span><textarea value={form.message} onChange={(event) => updateField("message", event.target.value)} placeholder="Ex.: quero entender disponibilidade, cores e condições atuais." rows={3} /></label>
             <button className="quote-form__submit" type="submit"><span className="whatsapp-mark" aria-hidden="true"><WhatsAppMark size={18} /></span> Solicitar orçamento pelo WhatsApp <ArrowRight size={15} /></button>
             <small className="quote-form__privacy">Seus dados serão usados apenas para responder ao seu pedido de atendimento.</small>

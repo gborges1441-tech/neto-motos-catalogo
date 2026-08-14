@@ -199,3 +199,10 @@
 - [x] Ajustar o gutter central para uma separação física estreita e proporcional entre as páginas.
 - [x] Reposicionar o WhatsApp flutuante no desktop para não sobrepor o CTA inferior.
 - [x] Manter as regras mobile intactas e validar desktop em 1280, 1366 e 1440 pixels.
+
+- [x] Preservar a capa aprovada sem alterar headline, vídeo, composição, logo, tipografia ou animações.
+- [x] Auditar o inventário e separar somente motocicletas a combustão realmente comercializadas pelo Neto, incluindo SHINERAY e SBM quando confirmadas.
+- [x] Remover contagens fixas e produtos fora do recorte comercial do catálogo interno.
+- [x] Estruturar a página dupla com detalhe editorial à esquerda, hero fotográfico dominante à direita e galeria limpa.
+- [x] Auditar dados, fotos e componentes por modelo em fontes oficiais, sem inventar especificações ou 360º.
+- [x] Implementar ritmo editorial alternado e validação completa desktop/mobile sem regressão.

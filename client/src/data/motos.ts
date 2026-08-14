@@ -6,11 +6,21 @@ export type MotoImage = {
   alt: string;
 };
 
+export type MotoDetail = {
+  title: string;
+  headline: string;
+  description: string;
+  image?: MotoImage;
+  source: string;
+};
+
 export type Moto = {
   id: string;
+  brand: "SHINERAY" | "SBM";
   name: string;
   eyebrow: string;
   category: string;
+  engine?: string;
   price: string;
   priceNote: string;
   description: string;
@@ -18,7 +28,9 @@ export type Moto = {
   audience: string;
   highlights: string[];
   images: MotoImage[];
+  details: MotoDetail[];
   specs: Array<{ label: string; value: string }>;
+  colors?: string[];
   source: string;
   sourceLabel: string;
 };
@@ -44,6 +56,9 @@ const catalog = {
   jet125Efi: "/manus-storage/jet-125-efi_73dd11d6.webp",
   jef150: "/manus-storage/jef-150_1b66f905.webp",
   phoenix: "/manus-storage/phoenix-s_850d0efc.webp",
+  sbm150: "/manus-storage/sbm-150-01_614fbd72.webp",
+  sbm250s: "/manus-storage/sbm-250s-01_824cf529.webp",
+  sbm400s: "/manus-storage/sbm-400s-01_2502d227.webp",
   se2: "/manus-storage/se2_369cebae.webp",
   se1: "/manus-storage/se1_67428dd5.webp",
   sheS: "/manus-storage/she-s_22c756da.webp",
@@ -117,10 +132,12 @@ function images(name: string, src: string, extra: MotoImage[] = []): MotoImage[]
   });
 }
 
-function makeMoto({ id, name, category, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [] }: {
+function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [], details = [], colors }: {
   id: string;
   name: string;
+  brand?: "SHINERAY" | "SBM";
   category: string;
+  engine?: string;
   price: string;
   description: string;
   copyLine: string;
@@ -130,12 +147,16 @@ function makeMoto({ id, name, category, price, description, copyLine, audience, 
   highlights?: string[];
   specs?: Array<{ label: string; value: string }>;
   extraImages?: MotoImage[];
+  details?: MotoDetail[];
+  colors?: string[];
 }): Moto {
   return {
     id,
+    brand,
     name,
     eyebrow: `CAPÍTULO / ${category.toUpperCase()}`,
     category,
+    engine,
     price,
     priceNote: "Preço publicado pela fabricante como referência. Consulte estoque, cores, frete, documentação e condições com o Neto.",
     description,
@@ -143,9 +164,11 @@ function makeMoto({ id, name, category, price, description, copyLine, audience, 
     audience,
     highlights,
     images: images(name, image, [...(officialGalleries[id] ?? []), ...extraImages]),
+    details,
     specs,
+    colors,
     source,
-    sourceLabel: "Fonte de produto e imagem: Shineray do Brasil",
+    sourceLabel: `Fonte de produto e imagem: ${brand} — página oficial do modelo`,
   };
 }
 
@@ -266,6 +289,54 @@ const rawMotos: Moto[] = [
     copyLine: "Comece a rodar com uma escolha que cabe no seu plano.", audience: "Para quem quer comprar bem, usar todos os dias e contar com atendimento próximo.",
   }),
   makeMoto({
+    id: "sbm-150s", brand: "SBM", name: "SBM 150S", category: "Street / 150 cc", engine: "149,05 cc", price: "R$ 16.290,00", image: catalog.sbm150, source: "https://www.shineray.com.br/produto/sbm-150/",
+    description: "A SBM 150S foi criada para a rotina sobre duas rodas: uma street de pilotagem leve, com painel digital, ABS dianteiro e conjunto pensado para o uso diário.",
+    copyLine: "Uma street equilibrada para fazer a cidade render.", audience: "Para quem quer praticidade, leitura rápida das informações e mais controle nas frenagens do dia a dia.",
+    highlights: ["Painel 100% digital", "ABS dianteiro", "Freios a disco nas duas rodas", "Full LED"],
+    specs: [{ label: "Cilindrada", value: "149,05 cc" }, { label: "Potência", value: "12,34 CV / 8.500 RPM" }, { label: "Torque", value: "11,2 N.M / 6.500 RPM" }, { label: "Câmbio", value: "5 marchas" }, { label: "Freios", value: "Disco ABS dianteiro e disco traseiro" }, { label: "Suspensão", value: "Garfo telescópico / monoshock" }, { label: "Rodas", value: "90/90–17 / 120/80–17" }, { label: "Tanque", value: "14,5 L" }],
+    extraImages: [
+      { src: "/manus-storage/sbm-150-02_a54c9783.webp", label: "Ângulo 02", alt: "SBM 150S em fotografia oficial adicional" },
+      { src: "/manus-storage/sbm-150-03_aae21409.webp", label: "Ângulo 03", alt: "SBM 150S em fotografia oficial adicional" },
+    ],
+    details: [
+      { title: "PAINEL DIGITAL", headline: "Tudo o que importa, em um único olhar.", description: "O painel 100% digital reúne as informações essenciais com leitura clara para acompanhar a rotina com mais praticidade.", source: "https://www.shineray.com.br/produto/sbm-150/" },
+      { title: "RODAS E FREIOS", headline: "Controle para seguir com mais confiança.", description: "As rodas de liga leve e os freios a disco nas duas rodas, com ABS na dianteira, formam um conjunto voltado a estabilidade e controle.", source: "https://www.shineray.com.br/produto/sbm-150/" },
+      { title: "SUSPENSÃO", headline: "Mais equilíbrio para a rotina.", description: "O garfo telescópico dianteiro e o monoshock traseiro trabalham para absorver as irregularidades e manter a moto estável.", source: "https://www.shineray.com.br/produto/sbm-150/" },
+    ],
+  }),
+  makeMoto({
+    id: "sbm-250s", brand: "SBM", name: "SBM 250S", category: "Sport / 249 cc", engine: "249 cc", price: "R$ 23.490,00", image: catalog.sbm250s, source: "https://www.shineray.com.br/produto/sbm-250s/",
+    description: "A SBM 250S combina desenho esportivo, motor de 249 cc, ABS de duplo canal e suspensão invertida para quem quer mais presença e controle na pilotagem.",
+    copyLine: "Performance para transformar cada trajeto em escolha.", audience: "Para quem busca uma esportiva com leitura digital, conjunto de suspensão mais firme e freios preparados para diferentes situações.",
+    highlights: ["ABS de duplo canal", "Garfo invertido", "Painel digital", "Full LED"],
+    specs: [{ label: "Cilindrada", value: "249 cc" }, { label: "Potência", value: "27,5 CV / 9.500 RPM" }, { label: "Torque", value: "22,5 N.M / 7.250 RPM" }, { label: "Câmbio", value: "6 marchas" }, { label: "Freios", value: "Disco ABS de duplo canal" }, { label: "Suspensão", value: "Garfo invertido / monoshock" }, { label: "Rodas", value: "110/70 R17 / 140/60 R17" }, { label: "Tanque", value: "12,5 L" }],
+    extraImages: [
+      { src: "/manus-storage/sbm-250s-02_dbaff00f.webp", label: "Ângulo 02", alt: "SBM 250S em fotografia oficial adicional" },
+      { src: "/manus-storage/sbm-250s-03_7ed6a594.webp", label: "Ângulo 03", alt: "SBM 250S em fotografia oficial adicional" },
+    ],
+    details: [
+      { title: "PAINEL DIGITAL", headline: "Informação rápida com espírito esportivo.", description: "O display LCD reúne velocidade, rotações, combustível e outras informações em uma leitura direta.", source: "https://www.shineray.com.br/produto/sbm-250s/" },
+      { title: "ABS DE DUPLO CANAL", headline: "Frenagem com mais controle.", description: "O sistema ABS atua nos dois canais para reduzir o risco de travamento e manter a estabilidade em frenagens exigentes.", source: "https://www.shineray.com.br/produto/sbm-250s/" },
+      { title: "SUSPENSÃO INVERTIDA", headline: "Resposta precisa para a pilotagem.", description: "O garfo invertido dianteiro e o monoshock traseiro combinam rigidez, absorção e estabilidade para o uso esportivo.", source: "https://www.shineray.com.br/produto/sbm-250s/" },
+    ],
+  }),
+  makeMoto({
+    id: "sbm-400s", brand: "SBM", name: "SBM 400S", category: "Naked / 399 cc", engine: "399,73 cc", price: "R$ 33.490,00", image: catalog.sbm400s, source: "https://www.shineray.com.br/produto/sbm-400/",
+    description: "A SBM 400S é uma naked para quem procura motor bicilíndrico, câmbio de seis marchas, 41 CV e um conjunto preparado para entregar presença e agilidade.",
+    copyLine: "Dois cilindros, uma escolha feita para pilotar mais.", audience: "Para quem quer subir de categoria com painel TFT, ABS de duplo canal e uma ciclística que valoriza resposta e estabilidade.",
+    highlights: ["Motor bicilíndrico", "41 CV", "ABS de duplo canal", "Painel TFT"],
+    specs: [{ label: "Cilindrada", value: "399,73 cc" }, { label: "Potência", value: "41 CV / 9.000 RPM" }, { label: "Torque", value: "37 N.M / 7.500 RPM" }, { label: "Câmbio", value: "6 marchas" }, { label: "Freios", value: "Disco ABS de duplo canal" }, { label: "Suspensão", value: "Garfo invertido / monoshock" }, { label: "Rodas", value: "110/70 R17 / 150/60 R17" }, { label: "Tanque", value: "13,5 L" }],
+    extraImages: [
+      { src: "/manus-storage/sbm-400s-02_05e1f6e4.webp", label: "Ângulo 02", alt: "SBM 400S em fotografia oficial adicional" },
+      { src: "/manus-storage/sbm-400s-03_e2996e19.webp", label: "Ângulo 03", alt: "SBM 400S em fotografia oficial adicional" },
+    ],
+    details: [
+      { title: "PAINEL TFT", headline: "Alta nitidez para manter o controle.", description: "O painel TFT oferece leitura rápida das informações e permite acompanhar a pilotagem com mais clareza, inclusive sob sol forte.", source: "https://www.shineray.com.br/produto/sbm-400/" },
+      { title: "ABS DE DUPLO CANAL", headline: "Potência acompanhada de controle.", description: "O ABS de duplo canal ajuda a evitar travamentos em frenagens inesperadas e preserva a estabilidade do conjunto.", source: "https://www.shineray.com.br/produto/sbm-400/" },
+      { title: "MOTOR BICILÍNDRICO", headline: "Resposta para quem quer subir de categoria.", description: "Com 399,73 cc, 41 CV e câmbio de seis marchas, o motor bicilíndrico entrega uma proposta mais forte para cidade e estrada.", source: "https://www.shineray.com.br/produto/sbm-400/" },
+    ],
+  }),
+  makeMoto({
     id: "se2", name: "SE2", category: "Elétrica", price: "R$ 16.990,00", image: catalog.se2, source: "https://www.shineray.com.br/produto/se2/",
     description: "A SE2 representa uma forma mais silenciosa de pensar a cidade: uma escolha elétrica para quem quer experimentar outra relação com o deslocamento.",
     copyLine: "A cidade muda quando o silêncio vira parte do caminho.", audience: "Para quem quer conhecer a mobilidade elétrica e conversar antes de decidir o que realmente combina com a sua rotina.",
@@ -325,6 +396,7 @@ const rawMotos: Moto[] = [
   }),
 ];
 
-const firstMoto = rawMotos.find((moto) => moto.id === "shi-250") ?? rawMotos[0];
-export const motos: Moto[] = [firstMoto, ...rawMotos.filter((moto) => moto.id !== firstMoto.id)];
+const combustionMotos = rawMotos.filter((moto) => !["Elétrica", "Mobilidade elétrica", "Scooter elétrica"].some((term) => moto.category.includes(term)));
+const firstMoto = combustionMotos.find((moto) => moto.id === "shi-250") ?? combustionMotos[0];
+export const motos: Moto[] = [firstMoto, ...combustionMotos.filter((moto) => moto.id !== firstMoto.id)];
 export const coverMoto = motos[0];

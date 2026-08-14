@@ -1,21 +1,27 @@
 // Style reminder: catalogue utilities keep the printed archive precise, legible and consistent across every view.
 
-export type CatalogFamily = "Todos" | "Street" | "Trail" | "Scooter" | "Elétrica" | "Mobilidade" | "Urbana";
+export type CatalogFamily = "Todos" | "Street" | "Trail" | "Scooter" | "Sport" | "Naked" | "Urbana";
+export type CatalogBrand = "Todas as marcas" | "SHINERAY" | "SBM";
 
 export function formatChapter(index: number, total: number) {
   return `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
 }
 
+export function formatFolio(index: number) {
+  return String(index + 1).padStart(2, "0");
+}
+
 export function familyFromCategory(category: string): Exclude<CatalogFamily, "Todos"> {
-  if (category.toLowerCase().includes("mobilidade")) return "Mobilidade";
-  if (category.toLowerCase().includes("elétrica")) return "Elétrica";
   if (category.toLowerCase().includes("scooter")) return "Scooter";
   if (category.toLowerCase().includes("trail")) return "Trail";
   if (category.toLowerCase().includes("street")) return "Street";
+  if (category.toLowerCase().includes("sport")) return "Sport";
+  if (category.toLowerCase().includes("naked")) return "Naked";
   return "Urbana";
 }
 
-export const catalogFamilies: CatalogFamily[] = ["Todos", "Street", "Trail", "Scooter", "Elétrica", "Mobilidade", "Urbana"];
+export const catalogFamilies: CatalogFamily[] = ["Todos", "Street", "Trail", "Scooter", "Sport", "Naked", "Urbana"];
+export const catalogBrands: CatalogBrand[] = ["Todas as marcas", "SHINERAY", "SBM"];
 
 export type PriceRange = "Todos" | "Até R$ 15 mil" | "R$ 15–25 mil" | "Acima de R$ 25 mil";
 
