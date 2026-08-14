@@ -84,3 +84,6 @@ O wordmark será tipográfico, com “NETO” em bloco condensado e “MOTOS” 
 - A capa deve fazer a motocicleta ou a página impressa com a motocicleta ser o artefato visual dominante; vídeo e atmosfera são suporte.
 - O modo lista preserva a gramática de arquivo impresso, com textura, capítulos, molduras, marcadores e miniaturas reais.
 - O Vermelho Lombada permanece reservado a ação, progresso, capítulo e registro editorial.
+- A capa aprovada permanece congelada: headline, vídeo, composição, logo, tipografia, animações e proporções não entram na rodada estética interna.
+- Nos modos internos, o masthead usa a logo horizontal original como marca aprovada e deixa a edição, capítulo e contexto Shineray fazerem o trabalho editorial de publicação.
+- O CTA de WhatsApp mantém a marca circular verde reconhecível como pista de serviço, mas o invólucro de ação e navegação usa o Vermelho Lombada para que o catálogo não se comporte como uma landing page de atendimento.

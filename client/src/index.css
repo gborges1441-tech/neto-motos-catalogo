@@ -1,4 +1,5 @@
 /* Style reminder: this file enforces Arquivo de Performance—charcoal stage, warm paper, vermilion signal, editorial type and material depth. */
+/* Direção visual: Arquivo de Performance — catálogo premium em papel e carvão, com vermelho editorial, assimetria controlada e dados técnicos legíveis. A capa é uma composição protegida e não recebe regras desta rodada. */
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -254,7 +255,7 @@ button { border: 0; }
 .book-spread::before { content: ""; position: absolute; inset: -9px -6px; z-index: -1; pointer-events: none; border: 1px solid rgba(241,236,228,.11); box-shadow: 0 0 0 5px rgba(21,21,20,.34), 0 30px 50px rgba(0,0,0,.24); }
 .book-page { position: relative; overflow: hidden; background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12), inset 0 0 0 8px rgba(255,255,255,.08); }
 .book-page::before { content: ""; position: absolute; inset: 13px; z-index: 0; pointer-events: none; border: 1px solid rgba(21,21,20,.08); }
-.book-page--left { display: flex; flex-direction: column; padding: 30px 5.5% 22px; background: linear-gradient(120deg, #f6f1e9, #e9e2d9); }
+.book-page--left { display: flex; flex-direction: column; padding: 30px 5.5% 22px; overflow-y: auto; overflow-x: hidden; scrollbar-color: rgba(190,35,35,.52) transparent; scrollbar-width: thin; background: linear-gradient(120deg, #f6f1e9, #e9e2d9); }
 .book-page--right { padding: 27px 4.3% 18px; background: linear-gradient(115deg, #e7e0d8, #f5f0e9 48%, #eee7df); }
 .page-grain { pointer-events: none; position: absolute; inset: 0; opacity: .08; background-image: url("/manus-storage/neto-motos-paper-grain_d1ac5370.jpg"); background-size: 720px; mix-blend-mode: multiply; }
 .book-gutter { position: relative; z-index: 4; background: linear-gradient(90deg, rgba(0,0,0,.35), rgba(255,255,255,.08) 40%, rgba(0,0,0,.26)); box-shadow: 0 0 16px rgba(0,0,0,.5); }
@@ -262,7 +263,7 @@ button { border: 0; }
 .left-page__top, .right-page__meta { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; color: rgba(21,21,20,.58); text-transform: uppercase; letter-spacing: .18em; font-size: 8px; }
 .left-page__top svg { color: var(--red); }
 .chapter-index { color: var(--red); font-weight: 700; }
-.left-page__content { position: relative; z-index: 1; max-width: 410px; max-height: calc(100% - 140px); overflow: hidden; margin-top: 7vh; margin-left: 6%; margin-bottom: 16px; }
+.left-page__content { position: relative; z-index: 1; max-width: 410px; margin-top: 7vh; margin-left: 6%; margin-bottom: 16px; }
 .left-page__content .page-kicker { color: rgba(21,21,20,.58); }
 .left-page__content h1 { margin: 15px 0 13px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(58px, 7.1vw, 112px); font-weight: 700; line-height: .82; letter-spacing: -.045em; text-transform: uppercase; color: var(--ink); }
 .lead-copy { max-width: 290px; font-size: 15px; line-height: 1.48; color: rgba(21,21,20,.72); margin: 0; }
@@ -276,7 +277,7 @@ button { border: 0; }
 .price-block span { grid-column: 1 / -1; color: rgba(21,21,20,.47); font-size: 8px; text-transform: uppercase; letter-spacing: .17em; }
 .price-block b { font-family: "Barlow Condensed", sans-serif; font-size: 29px; line-height: .9; font-weight: 600; color: var(--ink); white-space: nowrap; }
 .price-block small { max-width: 88px; color: rgba(21,21,20,.42); font-size: 7px; line-height: 1.25; }
-.left-page__lower { position: absolute; z-index: 2; left: 5.5%; right: 5.5%; bottom: 16px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 16px; }
+.left-page__lower { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 16px; margin: 18px -5.5% 0; padding: 14px 5.5% 5px; background: linear-gradient(180deg, rgba(241,236,228,0), #f1ece4 25%); }
 .page-price { position: relative; left: auto; bottom: auto; z-index: 2; grid-column: 1; max-width: 100%; min-width: 0; margin: 0; }
 .left-page__footer { position: relative; left: auto; right: auto; bottom: auto; z-index: 1; grid-column: 2; display: flex; align-items: flex-end; justify-content: flex-end; gap: 13px; }
 .page-footer-note { display: flex; flex-direction: column; gap: 5px; color: rgba(21,21,20,.45); }
@@ -291,7 +292,13 @@ button { border: 0; }
 .about-teaser svg { color: var(--red); margin-left: 5px; }
 .right-page__meta { color: rgba(21,21,20,.49); }
 .right-page__meta span:first-child { color: var(--red); font-weight: 700; }
-.moto-visual { position: absolute; top: 12%; left: 2%; right: 2%; bottom: 16%; overflow: hidden; }
+.right-page__hero-heading { position: relative; z-index: 2; width: min(270px, 52%); margin: 15px 0 0 3%; color: var(--ink); }
+.right-page__brand { display: block; color: var(--red); font-size: 9px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.right-page__hero-heading h2 { margin: 5px 0 2px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(47px, 5.1vw, 78px); font-weight: 700; line-height: .78; letter-spacing: -.045em; text-transform: uppercase; }
+.right-page__hero-heading p { margin: 7px 0 12px; color: rgba(21,21,20,.58); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+.right-page__hero-heading b { display: inline-block; color: var(--ink); font-family: "Barlow Condensed", sans-serif; font-size: 24px; line-height: .9; }
+.right-page__hero-heading small { display: inline-block; margin-left: 8px; color: rgba(21,21,20,.45); font-size: 7px; letter-spacing: .14em; text-transform: uppercase; }
+.moto-visual { position: absolute; top: 20%; left: 2%; right: 2%; bottom: 16%; overflow: hidden; }
 .moto-visual::before { content: ""; position: absolute; inset: 5% 7%; border-top: 1px solid rgba(21,21,20,.08); border-bottom: 1px solid rgba(21,21,20,.08); }
 .moto-visual__wash { position: absolute; inset: 15% 10%; background: radial-gradient(ellipse, rgba(255,255,255,.78), transparent 63%); z-index: 0; }
 .moto-visual__zoom { position: absolute; inset: 4% 3% 3%; z-index: 1; display: block; width: 94%; height: 94%; padding: 0; background: transparent; border: 0; cursor: crosshair; }
@@ -308,6 +315,33 @@ button { border: 0; }
 .gallery-thumb:hover, .gallery-thumb--active { border-color: var(--red); transform: translateY(-3px); }
 .gallery-thumb img, .gallery-thumb .asset-image-fallback { width: 100%; height: 100%; object-fit: contain; object-position: center; background: #f0ebe4; mix-blend-mode: normal; }
 .gallery-thumb span { position: absolute; bottom: 3px; left: 4px; color: rgba(255,255,255,.78); text-shadow: 0 1px 3px #000; font-size: 7px; }
+.moto-editorial { position: relative; z-index: 1; padding: 20px 6% 190px; }
+.moto-editorial__intro { max-width: 330px; padding: 15px 0 18px; border-top: 1px solid rgba(21,21,20,.15); border-bottom: 1px solid rgba(21,21,20,.12); }
+.moto-editorial__eyebrow { display: inline-flex; align-items: center; gap: 7px; color: var(--red); font-size: 8px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.moto-editorial__intro p { margin: 9px 0 0; color: rgba(21,21,20,.64); font-size: 10px; line-height: 1.5; }
+.moto-detail-list { display: grid; gap: 17px; margin-top: 18px; }
+.moto-detail { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 13px; align-items: center; }
+.moto-detail--reverse { grid-template-columns: minmax(0, 1fr) 112px; }
+.moto-detail--reverse .moto-detail__visual { order: 2; }
+.moto-detail__visual { height: 92px; overflow: hidden; background: #e2dbd2; border: 1px solid rgba(21,21,20,.1); }
+.moto-detail__visual img, .moto-detail__visual .asset-image-fallback { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.moto-detail__copy { min-width: 0; }
+.moto-detail__index { display: block; color: var(--red); font-size: 7px; font-weight: 800; letter-spacing: .13em; line-height: 1.2; text-transform: uppercase; }
+.moto-detail__copy h3 { margin: 5px 0 6px; color: var(--ink); font-family: "Barlow Condensed", sans-serif; font-size: 21px; line-height: .93; letter-spacing: -.02em; text-transform: uppercase; }
+.moto-detail__copy p { margin: 0; color: rgba(21,21,20,.64); font-size: 9px; line-height: 1.45; }
+.moto-detail__benefit { display: block; margin-top: 8px; padding-left: 8px; border-left: 2px solid var(--red); color: var(--red-deep); font-size: 8px; line-height: 1.35; }
+.moto-detail__benefit b { display: block; margin-bottom: 2px; color: rgba(21,21,20,.46); font-size: 7px; letter-spacing: .13em; text-transform: uppercase; }
+.moto-tech-sheet { margin-top: 22px; padding: 19px 17px 16px; color: var(--paper); background: #20201e; box-shadow: 7px 8px 0 rgba(21,21,20,.12); }
+.moto-tech-sheet__heading h2 { margin: 8px 0 7px; color: var(--paper); font-family: "Barlow Condensed", sans-serif; font-size: 31px; line-height: .85; letter-spacing: -.025em; text-transform: uppercase; }
+.moto-tech-sheet__heading h2 em { color: #db625d; font-style: normal; }
+.moto-tech-sheet__heading p { max-width: 260px; margin: 0; color: rgba(241,236,228,.54); font-size: 9px; line-height: 1.45; }
+.moto-tech-sheet__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; margin-top: 17px; border-top: 1px solid rgba(241,236,228,.14); }
+.moto-tech-sheet__item { padding: 9px 0 8px; border-bottom: 1px solid rgba(241,236,228,.11); }
+.moto-tech-sheet__item span { display: block; color: rgba(241,236,228,.43); font-size: 7px; letter-spacing: .13em; text-transform: uppercase; }
+.moto-tech-sheet__item b { display: block; margin-top: 3px; color: var(--paper); font-size: 9px; line-height: 1.3; }
+.moto-tech-sheet__foot { display: flex; justify-content: space-between; gap: 10px; margin-top: 13px; color: rgba(241,236,228,.46); font-size: 7px; line-height: 1.35; }
+.moto-tech-sheet__foot span, .moto-tech-sheet__foot a { display: inline-flex; align-items: center; gap: 5px; }
+.moto-tech-sheet__foot a { color: #e4a39f; text-decoration: none; white-space: nowrap; }
 .book-mobile-page__zoom { position: relative; display: block; width: 100%; height: 100%; min-height: 0; padding: 0; background: transparent; border: 0; cursor: pointer; }
 .book-mobile-page__zoom > img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
   .book-mobile-page__zoom > span { top: 12px; right: 12px; }
@@ -363,6 +397,9 @@ button { border: 0; }
 .whatsapp-button::after { content: ""; position: absolute; z-index: -1; inset: -5px; border: 1px solid rgba(115,255,170,.56); box-shadow: 0 0 18px rgba(37,211,102,.34); opacity: 0; animation: whatsapp-ring 3.2s ease-out infinite; pointer-events: none; }
 .whatsapp-button > * { position: relative; z-index: 1; }
 .whatsapp-mark { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 27px; height: 27px; border-radius: 50%; color: #fff; background: #25d366; border: 1px solid rgba(235,255,242,.82); box-shadow: inset 0 0 0 2px rgba(255,255,255,.22), 0 0 0 2px rgba(37,211,102,.16), 0 0 18px rgba(37,211,102,.34); }
+.book-bottomline__cta .whatsapp-button, .list-mode__footer .whatsapp-button, .about-card__whatsapp, .quote-success .whatsapp-button { background: linear-gradient(135deg, #d92e2e, #8e1f24); border-color: rgba(255,208,202,.55); color: #fff; box-shadow: 0 0 0 3px rgba(217,46,46,.12), 0 0 22px rgba(217,46,46,.22), 0 10px 22px rgba(75,11,16,.3); }
+.book-bottomline__cta .whatsapp-button::after, .list-mode__footer .whatsapp-button::after, .about-card__whatsapp::after, .quote-success .whatsapp-button::after { border-color: rgba(255,142,134,.52); box-shadow: 0 0 18px rgba(217,46,46,.3); }
+.book-bottomline__cta .whatsapp-button:hover, .list-mode__footer .whatsapp-button:hover, .about-card__whatsapp:hover, .quote-success .whatsapp-button:hover { background: linear-gradient(135deg, #ef4540, #a9242b); border-color: rgba(255,224,219,.96); box-shadow: 0 0 0 4px rgba(217,46,46,.14), 0 14px 30px rgba(75,11,16,.36); }
 .whatsapp-button--compact .whatsapp-mark { width: 24px; height: 24px; }
 .whatsapp-button svg { color: #fff; filter: drop-shadow(0 0 4px rgba(255,255,255,.32)); }
 .whatsapp-button:hover { background: linear-gradient(135deg, #25d366, #1aad59); border-color: rgba(225,255,235,.96); transform: translateY(-3px); box-shadow: 0 0 0 4px rgba(37,211,102,.13), 0 14px 30px rgba(13,113,57,.36); }
@@ -642,6 +679,21 @@ button { border: 0; }
   .book-mobile-page__commercial .price-block b { font-size: 32px; }
   .book-mobile-page__commercial .price-block small { max-width: 145px; }
   .book-mobile-page__commercial .about-teaser { width: 100%; padding-top: 14px; border-top: 1px solid rgba(21,21,20,.1); }
+  .book-mobile-page .moto-editorial { margin-top: 26px; padding: 27px 0 10px; border-top: 1px solid rgba(21,21,20,.14); }
+  .book-mobile-page .moto-editorial__intro { max-width: none; padding-top: 0; border-top: 0; }
+  .book-mobile-page .moto-editorial__intro p { max-width: 310px; font-size: 10px; }
+  .book-mobile-page .moto-detail-list { gap: 14px; margin-top: 17px; }
+  .book-mobile-page .moto-detail, .book-mobile-page .moto-detail--reverse { grid-template-columns: 94px minmax(0, 1fr); gap: 12px; }
+  .book-mobile-page .moto-detail--reverse .moto-detail__visual { order: 0; }
+  .book-mobile-page .moto-detail__visual { height: 86px; }
+  .book-mobile-page .moto-detail__copy h3 { font-size: 21px; }
+  .book-mobile-page .moto-detail__copy p { font-size: 9px; }
+  .book-mobile-page .moto-detail__benefit { font-size: 8px; }
+  .book-mobile-page .moto-tech-sheet { margin-top: 22px; padding: 18px 15px 15px; }
+  .book-mobile-page .moto-tech-sheet__heading h2 { font-size: 31px; }
+  .book-mobile-page .moto-tech-sheet__grid { gap: 0 12px; }
+  .book-mobile-page .moto-tech-sheet__item b { font-size: 9px; }
+  .book-mobile-page .moto-tech-sheet__foot { flex-direction: column; gap: 7px; }
   .photo-lightbox { padding: 0; }
   .photo-lightbox__panel { width: 100%; height: 100%; min-height: 100dvh; padding: 18px 14px calc(18px + env(safe-area-inset-bottom)); border: 0; }
   .photo-lightbox__topline { padding: 0 42px 14px 2px; font-size: 8px; letter-spacing: .12em; }

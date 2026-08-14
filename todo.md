@@ -206,3 +206,11 @@
 - [x] Estruturar a página dupla com detalhe editorial à esquerda, hero fotográfico dominante à direita e galeria limpa.
 - [x] Auditar dados, fotos e componentes por modelo em fontes oficiais, sem inventar especificações ou 360º.
 - [x] Implementar ritmo editorial alternado e validação completa desktop/mobile sem regressão.
+
+- [ ] Reauditar integralmente os dois briefings e preservar a capa sem qualquer alteração.
+- [ ] Confirmar o inventário completo de motocicletas a combustão comercializadas pelo Neto em SHINERAY e SBM.
+- [ ] Excluir definitivamente elétricos, patinetes, mobilidade, veículos e modelos em breve sem confirmação.
+- [ ] Extrair das páginas oficiais fotos, galeria, especificações, componentes, cores, acessórios e recursos 360º quando disponíveis.
+- [ ] Refatorar a página interna direita como hero dominante e a esquerda como blocos editoriais alternados e específicos por modelo.
+- [ ] Implementar ficha técnica limpa, CTA contextual e galerias sem textos sobre as fotografias.
+- [ ] Validar modelos, assets, proporções, mobile, desktop, acessibilidade, performance, build e logs antes do checkpoint.

@@ -5,6 +5,7 @@ import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AssetImage } from "@/components/AssetImage";
+import { MotoEditorial } from "@/components/MotoEditorial";
 import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
@@ -46,6 +47,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, current.images.length - 1);
   const lightboxImage = current.images[safeLightboxIndex] ?? activeImage;
   const turnMoto = motos[turnTarget ?? activeIndex] ?? current;
+  const currentEngine = current.engine ?? current.specs.find((item) => item.label.toLowerCase().includes("cilindrada"))?.value ?? "—";
 
   useEffect(() => {
     setSelectedImage(0);
@@ -216,7 +218,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
     const target = event.target as HTMLElement;
-    if (target.closest("button, a, input, textarea, select, [data-no-swipe]")) {
+    if (target.closest("button, a, input, textarea, select, [data-no-swipe], [data-scrollable]")) {
       pointerStart.current = null;
       return;
     }
@@ -368,7 +370,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         </div>
         <div className="book-spread-frame" style={{ "--spread-scale": spreadScale } as CSSProperties}>
         <div className="book-spread" data-turning={turning ?? "idle"}>
-          <div className="book-page book-page--left">
+          <div className="book-page book-page--left" data-scrollable>
             <div className="page-grain" />
             <div className="left-page__top">
               <span className="chapter-index">{current.eyebrow}</span>
@@ -385,6 +387,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
                 {current.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
               </div>
             </div>
+            <MotoEditorial moto={current} compact />
             <div className="left-page__lower">
               <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
               <div className="left-page__footer">
@@ -399,6 +402,12 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <div className="book-page book-page--right">
             <div className="page-grain" />
             <div className="right-page__meta"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
+            <div className="right-page__hero-heading">
+              <span className="right-page__brand">{current.brand}</span>
+              <h2>{current.name}</h2>
+              <p>{current.category}</p>
+              <b>{currentEngine}</b><small>CILINDRADA OFICIAL</small>
+            </div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
               <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
@@ -433,7 +442,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
             {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
           </div>
-          <div className="book-mobile-page__copy">
+            <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / {current.brand}</span>
             <h1>{current.name}</h1>
             <p className="lead-copy">{current.description}</p>
@@ -443,6 +452,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="highlight-list">{current.highlights.map((highlight) => <span key={`mobile-${highlight}`}>{highlight}</span>)}</div>
             <div className="book-mobile-page__commercial"><div className="price-block"><span>A partir de</span><b>{current.price}</b><small>Preço de referência.<br />Confirme condições com o Neto.</small></div><button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button></div>
           </div>
+          <MotoEditorial moto={current} />
         </article>
 
         <div className="book-bottomline">

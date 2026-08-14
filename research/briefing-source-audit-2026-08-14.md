@@ -27,3 +27,63 @@ Não adicionar os modelos SBM ao inventário sem confirmar que o Neto efetivamen
 Após a extração das páginas oficiais específicas, foram confirmados e incorporados três modelos SBM a combustão: **SBM 150S**, com 149,05 cc, 12,34 CV, câmbio de 5 marchas e ABS dianteiro; **SBM 250S**, com 249 cc, 27,5 CV, câmbio de 6 marchas, garfo invertido e ABS de duplo canal; e **SBM 400S**, com 399,73 cc, 41 CV, motor bicilíndrico, câmbio de 6 marchas e ABS de duplo canal. Os preços foram mantidos como referência pública — R$ 16.290,00, R$ 23.490,00 e R$ 33.490,00 — com a orientação de confirmar condições e disponibilidade com o Neto.
 
 Foram baixadas e publicadas nove fotografias oficiais, três por modelo, em `/manus-storage/`. A extração também confirmou que as páginas oficiais oferecem experiência 360º, mas nenhum asset 360º autorizado foi integrado nesta rodada; o catálogo não simula uma rotação inexistente.
+
+## Auditoria adicional do catálogo oficial em 14/08/2026
+
+A página oficial `/produtos/` lista, entre outros itens, JEF 170, SHI 400sc, SHI 175, SHI 170, JET 50, JET 125, SHI 250, SH4, SH3, URBAN 150 EFI, 250F e SHI 175s EFI, além de veículos automotivos, ATVs, karts e mobilidade elétrica. O inventário do Neto deve ser cruzado com essa lista, mas o recorte do projeto exclui TLUX, DTRUCK, CGE Rover/Nomad, ATVs, KARTs, PTs e qualquer item elétrico ou automotivo. A página oficial também expõe links e imagens individuais por modelo, que serão usados como fonte de nomes, preços de referência e galerias — nunca como autorização implícita de uso comercial.
+
+A segunda página oficial acrescenta, entre outros, FREE 150 EFI, JEF 150S EFI, RIO 125 EFI, PHOENIX S EFI, JET 125 EFI, JEF 150 e PHOENIX S. Também lista CGE8, PTXS, PT-STAND, PT4-PRO, PTXR, PT3/3S, PT2, PT1, ATV 200, SE1, SE2 e SHE-S, classificados como veículos, mobilidade elétrica, triciclo ou outros produtos fora do recorte. A lista oficial confirma que o inventário elegível deve ser definido por tipo de produto e confirmação comercial, não pelo total bruto de itens da página.
+
+### Fichas oficiais extraídas nesta rodada
+
+| Modelo | Componentes destacados oficialmente | Dados técnicos capturados |
+|---|---|---|
+| JEF 170 | Painel 100% digital; rodas de liga leve aro 17; freio dianteiro a disco; monoshock; full LED; USB, cavalete central e descanso lateral | 169,30 cc; 13,59 CV; 15 N.M; 5 marchas; tanque 12 L; carga máxima 150 kg |
+| SHI 400SC | Painel TFT; rodas 19/18; ABS de duplo canal; garfo telescópico; dois amortecedores; full LED; USB e sensor de cavalete | 399,7 cc; 26,5 CV; 30 N.M; 5 marchas; tanque 14 L; carga máxima 150 kg |
+| SHI 175 | Painel digital; rodas raiadas 19/17; discos nas duas rodas; monoshock; full LED com DRL; USB/USB-C, alarme e partida remota | 175,11 cc; 15,63 CV; 14 N.M; 5 marchas; tanque 14,5 L; carga máxima 150 kg |
+| SHI 170 | Painel 100% digital; rodas aro 18; disco dianteiro; suspensão telescópica e traseira convencional; full LED; USB/USB-C e cavalete central | 169,30 cc; 13,59 CV; 11,45 N.M; 5 marchas; tanque 12,5 L; carga máxima 150 kg |
+
+As quatro páginas oficiais também exibem galerias de múltiplas fotografias e, para SHI 400SC, SHI 175 e SHI 170, uma seção oficial “em 360º”. O catálogo não deve inventar uma rotação sem que os frames autorizados possam ser baixados e usados.
+
+### Segunda leva de fichas oficiais
+
+| Modelo | Componentes destacados oficialmente | Dados técnicos capturados |
+|---|---|---|
+| URBAN LITE | Painel 100% digital; rodas de liga leve; guarda-volumes; full LED; USB/USB-C; cavalete central | 149,48 cc; 13,5 cv; 11 N.m; CVT automático; tanque 8 L; CBS; rodas 13” |
+| JET 50 | Painel digital com gasolina/marcha/velocidade; rodas de liga leve; full LED; guarda-volumes; USB e ganchos | 49,4 cc; 2,71 CV; 2,6 N.M; 4 marchas; tanque 3 L; carga máxima 150 kg |
+| JET 125 | Painel digital; rodas de liga leve 17/14; full LED; guarda-volumes; USB e acessórios urbanos | 123,67 cc; 8,15 CV; 8,0 N.M; 4 marchas; tanque 3 L; carga máxima 150 kg |
+| SHI 250 | Painel digital; rodas raiadas; discos nas duas rodas; garfo invertido; monoshock; Full LED/DRL; USB | 249,9 cc; 19,3 CV; 18 N.M; 6 marchas; tanque 18 L; CBS; rodas 21/18 |
+
+### Terceira leva de fichas oficiais
+
+| Modelo | Componentes destacados oficialmente | Dados técnicos capturados |
+|---|---|---|
+| SH4 | Painel digital; rodas de liga leve; bateria; motor elétrico Brushless | Classificado como elétrico e excluído do catálogo, apesar da nomenclatura de scooter |
+| SH3 | Painel digital; rodas de liga leve; bateria; motor elétrico Brushless | Classificado como elétrico e excluído do catálogo |
+| URBAN 150 EFI | Painel digital com espelhamento; Start/Stop; ABS de dois canais; Full LED/DRL; para-brisa ajustável | 149 cc; 12,9 cv; 13 N.m; automático; tanque 13,5 L; carga máxima 150 kg |
+| 250F | Painel digital; ABS de dois canais; injeção eletrônica; garfo invertido; monoshock; Full LED/DRL | 248,92 cc; 27,9 CV; 22,5 N.M; 6 marchas; refrigeração líquida; tanque 13,5 L |
+
+### Quarta leva de fichas oficiais
+
+| Modelo | Componentes destacados oficialmente | Dados técnicos capturados |
+|---|---|---|
+| SHI 175S EFI | Painel digital; rodas raiadas 19/17; discos nas duas rodas; monoshock; Full LED/DRL; USB/USB-C; alarme e partida remota | 175,11 cc; 15,63 CV; 14 N.M; 5 marchas; tanque 14,5 L; carga máxima 150 kg |
+| FREE 150 EFI | Painel digital; rodas de liga leve 18; disco dianteiro; suspensão telescópica; DRL e LED; suporte para celular | 149 cc; 11,96 cv; 9,8 N.m; 5 marchas; tanque 12 L; carga máxima 150 kg |
+| JEF 150S EFI | Painel digital; rodas aro 17; disco dianteiro; monoshock; lanternas Full LED; porta USB | 149 cc; 13,5 CV; 14 N.M; 5 marchas; tanque 12 L; carga máxima 150 kg |
+| RIO 125 EFI | Painel digital; rodas de liga leve 17/14; disco dianteiro; bi-shock; Full LED/DRL; guarda-volumes e USB | 123,67 cc; 8 CV; 9,0 N.M; 4 marchas; tanque 4,2 L; carga máxima 150 kg |
+
+### Correção de inventário identificada na auditoria final
+
+Embora o banco local ainda trouxesse SH4 e SH3 com a categoria genérica “Scooter / urbana”, as páginas oficiais descrevem ambos como veículos elétricos, com bateria de 48 V e motor Brushless. Portanto, os dois devem ser excluídos do recorte “somente motocicletas a combustão”; o filtro não pode depender apenas do texto da categoria local.
+
+Com essa correção, o inventário elegível passa a conter 18 modelos Shineray a combustão e 3 modelos SBM, totalizando 21 capítulos de produto. O número é usado apenas para auditoria interna; a interface do livro continuará sem contador total nas páginas internas, conforme o briefing.
+
+### Validação visual intermediária
+
+Em 1440 × 900, o spread passou a apresentar a página direita como hero dominante, com marca, categoria e cilindrada antes da fotografia, galeria oficial abaixo e lente circular preservada. A página esquerda mantém a abertura de copy e começa a leitura “O que muda na prática”; a ficha técnica permanece no mesmo papel editorial por rolagem interna, sem alterar a capa.
+
+Em 390 × 844, a página única apresenta a fotografia completa em `contain`, miniaturas horizontais, copy, preço, três blocos alternados de imagem e benefício e, ao final, a ficha técnica em painel escuro. A leitura permanece vertical e não houve corte da motocicleta.
+
+Após retirar a faixa fixa do rodapé interno desktop, o primeiro bloco editorial passou a aparecer no fluxo natural da página. O rodapé de preço e atendimento segue depois da ficha técnica; a navegação inferior do livro continua sendo o CTA principal de WhatsApp e os botões de capítulo.
+
+Na revisão final, a capa permaneceu exatamente na composição aprovada. O CTA interno do livro passou a usar o Vermelho Lombada como superfície de ação, mantendo o círculo verde do WhatsApp apenas como reconhecimento de serviço. A captura mobile pós-revisão manteve a moto inteira, a galeria oficial, o conteúdo editorial e a ficha técnica no mesmo fluxo vertical.

@@ -1,4 +1,5 @@
 // Style reminder: data feeds the Arquivo de Performance direction; every chapter pairs factual guardrails with a human, conversion-oriented narrative.
+import { editorialDetails, officialGallerySources, officialSpecs } from "@/data/editorialCatalog";
 
 export type MotoImage = {
   src: string;
@@ -150,6 +151,13 @@ function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, descr
   details?: MotoDetail[];
   colors?: string[];
 }): Moto {
+  const officialGallery = officialGallerySources[id] ?? [];
+  const officialImages = officialGallery.map((src, index) => ({
+    src,
+    label: index === 0 ? "Foto oficial" : `Galeria ${String(index + 1).padStart(2, "0")}`,
+    alt: `${name} em fotografia oficial de produto da ${brand}`,
+  }));
+  const supplementalImages = officialGallery.length > 0 ? [] : extraImages;
   return {
     id,
     brand,
@@ -163,9 +171,9 @@ function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, descr
     copyLine,
     audience,
     highlights,
-    images: images(name, image, [...(officialGalleries[id] ?? []), ...extraImages]),
-    details,
-    specs,
+    images: images(name, officialImages[0]?.src ?? image, [...officialImages.slice(1), ...supplementalImages]),
+    details: editorialDetails[id] ?? details,
+    specs: officialSpecs[id] ?? specs,
     colors,
     source,
     sourceLabel: `Fonte de produto e imagem: ${brand} — página oficial do modelo`,
@@ -396,7 +404,8 @@ const rawMotos: Moto[] = [
   }),
 ];
 
-const combustionMotos = rawMotos.filter((moto) => !["Elétrica", "Mobilidade elétrica", "Scooter elétrica"].some((term) => moto.category.includes(term)));
+const excludedNonCombustionIds = new Set(["sh3", "sh4", "se1", "se2", "she-s", "ptxs", "pt-stand", "pt4-pro", "ptxr", "pt1s", "pt2xs"]);
+const combustionMotos = rawMotos.filter((moto) => !excludedNonCombustionIds.has(moto.id) && !["Elétrica", "Mobilidade elétrica", "Scooter elétrica"].some((term) => moto.category.includes(term)));
 const firstMoto = combustionMotos.find((moto) => moto.id === "shi-250") ?? combustionMotos[0];
 export const motos: Moto[] = [firstMoto, ...combustionMotos.filter((moto) => moto.id !== firstMoto.id)];
 export const coverMoto = motos[0];
