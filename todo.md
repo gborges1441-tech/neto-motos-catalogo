@@ -280,3 +280,14 @@
 - [x] Implementar crossfade curto e deslocamento sutil na foto principal, com sincronização visual das miniaturas e proteção contra cliques repetidos.
 - [x] Respeitar `prefers-reduced-motion` e manter a troca instantânea quando a preferência estiver ativa.
 - [x] Validar desktop, mobile, alternância rápida, deep link, lightbox, 360º, build e logs antes do checkpoint.
+
+## Correção do visualizador 360º real
+
+- [x] Registrar que a página oficial está atualmente bloqueada por verificação de bot no navegador automatizado; não tratar a ausência de payload como inexistência dos frames.
+- [x] Retirar temporariamente do catálogo o módulo que usa galerias lineares como se fossem rotação 360º.
+- [x] Manter os componentes e o contrato de dados prontos para receber manifestos reais e ordenados quando a fonte for obtida.
+- [ ] Auditar os scripts da fabricante para identificar a origem, a ordem e a quantidade de frames de uma rotação real por modelo; o acesso ao DOM está bloqueado por verificação de bot.
+- [x] Remover os conjuntos que são apenas galerias de fotos ou detalhes; manter o controle 360º somente onde houver sequência completa oficial verificável.
+- [ ] Persistir o manifesto correto de frames por modelo e acabamento, preservando URL de origem, ordem angular e a correspondência de cor.
+- [ ] Reconstruir a interação para giro direto por arraste de mouse/toque, sem autoplay e sem controles que façam parecer uma apresentação de fotos.
+- [ ] Validar giro contínuo, direção, velocidade, teclado, mobile, swipe do livro, reduced motion, build e logs antes do checkpoint.

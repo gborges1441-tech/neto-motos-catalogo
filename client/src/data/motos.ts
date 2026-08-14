@@ -156,12 +156,7 @@ const urban150ColorVariants: MotoColorVariant[] = [
       { src: officialGallerySources["urban-150-efi"]?.[1] ?? "", label: "Traseira oficial", alt: "Traseira oficial da URBAN 150 EFI preta" },
       { src: officialGallerySources["urban-150-efi"]?.[3] ?? "", label: "Comandos oficiais", alt: "Comandos oficiais da URBAN 150 EFI preta" },
     ],
-    frames: [
-      "/manus-storage/urban-150-efi-preta-official_0d57184c.png",
-      officialGallerySources["urban-150-efi"]?.[0] ?? "",
-      officialGallerySources["urban-150-efi"]?.[1] ?? "",
-      officialGallerySources["urban-150-efi"]?.[3] ?? "",
-    ],
+    frames: [],
     source: "https://www.shineray.com.br/produto/urban-150-efi/",
   },
   {
@@ -173,11 +168,7 @@ const urban150ColorVariants: MotoColorVariant[] = [
       { src: officialGallerySources["urban-150-efi"]?.[2] ?? "", label: "Cockpit vermelho", alt: "Cockpit oficial da URBAN 150 EFI vermelha" },
       { src: officialGallerySources["urban-150-efi"]?.[4] ?? "", label: "Frente vermelha", alt: "Frente oficial da URBAN 150 EFI vermelha" },
     ],
-    frames: [
-      "/manus-storage/urban-150-efi-vermelha-official_45363fe4.png",
-      officialGallerySources["urban-150-efi"]?.[2] ?? "",
-      officialGallerySources["urban-150-efi"]?.[4] ?? "",
-    ],
+    frames: [],
     source: "https://www.shineray.com.br/produto/urban-150-efi/",
   },
 ];

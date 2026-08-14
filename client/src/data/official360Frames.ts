@@ -1,35 +1,11 @@
 /**
  * Direção visual: Arquivo de Performance / neo-editorial automotivo.
- * Cada sequência abaixo reutiliza fotografias oficiais publicadas na página do modelo.
- * Não há frames gerados, interpolados ou retocados artificialmente.
+ *
+ * O catálogo não trata galeria editorial como giro 360º. Este manifesto
+ * permanecerá vazio até receber sequências oficiais completas, ordenadas por
+ * ângulo e verificadas visualmente contra o configurador da fabricante.
  */
-import { officialGallerySources } from "@/data/officialGalleries";
-
-const verified360Ids = [
-  "jet-125",
-  "jef-150",
-  "urban-lite",
-  "urban-150-efi",
-  "shi-175",
-  "shi-170",
-  "shi-175s-efi",
-  "shi-400sc",
-  "sbm-400s",
-  "sbm-400ss",
-  "sbm-600v",
-  "sbm-250t",
-  "sbm-600",
-  "sbm-600t",
-  "sbm-600rc",
-  "sbm-400rr",
-  "iron",
-  "titanium",
-  "storm-200-efi",
-] as const;
-
-export const official360Frames: Record<string, string[]> = Object.fromEntries(
-  verified360Ids.map((id) => [id, (officialGallerySources[id] ?? []).slice(0, 10)]),
-);
+export const official360Frames: Record<string, string[]> = {};
 
 export const official360SourceUrls: Record<string, string> = {
   "jet-125": "https://www.shineray.com.br/produto/jet-125/",
