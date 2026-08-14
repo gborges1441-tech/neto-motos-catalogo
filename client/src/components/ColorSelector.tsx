@@ -9,9 +9,10 @@ type ColorSelectorProps = {
   variants: MotoColorVariant[];
   selectedId: string | null;
   onSelect: (variant: MotoColorVariant) => void;
+  disabled?: boolean;
 };
 
-export function ColorSelector({ variants, selectedId, onSelect }: ColorSelectorProps) {
+export function ColorSelector({ variants, selectedId, onSelect, disabled = false }: ColorSelectorProps) {
   if (variants.length < 2) return null;
 
   return (
@@ -31,6 +32,7 @@ export function ColorSelector({ variants, selectedId, onSelect }: ColorSelectorP
               type="button"
               role="radio"
               aria-checked={active}
+              disabled={disabled}
               aria-label={`Selecionar acabamento ${variant.name}`}
               className={`color-selector__option ${active ? "color-selector__option--active" : ""}`}
               onClick={() => onSelect(variant)}

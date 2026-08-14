@@ -303,6 +303,8 @@ button { border: 0; }
 .moto-visual__wash { position: absolute; inset: 15% 10%; background: radial-gradient(ellipse, rgba(255,255,255,.78), transparent 63%); z-index: 0; }
 .moto-visual__zoom { position: absolute; inset: 4% 3% 3%; z-index: 1; display: block; width: 94%; height: 94%; padding: 0; background: transparent; border: 0; cursor: crosshair; }
 .moto-visual__zoom > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; background: transparent; mix-blend-mode: normal; filter: none; transition: opacity .3s ease, transform .45s var(--ease-out); animation: image-in .6s var(--ease-out) both; }
+.moto-visual__zoom > .color-media__outgoing, .book-mobile-page__zoom > .color-media__outgoing { z-index: 1; pointer-events: none; }
+.moto-visual__zoom > .color-media__current, .book-mobile-page__zoom > .color-media__current { z-index: 2; }
 .book-page--has-colors .moto-visual__zoom { top: 16%; height: 80%; }
 .moto-visual__zoom > .asset-image-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: radial-gradient(ellipse at center, rgba(255,255,255,.72), rgba(226,219,210,.52)); }
 .moto-visual__zoom:focus-visible, .book-mobile-page__zoom:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
@@ -315,6 +317,7 @@ button { border: 0; }
 .gallery-thumb { position: relative; width: 51px; height: 40px; padding: 0; overflow: hidden; background: rgba(21,21,20,.08); border: 1px solid transparent; cursor: pointer; transition: border-color .2s ease, transform .2s var(--ease-out); }
 .gallery-thumb:hover, .gallery-thumb--active { border-color: var(--red); transform: translateY(-3px); }
 .gallery-thumb img, .gallery-thumb .asset-image-fallback { width: 100%; height: 100%; object-fit: contain; object-position: center; background: #f0ebe4; mix-blend-mode: normal; }
+.color-selector__option:disabled { cursor: wait; opacity: .62; }
 .gallery-thumb span { position: absolute; bottom: 3px; left: 4px; color: rgba(255,255,255,.78); text-shadow: 0 1px 3px #000; font-size: 7px; }
 .color-selector { display: grid; gap: 7px; margin-top: 12px; padding-top: 9px; border-top: 1px solid rgba(21,21,20,.12); }
 .color-selector__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 9px; color: rgba(21,21,20,.5); font-size: 7px; letter-spacing: .13em; text-transform: uppercase; }
@@ -382,6 +385,7 @@ button { border: 0; }
 .moto-tech-sheet__foot a { color: #e4a39f; text-decoration: none; white-space: nowrap; }
 .book-mobile-page__zoom { position: relative; display: block; width: 100%; height: 100%; min-height: 0; padding: 0; background: transparent; border: 0; cursor: pointer; }
 .book-mobile-page__zoom > img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.book-mobile-page__zoom > .color-media__outgoing, .book-mobile-page__zoom > .color-media__current { position: absolute; inset: 0; }
   .book-mobile-page__zoom > span { top: 12px; right: 12px; }
 .photo-lightbox { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 28px; background: rgba(7,7,6,.88); backdrop-filter: blur(13px); animation: lightbox-fade .24s var(--ease-out) both; }
 .photo-lightbox__panel { position: relative; display: grid; grid-template-columns: 54px minmax(0, 1fr) 54px; grid-template-rows: auto minmax(0, 1fr) auto; width: min(1120px, 94vw); height: min(820px, 92vh); padding: 22px 24px 18px; color: var(--paper); background: radial-gradient(circle at 50% 42%, rgba(92,28,28,.28), transparent 44%), linear-gradient(135deg, #232220, #0f0f0e 74%); border: 1px solid rgba(241,236,228,.2); box-shadow: 0 32px 100px rgba(0,0,0,.54), 0 0 0 10px rgba(217,46,46,.04); animation: lightbox-rise .34s var(--ease-out) both; }
@@ -599,6 +603,9 @@ button { border: 0; }
 
 @keyframes reveal-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes image-in { from { opacity: 0; transform: scale(.97) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes color-image-in { from { opacity: 0; transform: translate3d(1.4%, 0, 0) scale(.985); } to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
+@keyframes color-image-out { from { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } to { opacity: 0; transform: translate3d(-1.2%, 0, 0) scale(.988); } }
+@keyframes color-thumb-in { from { opacity: 0; transform: translate3d(4px, 0, 0) scale(.94); } to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); } }
 @keyframes pulse { 0%, 100% { transform: scale(.8); opacity: .75; } 55% { transform: scale(1.2); opacity: 0; } }
 @keyframes whatsapp-sheen { 0%, 58% { transform: translateX(0) skewX(-18deg); opacity: 0; } 68% { opacity: .72; } 82%, 100% { transform: translateX(430%) skewX(-18deg); opacity: 0; } }
 @keyframes whatsapp-ring { 0%, 62% { transform: scale(.97); opacity: 0; } 72% { opacity: .45; } 100% { transform: scale(1.04); opacity: 0; } }
@@ -819,4 +826,13 @@ button { border: 0; }
   .cover-commercial, .cover-stage__grid, .catalog-3d-field { opacity: .08; }
   .cover-commercial__video { display: none; }
   .cover-commercial__beam, .cover-commercial__road { display: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .moto-visual__zoom.is-color-transitioning > .color-media__current, .book-mobile-page__zoom.is-color-transitioning > .color-media__current { animation: color-image-in .32s var(--ease-out) both; }
+  .moto-visual__zoom.is-color-transitioning > .color-media__outgoing, .book-mobile-page__zoom.is-color-transitioning > .color-media__outgoing { animation: color-image-out .28s var(--ease-out) both; }
+  .gallery-thumbs--color-transitioning .gallery-thumb--color-enter, .book-mobile-page__gallery--color-transitioning .gallery-thumb--color-enter { animation: color-thumb-in .26s var(--ease-out) both; }
+  .gallery-thumbs--color-transitioning .gallery-thumb--color-enter:nth-child(2), .book-mobile-page__gallery--color-transitioning .gallery-thumb--color-enter:nth-child(2) { animation-delay: 35ms; }
+  .gallery-thumbs--color-transitioning .gallery-thumb--color-enter:nth-child(3), .book-mobile-page__gallery--color-transitioning .gallery-thumb--color-enter:nth-child(3) { animation-delay: 70ms; }
+  .gallery-thumbs--color-transitioning .gallery-thumb--color-enter:nth-child(4), .book-mobile-page__gallery--color-transitioning .gallery-thumb--color-enter:nth-child(4) { animation-delay: 105ms; }
 }

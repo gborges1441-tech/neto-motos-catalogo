@@ -37,9 +37,12 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const [spreadScale, setSpreadScale] = useState(1);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
+  const [colorTransitioning, setColorTransitioning] = useState(false);
+  const [outgoingColorImage, setOutgoingColorImage] = useState<Moto["images"][number] | null>(null);
   const bookShellRef = useRef<HTMLElement>(null);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
+  const colorTransitionTimer = useRef<number | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const lightboxGesture = useRef<{ x: number; y: number; panX: number; panY: number; scale: number; pointerType: string } | null>(null);
   const pinchPointers = useRef(new Map<number, { x: number; y: number }>());
@@ -68,6 +71,10 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   useEffect(() => {
     setSelectedImage(0);
     setLightboxIndex(null);
+    setColorTransitioning(false);
+    setOutgoingColorImage(null);
+    if (colorTransitionTimer.current !== null) window.clearTimeout(colorTransitionTimer.current);
+    colorTransitionTimer.current = null;
     setSelectedColorId(current.colorVariants?.find((variant) => variant.id === initialColorId)?.id ?? current.colorVariants?.[0]?.id ?? null);
   }, [activeIndex, current.colorVariants, current.id, initialColorId]);
 
@@ -162,6 +169,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   useEffect(() => {
     return () => {
       if (turnTimer.current !== null) window.clearTimeout(turnTimer.current);
+      if (colorTransitionTimer.current !== null) window.clearTimeout(colorTransitionTimer.current);
       void audioContextRef.current?.close();
       audioContextRef.current = null;
     };
@@ -274,6 +282,38 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
       setSelectedImage(nextIndex);
       return nextIndex;
     });
+  }
+
+  function selectColor(variant: NonNullable<Moto["colorVariants"]>[number]) {
+    if (variant.id === selectedColor?.id || colorTransitioning) return;
+    const applySelection = () => {
+      setSelectedColorId(variant.id);
+      setSelectedImage(0);
+      setLightboxIndex(null);
+      setLens(null);
+      trackEvent("color_variant_change", { model: current.name, color: variant.name });
+    };
+    const heroPreload = new Image();
+    heroPreload.decoding = "async";
+    heroPreload.src = variant.hero.src;
+    variant.gallery.forEach((image) => {
+      const galleryPreload = new Image();
+      galleryPreload.decoding = "async";
+      galleryPreload.src = image.src;
+    });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      applySelection();
+      return;
+    }
+    setOutgoingColorImage(activeImage);
+    setColorTransitioning(true);
+    window.requestAnimationFrame(applySelection);
+    if (colorTransitionTimer.current !== null) window.clearTimeout(colorTransitionTimer.current);
+    colorTransitionTimer.current = window.setTimeout(() => {
+      setOutgoingColorImage(null);
+      setColorTransitioning(false);
+      colorTransitionTimer.current = null;
+    }, 340);
   }
 
   function handleLensMove(event: React.MouseEvent<HTMLButtonElement>) {
@@ -426,20 +466,21 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
               <h2>{current.name}</h2>
               <p>{current.category}</p>
               <b>{currentEngine}</b><small>CILINDRADA OFICIAL</small>
-              <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} onSelect={(variant) => { setSelectedColorId(variant.id); setSelectedImage(0); setLightboxIndex(null); }} />
+              <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} disabled={colorTransitioning} onSelect={selectColor} />
             </div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
-              <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>
-                <AssetImage key={activeImage.src} src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+              <button className={`moto-visual__zoom ${colorTransitioning ? "is-color-transitioning" : ""}`} type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>
+                {outgoingColorImage && <AssetImage className="color-media__outgoing" src={outgoingColorImage.src} alt="" aria-hidden="true" fallbackLabel={current.name} />}
+                <AssetImage key={activeImage.src} className="color-media__current" src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               </button>
               {lens && <span className="moto-lens" aria-hidden="true" style={{ left: lens.left, top: lens.top, width: lens.size, height: lens.size, backgroundImage: `url(${lens.src})`, backgroundSize: lens.backgroundSize, backgroundPosition: lens.backgroundPosition }} />}
             </div>
             <div className="gallery-strip">
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>
-              <div className="gallery-thumbs">
+              <div className={`gallery-thumbs ${colorTransitioning ? "gallery-thumbs--color-transitioning" : ""}`}>
                 {displayImages.map((image, index) => (
-                  <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}>
+                  <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""} ${colorTransitioning ? "gallery-thumb--color-enter" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}>
                     <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" />
                   </button>
                 ))}
@@ -456,14 +497,15 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
           <div className="book-mobile-page__topline"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
           <div className="book-mobile-page__visual" style={{ aspectRatio: mobilePhotoRatio }}>
-              <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>
-                <AssetImage key={`mobile-${activeImage.src}`} src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
+              <button className={`book-mobile-page__zoom ${colorTransitioning ? "is-color-transitioning" : ""}`} type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>
+                {outgoingColorImage && <AssetImage className="color-media__outgoing" src={outgoingColorImage.src} alt="" aria-hidden="true" fallbackLabel={current.name} />}
+                <AssetImage key={`mobile-${activeImage.src}`} className="color-media__current" src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               </button>
           </div>
-          <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
-            {displayImages.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
+          <div className={`book-mobile-page__gallery ${colorTransitioning ? "book-mobile-page__gallery--color-transitioning" : ""}`} aria-label="Galeria da moto">
+            {displayImages.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""} ${colorTransitioning ? "gallery-thumb--color-enter" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
           </div>
-          <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} onSelect={(variant) => { setSelectedColorId(variant.id); setSelectedImage(0); setLightboxIndex(null); }} />
+          <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} disabled={colorTransitioning} onSelect={selectColor} />
           <Official360Viewer model={`${current.name}${selectedColor ? ` / ${selectedColor.name}` : ""}`} frames={current360Frames} source={current360Source} />
             <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / {current.brand}</span>

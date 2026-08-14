@@ -273,3 +273,10 @@
 - [x] Implementar o seletor acessível na página do modelo, com estado ativo, teclado, foco visível e fallback claro quando só existir uma cor verificável.
 - [x] Atualizar automaticamente hero, galeria e frame atual do visualizador 360º ao trocar de cor, resetando o índice e pre-carregando a nova sequência.
 - [x] Validar desktop, mobile, reduced motion, troca de modelo, deep link, swipe do book, lightbox, build e logs antes do checkpoint.
+
+## Transição entre acabamentos
+
+- [x] Auditar a troca atual de hero, thumbnails e frames para identificar a camada correta de animação sem disparar reflow ou interferir no 360º.
+- [x] Implementar crossfade curto e deslocamento sutil na foto principal, com sincronização visual das miniaturas e proteção contra cliques repetidos.
+- [x] Respeitar `prefers-reduced-motion` e manter a troca instantânea quando a preferência estiver ativa.
+- [x] Validar desktop, mobile, alternância rápida, deep link, lightbox, 360º, build e logs antes do checkpoint.
