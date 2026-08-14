@@ -242,3 +242,15 @@
 - [x] Aumentar blocos foto/texto da página esquerda, preservando alternância FOTO → TEXTO → FOTO → TEXTO, com imagem e texto confortáveis e sem vazios artificiais.
 - [x] Criar relatório interno por modelo com status de hero, galeria, detalhes, cores, 360º e quantidade de imagens, marcando “não extraído” quando aplicável.
 - [ ] Validar modelo por modelo, imagem por imagem, TypeScript, build, proporções, performance, acessibilidade, mobile, desktop, zoom e preservação da capa antes do checkpoint.
+
+## Nova auditoria integral de inventário e heroes — solicitação do usuário
+
+- [x] Reconciliar a listagem oficial atual de produtos Shineray com a linha comercial do Neto, separando combustão, ciclomotores e produtos fora do escopo.
+- [x] Reconciliar toda a listagem oficial SBM, incluindo modelos relacionados descobertos nas páginas individuais, sem incluir itens “em breve” ou não confirmados comercialmente.
+- [x] Localizar e validar a foto hero oficial do JET 125 EFI; o recorte antigo foi substituído pela galeria do slug oficial corrigido.
+- [x] Localizar e validar a foto hero oficial da SHI 175 que não mantinha o padrão lateral/isolado do catálogo.
+- [x] Localizar e validar a foto hero oficial da SBM 400S que não mantinha o padrão visual dos demais modelos.
+- [x] Conferir que cada modelo publicado possui hero, galeria oficial, página de origem e status documentado; quando a fonte não ofereceu vista isolada, foi usada moto inteira oficial em contain.
+- [x] Adicionar ao catálogo somente os modelos Shineray não elétricos e SBM confirmados nas páginas individuais auditadas; a confirmação final de estoque/condições continua sendo do Neto.
+- [x] Atualizar o relatório de cobertura com modelos adicionados, excluídos, pendentes e fontes individuais.
+- [x] Validar o inventário final, heroes, galeria, filtros, modo livro, modo lista, mobile, zoom, build e preservação da capa antes do novo checkpoint.

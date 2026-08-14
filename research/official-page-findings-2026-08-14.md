@@ -48,6 +48,40 @@ A listagem oficial `https://www.shineray.com.br/sbm/produtos-sbm/` retornou cont
 
 O navegador também foi bloqueado por captcha ao abrir a página SBM 150, embora o conteúdo textual individual tenha sido extraído. A coleta de assets continuará usando os URLs oficiais de mídia já identificados; nenhuma tentativa de contornar captcha será feita e nenhum asset será inventado.
 
+## Atualização da listagem oficial
+
+A listagem oficial atual expõe o JET 125 EFI como `/produto/jet-125ss-efi/`, diferente do slug usado anteriormente no catálogo, e também lista NEW JET, SHI 400SC e STORM 200 EFI entre as entradas não elétricas. A página individual da SHI 175 confirma dez imagens de galeria, quatro cores, 360º e o conjunto atualizado de itens de série. A nova coleta deve usar o slug `jet-125ss-efi` para recuperar o hero correto.
+
+## Auditoria visual dos três heroes apontados
+
+O hero atual do JET 125 EFI é um recorte transparente de 500×500 em vista frontal/3⁄4 e mostra a moto inteira, mas ainda precisa ser comparado com o asset do slug oficial `jet-125ss-efi`. O hero atual da SHI 175 é um recorte transparente de 500×500 em 3⁄4, com a moto inteira, porém a frente ocupa mais área visual que os demais heroes laterais; a substituição só será feita se a fonte oficial oferecer um recorte mais equilibrado. A SBM 400S ainda será auditada visualmente no próximo passo.
+
+O asset atual da SBM 400S foi confirmado como um close de banco em fotografia 1920×1080, inadequado para hero. A galeria oficial publicada tem de ser percorrida para encontrar uma imagem de moto inteira; se não houver vista isolada, a solução deve usar a melhor fotografia oficial de moto completa em `contain`, sem recorte artificial.
+
+Na galeria oficial da SHI 175, os assets `Galeria-SHI-175-2.webp`, `3.webp` e `4.webp` são vistas laterais de estúdio com a moto inteira; o asset `1.webp` é close frontal e não deve ocupar o hero. Na galeria oficial da SBM 400S, `Galeria-SBM-400-2.webp` e `Galeria-SBM-400-8.webp` mostram a moto completa em uso; os assets 1, 3, 4, 5, 7, 9 e 10 são detalhes ou closes e não devem ocupar o hero.
+
+## Candidatos SBM confirmados em páginas individuais
+
+As páginas oficiais atuais confirmam **SBM 400SS** (R$ 37.490,00, 378 cc, 45,5 CV, dez imagens), **SBM 600V** (R$ 51.990,00, 561,9 cc, V4, 68,7 CV, dez imagens), **SBM 250T** (R$ 24.990,00, 249 cc, 30,8 CV, dez imagens) e **DENVER** (R$ 25.490,00, 248,92 cc, bicilíndrica em V, dez imagens). Todos são modelos a combustão, com ABS e páginas individuais de produto. A inclusão no catálogo ainda exige reconciliação com a oferta efetiva do Neto, mas eles não devem ser tratados como ausentes.
+
+As páginas individuais também confirmam **SBM 600** (R$ 37.990,00, 554 cc, bicilíndrica, dez imagens), **SBM 600T** (R$ 47.490,00, 554 cc, trail, dez imagens), **STORM 200 EFI** (R$ 21.590,00, 198,1 cc, dez imagens) e **IRON** (R$ 21.990,00, 249,60 cc, dez imagens). A STORM aparece na área geral da Shineray, mas é uma motocicleta a combustão; os candidatos SBM têm páginas sob o núcleo SBM e devem ser reconciliados com a oferta comercial do Neto antes da publicação.
+
+A nova rodada confirma também **TITANIUM** (R$ 25.490,00, 248,92 cc, bicilíndrica em V, dez imagens), **SBM 600RC** (R$ 52.490,00, 600 cc, quatro cilindros, 88,4 CV, dez imagens) e **SBM 400RR** (R$ 44.990,00, 400 cc, quatro cilindros, dez imagens). Todas as páginas apresentam produto a combustão, galeria, 360º e ficha técnica oficial.
+
+Na seleção visual das galerias novas, a **SBM 400SS** tem uma vista de estúdio de moto inteira no asset `Galeria-SBM-400ss-1-1.webp`, enquanto o asset 1 é uma cena de pilotagem e não deve ser hero. A **SBM 600V** oferece uma vista lateral de estúdio no asset `Galeria-SBM-600V.webp`; os nove assets anteriores são detalhes fechados e devem permanecer como galeria secundária.
+
+Na seleção seguinte, a **SBM 250T** tem uma vista lateral de estúdio no asset `07.webp`, enquanto o asset 1 é uma foto contextual frontal/3⁄4. A **DENVER** não apresenta recorte isolado; o asset `Galeria-Denver-2-6.webp` mostra a moto inteira em contexto e será usado em `contain`, sem corte artificial.
+
+Para a **SBM 600**, a vista lateral de estúdio aparece em `Galeria-05-SBM-600C.webp`; na **SBM 600T**, a fonte auditada não expõe uma vista lateral de moto inteira, somente detalhes e cockpit. A 600T ficará com o melhor asset oficial de produto inteiro quando a próxima inspeção confirmar sua composição; nenhum close será promovido a hero.
+
+Uma inspeção de HTML da página SBM 600T revelou o asset de apresentação `https://www.shineray.com.br/wp-content/uploads/2026/01/SBM-600T.webp`, além do frame 360º `SBM-600-360-TRAIL-01.webp`. O acesso visual do navegador e o download direto ficaram intermitentemente encerrados pelo host, portanto a imagem não será substituída por close até ser persistida com sucesso.
+
+Uma busca visual com título da própria página Shineray revelou o recorte oficial de apresentação da **SBM 600T** em vista lateral, que foi preservado localmente para publicação. A mesma busca encontrou o recorte lateral oficial preto da **SBM 400RR**, também publicado sem retoque ou geração artificial.
+
+Na linha esportiva, a **SBM 600RC** tem uma vista lateral de estúdio de moto inteira em `Galeria-SBM-600R-5-scaled.webp` e uma segunda vista lateral preta em `10-scaled.webp`. A **SBM 400RR** apresentou apenas cockpit, traseira e detalhes no contato visual atual; não será promovida uma imagem parcial a hero até existir uma fotografia oficial de moto inteira.
+
+Na seleção cruiser, a **IRON** apresenta a moto inteira em 3⁄4 no asset `Galeria-Iron-10-3.webp` e a **TITANIUM** apresenta a moto inteira em contexto no asset `Galeria-Titanium-1-3.webp`; ambos serão usados em `contain`, sem cortes artificiais.
+
 ## Resultado da coleta persistente
 
 O manifesto de galerias dos modelos já publicados recuperou **196 imagens oficiais**: dez imagens para cada um dos modelos Shineray resolvidos, oito para JEF 150S EFI, oito para SBM 150S e dez para cada SBM 250S e SBM 400S. Os arquivos foram publicados em `/manus-storage/` e o catálogo já consome o novo mapa persistente. O JET 125 EFI permanece explicitamente pendente porque a página individual não foi extraída; sua galeria anterior não foi substituída por suposição.

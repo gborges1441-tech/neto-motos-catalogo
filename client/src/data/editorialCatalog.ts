@@ -1,6 +1,7 @@
 // Direção visual: arquivo de performance editorial — fatos oficiais organizados em blocos de benefício, com ritmo assimétrico de livro premium e sem texto sobre fotografias.
 import type { MotoDetail } from "@/data/motos";
 import { officialGallerySources } from "@/data/officialGalleries";
+import { additionalEditorialDetails, additionalOfficialSpecs } from "@/data/candidateCatalog";
 
 const shineray = "https://www.shineray.com.br/produto";
 
@@ -121,6 +122,8 @@ export const editorialDetails: Record<string, MotoDetail[]> = {
   ],
 };
 
+Object.assign(editorialDetails, additionalEditorialDetails);
+
 export const officialSpecs: Record<string, Array<{ label: string; value: string }>> = {
   "jef-170": [{ label: "Cilindrada", value: "169,30 cc" }, { label: "Potência", value: "13,59 CV / 8.000 RPM" }, { label: "Torque", value: "15 N.M / 6.000 RPM" }, { label: "Câmbio", value: "5 marchas" }, { label: "Tanque", value: "12 L" }, { label: "Rodas", value: "90/90–17” · 120/80–17”" }, { label: "Freios", value: "Disco dianteiro / tambor traseiro" }, { label: "Carga máxima", value: "150 kg" }],
   "shi-400sc": [{ label: "Cilindrada", value: "399,7 cc" }, { label: "Potência", value: "26,5 CV / 7.000 RPM" }, { label: "Torque", value: "30 N.M / 5.500 RPM" }, { label: "Câmbio", value: "5 marchas" }, { label: "Tanque", value: "14 L" }, { label: "Rodas", value: "110/90–19” · 130/70–18”" }, { label: "Freios", value: "ABS de duplo canal" }, { label: "Carga máxima", value: "150 kg" }],
@@ -141,3 +144,5 @@ export const officialSpecs: Record<string, Array<{ label: string; value: string 
   "jef-150": [{ label: "Cilindrada", value: "149,48 cc" }, { label: "Potência", value: "13,5 CV / 7.500 RPM" }, { label: "Torque", value: "14 N.M / 6.000 RPM" }, { label: "Câmbio", value: "5 marchas" }, { label: "Tanque", value: "12 L" }, { label: "Rodas", value: "90/90–17” · 120/80–17”" }, { label: "Freios", value: "Disco dianteiro / tambor traseiro" }, { label: "Carga máxima", value: "150 kg" }],
   "phoenix-s": [{ label: "Cilindrada", value: "47,9 cc" }, { label: "Potência", value: "5,6 CV / 8.500 RPM" }, { label: "Torque", value: "6,6 N.M / 6.000 RPM" }, { label: "Câmbio", value: "4 marchas" }, { label: "Tanque", value: "3,5 L" }, { label: "Rodas", value: "2.50–17” · 2.75–17”" }, { label: "Freios", value: "Disco dianteiro / tambor traseiro" }, { label: "Carga máxima", value: "150 kg" }],
 };
+
+Object.assign(officialSpecs, additionalOfficialSpecs);

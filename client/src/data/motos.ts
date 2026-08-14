@@ -1,5 +1,6 @@
 // Style reminder: data feeds the Arquivo de Performance direction; every chapter pairs factual guardrails with a human, conversion-oriented narrative.
 import { editorialDetails, officialGallerySources, officialSpecs } from "@/data/editorialCatalog";
+import { additionalHeroImages } from "@/data/candidateCatalog";
 
 export type MotoImage = {
   src: string;
@@ -39,7 +40,7 @@ export type Moto = {
 const catalog = {
   jef170: "/manus-storage/jef-170_c2632265.webp",
   shi400sc: "/manus-storage/shi-400sc_4fa980b9.webp",
-  shi175: "/manus-storage/shi-175_50af884f.webp",
+  shi175: "/manus-storage/02-Galeria-SHI-175-2_4c7f317b.webp",
   shi170: "/manus-storage/shi-170_9901bd46.webp",
   urbanLite: "/manus-storage/urban-lite_f9d6f3ce.webp",
   jet50: "/manus-storage/jet-50_660be97b.webp",
@@ -54,12 +55,12 @@ const catalog = {
   jef150s: "/manus-storage/jef-150s-efi_39703531.webp",
   rio125: "/manus-storage/rio-125-efi_5036850b.webp",
   phoenixEfi: "/manus-storage/phoenix-s-efi_57508b6b.webp",
-  jet125Efi: "/manus-storage/jet-125-efi_73dd11d6.webp",
+  jet125Efi: "/manus-storage/09-Galeria-JET-125-EFI-9-scaled_bde94770.webp",
   jef150: "/manus-storage/jef-150_1b66f905.webp",
   phoenix: "/manus-storage/phoenix-s_850d0efc.webp",
   sbm150: "/manus-storage/sbm-150-01_614fbd72.webp",
   sbm250s: "/manus-storage/sbm-250s-01_824cf529.webp",
-  sbm400s: "/manus-storage/sbm-400s-01_2502d227.webp",
+  sbm400s: "/manus-storage/02-Galeria-SBM-400-2_8c1b7e29.webp",
   se2: "/manus-storage/se2_369cebae.webp",
   se1: "/manus-storage/se1_67428dd5.webp",
   sheS: "/manus-storage/she-s_22c756da.webp",
@@ -404,8 +405,23 @@ const rawMotos: Moto[] = [
   }),
 ];
 
+const additionalRawMotos: Moto[] = [
+  makeMoto({ id: "sbm-400ss", brand: "SBM", name: "SBM 400SS", category: "Trail / 378 cc", engine: "378 cc", price: "R$ 37.490,00", image: additionalHeroImages["sbm-400ss"], source: "https://www.shineray.com.br/produto/sbm-400ss-2/", description: "Uma trail de alta presença para quem quer levar tecnologia, controle e espaço para além do asfalto.", copyLine: "Tecnologia para transformar a estrada em possibilidade.", audience: "Para quem quer ABS de duplo canal, painel TFT, três baús e um conjunto pronto para viagens.", highlights: ["Motor bicilíndrico", "45,5 CV", "ABS de duplo canal", "Três baús de fábrica"] }),
+  makeMoto({ id: "sbm-600v", brand: "SBM", name: "SBM 600V", category: "Cruiser / 562 cc", engine: "561,9 cc", price: "R$ 51.990,00", image: additionalHeroImages["sbm-600v"], source: "https://www.shineray.com.br/produto/sbm-600v/", description: "Uma cruiser de presença marcante para quem procura força, conforto e tecnologia em cada detalhe.", copyLine: "Presença de quatro cilindros para ir mais longe.", audience: "Para quem quer motor V4, controle de tração, painel TFT e duplo disco dianteiro.", highlights: ["Motor V4", "68,7 CV", "Controle de tração", "ABS de duplo canal"] }),
+  makeMoto({ id: "sbm-250t", brand: "SBM", name: "SBM 250T", category: "Trail / 249 cc", engine: "249 cc", price: "R$ 24.990,00", image: additionalHeroImages["sbm-250t"], source: "https://www.shineray.com.br/produto/sbm-250t/", description: "Uma trail versátil para quem quer alternar entre a cidade, a estrada e os caminhos que aparecem no meio.", copyLine: "Mais liberdade para escolher o próximo trecho.", audience: "Para quem quer seis marchas, ABS de duplo canal e suspensão preparada para diferentes terrenos.", highlights: ["249 cc", "6 marchas", "ABS de duplo canal", "Garfo invertido"] }),
+  makeMoto({ id: "denver", brand: "SBM", name: "DENVER", category: "Cruiser / 249 cc", engine: "248,92 cc", price: "R$ 25.490,00", image: additionalHeroImages.denver, source: "https://www.shineray.com.br/produto/denver/", description: "A DENVER combina desenho clássico, motor em V e conforto para quem valoriza cada quilômetro da viagem.", copyLine: "Conforto e personalidade para viver a estrada.", audience: "Para quem quer bicilíndrica em V, ABS de dois canais e uma posição de pilotagem mais relaxada.", highlights: ["Motor em V", "19 CV", "ABS de dois canais", "Full LED"] }),
+  makeMoto({ id: "sbm-600", brand: "SBM", name: "SBM 600", category: "Cruiser / 554 cc", engine: "554 cc", price: "R$ 37.990,00", image: additionalHeroImages["sbm-600"], source: "https://www.shineray.com.br/produto/sbm-600/", description: "Uma cruiser de 554 cc para quem quer mais conforto, força e presença em viagens longas.", copyLine: "Força constante para percorrer mais.", audience: "Para quem busca bicilíndrica, transmissão por correia, ABS e controle de tração.", highlights: ["554 cc", "56,1 CV", "Transmissão por correia", "Controle de tração"] }),
+  makeMoto({ id: "sbm-600t", brand: "SBM", name: "SBM 600T", category: "Trail / 554 cc", engine: "554 cc", price: "R$ 47.490,00", image: additionalHeroImages["sbm-600t"], source: "https://www.shineray.com.br/produto/sbm-600t/", description: "Uma trail de 600 cc feita para ir além do asfalto com suspensão Marzocchi, tecnologia e conforto.", copyLine: "Feita para transformar cada caminho em aventura.", audience: "Para quem quer painel TFT de 7”, freios Brembo, modos de condução e suspensão Marzocchi.", highlights: ["554 cc", "Suspensão Marzocchi", "Freios Brembo", "Painel TFT de 7”"] }),
+  makeMoto({ id: "sbm-600rc", brand: "SBM", name: "SBM 600RC", category: "Sport / 600 cc", engine: "600 cc", price: "R$ 52.490,00", image: additionalHeroImages["sbm-600rc"], source: "https://www.shineray.com.br/produto/sbm-600rc/", description: "Uma esportiva de quatro cilindros para quem quer respostas rápidas, presença e controle quando o ritmo aumenta.", copyLine: "Desempenho para pilotar com mais intensidade.", audience: "Para quem procura 88,4 CV, duplo disco dianteiro, ABS e painel TFT com conectividade.", highlights: ["4 cilindros", "88,4 CV", "Duplo disco dianteiro", "Painel TFT"] }),
+  makeMoto({ id: "sbm-400rr", brand: "SBM", name: "SBM 400RR", category: "Sport / 400 cc", engine: "400 cc", price: "R$ 44.990,00", image: additionalHeroImages["sbm-400rr"], source: "https://www.shineray.com.br/produto/sbm-400rr/", description: "Uma esportiva de quatro cilindros criada para quem quer alto desempenho, adrenalina e precisão sobre duas rodas.", copyLine: "A esportiva para quem quer sentir a resposta.", audience: "Para quem quer quatro cilindros, ABS de duplo canal e uma ciclística firme para pilotar com intenção.", highlights: ["4 cilindros", "400 cc", "ABS de duplo canal", "Garfo invertido"] }),
+  makeMoto({ id: "iron", brand: "SBM", name: "IRON", category: "Cruiser / 250 cc", engine: "249,60 cc", price: "R$ 21.990,00", image: additionalHeroImages.iron, source: "https://www.shineray.com.br/produto/iron/", description: "A IRON combina design sofisticado, motor de 250 cc e uma postura cruiser feita para enfrentar a estrada.", copyLine: "Estilo sofisticado para conquistar novos caminhos.", audience: "Para quem quer motor de 249,60 cc, ABS de dois canais e uma linguagem cruiser marcante.", highlights: ["249,60 cc", "27,67 CV", "ABS de dois canais", "Full LED"] }),
+  makeMoto({ id: "titanium", brand: "SBM", name: "TITANIUM", category: "Cruiser / 249 cc", engine: "248,92 cc", price: "R$ 25.490,00", image: additionalHeroImages.titanium, source: "https://www.shineray.com.br/produto/titanium/", description: "A TITANIUM coloca motor em V, design marcante e desempenho equilibrado no mesmo capítulo.", copyLine: "Uma cruiser com assinatura própria.", audience: "Para quem quer bicilíndrica em V, ABS de dois canais e uma experiência urbana com presença.", highlights: ["Motor em V", "19 CV", "ABS de dois canais", "Painel digital"] }),
+  makeMoto({ id: "storm-200-efi", name: "STORM 200 EFI", category: "Crossover / 198 cc", engine: "198,1 cc", price: "R$ 21.590,00", image: additionalHeroImages["storm-200-efi"], source: "https://www.shineray.com.br/produto/storm-200/", description: "A STORM 200 EFI combina desenho crossover, injeção eletrônica e segurança para encarar cidade e estrada.", copyLine: "Mais potência e controle para mudar de rota.", audience: "Para quem quer 20,4 CV, ABS de dois canais e suspensão invertida em uma crossover versátil.", highlights: ["Injeção eletrônica", "20,4 CV", "ABS de duplo canal", "Garfo invertido"] }),
+];
+
 const excludedNonCombustionIds = new Set(["sh3", "sh4", "se1", "se2", "she-s", "ptxs", "pt-stand", "pt4-pro", "ptxr", "pt1s", "pt2xs"]);
-const combustionMotos = rawMotos.filter((moto) => !excludedNonCombustionIds.has(moto.id) && !["Elétrica", "Mobilidade elétrica", "Scooter elétrica"].some((term) => moto.category.includes(term)));
+const allRawMotos = [...rawMotos, ...additionalRawMotos];
+const combustionMotos = allRawMotos.filter((moto) => !excludedNonCombustionIds.has(moto.id) && !["Elétrica", "Mobilidade elétrica", "Scooter elétrica"].some((term) => moto.category.includes(term)));
 const firstMoto = combustionMotos.find((moto) => moto.id === "shi-250") ?? combustionMotos[0];
 export const motos: Moto[] = [firstMoto, ...combustionMotos.filter((moto) => moto.id !== firstMoto.id)];
 export const coverMoto = motos[0];
