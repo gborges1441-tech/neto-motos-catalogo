@@ -254,3 +254,14 @@
 - [x] Adicionar ao catálogo somente os modelos Shineray não elétricos e SBM confirmados nas páginas individuais auditadas; a confirmação final de estoque/condições continua sendo do Neto.
 - [x] Atualizar o relatório de cobertura com modelos adicionados, excluídos, pendentes e fontes individuais.
 - [x] Validar o inventário final, heroes, galeria, filtros, modo livro, modo lista, mobile, zoom, build e preservação da capa antes do novo checkpoint.
+
+## Visualização 360º com frames oficiais
+
+- [x] Mapear, por página oficial e modelo, quais conjuntos completos de frames 360º existem e quais são apenas imagens de cor ou detalhes.
+- [x] Reutilizar somente os frames oficiais já persistidos, preservando resolução, ordem, nome original, fonte e agrupamento por modelo; nenhum frame foi gerado ou interpolado.
+- [x] Publicar o manifesto TypeScript com contagem, ordem e origem por modelo em `client/src/data/official360Frames.ts`.
+- [x] Criar um visualizador 360º com arraste horizontal, toque, cursor de controle, teclas de seta, foco visível e indicação discreta de interação.
+- [x] Implementar carregamento progressivo, preloading dos frames vizinhos, fallback de imagem e suporte a `prefers-reduced-motion` sem autoplay agressivo.
+- [x] Integrar o módulo somente nos modelos com seção 360º oficial documentada, mantendo galeria e lightbox intactos nos demais.
+- [x] Garantir que o visualizador não seja confundido com a galeria, não cubra CTA e não interfira no swipe vertical/mobile ou na virada do book.
+- [x] Validar acessibilidade, performance, desktop, mobile, zoom, navegação por teclado, build e logs antes de novo checkpoint.

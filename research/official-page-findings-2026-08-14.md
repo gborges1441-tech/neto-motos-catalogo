@@ -78,6 +78,8 @@ Uma inspeção de HTML da página SBM 600T revelou o asset de apresentação `ht
 
 Uma busca visual com título da própria página Shineray revelou o recorte oficial de apresentação da **SBM 600T** em vista lateral, que foi preservado localmente para publicação. A mesma busca encontrou o recorte lateral oficial preto da **SBM 400RR**, também publicado sem retoque ou geração artificial.
 
+Para a primeira implementação 360º, foram selecionados apenas os modelos cuja página oficial apresenta explicitamente a seção “em 360º” e uma galeria oficial completa. O módulo reutiliza os dez assets oficiais persistidos na ordem publicada como frames de interação; não interpola imagens, não cria ângulos intermediários e não exibe o controle nos demais modelos.
+
 Na linha esportiva, a **SBM 600RC** tem uma vista lateral de estúdio de moto inteira em `Galeria-SBM-600R-5-scaled.webp` e uma segunda vista lateral preta em `10-scaled.webp`. A **SBM 400RR** apresentou apenas cockpit, traseira e detalhes no contato visual atual; não será promovida uma imagem parcial a hero até existir uma fotografia oficial de moto inteira.
 
 Na seleção cruiser, a **IRON** apresenta a moto inteira em 3⁄4 no asset `Galeria-Iron-10-3.webp` e a **TITANIUM** apresenta a moto inteira em contexto no asset `Galeria-Titanium-1-3.webp`; ambos serão usados em `contain`, sem cortes artificiais.

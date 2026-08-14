@@ -6,6 +6,8 @@ import { BrandMark } from "@/components/BrandMark";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AssetImage } from "@/components/AssetImage";
 import { MotoEditorial } from "@/components/MotoEditorial";
+import { Official360Viewer } from "@/components/Official360Viewer";
+import { official360Frames } from "@/data/official360Frames";
 import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
@@ -44,6 +46,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const lightboxPreviousFocus = useRef<HTMLElement | null>(null);
   const current = motos[activeIndex];
   const activeImage = current.images[Math.min(selectedImage, current.images.length - 1)] ?? current.images[0];
+  const current360Frames = official360Frames[current.id] ?? [];
   const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, current.images.length - 1);
   const lightboxImage = current.images[safeLightboxIndex] ?? activeImage;
   const turnMoto = motos[turnTarget ?? activeIndex] ?? current;
@@ -427,6 +430,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
                 ))}
               </div>
             </div>
+            <Official360Viewer model={current.name} frames={current360Frames} source={current.source} />
           </div>
 
           {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={activeImage.src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{turnMoto.name}</span><AssetImage src={turnMoto.images[0].src} alt="" fallbackLabel={turnMoto.name} /></div></div>}
@@ -444,6 +448,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
             {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
           </div>
+          <Official360Viewer model={current.name} frames={current360Frames} source={current.source} />
             <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / {current.brand}</span>
             <h1>{current.name}</h1>

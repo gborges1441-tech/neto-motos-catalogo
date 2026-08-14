@@ -17,8 +17,10 @@ const coverIndex = 0;
 
 export default function Home() {
   const initialMode = new URLSearchParams(window.location.search).get("mode");
-  const [opened, setOpened] = useState(() => initialMode === "book");
-  const [activeIndex, setActiveIndex] = useState(coverIndex);
+  const initialModelId = new URLSearchParams(window.location.search).get("model");
+  const initialModelIndex = motos.findIndex((moto) => moto.id === initialModelId);
+  const [opened, setOpened] = useState(() => initialMode === "book" || initialModelIndex >= 0);
+  const [activeIndex, setActiveIndex] = useState(() => initialModelIndex >= 0 ? initialModelIndex : coverIndex);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [indexOpen, setIndexOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
