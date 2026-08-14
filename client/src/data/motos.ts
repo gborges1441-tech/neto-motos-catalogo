@@ -171,7 +171,7 @@ function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, descr
     copyLine,
     audience,
     highlights,
-    images: images(name, officialImages[0]?.src ?? image, [...officialImages.slice(1), ...supplementalImages]),
+    images: images(name, image, [...officialImages, ...supplementalImages]),
     details: editorialDetails[id] ?? details,
     specs: officialSpecs[id] ?? specs,
     colors,
@@ -224,7 +224,7 @@ const rawMotos: Moto[] = [
     highlights: ["Painel digital", "Full LED", "Porta USB", "Guarda-volumes"],
   }),
   makeMoto({
-    id: "shi-250", name: "SHI 250", category: "Trail / 250 cc", price: "R$ 21.490,00", image: detail.shi250Hero, source: "https://www.shineray.com.br/produto/shi-250/",
+    id: "shi-250", name: "SHI 250", category: "Trail / 250 cc", price: "R$ 21.490,00", image: catalog.shi250Card, source: "https://www.shineray.com.br/produto/shi-250/",
     description: "Uma trail de 250 cc para quem quer sair do asfalto sem abrir mão de controle, informação e orientação direta antes da compra.",
     copyLine: "Versatilidade de verdade para o asfalto e o próximo destino.", audience: "249,9 cc, seis marchas e freios a disco nas duas rodas: uma escolha para quem quer liberdade com ficha técnica na mesa.",
     highlights: ["Motor 249,9 cc", "6 marchas", "Full LED + DRL", "Freios a disco nas duas rodas"],

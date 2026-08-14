@@ -245,7 +245,7 @@ button { border: 0; }
 .sound-led { width: 5px; height: 5px; border-radius: 50%; background: rgba(241,236,228,.3); }
 .sound-led--on { background: var(--red); box-shadow: 0 0 0 3px rgba(217,46,46,.15); }
 .catalog-rule { height: 1px; background: rgba(241,236,228,.14); }
-.book-shell { max-width: 1320px; margin: 0 auto; padding-top: 14px; touch-action: pan-y; }
+.book-shell { max-width: 1740px; margin: 0 auto; padding-top: 14px; touch-action: pan-y; }
 .book-mobile-page { display: none; }
 .book-topline, .book-bottomline { display: flex; align-items: center; justify-content: space-between; color: rgba(241,236,228,.47); text-transform: uppercase; font-size: 8px; letter-spacing: .18em; }
 .book-topline > span:first-child { display: flex; align-items: center; }
@@ -589,7 +589,6 @@ button { border: 0; }
 @supports (height: 100dvh) {
   .cover-stage, .catalog-workspace { min-height: 100dvh; }
   .cover-content { min-height: calc(100dvh - 160px); }
-  .book-spread { height: calc(100dvh - 190px); }
 }
 
 @media (max-width: 900px) {
@@ -598,7 +597,6 @@ button { border: 0; }
   .cover-content { padding-left: 11vw; padding-right: 7vw; }
   .cover-object { left: 57%; width: 45vw; }
   .book-shell { padding-top: 18px; }
-  .book-spread { height: calc(100svh - 180px); min-height: 500px; }
   .book-page--left { padding-left: 5%; padding-right: 5%; }
   .left-page__content { margin-left: 0; }
   .left-page__content h1 { font-size: clamp(54px, 7.1vw, 88px); }

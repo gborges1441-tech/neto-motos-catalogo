@@ -25,7 +25,6 @@ export default function Home() {
   const [quoteOpen, setQuoteOpen] = useState(() => new URLSearchParams(window.location.search).get("quote") === "1");
   const [listMode, setListMode] = useState(() => initialMode === "list");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [floatingCompact, setFloatingCompact] = useState(false);
   const lastUrlMode = useRef(initialMode === "book" || initialMode === "list" ? initialMode : "");
 
   useEffect(() => {
@@ -63,15 +62,6 @@ export default function Home() {
   }, [activeIndex, listMode, opened]);
 
   useEffect(() => {
-    if (!opened) {
-      setFloatingCompact(false);
-      return;
-    }
-    const timer = window.setTimeout(() => setFloatingCompact(true), 5200);
-    return () => window.clearTimeout(timer);
-  }, [opened]);
-
-  useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIndexOpen(false);
@@ -101,7 +91,7 @@ export default function Home() {
   }
 
   return (
-    <div className={`site-shell ${opened ? "site-shell--opened" : ""} ${floatingCompact ? "site-shell--floating-compact" : ""}`}>
+    <div className={`site-shell ${opened ? "site-shell--opened" : ""}`}>
       <a className="skip-link" href="#catalog-content">Pular para o catálogo</a>
       {listMode ? (
         <ListMode open={listMode} onClose={() => setListMode(false)} onSelect={(index) => { setListMode(false); openCatalog(index); }} onOpenQuote={() => openQuote("list")} />
@@ -114,7 +104,6 @@ export default function Home() {
       {!listMode && <IndexDrawer open={indexOpen} activeIndex={activeIndex} onClose={() => setIndexOpen(false)} onSelect={(index) => { setIndexOpen(false); openCatalog(index); }} onListMode={() => { setIndexOpen(false); setListMode(true); }} />}
       {!listMode && <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />}
       {!listMode && <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} />}
-      {opened && <a className="floating-whatsapp" href={whatsappHref()} target="_blank" rel="noreferrer" aria-label="Falar com o Neto pelo WhatsApp"><span className="floating-whatsapp__ping" /><span className="whatsapp-mark" aria-hidden="true"><WhatsAppMark size={19} /></span><span>Falar com o Neto</span></a>}
     </div>
   );
 }

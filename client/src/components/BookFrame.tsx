@@ -76,12 +76,14 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
         setSpreadScale(1);
         return;
       }
-      const availableWidth = Math.min(shell.clientWidth, 1320);
-      const reservedHeight = window.innerWidth <= 1100 ? 194 : 202;
-      const availableHeight = Math.max(360, window.innerHeight - reservedHeight);
+      const availableWidth = shell.clientWidth;
+      const bottomline = shell.querySelector<HTMLElement>(".book-bottomline");
+      const bottomlineHeight = bottomline?.getBoundingClientRect().height ?? 42;
+      const shellTop = shell.getBoundingClientRect().top;
+      const availableHeight = Math.max(440, window.innerHeight - shellTop - bottomlineHeight - 48);
       const widthScale = availableWidth / 1320;
       const heightScale = availableHeight / 710;
-      const nextScale = Math.max(0.52, Math.min(1, widthScale, heightScale));
+      const nextScale = Math.max(0.52, Math.min(1.45, widthScale, heightScale));
       setSpreadScale(Number(nextScale.toFixed(4)));
     };
 

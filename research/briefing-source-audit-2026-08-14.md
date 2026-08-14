@@ -87,3 +87,25 @@ Em 390 × 844, a página única apresenta a fotografia completa em `contain`, mi
 Após retirar a faixa fixa do rodapé interno desktop, o primeiro bloco editorial passou a aparecer no fluxo natural da página. O rodapé de preço e atendimento segue depois da ficha técnica; a navegação inferior do livro continua sendo o CTA principal de WhatsApp e os botões de capítulo.
 
 Na revisão final, a capa permaneceu exatamente na composição aprovada. O CTA interno do livro passou a usar o Vermelho Lombada como superfície de ação, mantendo o círculo verde do WhatsApp apenas como reconhecimento de serviço. A captura mobile pós-revisão manteve a moto inteira, a galeria oficial, o conteúdo editorial e a ficha técnica no mesmo fluxo vertical.
+
+### Nova auditoria de enquadramento
+
+A fotografia atualmente escolhida como primeira imagem da SHI 250 é um enquadramento contextual 16:9, frontal e baixo, em que a roda dianteira e o farol ocupam grande parte da área visual. Ela é oficial e adequada como fotografia narrativa, mas não como hero principal de um catálogo de produto quando a intenção é reconhecer a moto inteira de imediato. A ordem dos assets precisa separar a imagem de produto lateral/estúdio da imagem de campanha contextual, e o CSS precisa permitir que o hero use a área disponível sem recortes laterais ou verticais.
+
+Os assets em `webdev-static-assets/shineray/catalog/` confirmam a solução solicitada: são recortes oficiais de 500 × 500 px, com fundo transparente e a motocicleta inteira em ângulo lateral/3⁄4. A SHI 250 e a JEF 170, por exemplo, aparecem completas nesses recortes. Eles devem ser usados como `images[0]`/hero de produto, sem `object-fit: cover`, e as galerias 1920 × 1080 de estrada ou campanha devem permanecer abaixo como contexto.
+
+Para a linha SBM, os arquivos oficiais publicados nesta rodada são fotografias 1920 × 1080 de campanha; não há um recorte transparente lateral equivalente disponível no asset local. Eles continuarão em `contain`, sem cortes, até que exista uma imagem oficial de estúdio autorizada — não será criada ou simulada uma vista que a fonte não oferece.
+
+### Primeira iteração autônoma aplicada
+
+O hero da SHI 250 passou a usar o recorte oficial lateral sem fundo de catálogo, e as galerias contextuais foram mantidas como thumbnails secundários. Em 1440 × 900, a moto aparece inteira e reconhecível na página direita. Em 1280 × 720, a escala foi recalculada com a altura real do shell e a reserva inferior foi reduzida: o book ocupa praticamente toda a área útil, a navegação inferior continua visível e o CTA não fica cortado.
+
+No mobile, a mesma imagem lateral aparece completa em `contain`, sem o farol isolado. O WhatsApp flutuante duplicado, que ficava sobre a copy, foi removido do catálogo aberto; permanece somente o CTA inferior fixo, com o ícone reconhecível e a mensagem contextual do modelo.
+
+Em 1366 × 768, o book manteve páginas grandes e o CTA inferior visível. Em 1920 × 1080, a remoção do `max-width: 1320px` do shell e do limite de escala 1× permitiu que o spread crescesse proporcionalmente até a área útil real, sem o grande vazio preto lateral/inferior observado antes.
+
+As capturas seguintes confirmaram o efeito em 1920 × 1080 e 1440 × 900: as páginas passaram a ocupar o palco com margens editoriais controladas, a SHI 250 aparece como recorte lateral sem fundo e o modo lista reutiliza os mesmos assets oficiais de produto nos cards de SHI 250 e JEF 170.
+
+Em 430 × 932 no mobile, a página única mantém a moto inteira e maior, miniaturas abaixo, copy legível, preço, blocos alternados e ficha técnica sem corte. A remoção do botão flutuante duplicado evita a sobreposição que havia sido observada na captura viewport curta.
+
+Após reiniciar o servidor, a captura 1440 × 900 confirmou o spread ampliado, o hero lateral sem fundo e o CTA visível. A captura 430 × 932 confirmou o mesmo asset inteiro, a ausência do botão flutuante redundante e a leitura vertical completa até a ficha técnica. O único aviso do servidor é informativo, relacionado à atualização futura de `baseline-browser-mapping`; não há erro de TypeScript, build ou rede não-2xx.

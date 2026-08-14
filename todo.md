@@ -214,3 +214,13 @@
 - [ ] Refatorar a página interna direita como hero dominante e a esquerda como blocos editoriais alternados e específicos por modelo.
 - [ ] Implementar ficha técnica limpa, CTA contextual e galerias sem textos sobre as fotografias.
 - [ ] Validar modelos, assets, proporções, mobile, desktop, acessibilidade, performance, build e logs antes do checkpoint.
+
+## Rodada autônoma de correção visual — fotos laterais e escala do book
+
+- [ ] Auditar o enquadramento real de cada imagem hero no spread e identificar por que algumas exibem apenas farol ou recorte fechado.
+- [ ] Selecionar, a partir dos assets oficiais publicados, a fotografia sem fundo em vista lateral para a imagem principal de cada modelo quando disponível.
+- [ ] Reorganizar a ordem das galerias para que o primeiro asset seja uma vista lateral limpa e a galeria secundária preserve detalhes e ângulos complementares.
+- [ ] Recalcular a escala do spread pela área útil real, incluindo header, topline, navegação e safe area, eliminando o vazio preto inferior em 1280, 1366, 1440 e 1920 pixels.
+- [ ] Aumentar as páginas do book sem cortar topo, rodapé, gutter, CTA ou conteúdo editorial, tratando altura e largura como restrições simultâneas.
+- [ ] Validar a composição em desktop, tablet portrait, mobile 390 e mobile 430, incluindo virada, rolagem editorial, lightbox e CTA.
+- [ ] Iterar visualmente até não haver enquadramento de farol isolado, página subdimensionada ou faixa preta desproporcional antes de salvar novo checkpoint.
