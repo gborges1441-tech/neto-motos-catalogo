@@ -220,7 +220,25 @@
 - [ ] Auditar o enquadramento real de cada imagem hero no spread e identificar por que algumas exibem apenas farol ou recorte fechado.
 - [ ] Selecionar, a partir dos assets oficiais publicados, a fotografia sem fundo em vista lateral para a imagem principal de cada modelo quando disponível.
 - [ ] Reorganizar a ordem das galerias para que o primeiro asset seja uma vista lateral limpa e a galeria secundária preserve detalhes e ângulos complementares.
-- [ ] Recalcular a escala do spread pela área útil real, incluindo header, topline, navegação e safe area, eliminando o vazio preto inferior em 1280, 1366, 1440 e 1920 pixels.
-- [ ] Aumentar as páginas do book sem cortar topo, rodapé, gutter, CTA ou conteúdo editorial, tratando altura e largura como restrições simultâneas.
-- [ ] Validar a composição em desktop, tablet portrait, mobile 390 e mobile 430, incluindo virada, rolagem editorial, lightbox e CTA.
-- [ ] Iterar visualmente até não haver enquadramento de farol isolado, página subdimensionada ou faixa preta desproporcional antes de salvar novo checkpoint.
+- [x] Recalcular a escala do spread pela área útil real, incluindo header, topline, navegação e safe area, eliminando o vazio preto inferior em 1280, 1366, 1440 e 1920 pixels.
+- [x] Aumentar as páginas do book sem cortar topo, rodapé, gutter, CTA ou conteúdo editorial, tratando altura e largura como restrições simultâneas.
+- [x] Validar a composição em desktop, tablet portrait, mobile 390 e mobile 430, incluindo virada, rolagem editorial, lightbox e CTA.
+- [x] Iterar visualmente até não haver enquadramento de farol isolado, página subdimensionada ou faixa preta desproporcional antes de salvar novo checkpoint.
+
+## Auditoria completa do acervo oficial — documento enviado pelo usuário
+
+- [x] Transformar o documento anexado em checklist de execução e preservar explicitamente capa, copy, design geral, navegação, page flip, WhatsApp e zoom.
+- [ ] Cruzar a lista oficial Shineray, a lista oficial SBM e a lista comercial efetivamente confirmada do Neto; não adicionar modelos apenas por existirem no site da fabricante.
+- [ ] Confirmar individualmente os 14 modelos Shineray a combustão listados no documento, tratando JET 50, PHOENIX S e PHOENIX S EFI como ciclomotores sob verificação comercial separada.
+- [ ] Auditar os 10 modelos SBM listados no documento e excluir “em breve” e qualquer item sem confirmação comercial do Neto; verificar especialmente SBM 400SS, 600V, 250T, STORM 200 EFI, IRON, TITANIUM e DENVER.
+- [ ] Excluir de forma auditável elétricos, autopropelidos, triciclos, ATVs, quadriciclos, karts, carrinhos, TLUX, DTRUCK, automóveis, vans, minitrucks e demais produtos fora do recorte comercial.
+- [ ] Percorrer cada página individual oficial e coletar todas as imagens carregadas: hero, ângulos, detalhes, componentes, acessórios, cores, recursos e imagens pós-interação.
+- [ ] Preparar separadamente os frames de 360º quando existirem, sem implementar a experiência 360 nesta rodada e sem fingir recurso inexistente.
+- [x] Organizar assets por marca/modelo em original, web, hero, gallery, details, colors e 360, sem misturar modelos e sem remover arquivos apenas por semelhança visual. As galerias principais estão organizadas; colors/360 ficam registrados como status quando não foram extraídos.
+- [x] Preservar a maior resolução oficial disponível, manter original para zoom e usar versão otimizada na interface com carregamento sob demanda.
+- [x] Criar metadados por imagem com modelo, marca, categoria, tipo, URL original, fonte, nome original, ordem e componente quando identificável, por meio do manifesto e do mapa persistente.
+- [ ] Padronizar o hero de cada modelo com moto inteira, centralizada, sem cortes de rodas, espelhos, guidão, pneus ou farol; manter vista lateral/isolada quando existir oficialmente.
+- [x] Expandir a galeria da página direita para todas as fotografias oficiais relevantes, mantendo miniaturas abaixo e troca de hero em contain.
+- [x] Aumentar blocos foto/texto da página esquerda, preservando alternância FOTO → TEXTO → FOTO → TEXTO, com imagem e texto confortáveis e sem vazios artificiais.
+- [x] Criar relatório interno por modelo com status de hero, galeria, detalhes, cores, 360º e quantidade de imagens, marcando “não extraído” quando aplicável.
+- [ ] Validar modelo por modelo, imagem por imagem, TypeScript, build, proporções, performance, acessibilidade, mobile, desktop, zoom e preservação da capa antes do checkpoint.

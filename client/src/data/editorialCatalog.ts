@@ -1,136 +1,10 @@
 // Direção visual: arquivo de performance editorial — fatos oficiais organizados em blocos de benefício, com ritmo assimétrico de livro premium e sem texto sobre fotografias.
 import type { MotoDetail } from "@/data/motos";
+import { officialGallerySources } from "@/data/officialGalleries";
 
 const shineray = "https://www.shineray.com.br/produto";
 
-export const officialGallerySources: Record<string, string[]> = {
-  "jef-170": [
-    "/manus-storage/Galeria-JEF-170-1-1-scaled_dc2a45da.webp",
-    "/manus-storage/Galeria-JEF-170-2-1-scaled_7d26e17e.webp",
-    "/manus-storage/Galeria-JEF-170-3-1-scaled_4db6f9c8.webp",
-    "/manus-storage/Galeria-JEF-170-4-1-scaled_1f612a2b.webp",
-    "/manus-storage/Galeria-JEF-170-5-1-scaled_8cbe56c9.webp",
-  ],
-  "shi-400sc": [
-    "/manus-storage/Galeria-SHI-400sc-1_acd63216.webp",
-    "/manus-storage/Galeria-SHI-400sc-3_a63e12b7.webp",
-    "/manus-storage/Galeria-SHI-400sc-4_9eac4d5c.webp",
-    "/manus-storage/Galeria-SHI-400sc-5_d7e269ee.webp",
-    "/manus-storage/Galeria-SHI-400sc-6_c606c647.webp",
-  ],
-  "shi-175": [
-    "/manus-storage/Galeria-SHI-175-1_338768d8.webp",
-    "/manus-storage/Galeria-SHI-175-2_3bc95e2d.webp",
-    "/manus-storage/Galeria-SHI-175-3_da171aeb.webp",
-    "/manus-storage/Galeria-SHI-175-4_df10db2c.webp",
-    "/manus-storage/Galeria-SHI-175-5_32300abb.webp",
-  ],
-  "shi-170": [
-    "/manus-storage/Galeria-SHI-170-1_bdbd6f98.webp",
-    "/manus-storage/Galeria-SHI-170-2-1_6563a37e.webp",
-    "/manus-storage/Galeria-SHI-170-3_f1605852.webp",
-    "/manus-storage/Galeria-SHI-170-4-1_d7021755.webp",
-    "/manus-storage/Galeria-SHI-170-5_6b3e7083.webp",
-  ],
-  "urban-lite": [
-    "/manus-storage/Galeria-URBAN-LITE-1_676ccbcd.webp",
-    "/manus-storage/Galeria-URBAN-LITE-2_5300fedf.webp",
-    "/manus-storage/Galeria-URBAN-LITE-3_26e1c4d1.webp",
-    "/manus-storage/Galeria-URBAN-LITE-4_03be77ce.webp",
-    "/manus-storage/Galeria-URBAN-LITE-5_e1bc49e4.webp",
-  ],
-  "jet-50": [
-    "/manus-storage/JET-50-1_7fbbd999.webp",
-    "/manus-storage/JET-50-3_5846c503.webp",
-    "/manus-storage/JET-50-4_ef268d58.webp",
-    "/manus-storage/JET-50-5_c7e08540.webp",
-    "/manus-storage/JET-50-6_7c375261.webp",
-  ],
-  "jet-125": [
-    "/manus-storage/01-scaled_300ec682.webp",
-    "/manus-storage/02-scaled_66944f7a.webp",
-    "/manus-storage/03-scaled_34acc83e.webp",
-    "/manus-storage/04-scaled_d4d788e1.webp",
-    "/manus-storage/05-scaled_af490e8f.webp",
-  ],
-  "shi-250": [
-    "/manus-storage/GALERIA-SHI-250-1_10712500.webp",
-    "/manus-storage/GALERIA-SHI-250-2_b9bc3506.webp",
-    "/manus-storage/GALERIA-SHI-250-3_76586f18.webp",
-    "/manus-storage/GALERIA-SHI-250-4_11754029.webp",
-    "/manus-storage/GALERIA-SHI-250-5_bbcdd2ff.webp",
-  ],
-  "urban-150-efi": [
-    "/manus-storage/GALERIA-URBAN-1_c639d41c.webp",
-    "/manus-storage/GALERIA-URBAN-4_7298dd1d.webp",
-    "/manus-storage/GALERIA-URBAN-5_a998ea24.webp",
-    "/manus-storage/GALERIA-URBAN-7_17ee8949.webp",
-    "/manus-storage/GALERIA-URBAN-8_16f40b54.webp",
-  ],
-  "250f": [
-    "/manus-storage/GALERIA-250F-1-1_ffbcc2a5.webp",
-    "/manus-storage/GALERIA-250F-2-1_55e1e831.webp",
-    "/manus-storage/GALERIA-250F-3-1_ef766170.webp",
-    "/manus-storage/GALERIA-250F-4-1_2226cd5c.webp",
-    "/manus-storage/GALERIA-250F-5-1_97ec8522.webp",
-  ],
-  "shi-175s-efi": [
-    "/manus-storage/Galeria-SHI-175s-EFI-1-3_9cb63652.webp",
-    "/manus-storage/Galeria-SHI-175s-EFI-2-3_78d4fff9.webp",
-    "/manus-storage/Galeria-SHI-175s-EFI-3-2_d3dbd3c5.webp",
-    "/manus-storage/Galeria-SHI-175s-EFI-4-2_02b6ade0.webp",
-    "/manus-storage/Galeria-SHI-175s-EFI-5-2_b8493251.webp",
-  ],
-  "free-150-efi": [
-    "/manus-storage/Galeria-FREE-150-1-1_c34643f9.webp",
-    "/manus-storage/Galeria-FREE-150-2-1_59300d21.webp",
-    "/manus-storage/Galeria-FREE-150-3-1_d8df5161.webp",
-    "/manus-storage/Galeria-FREE-150-4-1_5eafbe0c.webp",
-    "/manus-storage/Galeria-FREE-150-5-1_bb23cfd3.webp",
-  ],
-  "jef-150s-efi": [
-    "/manus-storage/Galeria-JEF-150s-EFI-1_9bc0e9f8.webp",
-    "/manus-storage/Galeria-JEF-150s-EFI-3_66f16d6d.webp",
-    "/manus-storage/Galeria-JEF-150s-EFI-4_5d357c79.webp",
-    "/manus-storage/Galeria-JEF-150s-EFI-5_ced425c3.webp",
-    "/manus-storage/Galeria-JEF-150s-EFI-6_d478e571.webp",
-  ],
-  "rio-125-efi": [
-    "/manus-storage/Galeria-RIO-125-EFI-1-1_4036dc39.webp",
-    "/manus-storage/Galeria-RIO-125-EFI-2-1_475aeb5d.webp",
-    "/manus-storage/Galeria-RIO-125-EFI-3-1_bf25c4d1.webp",
-    "/manus-storage/Galeria-RIO-125-EFI-4-1_9824a173.webp",
-    "/manus-storage/Galeria-RIO-125-EFI-5-1_b6d364c7.webp",
-  ],
-  "phoenix-s-efi": [
-    "/manus-storage/Galeria-Phoenix-S-EFI-1-1_cc5db864.webp",
-    "/manus-storage/Galeria-Phoenix-S-EFI-2-1_53856593.webp",
-    "/manus-storage/Galeria-Phoenix-S-EFI-3-1_3ad6e17b.webp",
-    "/manus-storage/Galeria-Phoenix-S-EFI-4-1_80676c76.webp",
-    "/manus-storage/Galeria-Phoenix-S-EFI-5-1_821b50ab.webp",
-  ],
-  "jet-125-efi": [
-    "/manus-storage/Galeria-JET-125-EFI-1-scaled_f2ea22a6.webp",
-    "/manus-storage/Galeria-JET-125-EFI-2-scaled_74d85276.webp",
-    "/manus-storage/Galeria-JET-125-EFI-3-scaled_15df4c89.webp",
-    "/manus-storage/Galeria-JET-125-EFI-4-scaled_18888174.webp",
-    "/manus-storage/Galeria-JET-125-EFI-5-scaled_ff0cef4a.webp",
-  ],
-  "jef-150": [
-    "/manus-storage/Galeria-JEF-150-1-1-scaled_762329fe.webp",
-    "/manus-storage/Galeria-JEF-150-2-1-scaled_34ee48a0.webp",
-    "/manus-storage/Galeria-JEF-150-3-1-scaled_27773dcd.webp",
-    "/manus-storage/Galeria-JEF-150-4-1-scaled_87e633b8.webp",
-    "/manus-storage/Galeria-JEF-150-5-1-scaled_7d3a69e5.webp",
-  ],
-  "phoenix-s": [
-    "/manus-storage/Phoenix-S1_537e0acb.webp",
-    "/manus-storage/Phoenix-S2_4a9c4bbe.webp",
-    "/manus-storage/Phoenix-S3_15a3c1e0.webp",
-    "/manus-storage/Phoenix-S4_dc7c286b.webp",
-    "/manus-storage/Phoenix-S6_61095b97.webp",
-  ],
-};
+export { officialGallerySources };
 
 const detail = (model: string, title: string, headline: string, description: string, index: string): MotoDetail => ({
   title,
@@ -216,9 +90,9 @@ export const editorialDetails: Record<string, MotoDetail[]> = {
     detail("PHOENIX S EFI", "FULL LED + BI-SHOCK", "Mais visibilidade para viver a cidade por inteiro.", "A iluminação Full LED e a suspensão traseira bi-shock completam o conjunto com presença e estabilidade para a rotina.", "phoenix-s-efi"),
   ],
   "jet-125-efi": [
-    detail("JET 125 EFI", "INJEÇÃO ELETRÔNICA", "Praticidade urbana com uma resposta mais atual.", "A injeção eletrônica atualiza a scooter para quem quer ganhar tempo na cidade sem abrir mão de uma compra bem explicada.", "jet-125ss-efi"),
-    detail("JET 125 EFI", "PAINEL DIGITAL + LED", "Tudo no seu campo de visão, todos os dias.", "O painel digital e o conjunto óptico foram pensados para manter indicadores e iluminação essenciais mais fáceis de acompanhar.", "jet-125ss-efi"),
-    detail("JET 125 EFI", "GUARDA-VOLUMES + USB", "A cidade fica mais leve quando a moto resolve junto.", "O compartimento para itens pessoais, a porta USB e os dois cavaletes entregam conveniência para a rotina.", "jet-125ss-efi"),
+    detail("JET 125 EFI", "INJEÇÃO ELETRÔNICA", "Praticidade urbana com uma resposta mais atual.", "A injeção eletrônica atualiza a scooter para quem quer ganhar tempo na cidade sem abrir mão de uma compra bem explicada.", "jet-125-efi"),
+    detail("JET 125 EFI", "PAINEL DIGITAL + LED", "Tudo no seu campo de visão, todos os dias.", "O painel digital e o conjunto óptico foram pensados para manter indicadores e iluminação essenciais mais fáceis de acompanhar.", "jet-125-efi"),
+    detail("JET 125 EFI", "GUARDA-VOLUMES + USB", "A cidade fica mais leve quando a moto resolve junto.", "O compartimento para itens pessoais, a porta USB e os dois cavaletes entregam conveniência para a rotina.", "jet-125-efi"),
   ],
   "jef-150": [
     detail("JEF 150", "PAINEL DIGITAL", "Uma street direta para a vida que não para.", "O painel digital mais intuitivo deixa as informações essenciais no alcance dos olhos, com menos distração e mais fluidez.", "jef-150"),
