@@ -18,6 +18,7 @@ const coverIndex = 0;
 export default function Home() {
   const initialMode = new URLSearchParams(window.location.search).get("mode");
   const initialModelId = new URLSearchParams(window.location.search).get("model");
+  const initialColorId = new URLSearchParams(window.location.search).get("color");
   const initialModelIndex = motos.findIndex((moto) => moto.id === initialModelId);
   const [opened, setOpened] = useState(() => initialMode === "book" || initialModelIndex >= 0);
   const [activeIndex, setActiveIndex] = useState(() => initialModelIndex >= 0 ? initialModelIndex : coverIndex);
@@ -100,7 +101,7 @@ export default function Home() {
       ) : !opened ? (
         <Cover onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => { setAboutOpen(true); setIndexOpen(false); }} onOpenIndex={() => { setIndexOpen(true); setAboutOpen(false); }} onOpenQuote={() => openQuote("cover")} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
       ) : (
-        <BookFrame motos={motos} activeIndex={activeIndex} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} onOpenQuote={() => openQuote("book")} />
+        <BookFrame motos={motos} activeIndex={activeIndex} initialColorId={initialColorId} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} onOpenQuote={() => openQuote("book")} />
       )}
 
       {!listMode && <IndexDrawer open={indexOpen} activeIndex={activeIndex} onClose={() => setIndexOpen(false)} onSelect={(index) => { setIndexOpen(false); openCatalog(index); }} onListMode={() => { setIndexOpen(false); setListMode(true); }} />}

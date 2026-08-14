@@ -265,3 +265,11 @@
 - [x] Integrar o módulo somente nos modelos com seção 360º oficial documentada, mantendo galeria e lightbox intactos nos demais.
 - [x] Garantir que o visualizador não seja confundido com a galeria, não cubra CTA e não interfira no swipe vertical/mobile ou na virada do book.
 - [x] Validar acessibilidade, performance, desktop, mobile, zoom, navegação por teclado, build e logs antes de novo checkpoint.
+
+## Seletor de cores oficial sincronizado com 360º
+
+- [x] Auditar no acervo persistido quais modelos possuem mais de uma variante de cor oficial identificável e quais têm frames 360º separados por cor.
+- [x] Modelar variantes de cor com nome, amostra visual, hero, galeria, frames 360º e fonte oficial, sem inventar cores ou reaproveitar frames de outra cor.
+- [x] Implementar o seletor acessível na página do modelo, com estado ativo, teclado, foco visível e fallback claro quando só existir uma cor verificável.
+- [x] Atualizar automaticamente hero, galeria e frame atual do visualizador 360º ao trocar de cor, resetando o índice e pre-carregando a nova sequência.
+- [x] Validar desktop, mobile, reduced motion, troca de modelo, deep link, swipe do book, lightbox, build e logs antes do checkpoint.

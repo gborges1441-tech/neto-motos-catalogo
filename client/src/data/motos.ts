@@ -8,6 +8,16 @@ export type MotoImage = {
   alt: string;
 };
 
+export type MotoColorVariant = {
+  id: string;
+  name: string;
+  swatch: string;
+  hero: MotoImage;
+  gallery: MotoImage[];
+  frames: string[];
+  source: string;
+};
+
 export type MotoDetail = {
   title: string;
   headline: string;
@@ -33,6 +43,7 @@ export type Moto = {
   details: MotoDetail[];
   specs: Array<{ label: string; value: string }>;
   colors?: string[];
+  colorVariants?: MotoColorVariant[];
   source: string;
   sourceLabel: string;
 };
@@ -134,7 +145,44 @@ function images(name: string, src: string, extra: MotoImage[] = []): MotoImage[]
   });
 }
 
-function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [], details = [], colors }: {
+const urban150ColorVariants: MotoColorVariant[] = [
+  {
+    id: "urban-150-preta",
+    name: "Preta",
+    swatch: "#151719",
+    hero: { src: "/manus-storage/urban-150-efi-preta-official_0d57184c.png", label: "URBAN 150 EFI preta", alt: "Shineray URBAN 150 EFI na cor preta em imagem oficial" },
+    gallery: [
+      { src: officialGallerySources["urban-150-efi"]?.[0] ?? "", label: "Cockpit oficial", alt: "Cockpit oficial da URBAN 150 EFI preta" },
+      { src: officialGallerySources["urban-150-efi"]?.[1] ?? "", label: "Traseira oficial", alt: "Traseira oficial da URBAN 150 EFI preta" },
+      { src: officialGallerySources["urban-150-efi"]?.[3] ?? "", label: "Comandos oficiais", alt: "Comandos oficiais da URBAN 150 EFI preta" },
+    ],
+    frames: [
+      "/manus-storage/urban-150-efi-preta-official_0d57184c.png",
+      officialGallerySources["urban-150-efi"]?.[0] ?? "",
+      officialGallerySources["urban-150-efi"]?.[1] ?? "",
+      officialGallerySources["urban-150-efi"]?.[3] ?? "",
+    ],
+    source: "https://www.shineray.com.br/produto/urban-150-efi/",
+  },
+  {
+    id: "urban-150-vermelha",
+    name: "Vermelha",
+    swatch: "#c8192e",
+    hero: { src: "/manus-storage/urban-150-efi-vermelha-official_45363fe4.png", label: "URBAN 150 EFI vermelha", alt: "Shineray URBAN 150 EFI na cor vermelha em imagem oficial" },
+    gallery: [
+      { src: officialGallerySources["urban-150-efi"]?.[2] ?? "", label: "Cockpit vermelho", alt: "Cockpit oficial da URBAN 150 EFI vermelha" },
+      { src: officialGallerySources["urban-150-efi"]?.[4] ?? "", label: "Frente vermelha", alt: "Frente oficial da URBAN 150 EFI vermelha" },
+    ],
+    frames: [
+      "/manus-storage/urban-150-efi-vermelha-official_45363fe4.png",
+      officialGallerySources["urban-150-efi"]?.[2] ?? "",
+      officialGallerySources["urban-150-efi"]?.[4] ?? "",
+    ],
+    source: "https://www.shineray.com.br/produto/urban-150-efi/",
+  },
+];
+
+function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, description, copyLine, audience, image, source, highlights = ["Linha oficial Shineray", "Preço de referência", "Disponibilidade sob consulta", "Atendimento direto"], specs = genericSpecs, extraImages = [], details = [], colors, colorVariants }: {
   id: string;
   name: string;
   brand?: "SHINERAY" | "SBM";
@@ -151,6 +199,7 @@ function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, descr
   extraImages?: MotoImage[];
   details?: MotoDetail[];
   colors?: string[];
+  colorVariants?: MotoColorVariant[];
 }): Moto {
   const officialGallery = officialGallerySources[id] ?? [];
   const officialImages = officialGallery.map((src, index) => ({
@@ -176,6 +225,7 @@ function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, descr
     details: editorialDetails[id] ?? details,
     specs: officialSpecs[id] ?? specs,
     colors,
+    colorVariants,
     source,
     sourceLabel: `Fonte de produto e imagem: ${brand} — página oficial do modelo`,
   };
@@ -246,6 +296,7 @@ const rawMotos: Moto[] = [
     id: "urban-150-efi", name: "URBAN 150 EFI", category: "Scooter / 150 cc", price: "R$ 20.990,00", image: catalog.urban150, source: "https://www.shineray.com.br/produto/urban-150-efi/",
     description: "Para quem espera mais da rotina urbana, a URBAN 150 EFI combina presença de scooter e uma proposta que pede espaço na sua agenda.",
     copyLine: "Mais presença para o deslocamento que ocupa seus dias.", audience: "Para quem quer uma scooter urbana mais completa e prefere entender a escolha antes de fechar.",
+    colorVariants: urban150ColorVariants,
   }),
   makeMoto({
     id: "250f", name: "250F", category: "Street / sport", price: "R$ 20.590,00", image: catalog.sport250, source: "https://www.shineray.com.br/produto/250f/",

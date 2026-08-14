@@ -1,10 +1,11 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
 import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, X } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { AssetImage } from "@/components/AssetImage";
+import { ColorSelector } from "@/components/ColorSelector";
 import { MotoEditorial } from "@/components/MotoEditorial";
 import { Official360Viewer } from "@/components/Official360Viewer";
 import { official360Frames } from "@/data/official360Frames";
@@ -14,6 +15,7 @@ import { trackEvent } from "@/lib/analytics";
 type BookFrameProps = {
   motos: Moto[];
   activeIndex: number;
+  initialColorId?: string | null;
   onIndexChange: (index: number) => void;
   onOpenIndex: () => void;
   onOpenAbout: () => void;
@@ -23,7 +25,7 @@ type BookFrameProps = {
   onOpenQuote: () => void;
 };
 
-export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOpenAbout, onBackToCover, soundEnabled, onToggleSound, onOpenQuote }: BookFrameProps) {
+export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, onOpenIndex, onOpenAbout, onBackToCover, soundEnabled, onToggleSound, onOpenQuote }: BookFrameProps) {
   const [turning, setTurning] = useState<"next" | "prev" | null>(null);
   const [turnTarget, setTurnTarget] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -34,6 +36,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const [mobilePhotoRatio, setMobilePhotoRatio] = useState(4 / 3);
   const [spreadScale, setSpreadScale] = useState(1);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
   const bookShellRef = useRef<HTMLElement>(null);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
@@ -45,20 +48,31 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   const lightboxCloseRef = useRef<HTMLButtonElement>(null);
   const lightboxPreviousFocus = useRef<HTMLElement | null>(null);
   const current = motos[activeIndex];
-  const activeImage = current.images[Math.min(selectedImage, current.images.length - 1)] ?? current.images[0];
-  const current360Frames = official360Frames[current.id] ?? [];
-  const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, current.images.length - 1);
-  const lightboxImage = current.images[safeLightboxIndex] ?? activeImage;
+  const colorVariants = current.colorVariants ?? [];
+  const selectedColor = useMemo(
+    () => colorVariants.find((variant) => variant.id === selectedColorId) ?? colorVariants[0] ?? null,
+    [colorVariants, selectedColorId],
+  );
+  const displayImages = useMemo(
+    () => selectedColor ? [selectedColor.hero, ...selectedColor.gallery] : current.images,
+    [current.images, selectedColor],
+  );
+  const activeImage = displayImages[Math.min(selectedImage, displayImages.length - 1)] ?? displayImages[0];
+  const current360Frames = selectedColor?.frames ?? official360Frames[current.id] ?? [];
+  const current360Source = selectedColor?.source ?? current.source;
+  const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, displayImages.length - 1);
+  const lightboxImage = displayImages[safeLightboxIndex] ?? activeImage;
   const turnMoto = motos[turnTarget ?? activeIndex] ?? current;
   const currentEngine = current.engine ?? current.specs.find((item) => item.label.toLowerCase().includes("cilindrada"))?.value ?? "—";
 
   useEffect(() => {
     setSelectedImage(0);
     setLightboxIndex(null);
-  }, [activeIndex]);
+    setSelectedColorId(current.colorVariants?.find((variant) => variant.id === initialColorId)?.id ?? current.colorVariants?.[0]?.id ?? null);
+  }, [activeIndex, current.colorVariants, current.id, initialColorId]);
 
   useEffect(() => {
-    const imageData = current.images[Math.min(selectedImage, current.images.length - 1)];
+    const imageData = displayImages[Math.min(selectedImage, displayImages.length - 1)];
     setMobilePhotoRatio(4 / 3);
     if (!imageData) return;
     const probe = new Image();
@@ -67,7 +81,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     };
     probe.src = imageData.src;
     return () => { probe.onload = null; };
-  }, [current.images, selectedImage]);
+  }, [displayImages, selectedImage]);
 
   useEffect(() => {
     const measureSpread = () => {
@@ -115,8 +129,8 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setLightboxIndex(null);
-      if (event.key === "ArrowRight") setLightboxIndex((index) => index === null ? null : (index + 1) % current.images.length);
-      if (event.key === "ArrowLeft") setLightboxIndex((index) => index === null ? null : (index - 1 + current.images.length) % current.images.length);
+      if (event.key === "ArrowRight") setLightboxIndex((index) => index === null ? null : (index + 1) % displayImages.length);
+      if (event.key === "ArrowLeft") setLightboxIndex((index) => index === null ? null : (index - 1 + displayImages.length) % displayImages.length);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => {
@@ -124,7 +138,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
       window.removeEventListener("keydown", onKeyDown);
       window.requestAnimationFrame(() => lightboxPreviousFocus.current?.focus());
     };
-  }, [current.images.length, lightboxIndex]);
+  }, [displayImages.length, lightboxIndex]);
 
   useEffect(() => {
     setLightboxZoom(1);
@@ -141,9 +155,9 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
       preload.src = image.src;
     };
     const nextMoto = motos[activeIndex + 1];
-    const priorityImages = [...current.images, nextMoto?.images[0]].filter(Boolean) as Moto["images"][number][];
+    const priorityImages = [...displayImages, nextMoto?.images[0]].filter(Boolean) as Moto["images"][number][];
     priorityImages.forEach(preload);
-  }, [activeIndex, current.images, motos, selectedImage]);
+  }, [activeIndex, displayImages, motos, selectedImage]);
 
   useEffect(() => {
     return () => {
@@ -256,7 +270,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
   function changeLightbox(delta: number) {
     setLightboxIndex((index) => {
       if (index === null) return null;
-      const nextIndex = (index + delta + current.images.length) % current.images.length;
+      const nextIndex = (index + delta + displayImages.length) % displayImages.length;
       setSelectedImage(nextIndex);
       return nextIndex;
     });
@@ -404,7 +418,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
           <div className="book-gutter" aria-hidden="true"><span /></div>
 
-          <div className="book-page book-page--right">
+          <div className={`book-page book-page--right ${colorVariants.length > 1 ? "book-page--has-colors" : ""}`}>
             <div className="page-grain" />
             <div className="right-page__meta"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
             <div className="right-page__hero-heading">
@@ -412,10 +426,11 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
               <h2>{current.name}</h2>
               <p>{current.category}</p>
               <b>{currentEngine}</b><small>CILINDRADA OFICIAL</small>
+              <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} onSelect={(variant) => { setSelectedColorId(variant.id); setSelectedImage(0); setLightboxIndex(null); }} />
             </div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
-              <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
+              <button className="moto-visual__zoom" type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>
                 <AssetImage key={activeImage.src} src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               </button>
               {lens && <span className="moto-lens" aria-hidden="true" style={{ left: lens.left, top: lens.top, width: lens.size, height: lens.size, backgroundImage: `url(${lens.src})`, backgroundSize: lens.backgroundSize, backgroundPosition: lens.backgroundPosition }} />}
@@ -423,14 +438,14 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
             <div className="gallery-strip">
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>
               <div className="gallery-thumbs">
-                {current.images.map((image, index) => (
+                {displayImages.map((image, index) => (
                   <button key={image.src} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}>
                     <AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" />
                   </button>
                 ))}
               </div>
             </div>
-            <Official360Viewer model={current.name} frames={current360Frames} source={current.source} />
+            <Official360Viewer model={`${current.name}${selectedColor ? ` / ${selectedColor.name}` : ""}`} frames={current360Frames} source={current360Source} />
           </div>
 
           {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={activeImage.src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{turnMoto.name}</span><AssetImage src={turnMoto.images[0].src} alt="" fallbackLabel={turnMoto.name} /></div></div>}
@@ -441,14 +456,15 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
           <div className="book-mobile-page__topline"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
           <div className="book-mobile-page__visual" style={{ aspectRatio: mobilePhotoRatio }}>
-              <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${current.images.length} da ${current.name}`}>
+              <button className="book-mobile-page__zoom" type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>
                 <AssetImage key={`mobile-${activeImage.src}`} src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               </button>
           </div>
           <div className="book-mobile-page__gallery" aria-label="Galeria da moto">
-            {current.images.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
+            {displayImages.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
           </div>
-          <Official360Viewer model={current.name} frames={current360Frames} source={current.source} />
+          <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} onSelect={(variant) => { setSelectedColorId(variant.id); setSelectedImage(0); setLightboxIndex(null); }} />
+          <Official360Viewer model={`${current.name}${selectedColor ? ` / ${selectedColor.name}` : ""}`} frames={current360Frames} source={current360Source} />
             <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / {current.brand}</span>
             <h1>{current.name}</h1>
@@ -471,7 +487,7 @@ export function BookFrame({ motos, activeIndex, onIndexChange, onOpenIndex, onOp
 
       {lightboxIndex !== null && <div className="photo-lightbox" role="dialog" aria-modal="true" aria-label={`Galeria ampliada da ${current.name}`} onMouseDown={(event) => { if (event.target === event.currentTarget) setLightboxIndex(null); }}>
         <div className="photo-lightbox__panel">
-          <div className="photo-lightbox__topline"><span><span className="live-dot" /> {current.name} / {current.category}</span><span>{String(lightboxIndex + 1).padStart(2, "0")} / {String(current.images.length).padStart(2, "0")}</span></div>
+          <div className="photo-lightbox__topline"><span><span className="live-dot" /> {current.name} / {current.category}</span><span>{String(lightboxIndex + 1).padStart(2, "0")} / {String(displayImages.length).padStart(2, "0")}</span></div>
           <button ref={lightboxCloseRef} className="photo-lightbox__close" type="button" onClick={() => setLightboxIndex(null)} aria-label="Fechar foto ampliada"><X size={21} /></button>
           <button className="photo-lightbox__nav photo-lightbox__nav--prev" type="button" onClick={() => changeLightbox(-1)} aria-label="Ver foto anterior"><ChevronLeft size={25} /></button>
           <div className="photo-lightbox__stage" onPointerDown={onLightboxPointerDown} onPointerMove={onLightboxPointerMove} onPointerUp={onLightboxPointerUp} onPointerCancel={onLightboxPointerUp} onDoubleClick={onLightboxDoubleClick}>
