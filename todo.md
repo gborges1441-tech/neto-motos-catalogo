@@ -401,3 +401,10 @@
 - [x] Validar origem Shineray, identidade, enquadramento lateral e compatibilidade visual com os demais heroes.
 - [x] Substituir somente a hero do modelo, preservando a galeria, ficha técnica, copy e capa.
 - [x] Validar a SHI 175S EFI em desktop e mobile e executar build; checkpoint pendente ao final desta rodada.
+
+## Correção de hero — SBM 150S
+
+- [x] Auditar a imagem atual da SBM 150S e localizar uma alternativa oficial com a moto inteira e isolada.
+- [x] Validar origem Shineray, identidade, enquadramento lateral e compatibilidade visual com os demais heroes.
+- [x] Substituir somente a hero do modelo, preservando a galeria, ficha técnica, copy e capa.
+- [x] Validar a SBM 150S em desktop e mobile e executar build; checkpoint pendente ao final desta rodada.

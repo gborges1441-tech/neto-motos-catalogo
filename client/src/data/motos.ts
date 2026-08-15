@@ -85,7 +85,7 @@ const catalog = {
   jet125Efi: "/manus-storage/09-Galeria-JET-125-EFI-9-scaled_bde94770.webp",
   jef150: "/manus-storage/jef-150_1b66f905.webp",
   phoenix: "/manus-storage/phoenix-s_850d0efc.webp",
-  sbm150: "/manus-storage/sbm-150-01_614fbd72.webp",
+  sbm150: "/manus-storage/sbm-150s-official-isolated_7bfa5e0a.webp",
   sbm250s: "/manus-storage/sbm-250s-01_824cf529.webp",
   sbm400s: "/manus-storage/02-Galeria-SBM-400-2_8c1b7e29.webp",
   se2: "/manus-storage/se2_369cebae.webp",
