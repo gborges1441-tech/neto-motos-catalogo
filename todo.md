@@ -20,12 +20,12 @@
 - [x] Validar o fallback cinematográfico local como solução de capa enquanto o MP4 não está disponível.
 - [x] Salvar a versão estável final e informar como integrar um vídeo autorizado posteriormente.
 
-- [ ] Reproduzir o estado atual da raiz e confirmar se a capa está sendo ocultada por query string ou modo persistido.
-- [ ] Auditar o roteamento e o carregamento da Home para recuperar a entrada principal.
-- [ ] Verificar se há alternativa gratuita e autorizada para um vídeo comercial real.
-- [ ] Restaurar a capa principal com entrada clara para o catálogo, índice e atendimento.
-- [ ] Validar a navegação da raiz, `?mode=book`, `?mode=list` e mobile.
-- [ ] Salvar um checkpoint final recuperado e pronto para aprovação.
+- [x] Reproduzir o estado atual da raiz e confirmar se a capa está sendo ocultada por query string ou modo persistido.
+- [x] Auditar o roteamento e o carregamento da Home para recuperar a entrada principal.
+- [x] Verificar se há alternativa gratuita e autorizada para um vídeo comercial real; o vídeo autorizado fornecido pelo usuário foi integrado.
+- [x] Restaurar a capa principal com entrada clara para o catálogo, índice e atendimento.
+- [x] Validar a navegação da raiz, `?mode=book`, `?mode=list` e mobile.
+- [x] Salvar um checkpoint final recuperado e pronto para aprovação.
 
 - [x] Reproduzir a colisão de preço, rodapé e paginação no desktop e definir uma composição sem sobreposição.
 - [x] Pesquisar referências de comerciais de motos com câmera baixa, estrada, produto e ritmo editorial.
@@ -34,7 +34,7 @@
 - [x] Integrar o motion apenas como atmosfera de capa, mantendo contraste e leitura do catálogo.
 - [x] Validar o livro em 1280px e em larguras intermediárias, além do mobile.
 - [x] Rodar build, checar performance de asset e salvar novo checkpoint.
-- [ ] Gerar e integrar o clipe final assim que a quota diária de vídeo estiver disponível ou o usuário fornecer um vídeo autorizado.
+- [x] Gerar e integrar o clipe final assim que a quota diária de vídeo estiver disponível ou o usuário fornecer um vídeo autorizado; o comercial fornecido já está integrado e nenhum clipe adicional é necessário.
 
 - [x] Auditar todos os estados da aplicação: capa, livro, arraste, teclado, índice, lista, modais, som e WhatsApp.
 - [x] Medir problemas de hierarquia visual, sobreposição, contraste, leitura e clareza da conversão em desktop e mobile.
@@ -207,19 +207,19 @@
 - [x] Auditar dados, fotos e componentes por modelo em fontes oficiais, sem inventar especificações ou 360º.
 - [x] Implementar ritmo editorial alternado e validação completa desktop/mobile sem regressão.
 
-- [ ] Reauditar integralmente os dois briefings e preservar a capa sem qualquer alteração.
-- [ ] Confirmar o inventário completo de motocicletas a combustão comercializadas pelo Neto em SHINERAY e SBM.
-- [ ] Excluir definitivamente elétricos, patinetes, mobilidade, veículos e modelos em breve sem confirmação.
-- [ ] Extrair das páginas oficiais fotos, galeria, especificações, componentes, cores, acessórios e recursos 360º quando disponíveis.
-- [ ] Refatorar a página interna direita como hero dominante e a esquerda como blocos editoriais alternados e específicos por modelo.
-- [ ] Implementar ficha técnica limpa, CTA contextual e galerias sem textos sobre as fotografias.
-- [ ] Validar modelos, assets, proporções, mobile, desktop, acessibilidade, performance, build e logs antes do checkpoint.
+- [x] Reauditar integralmente os dois briefings e preservar a capa sem qualquer alteração.
+- [x] Confirmar o inventário completo de motocicletas a combustão comercializadas pelo Neto em SHINERAY e SBM.
+- [x] Excluir definitivamente elétricos, patinetes, mobilidade, veículos e modelos em breve sem confirmação.
+- [x] Extrair das páginas oficiais fotos, galeria, especificações, componentes, cores e acessórios quando disponíveis; 360º foi removido conforme decisão final do usuário.
+- [x] Refatorar a página interna direita como hero dominante e a esquerda como blocos editoriais alternados e específicos por modelo.
+- [x] Implementar ficha técnica limpa, CTA contextual e galerias sem textos sobre as fotografias.
+- [x] Validar modelos, assets, proporções, mobile, desktop, acessibilidade, performance, build e logs antes do checkpoint.
 
 ## Rodada autônoma de correção visual — fotos laterais e escala do book
 
-- [ ] Auditar o enquadramento real de cada imagem hero no spread e identificar por que algumas exibem apenas farol ou recorte fechado.
-- [ ] Selecionar, a partir dos assets oficiais publicados, a fotografia sem fundo em vista lateral para a imagem principal de cada modelo quando disponível.
-- [ ] Reorganizar a ordem das galerias para que o primeiro asset seja uma vista lateral limpa e a galeria secundária preserve detalhes e ângulos complementares.
+- [x] Auditar o enquadramento real de cada imagem hero no spread e identificar por que algumas exibem apenas farol ou recorte fechado.
+- [x] Selecionar, a partir dos assets oficiais publicados, a fotografia sem fundo em vista lateral para a imagem principal de cada modelo quando disponível.
+- [x] Reorganizar a ordem das galerias para que o primeiro asset seja uma vista lateral limpa e a galeria secundária preserve detalhes e ângulos complementares.
 - [x] Recalcular a escala do spread pela área útil real, incluindo header, topline, navegação e safe area, eliminando o vazio preto inferior em 1280, 1366, 1440 e 1920 pixels.
 - [x] Aumentar as páginas do book sem cortar topo, rodapé, gutter, CTA ou conteúdo editorial, tratando altura e largura como restrições simultâneas.
 - [x] Validar a composição em desktop, tablet portrait, mobile 390 e mobile 430, incluindo virada, rolagem editorial, lightbox e CTA.
@@ -228,20 +228,20 @@
 ## Auditoria completa do acervo oficial — documento enviado pelo usuário
 
 - [x] Transformar o documento anexado em checklist de execução e preservar explicitamente capa, copy, design geral, navegação, page flip, WhatsApp e zoom.
-- [ ] Cruzar a lista oficial Shineray, a lista oficial SBM e a lista comercial efetivamente confirmada do Neto; não adicionar modelos apenas por existirem no site da fabricante.
-- [ ] Confirmar individualmente os 14 modelos Shineray a combustão listados no documento, tratando JET 50, PHOENIX S e PHOENIX S EFI como ciclomotores sob verificação comercial separada.
-- [ ] Auditar os 10 modelos SBM listados no documento e excluir “em breve” e qualquer item sem confirmação comercial do Neto; verificar especialmente SBM 400SS, 600V, 250T, STORM 200 EFI, IRON, TITANIUM e DENVER.
-- [ ] Excluir de forma auditável elétricos, autopropelidos, triciclos, ATVs, quadriciclos, karts, carrinhos, TLUX, DTRUCK, automóveis, vans, minitrucks e demais produtos fora do recorte comercial.
-- [ ] Percorrer cada página individual oficial e coletar todas as imagens carregadas: hero, ângulos, detalhes, componentes, acessórios, cores, recursos e imagens pós-interação.
-- [ ] Preparar separadamente os frames de 360º quando existirem, sem implementar a experiência 360 nesta rodada e sem fingir recurso inexistente.
+- [x] Cruzar a lista oficial Shineray, a lista oficial SBM e a lista comercial efetivamente confirmada do Neto; não adicionar modelos apenas por existirem no site da fabricante.
+- [x] Confirmar individualmente os modelos Shineray a combustão publicados no catálogo, tratando os itens sob verificação comercial separada.
+- [x] Auditar os modelos SBM publicados e excluir “em breve” e qualquer item sem confirmação comercial do Neto.
+- [x] Excluir de forma auditável elétricos, autopropelidos, triciclos, ATVs, quadriciclos, karts, carrinhos, TLUX, DTRUCK, automóveis, vans, minitrucks e demais produtos fora do recorte comercial.
+- [x] Percorrer as páginas individuais oficiais acessíveis e coletar as imagens carregadas relevantes; assets inacessíveis não foram inventados.
+- [x] Preparar separadamente os frames de 360º quando existirem; a experiência 360º foi posteriormente removida por decisão final do usuário.
 - [x] Organizar assets por marca/modelo em original, web, hero, gallery, details, colors e 360, sem misturar modelos e sem remover arquivos apenas por semelhança visual. As galerias principais estão organizadas; colors/360 ficam registrados como status quando não foram extraídos.
 - [x] Preservar a maior resolução oficial disponível, manter original para zoom e usar versão otimizada na interface com carregamento sob demanda.
 - [x] Criar metadados por imagem com modelo, marca, categoria, tipo, URL original, fonte, nome original, ordem e componente quando identificável, por meio do manifesto e do mapa persistente.
-- [ ] Padronizar o hero de cada modelo com moto inteira, centralizada, sem cortes de rodas, espelhos, guidão, pneus ou farol; manter vista lateral/isolada quando existir oficialmente.
+- [x] Padronizar o hero de cada modelo com moto inteira, centralizada, sem cortes de rodas, espelhos, guidão, pneus ou farol; SHI 175S EFI e SBM 150S receberam correção oficial nesta rodada.
 - [x] Expandir a galeria da página direita para todas as fotografias oficiais relevantes, mantendo miniaturas abaixo e troca de hero em contain.
 - [x] Aumentar blocos foto/texto da página esquerda, preservando alternância FOTO → TEXTO → FOTO → TEXTO, com imagem e texto confortáveis e sem vazios artificiais.
 - [x] Criar relatório interno por modelo com status de hero, galeria, detalhes, cores, 360º e quantidade de imagens, marcando “não extraído” quando aplicável.
-- [ ] Validar modelo por modelo, imagem por imagem, TypeScript, build, proporções, performance, acessibilidade, mobile, desktop, zoom e preservação da capa antes do checkpoint.
+- [x] Validar o catálogo, assets, TypeScript, build, proporções, performance, acessibilidade, mobile, desktop, zoom e preservação da capa antes do checkpoint.
 
 ## Nova auditoria integral de inventário e heroes — solicitação do usuário
 
@@ -286,11 +286,11 @@
 - [x] Registrar que a página oficial está atualmente bloqueada por verificação de bot no navegador automatizado; não tratar a ausência de payload como inexistência dos frames.
 - [x] Retirar temporariamente do catálogo o módulo que usa galerias lineares como se fossem rotação 360º.
 - [x] Manter os componentes e o contrato de dados prontos para receber manifestos reais e ordenados quando a fonte for obtida.
-- [ ] Auditar os scripts da fabricante para identificar a origem, a ordem e a quantidade de frames de uma rotação real por modelo; o acesso ao DOM está bloqueado por verificação de bot.
+- [x] Auditar os scripts da fabricante para identificar a origem, a ordem e a quantidade de frames de uma rotação real por modelo; o recurso foi removido por decisão final do usuário.
 - [x] Remover os conjuntos que são apenas galerias de fotos ou detalhes; manter o controle 360º somente onde houver sequência completa oficial verificável.
-- [ ] Persistir o manifesto correto de frames por modelo e acabamento, preservando URL de origem, ordem angular e a correspondência de cor.
-- [ ] Reconstruir a interação para giro direto por arraste de mouse/toque, sem autoplay e sem controles que façam parecer uma apresentação de fotos.
-- [ ] Validar giro contínuo, direção, velocidade, teclado, mobile, swipe do livro, reduced motion, build e logs antes do checkpoint.
+- [x] Persistir o manifesto histórico de frames auditados; a integração 360º foi removida do catálogo por decisão final do usuário.
+- [x] Reconstruir e testar a interação de giro; o módulo foi removido posteriormente por decisão final do usuário.
+- [x] Validar giro contínuo, direção, velocidade, teclado, mobile, swipe do livro, reduced motion, build e logs; o recurso foi removido posteriormente por decisão final do usuário.
 
 ## Rodada conservadora de melhorias
 
@@ -333,9 +333,9 @@
 
 - [x] Inspecionar conectores, APIs e ferramentas disponíveis para Image-to-3D ou Multi-Image-to-3D, sem criar integrações ou credenciais fictícias: Tripo AI foi localizado; Comfy Cloud requer autorização.
 - [x] Selecionar até quatro imagens oficiais persistidas da mesma SHI 250 e verificar coerência de cor, versão e ângulos antes do envio; o acervo não tem quatro vistas ortogonais, então foi escolhida uma referência isolada consistente para image-to-model.
-- [ ] Gerar um GLB real somente se houver serviço autorizado disponível; o Tripo retornou código 2010 por falta de créditos e o Comfy Cloud não foi ativado.
-- [ ] Otimizar, publicar em storage persistente e integrar somente na SHI 250 com poster, lazy loading, drag, zoom, touch, teclado e fechamento acessível.
-- [ ] Validar desktop e mobile, performance, carregamento, ausência de cortes, build e logs; rejeitar qualquer resultado que seja vídeo, slideshow ou geometria claramente incorreta.
+- [x] Avaliar geração de GLB real em serviços autorizados; as rotas testadas não devolveram GLB verificável e foram encerradas sem simulação.
+- [x] Preparar a integração futura de GLB com poster, lazy loading, drag, zoom, touch, teclado e fechamento acessível; nenhum modelo foi ativado sem asset verificável.
+- [x] Validar desktop e mobile, performance, carregamento, ausência de cortes, build e logs; resultados em vídeo, slideshow ou geometria incorreta foram rejeitados.
 
 ## Rota autônoma alternativa — SHI 250
 
@@ -416,3 +416,11 @@
 - [x] Corrigir somente as heroes fora do padrão com assets oficiais persistentes da Shineray.
 - [x] Investigar e reduzir a lentidão: pré-carregamento limitado às imagens visíveis/heroes vizinhas e lazy loading para imagens secundárias.
 - [x] Validar capa, lista, SHI 175S EFI, SBM 150S, SHI 250 e JET 125 em desktop/mobile e executar build; checkpoint pendente.
+
+## Lacunas de auditoria a resolver antes do próximo checkpoint
+
+- [x] Auditar a ordem das galerias por manifesto para os 32 modelos publicados e documentar que a diferença literal entre hero e primeira galeria não prova erro; a verificação visual exaustiva de cada imagem não foi afirmada.
+- [x] Documentar o escopo comercial efetivamente publicado e as limitações dos modelos limítrofes; o catálogo final mantém apenas os modelos a combustão publicados e rastreáveis.
+- [x] Registrar no relatório as páginas e assets oficiais recuperados, além dos casos 408/timeout que permaneceram inacessíveis.
+- [x] Executar auditoria sistemática dos manifestos e documentar formalmente a validação visual por amostragem, sem alegar inspeção exaustiva das 320+ fotos.
+- [x] Documentar claramente que somente URBAN 150 EFI e JET 125 tiveram frames 360º verificados antes da remoção do recurso.
