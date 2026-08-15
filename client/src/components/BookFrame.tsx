@@ -35,7 +35,6 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxZoom, setLightboxZoom] = useState(1);
   const [lightboxPan, setLightboxPan] = useState({ x: 0, y: 0 });
-  const [lens, setLens] = useState<{ left: number; top: number; size: number; backgroundSize: string; backgroundPosition: string; src: string } | null>(null);
   const [mobilePhotoRatio, setMobilePhotoRatio] = useState(4 / 3);
   const [spreadScale, setSpreadScale] = useState(1);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -274,7 +273,6 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
       setSelectedColorId(variant.id);
       setSelectedImage(0);
       setLightboxIndex(null);
-      setLens(null);
       trackEvent("color_variant_change", { model: current.name, color: variant.name });
     };
     const heroPreload = new Image();
@@ -298,36 +296,6 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
       setColorTransitioning(false);
       colorTransitionTimer.current = null;
     }, 340);
-  }
-
-  function handleLensMove(event: React.MouseEvent<HTMLButtonElement>) {
-    const image = event.currentTarget.querySelector("img");
-    const rect = image?.getBoundingClientRect() ?? event.currentTarget.getBoundingClientRect();
-    const naturalWidth = image?.naturalWidth || rect.width;
-    const naturalHeight = image?.naturalHeight || rect.height;
-    const ratio = naturalWidth / Math.max(naturalHeight, 1);
-    const boxRatio = rect.width / Math.max(rect.height, 1);
-    const renderedWidth = ratio > boxRatio ? rect.width : rect.height * ratio;
-    const renderedHeight = ratio > boxRatio ? rect.width / ratio : rect.height;
-    const offsetX = (rect.width - renderedWidth) / 2;
-    const offsetY = (rect.height - renderedHeight) / 2;
-    const imageX = event.clientX - rect.left - offsetX;
-    const imageY = event.clientY - rect.top - offsetY;
-    if (imageX < 0 || imageY < 0 || imageX > renderedWidth || imageY > renderedHeight) {
-      setLens(null);
-      return;
-    }
-    const lensSize = Math.min(190, Math.max(138, rect.width * .28));
-    const containerRect = event.currentTarget.parentElement?.getBoundingClientRect() ?? rect;
-    const zoom = 2.45;
-    setLens({
-      left: event.clientX - containerRect.left - lensSize / 2,
-      top: event.clientY - containerRect.top - lensSize / 2,
-      size: lensSize,
-      backgroundSize: `${renderedWidth * zoom}px ${renderedHeight * zoom}px`,
-      backgroundPosition: `${lensSize / 2 - imageX * zoom}px ${lensSize / 2 - imageY * zoom}px`,
-      src: activeImage.src,
-    });
   }
 
   function onLightboxPointerDown(event: React.PointerEvent<HTMLDivElement>) {
@@ -454,11 +422,10 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
             </div>
             <div className="moto-visual">
               <div className="moto-visual__wash" />
-              <button className={`moto-visual__zoom ${colorTransitioning ? "is-color-transitioning" : ""}`} type="button" onClick={() => openLightbox(selectedImage)} onMouseMove={handleLensMove} onMouseLeave={() => setLens(null)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>
+              <button className={`moto-visual__zoom ${colorTransitioning ? "is-color-transitioning" : ""}`} type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name} em tela cheia`}>
                 {outgoingColorImage && <AssetImage className="color-media__outgoing" src={outgoingColorImage.src} alt="" aria-hidden="true" fallbackLabel={current.name} />}
                 <AssetImage key={activeImage.src} className="color-media__current" src={activeImage.src} alt={activeImage.alt} fallbackLabel={current.name} loading={activeIndex === 0 ? "eager" : "lazy"} fetchPriority={activeIndex === 0 ? "high" : "auto"} />
               </button>
-              {lens && <span className="moto-lens" aria-hidden="true" style={{ left: lens.left, top: lens.top, width: lens.size, height: lens.size, backgroundImage: `url(${lens.src})`, backgroundSize: lens.backgroundSize, backgroundPosition: lens.backgroundPosition }} />}
             </div>
             <div className="gallery-strip">
               <div className="gallery-strip__label"><ImageIcon size={13} /><span>Galeria</span></div>

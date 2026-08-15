@@ -351,3 +351,21 @@
 - [x] Validar que o payload pertence à URBAN 150 EFI; como o widget não declara cor, mantê-lo no nível do modelo e não atribuí-lo artificialmente aos swatches.
 - [x] Integrar somente os 19 frames completos e oficiais no manifesto, sem reutilizar a galeria editorial.
 - [x] Executar build e validar o CTA do viewer oficial em desktop e mobile; o host da Shineray retorna 408 no ambiente de desenvolvimento, impedindo somente a prévia dos frames aqui.
+
+## Refinamento de interface e interação 360º
+
+- [x] Remover por completo a lente/lupa de ampliação do catálogo desktop sem alterar hero, galeria ou lightbox.
+- [x] Tirar o CTA de abertura 360º de cima da motocicleta e reposicioná-lo como ação editorial discreta, abaixo da área principal da imagem.
+- [x] Manter a visualização 360º aberta somente por escolha explícita do visitante, em painel próprio e sem encobrir o hero do capítulo.
+- [x] Melhorar o giro dentro do painel para responder de forma contínua a cursor/arraste no desktop, toque no mobile e teclado, mantendo botões como alternativa acessível.
+- [x] Auditar outros modelos somente pelos seus widgets oficiais; JET 125 foi aprovado com 24 frames e os demais seguem ocultos até haver sequência completa verificável.
+- [x] Validar as novas proporções em desktop e mobile e executar build; checkpoint pendente ao final desta rodada.
+
+## Recuperação responsável de cobertura 360º/3D
+
+- [x] Inventariar, por modelo, quais páginas oficiais declaram 360º e quais expõem uma sequência completa recuperável.
+- [x] Priorizar a recuperação de frames oficiais consecutivos aprovados, registrando origem, padrão de nome e total para URBAN 150 EFI e JET 125.
+- [x] Rejeitar hero, galeria, vídeo gerado ou qualquer conjunto sem ângulos oficiais como substituto de giro 360º.
+- [x] Avaliar geração 3D somente se houver referências multivista consistentes do mesmo modelo e uma saída GLB/GLTF licenciada e verificável; as rotas disponíveis não devolveram GLB válido.
+- [x] Integrar exclusivamente as sequências aprovadas, preservando o botão oculto para todos os modelos ainda inconclusivos.
+- [x] Validar as interações de cursor, arraste, toque e teclado e documentar a cobertura final por modelo.

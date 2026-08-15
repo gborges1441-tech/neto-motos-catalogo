@@ -11,12 +11,23 @@ const urban150EfiOfficialFrames = Array.from(
 );
 
 /**
+ * O widget oficial da JET 125 declara `data-main-image-url="NEW-JET-1.webp"`,
+ * `data-image-url-format="NEW-JET-x.webp"` e `data-total-frames="24"`.
+ * A sequência é construída diretamente desse contrato da fabricante.
+ */
+const jet125OfficialFrames = Array.from(
+  { length: 24 },
+  (_, index) => `https://www.shineray.com.br/wp-content/uploads/2026/02/NEW-JET-${index + 1}.webp`,
+);
+
+/**
  * A fonte oficial expôs `data-total-frames="19"` e o padrão
  * `URBAN-150_xx.webp` no próprio widget de giro. Não há parâmetro de cor no
  * payload, por isso esta única sequência permanece associada ao modelo — nunca
  * às galerias editoriais ou às variações estáticas de acabamento.
  */
 export const official360Frames: Record<string, string[]> = {
+  "jet-125": jet125OfficialFrames,
   "urban-150-efi": urban150EfiOfficialFrames,
 };
 
@@ -43,6 +54,10 @@ export type Official3DModel = {
 };
 
 export const official360Sequences: Record<string, Official360Sequence> = {
+  "jet-125": {
+    frames: jet125OfficialFrames,
+    source: "https://www.shineray.com.br/produto/jet-125/",
+  },
   "urban-150-efi": {
     frames: urban150EfiOfficialFrames,
     source: "https://www.shineray.com.br/produto/urban-150-efi/",

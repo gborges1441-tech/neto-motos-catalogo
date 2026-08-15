@@ -2,7 +2,7 @@
  * Direção visual: Arquivo de Performance / neo-editorial automotivo.
  * Interação física, contida e acessível; frames exclusivamente oficiais do modelo.
  */
-import { ChevronLeft, ChevronRight, ExternalLink, Rotate3D, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, MousePointer2, Rotate3D, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AssetImage } from "@/components/AssetImage";
 
@@ -16,6 +16,7 @@ export function Official360Viewer({ model, frames, source }: Official360ViewerPr
   const [open, setOpen] = useState(false);
   const [frameIndex, setFrameIndex] = useState(0);
   const dragRef = useRef<{ pointerId: number; x: number; remainder: number } | null>(null);
+  const hoverRef = useRef<{ x: number; remainder: number } | null>(null);
 
   const safeFrames = useMemo(() => frames.filter(Boolean), [frames]);
   const frameCount = safeFrames.length;
@@ -42,26 +43,50 @@ export function Official360Viewer({ model, frames, source }: Official360ViewerPr
     setFrameIndex((index) => (index + delta + frameCount) % frameCount);
   }
 
+  function scrubFrame(
+    clientX: number,
+    target: HTMLDivElement,
+    state: { x: number; remainder: number },
+  ) {
+    const distance = clientX - state.x + state.remainder;
+    const stepSize = Math.max(9, Math.min(24, target.clientWidth / Math.max(frameCount * 1.25, 18)));
+    if (Math.abs(distance) < stepSize) return state;
+
+    const steps = Math.trunc(distance / stepSize);
+    moveFrame(-steps);
+    return { x: clientX, remainder: distance - steps * stepSize };
+  }
+
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    if ((event.target as HTMLElement).closest("button, a")) return;
     dragRef.current = { pointerId: event.pointerId, x: event.clientX, remainder: 0 };
     event.currentTarget.setPointerCapture?.(event.pointerId);
   }
 
   function onPointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    if ((event.target as HTMLElement).closest("button, a")) return;
     const drag = dragRef.current;
-    if (!drag || drag.pointerId !== event.pointerId) return;
-    const distance = event.clientX - drag.x + drag.remainder;
-    const stepSize = Math.max(10, Math.min(28, event.currentTarget.clientWidth / Math.max(frameCount * 1.15, 18)));
-    if (Math.abs(distance) < stepSize) return;
-    const steps = Math.trunc(distance / stepSize);
-    moveFrame(-steps);
-    drag.x = event.clientX;
-    drag.remainder = distance - steps * stepSize;
+    if (drag?.pointerId === event.pointerId) {
+      dragRef.current = { ...scrubFrame(event.clientX, event.currentTarget, drag), pointerId: drag.pointerId };
+      return;
+    }
+
+    if (event.pointerType !== "mouse") return;
+    const hover = hoverRef.current ?? { x: event.clientX, remainder: 0 };
+    hoverRef.current = scrubFrame(event.clientX, event.currentTarget, hover);
   }
 
   function onPointerUp(event: React.PointerEvent<HTMLDivElement>) {
     if (dragRef.current?.pointerId === event.pointerId) dragRef.current = null;
     if (event.currentTarget.hasPointerCapture?.(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  }
+
+  function onPointerEnter(event: React.PointerEvent<HTMLDivElement>) {
+    if (event.pointerType === "mouse") hoverRef.current = { x: event.clientX, remainder: 0 };
+  }
+
+  function onPointerLeave(event: React.PointerEvent<HTMLDivElement>) {
+    if (event.pointerType === "mouse" && !dragRef.current) hoverRef.current = null;
   }
 
   function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
@@ -94,11 +119,12 @@ export function Official360Viewer({ model, frames, source }: Official360ViewerPr
       ) : (
         <div className="official-360__panel">
           <div className="official-360__header">
-            <div><span className="page-kicker">VISUALIZAÇÃO OFICIAL</span><h3>{model} / 360°</h3><small>Arraste horizontalmente para girar</small></div>
+            <div><span className="page-kicker">VISUALIZAÇÃO OFICIAL</span><h3>{model} / 360°</h3><small>Mova o cursor ou arraste para girar</small></div>
             <button className="official-360__close" type="button" onClick={() => setOpen(false)} aria-label="Fechar visualização 360 graus"><X size={16} /></button>
           </div>
-          <div className="official-360__stage" tabIndex={0} role="application" aria-label={`Arraste ou use as setas para girar a ${model}`} onKeyDown={onKeyDown} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}>
+          <div className="official-360__stage" tabIndex={0} role="application" aria-label={`Mova o cursor, arraste ou use as setas para girar a ${model}`} onKeyDown={onKeyDown} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}>
             <AssetImage key={`${model}-${currentFrame}`} src={currentFrame} alt={`${model}, ângulo ${frameIndex + 1} de ${frameCount}, fotografia oficial`} fallbackLabel={model} loading="eager" decoding="async" fetchPriority="high" />
+            <span className="official-360__scrub-hint" aria-hidden="true"><MousePointer2 size={13} /> mover para girar</span>
             <button className="official-360__arrow official-360__arrow--left" type="button" onClick={() => moveFrame(-1)} aria-label="Ver ângulo anterior"><ChevronLeft size={18} /></button>
             <button className="official-360__arrow official-360__arrow--right" type="button" onClick={() => moveFrame(1)} aria-label="Ver próximo ângulo"><ChevronRight size={18} /></button>
           </div>
