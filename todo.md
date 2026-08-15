@@ -313,3 +313,10 @@
 - [x] Preparar um recorte discreto, com fade de entrada e saída, em formato leve para publicação persistente.
 - [x] Substituir a síntese artificial pelo sample real, mantendo som/mudo, volume controlado e gatilhos de virada.
 - [x] Validar o carregamento do áudio, as viradas por gesto, botões e teclado, build e logs antes do checkpoint.
+
+## Auditoria oficial da linha premium SBM
+
+- [x] Mapear a página oficial da SBM, seus modelos publicados, galerias, cores e possíveis assets 360º; a vitrine retorna 408, mas páginas individuais ainda confirmam conteúdo oficial.
+- [x] Comparar os assets oficiais encontrados com as 13 motos SBM já publicadas no catálogo: quatro modelos premium auditados preservam as dez fotos oficiais esperadas.
+- [x] Persistir e integrar somente fotografias oficiais que ampliem ou corrijam a cobertura atual, sem alterar a capa ou modelos existentes; não foi encontrada mídia distinta e verificável que justificasse uma troca.
+- [x] Registrar a SBM 600RC V2 como possível novidade indexada, sem integração enquanto a página oficial retornar 408 e não expuser galeria e ficha técnica auditáveis.
