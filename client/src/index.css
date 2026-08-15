@@ -836,3 +836,38 @@ button { border: 0; }
   .gallery-thumbs--color-transitioning .gallery-thumb--color-enter:nth-child(3), .book-mobile-page__gallery--color-transitioning .gallery-thumb--color-enter:nth-child(3) { animation-delay: 70ms; }
   .gallery-thumbs--color-transitioning .gallery-thumb--color-enter:nth-child(4), .book-mobile-page__gallery--color-transitioning .gallery-thumb--color-enter:nth-child(4) { animation-delay: 105ms; }
 }
+
+/* GLB viewer: extensão material do livro, carregada somente para um modelo 3D autorizado. */
+.moto-3d { position: relative; z-index: 3; margin: 10px 1% 0; }
+.moto-3d__trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 11px; color: var(--ink); background: rgba(255,255,255,.3); border: 1px solid rgba(21,21,20,.15); text-align: left; cursor: pointer; transition: border-color .2s ease, background .2s ease, transform .2s var(--ease-out); }
+.moto-3d__trigger:hover { background: rgba(255,255,255,.62); border-color: rgba(217,46,46,.52); transform: translateY(-2px); }
+.moto-3d__trigger-mark { display: grid; place-items: center; width: 28px; height: 28px; color: var(--paper); background: var(--red); }
+.moto-3d__trigger > span:nth-child(2) { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.moto-3d__trigger b, .moto-3d__header h3 { font-family: "Barlow Condensed", sans-serif; font-size: 17px; line-height: .95; letter-spacing: .06em; text-transform: uppercase; }
+.moto-3d__trigger small, .moto-3d__header small { color: rgba(21,21,20,.54); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+.moto-3d__dialog { padding: 11px 10px 8px; background: linear-gradient(145deg, rgba(255,255,255,.76), rgba(222,215,205,.6)); border: 1px solid rgba(21,21,20,.16); box-shadow: 0 13px 28px rgba(21,21,20,.12); }
+.moto-3d__header { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 0 1px 8px; }
+.moto-3d__header > div { display: grid; gap: 4px; }
+.moto-3d__header h3 { margin: 0; color: var(--ink); }
+.moto-3d__close { display: grid; place-items: center; width: 25px; height: 25px; color: rgba(21,21,20,.68); background: transparent; border: 1px solid rgba(21,21,20,.18); cursor: pointer; }
+.moto-3d__stage { position: relative; display: grid; place-items: center; min-height: 286px; overflow: hidden; background: radial-gradient(ellipse at center, rgba(255,255,255,.92), rgba(222,215,205,.62)); }
+.moto-3d__stage model-viewer { display: block; width: 100%; height: 286px; --poster-color: transparent; --progress-bar-color: var(--red); --progress-mask: rgba(241,236,228,.72); }
+.moto-3d__loading, .moto-3d__error { position: absolute; right: 10px; bottom: 10px; max-width: 72%; padding: 6px 8px; color: rgba(21,21,20,.6); background: rgba(241,236,228,.82); border: 1px solid rgba(21,21,20,.12); font-size: 7px; line-height: 1.4; letter-spacing: .1em; text-transform: uppercase; }
+.moto-3d__error { color: var(--red-deep); }
+.moto-3d__controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 8px; }
+.moto-3d__control-group { display: flex; gap: 4px; }
+.moto-3d__control-group button { display: grid; place-items: center; width: 25px; height: 25px; color: rgba(21,21,20,.72); background: rgba(255,255,255,.42); border: 1px solid rgba(21,21,20,.16); transition: color .2s ease, background .2s ease, transform .16s var(--ease-out); }
+.moto-3d__control-group button:hover { color: var(--paper); background: var(--red); }
+.moto-3d__control-group button:active { transform: scale(.97); }
+.moto-3d__flip { transform: scaleX(-1); }
+.moto-3d__controls a { display: inline-flex; align-items: center; gap: 5px; color: rgba(21,21,20,.62); font-size: 8px; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.moto-3d__controls a:hover { color: var(--red-deep); }
+.moto-3d__trigger:focus-visible, .moto-3d__close:focus-visible, .moto-3d__control-group button:focus-visible, .moto-3d__controls a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+@media (max-width: 680px) {
+  .book-mobile-page .moto-3d { margin: 16px 0 0; }
+  .book-mobile-page .moto-3d__dialog { padding: 12px 10px 9px; }
+  .book-mobile-page .moto-3d__stage, .book-mobile-page .moto-3d__stage model-viewer { min-height: 250px; height: 250px; }
+  .moto-3d__controls { align-items: flex-end; }
+  .moto-3d__controls a { max-width: 106px; text-align: right; line-height: 1.35; }
+}

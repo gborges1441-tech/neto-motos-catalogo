@@ -328,3 +328,18 @@
 - [x] Remover qualquer comportamento restante de autoplay, loop ou aparência de slideshow no caminho do 360º.
 - [x] Registrar que coletas no domínio oficial estão suspensas enquanto houver 408/403/429/5xx; usar somente assets já persistidos ou fornecidos/autorizados.
 - [x] Validar desktop, mobile, teclado, lightbox, página do modelo, build e logs sem alterar capa, livro, fotos, copy, WhatsApp, zoom, tipografia ou cores.
+
+## Teste automatizado de modelo 3D — SHI 250
+
+- [x] Inspecionar conectores, APIs e ferramentas disponíveis para Image-to-3D ou Multi-Image-to-3D, sem criar integrações ou credenciais fictícias: Tripo AI foi localizado; Comfy Cloud requer autorização.
+- [x] Selecionar até quatro imagens oficiais persistidas da mesma SHI 250 e verificar coerência de cor, versão e ângulos antes do envio; o acervo não tem quatro vistas ortogonais, então foi escolhida uma referência isolada consistente para image-to-model.
+- [ ] Gerar um GLB real somente se houver serviço autorizado disponível; o Tripo retornou código 2010 por falta de créditos e o Comfy Cloud não foi ativado.
+- [ ] Otimizar, publicar em storage persistente e integrar somente na SHI 250 com poster, lazy loading, drag, zoom, touch, teclado e fechamento acessível.
+- [ ] Validar desktop e mobile, performance, carregamento, ausência de cortes, build e logs; rejeitar qualquer resultado que seja vídeo, slideshow ou geometria claramente incorreta.
+
+## Rota autônoma alternativa — SHI 250
+
+- [x] Mapear opções de imagem-para-3D sem autorização, recarga ou credencial adicional do usuário, priorizando serviços e modelos que permitam exportar GLB utilizável no catálogo.
+- [x] Executar alternativas acessíveis e descartar as que não retornaram GLB verificável; não recorrer a imagens ou motos de terceiros como substituto da SHI 250.
+- [x] Preservar a exigência de comparação visual: sem arquivo 3D de saída, não há modelo a aprovar ou publicar.
+- [x] Manter o catálogo sem botão 3D enquanto nenhuma alternativa gerar um modelo 3D real aprovado.

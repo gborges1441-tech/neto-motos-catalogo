@@ -1,6 +1,6 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
 import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -8,11 +8,12 @@ import { AssetImage } from "@/components/AssetImage";
 import { ColorSelector } from "@/components/ColorSelector";
 import { MotoEditorial } from "@/components/MotoEditorial";
 import { Official360Viewer } from "@/components/Official360Viewer";
-import { official360Sequences } from "@/data/official360Frames";
+import { official360Sequences, official3DModels } from "@/data/official360Frames";
 import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
 const motorcycleTurnSound = "/manus-storage/motorbike-rev-turn_9baf8ab2.mp3";
+const Moto3DViewer = lazy(() => import("@/components/Moto3DViewer").then(({ Moto3DViewer: Viewer }) => ({ default: Viewer })));
 
 type BookFrameProps = {
   motos: Moto[];
@@ -68,6 +69,8 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const current360Sequence = official360Sequences[current.id];
   const current360Frames = current360Sequence?.frames ?? [];
   const current360Source = current360Sequence?.source ?? current.source;
+  // GLB autorizado tem precedência sobre o contrato do modelo; fotos nunca alimentam este caminho.
+  const current3DModel = selectedColor?.threeD ?? current.threeD ?? official3DModels[current.id];
   const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, displayImages.length - 1);
   const lightboxImage = displayImages[safeLightboxIndex] ?? activeImage;
   const turnMoto = motos[turnTarget ?? activeIndex] ?? current;
@@ -468,6 +471,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
               </div>
             </div>
             <Official360Viewer model={`${current.name}${selectedColor ? ` / ${selectedColor.name}` : ""}`} frames={current360Frames} source={current360Source} />
+            {current3DModel && <Suspense fallback={null}><Moto3DViewer model={`${current.name}${selectedColor ? ` / ${selectedColor.name}` : ""}`} asset={current3DModel} /></Suspense>}
           </div>
 
           {turning && <div className={`turn-sheet turn-sheet--${turning}`} aria-hidden="true"><div className="turn-sheet__face"><span>{current.name}</span><AssetImage src={activeImage.src} alt="" fallbackLabel={current.name} /></div><div className="turn-sheet__back"><span>{turnMoto.name}</span><AssetImage src={turnMoto.images[0].src} alt="" fallbackLabel={turnMoto.name} /></div></div>}
@@ -488,6 +492,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
           </div>
           <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} disabled={colorTransitioning} onSelect={selectColor} />
           <Official360Viewer model={`${current.name}${selectedColor ? ` / ${selectedColor.name}` : ""}`} frames={current360Frames} source={current360Source} />
+          {current3DModel && <Suspense fallback={null}><Moto3DViewer model={`${current.name}${selectedColor ? ` / ${selectedColor.name}` : ""}`} asset={current3DModel} /></Suspense>}
             <div className="book-mobile-page__copy">
             <span className="page-kicker">NETO MOTOS / {current.brand}</span>
             <h1>{current.name}</h1>
