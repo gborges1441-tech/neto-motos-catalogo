@@ -8,7 +8,7 @@ import { AssetImage } from "@/components/AssetImage";
 import { ColorSelector } from "@/components/ColorSelector";
 import { MotoEditorial } from "@/components/MotoEditorial";
 import { Official360Viewer } from "@/components/Official360Viewer";
-import { official360Frames } from "@/data/official360Frames";
+import { official360Sequences } from "@/data/official360Frames";
 import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
@@ -63,8 +63,11 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
     [current.images, selectedColor],
   );
   const activeImage = displayImages[Math.min(selectedImage, displayImages.length - 1)] ?? displayImages[0];
-  const current360Frames = selectedColor?.frames ?? official360Frames[current.id] ?? [];
-  const current360Source = selectedColor?.source ?? current.source;
+  // O viewer só recebe uma sequência declarada como giro fotográfico oficial.
+  // Hero, galeria e variantes de acabamento nunca são fallback para 360º.
+  const current360Sequence = official360Sequences[current.id];
+  const current360Frames = current360Sequence?.frames ?? [];
+  const current360Source = current360Sequence?.source ?? current.source;
   const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, displayImages.length - 1);
   const lightboxImage = displayImages[safeLightboxIndex] ?? activeImage;
   const turnMoto = motos[turnTarget ?? activeIndex] ?? current;

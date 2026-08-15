@@ -8,6 +8,20 @@ export type MotoImage = {
   alt: string;
 };
 
+/**
+ * Direção visual: Arquivo de Performance / neo-editorial automotivo.
+ * Só deve ser preenchido com um GLB/GLTF oficial e autorizado da fabricante.
+ * A ausência do objeto mantém o 3D totalmente oculto — galeria nunca é fallback.
+ */
+export type MotoThreeDAsset = {
+  modelUrl: string;
+  source: string;
+  poster?: string;
+  environment?: string;
+  initialOrbit?: string;
+  cameraTarget?: string;
+};
+
 export type MotoColorVariant = {
   id: string;
   name: string;
@@ -16,6 +30,7 @@ export type MotoColorVariant = {
   gallery: MotoImage[];
   frames: string[];
   source: string;
+  threeD?: MotoThreeDAsset;
 };
 
 export type MotoDetail = {
@@ -44,6 +59,7 @@ export type Moto = {
   specs: Array<{ label: string; value: string }>;
   colors?: string[];
   colorVariants?: MotoColorVariant[];
+  threeD?: MotoThreeDAsset;
   source: string;
   sourceLabel: string;
 };

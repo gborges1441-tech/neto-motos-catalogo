@@ -320,3 +320,11 @@
 - [x] Comparar os assets oficiais encontrados com as 13 motos SBM já publicadas no catálogo: quatro modelos premium auditados preservam as dez fotos oficiais esperadas.
 - [x] Persistir e integrar somente fotografias oficiais que ampliem ou corrijam a cobertura atual, sem alterar a capa ou modelos existentes; não foi encontrada mídia distinta e verificável que justificasse uma troca.
 - [x] Registrar a SBM 600RC V2 como possível novidade indexada, sem integração enquanto a página oficial retornar 408 e não expuser galeria e ficha técnica auditáveis.
+
+## Protocolo 360º/3D fornecido pelo usuário
+
+- [x] Confirmar que o visualizador permanece oculto em todos os modelos sem GLB/GLTF autorizado ou sequência real, completa e ordenada de frames 360º.
+- [x] Auditar o contrato de dados e o componente local para aceitar futuramente `modelUrl`, `poster`, `initialOrbit`, ambiente e frames oficiais sem usar galerias convencionais.
+- [x] Remover qualquer comportamento restante de autoplay, loop ou aparência de slideshow no caminho do 360º.
+- [x] Registrar que coletas no domínio oficial estão suspensas enquanto houver 408/403/429/5xx; usar somente assets já persistidos ou fornecidos/autorizados.
+- [x] Validar desktop, mobile, teclado, lightbox, página do modelo, build e logs sem alterar capa, livro, fotos, copy, WhatsApp, zoom, tipografia ou cores.

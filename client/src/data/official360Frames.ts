@@ -7,6 +7,31 @@
  */
 export const official360Frames: Record<string, string[]> = {};
 
+/**
+ * Contrato futuro para giro fotográfico real. A lista deve conter somente
+ * frames angulares oficiais, consecutivos e do mesmo acabamento.
+ */
+export type Official360Sequence = {
+  frames: string[];
+  source: string;
+};
+
+/**
+ * Contrato futuro para um arquivo 3D real (GLB/GLTF) autorizado. Não há
+ * modelos cadastrados enquanto a fabricante não expuser um asset verificável.
+ */
+export type Official3DModel = {
+  modelUrl: string;
+  source: string;
+  poster?: string;
+  environment?: string;
+  initialOrbit?: string;
+  cameraTarget?: string;
+};
+
+export const official360Sequences: Record<string, Official360Sequence> = {};
+export const official3DModels: Record<string, Official3DModel> = {};
+
 export const official360SourceUrls: Record<string, string> = {
   "jet-125": "https://www.shineray.com.br/produto/jet-125/",
   "jef-150": "https://www.shineray.com.br/produto/jef-150/",
