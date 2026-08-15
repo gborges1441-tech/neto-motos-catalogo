@@ -158,10 +158,10 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
       preload.decoding = "async";
       preload.src = image.src;
     };
-    const nearbyMotos = [motos[activeIndex - 1], motos[activeIndex + 1], motos[activeIndex + 2]].filter(Boolean) as Moto[];
-    const nearbyImages = nearbyMotos.flatMap((moto) => moto.images.slice(0, 3));
-    const priorityImages = [...displayImages, ...nearbyImages].filter(Boolean) as Moto["images"][number][];
-    priorityImages.forEach(preload);
+    const nearbyMotos = [motos[activeIndex - 1], motos[activeIndex + 1]].filter(Boolean) as Moto[];
+    const nearbyImages = nearbyMotos.map((moto) => moto.images[0]).filter(Boolean) as Moto["images"][number][];
+    const visibleImages = [displayImages[selectedImage], displayImages[selectedImage + 1]].filter(Boolean) as Moto["images"][number][];
+    [...visibleImages, ...nearbyImages].forEach(preload);
   }, [activeIndex, displayImages, motos, selectedImage]);
 
   useEffect(() => {
@@ -198,11 +198,12 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
 
   function requestPage(nextIndex: number, direction: "next" | "prev") {
     if (turning || nextIndex < 0 || nextIndex >= motos.length) return;
-    motos[nextIndex]?.images.slice(0, 4).forEach((image) => {
+    const nextHero = motos[nextIndex]?.images[0];
+    if (nextHero) {
       const preload = new Image();
       preload.decoding = "async";
-      preload.src = image.src;
-    });
+      preload.src = nextHero.src;
+    }
     setTurning(direction);
     setTurnTarget(nextIndex);
     pageSound(direction);

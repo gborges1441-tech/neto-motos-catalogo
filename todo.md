@@ -408,3 +408,11 @@
 - [x] Validar origem Shineray, identidade, enquadramento lateral e compatibilidade visual com os demais heroes.
 - [x] Substituir somente a hero do modelo, preservando a galeria, ficha técnica, copy e capa.
 - [x] Validar a SBM 150S em desktop e mobile e executar build; checkpoint pendente ao final desta rodada.
+
+## Auditoria geral de heroes e desempenho
+
+- [x] Inventariar todas as heroes das 32 motos a combustão publicadas, suas fontes e mapas de assets.
+- [x] Identificar as exceções visuais nas heroes; SHI 175S EFI e SBM 150S foram as duas imagens fora do padrão e já foram substituídas.
+- [x] Corrigir somente as heroes fora do padrão com assets oficiais persistentes da Shineray.
+- [x] Investigar e reduzir a lentidão: pré-carregamento limitado às imagens visíveis/heroes vizinhas e lazy loading para imagens secundárias.
+- [x] Validar capa, lista, SHI 175S EFI, SBM 150S, SHI 250 e JET 125 em desktop/mobile e executar build; checkpoint pendente.

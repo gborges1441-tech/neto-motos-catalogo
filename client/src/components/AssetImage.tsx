@@ -25,6 +25,7 @@ export function AssetImage({ fallbackLabel = "Imagem indisponível", className =
       {...props}
       alt={alt}
       className={`asset-image ${loaded ? "asset-image--loaded" : "asset-image--loading"} ${className}`}
+      loading={props.loading ?? "lazy"}
       decoding={props.decoding ?? "async"}
       onLoad={(event) => {
         setLoaded(true);
