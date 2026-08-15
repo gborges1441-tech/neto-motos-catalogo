@@ -161,8 +161,9 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
       preload.decoding = "async";
       preload.src = image.src;
     };
-    const nextMoto = motos[activeIndex + 1];
-    const priorityImages = [...displayImages, nextMoto?.images[0]].filter(Boolean) as Moto["images"][number][];
+    const nearbyMotos = [motos[activeIndex - 1], motos[activeIndex + 1], motos[activeIndex + 2]].filter(Boolean) as Moto[];
+    const nearbyImages = nearbyMotos.flatMap((moto) => moto.images.slice(0, 3));
+    const priorityImages = [...displayImages, ...nearbyImages].filter(Boolean) as Moto["images"][number][];
     priorityImages.forEach(preload);
   }, [activeIndex, displayImages, motos, selectedImage]);
 
@@ -230,6 +231,11 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
 
   function requestPage(nextIndex: number, direction: "next" | "prev") {
     if (turning || nextIndex < 0 || nextIndex >= motos.length) return;
+    motos[nextIndex]?.images.slice(0, 4).forEach((image) => {
+      const preload = new Image();
+      preload.decoding = "async";
+      preload.src = image.src;
+    });
     setTurning(direction);
     setTurnTarget(nextIndex);
     pageSound(direction);

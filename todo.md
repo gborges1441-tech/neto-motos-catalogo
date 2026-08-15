@@ -291,3 +291,11 @@
 - [ ] Persistir o manifesto correto de frames por modelo e acabamento, preservando URL de origem, ordem angular e a correspondência de cor.
 - [ ] Reconstruir a interação para giro direto por arraste de mouse/toque, sem autoplay e sem controles que façam parecer uma apresentação de fotos.
 - [ ] Validar giro contínuo, direção, velocidade, teclado, mobile, swipe do livro, reduced motion, build e logs antes do checkpoint.
+
+## Rodada conservadora de melhorias
+
+- [x] Reconsultar a fonte oficial e os índices públicos para localizar, sem simulação, o payload ou os frames completos do 360º original; a seção existe no conteúdo oficial, mas o DOM/script segue inacessível por verificação de bot.
+- [x] Conferir a cobertura de hero e galeria dos 32 modelos publicados: os 316 caminhos persistidos responderam 200 no preview, sem falhas de carregamento.
+- [x] Priorizar melhorias de conversão e navegação que preservem a capa aprovada, a estética de livro e o layout mobile validado.
+- [x] Implementar somente aperfeiçoamentos confirmados, sem alterar a capa, dados técnicos ou fotos oficiais: pré-carregamento dos três capítulos vizinhos e reforço imediato do capítulo solicitado na virada.
+- [x] Validar desktop, mobile, desempenho, acessibilidade, build e logs antes de checkpoint.
