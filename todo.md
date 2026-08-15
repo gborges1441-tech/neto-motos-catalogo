@@ -369,3 +369,12 @@
 - [x] Avaliar geração 3D somente se houver referências multivista consistentes do mesmo modelo e uma saída GLB/GLTF licenciada e verificável; as rotas disponíveis não devolveram GLB válido.
 - [x] Integrar exclusivamente as sequências aprovadas, preservando o botão oculto para todos os modelos ainda inconclusivos.
 - [x] Validar as interações de cursor, arraste, toque e teclado e documentar a cobertura final por modelo.
+
+## Correção de velocidade e frames em branco no 360º
+
+- [ ] Diagnosticar por que o giro oficial avança rápido demais e por que alguns frames ficam em branco durante o arraste.
+- [ ] Corrigir o ritmo do giro para uma resposta mais natural e controlada pelo cursor/arraste.
+- [ ] Implementar pré-carregamento, estado de carregamento e fallback visual sem substituir o frame oficial por outra imagem.
+- [ ] Avaliar frames auxiliares gerados por IA somente como hipótese técnica, preservando a geometria e a identidade da motocicleta.
+- [ ] Não publicar frames gerados como se fossem oficiais enquanto a fidelidade visual não for comprovada.
+- [ ] Validar URBAN 150 EFI em desktop e mobile e salvar checkpoint.
