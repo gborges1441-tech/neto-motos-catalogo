@@ -306,3 +306,10 @@
 - [x] Criar um acento curto de motor acelerando, com volume leve e variação sutil entre avançar e voltar.
 - [x] Garantir ativação explícita pelo usuário, estado acessível do botão e ausência de som quando estiver em modo mudo.
 - [x] Validar desktop, mobile, viradas rápidas, teclado, build e logs antes de checkpoint.
+
+## Correção do timbre de motor
+
+- [x] Localizar um efeito curto de aceleração de motocicleta com licença adequada para uso no catálogo.
+- [x] Preparar um recorte discreto, com fade de entrada e saída, em formato leve para publicação persistente.
+- [x] Substituir a síntese artificial pelo sample real, mantendo som/mudo, volume controlado e gatilhos de virada.
+- [x] Validar o carregamento do áudio, as viradas por gesto, botões e teclado, build e logs antes do checkpoint.

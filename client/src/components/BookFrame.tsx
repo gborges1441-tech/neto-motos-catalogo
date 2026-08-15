@@ -12,6 +12,8 @@ import { official360Frames } from "@/data/official360Frames";
 import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 
+const motorcycleTurnSound = "/manus-storage/motorbike-rev-turn_9baf8ab2.mp3";
+
 type BookFrameProps = {
   motos: Moto[];
   activeIndex: number;
@@ -43,7 +45,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
   const colorTransitionTimer = useRef<number | null>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
+  const motorcycleTurnRef = useRef<HTMLAudioElement | null>(null);
   const lightboxGesture = useRef<{ x: number; y: number; panX: number; panY: number; scale: number; pointerType: string } | null>(null);
   const pinchPointers = useRef(new Map<number, { x: number; y: number }>());
   const pinchStart = useRef<{ distance: number; scale: number } | null>(null);
@@ -171,8 +173,8 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
     return () => {
       if (turnTimer.current !== null) window.clearTimeout(turnTimer.current);
       if (colorTransitionTimer.current !== null) window.clearTimeout(colorTransitionTimer.current);
-      void audioContextRef.current?.close();
-      audioContextRef.current = null;
+      motorcycleTurnRef.current?.pause();
+      motorcycleTurnRef.current = null;
     };
   }, []);
 
@@ -189,44 +191,14 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
 
   function pageSound(direction: "next" | "prev") {
     if (!soundEnabled || typeof window === "undefined") return;
-    const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-    if (!AudioContextClass) return;
-    const context = audioContextRef.current ?? new AudioContextClass();
-    audioContextRef.current = context;
-    void context.resume();
-    const now = context.currentTime;
-    const duration = direction === "next" ? 0.32 : 0.27;
-    const engine = context.createOscillator();
-    const engineHarmonic = context.createOscillator();
-    const engineFilter = context.createBiquadFilter();
-    const engineGain = context.createGain();
-    const harmonicGain = context.createGain();
-    const startFrequency = direction === "next" ? 92 : 82;
-    const endFrequency = direction === "next" ? 276 : 220;
-
-    engine.type = "sawtooth";
-    engineHarmonic.type = "triangle";
-    engine.frequency.setValueAtTime(startFrequency, now);
-    engine.frequency.exponentialRampToValueAtTime(endFrequency, now + duration * 0.72);
-    engineHarmonic.frequency.setValueAtTime(startFrequency * 2.02, now);
-    engineHarmonic.frequency.exponentialRampToValueAtTime(endFrequency * 1.72, now + duration * 0.66);
-    engineFilter.type = "lowpass";
-    engineFilter.frequency.setValueAtTime(560, now);
-    engineFilter.frequency.exponentialRampToValueAtTime(1550, now + duration * 0.62);
-    engineFilter.Q.setValueAtTime(1.05, now);
-    engineGain.gain.setValueAtTime(0.0001, now);
-    engineGain.gain.exponentialRampToValueAtTime(0.034, now + 0.045);
-    engineGain.gain.exponentialRampToValueAtTime(0.018, now + duration * 0.68);
-    engineGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-    harmonicGain.gain.setValueAtTime(0.0001, now);
-    harmonicGain.gain.exponentialRampToValueAtTime(0.009, now + 0.055);
-    harmonicGain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 0.85);
-    engine.connect(engineFilter).connect(engineGain).connect(context.destination);
-    engineHarmonic.connect(harmonicGain).connect(engineFilter);
-    engine.start(now);
-    engineHarmonic.start(now);
-    engine.stop(now + duration);
-    engineHarmonic.stop(now + duration);
+    const sound = motorcycleTurnRef.current ?? new Audio(motorcycleTurnSound);
+    motorcycleTurnRef.current = sound;
+    sound.pause();
+    sound.currentTime = direction === "next" ? 0.03 : 0.08;
+    sound.volume = direction === "next" ? 0.32 : 0.27;
+    void sound.play().catch(() => {
+      // Alguns navegadores só liberam áudio após a primeira interação; a próxima virada tenta novamente.
+    });
   }
 
   function requestPage(nextIndex: number, direction: "next" | "prev") {
