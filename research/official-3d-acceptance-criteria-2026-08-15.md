@@ -31,3 +31,7 @@ Priorizar captura de contratos do widget através de fonte pública estável (HT
 As rotas autônomas já testadas no projeto — Tripo AI, Hunyuan3D-2.0, Hunyuan3D-2.1, TRELLIS.2 e Stable Fast 3D — não retornaram um GLB válido: a integração comercial não tinha créditos e os serviços públicos finalizaram sem arquivo de saída. Além disso, os demais modelos não têm nesta sessão referências multivista completas recuperáveis. Portanto, não há base técnica ou de fidelidade para fabricar modelos 3D “perfeitos” a partir de hero, galeria ou vídeo.
 
 Enquanto a fonte oficial estiver intermitente, a rota segura é manter ativos apenas os giros de **URBAN 150 EFI** e **JET 125**, que têm contrato de frames comprovado. Os demais mantêm o controle oculto, preservando a honestidade do catálogo.
+
+## Teste auxiliar de identidade — URBAN 150 EFI
+
+Foi iniciado um lote controlado de cinco ângulos auxiliares usando uma referência oficial persistida da URBAN 150 EFI. O lote tem finalidade exclusiva de avaliação de identidade e consistência; seus resultados não entram no manifesto 360º, não substituem os 19 frames oficiais e não serão apresentados como material da fabricante. A aprovação exigiria correspondência visual rigorosa de carenagem, rodas, espelhos, escapamento, proporções e acabamento em todos os ângulos, além de transparência explícita sobre a origem.

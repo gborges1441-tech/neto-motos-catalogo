@@ -372,9 +372,9 @@
 
 ## Correção de velocidade e frames em branco no 360º
 
-- [ ] Diagnosticar por que o giro oficial avança rápido demais e por que alguns frames ficam em branco durante o arraste.
-- [ ] Corrigir o ritmo do giro para uma resposta mais natural e controlada pelo cursor/arraste.
-- [ ] Implementar pré-carregamento, estado de carregamento e fallback visual sem substituir o frame oficial por outra imagem.
-- [ ] Avaliar frames auxiliares gerados por IA somente como hipótese técnica, preservando a geometria e a identidade da motocicleta.
-- [ ] Não publicar frames gerados como se fossem oficiais enquanto a fidelidade visual não for comprovada.
-- [ ] Validar URBAN 150 EFI em desktop e mobile e salvar checkpoint.
+- [x] Diagnosticar por que o giro oficial avança rápido demais e por que alguns frames ficam em branco durante o arraste.
+- [x] Corrigir o ritmo do giro para uma resposta mais natural e controlada pelo cursor/arraste.
+- [x] Implementar pré-carregamento, estado de carregamento e fallback visual sem substituir o frame oficial por outra imagem.
+- [x] Avaliar frames auxiliares gerados por IA somente como hipótese técnica, preservando a geometria e a identidade da motocicleta; o lote foi mantido fora do catálogo por não ser fonte oficial.
+- [x] Não publicar frames gerados como se fossem oficiais enquanto a fidelidade visual não for comprovada.
+- [x] Validar URBAN 150 EFI em desktop e mobile e salvar checkpoint; build e capturas foram concluídos, com checkpoint final pendente.

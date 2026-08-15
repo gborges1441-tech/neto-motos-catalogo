@@ -15,27 +15,71 @@ type Official360ViewerProps = {
 export function Official360Viewer({ model, frames, source }: Official360ViewerProps) {
   const [open, setOpen] = useState(false);
   const [frameIndex, setFrameIndex] = useState(0);
+  const [visibleFrameIndex, setVisibleFrameIndex] = useState(0);
+  const [loadedFrames, setLoadedFrames] = useState<Set<number>>(() => new Set());
+  const [failedFrames, setFailedFrames] = useState<Set<number>>(() => new Set());
   const dragRef = useRef<{ pointerId: number; x: number; remainder: number } | null>(null);
   const hoverRef = useRef<{ x: number; remainder: number } | null>(null);
 
   const safeFrames = useMemo(() => frames.filter(Boolean), [frames]);
   const frameCount = safeFrames.length;
-  const currentFrame = safeFrames[frameIndex] ?? safeFrames[0];
+  const currentFrame = safeFrames[visibleFrameIndex] ?? safeFrames[0];
+  const isCurrentFrameReady = loadedFrames.has(frameIndex);
+  const isLoadingCurrentFrame = !isCurrentFrameReady && !failedFrames.has(frameIndex);
 
   useEffect(() => {
     setOpen(false);
     setFrameIndex(0);
+    setVisibleFrameIndex(0);
+    setLoadedFrames(new Set());
+    setFailedFrames(new Set());
   }, [model]);
 
   useEffect(() => {
     if (!open || frameCount < 2) return;
-    const preloadIndexes = [frameIndex, frameIndex + 1, frameIndex - 1].map((index) => (index + frameCount) % frameCount);
-    preloadIndexes.forEach((index) => {
+
+    let cancelled = false;
+    safeFrames.forEach((src, index) => {
       const image = new Image();
       image.decoding = "async";
-      image.src = safeFrames[index];
+      image.onload = () => {
+        if (cancelled) return;
+        setLoadedFrames((previous) => {
+          const next = new Set(previous);
+          next.add(index);
+          return next;
+        });
+        setFailedFrames((previous) => {
+          if (!previous.has(index)) return previous;
+          const next = new Set(previous);
+          next.delete(index);
+          return next;
+        });
+        setFrameIndex((requested) => {
+          if (requested === index) setVisibleFrameIndex(index);
+          return requested;
+        });
+      };
+      image.onerror = () => {
+        if (cancelled) return;
+        setFailedFrames((previous) => {
+          const next = new Set(previous);
+          next.add(index);
+          return next;
+        });
+      };
+      image.src = src;
     });
-  }, [frameCount, frameIndex, open, safeFrames]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [frameCount, open, safeFrames]);
+
+  useEffect(() => {
+    if (!open || !loadedFrames.has(frameIndex)) return;
+    setVisibleFrameIndex(frameIndex);
+  }, [frameIndex, loadedFrames, open]);
 
   if (frameCount < 2) return null;
 
@@ -49,7 +93,8 @@ export function Official360Viewer({ model, frames, source }: Official360ViewerPr
     state: { x: number; remainder: number },
   ) {
     const distance = clientX - state.x + state.remainder;
-    const stepSize = Math.max(9, Math.min(24, target.clientWidth / Math.max(frameCount * 1.25, 18)));
+    // Ritmo deliberadamente mais lento: uma travessia completa revela cerca de 12–16 ângulos.
+    const stepSize = Math.max(42, Math.min(64, target.clientWidth / Math.max(frameCount * 0.55, 8)));
     if (Math.abs(distance) < stepSize) return state;
 
     const steps = Math.trunc(distance / stepSize);
@@ -123,7 +168,9 @@ export function Official360Viewer({ model, frames, source }: Official360ViewerPr
             <button className="official-360__close" type="button" onClick={() => setOpen(false)} aria-label="Fechar visualização 360 graus"><X size={16} /></button>
           </div>
           <div className="official-360__stage" tabIndex={0} role="application" aria-label={`Mova o cursor, arraste ou use as setas para girar a ${model}`} onKeyDown={onKeyDown} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}>
-            <AssetImage key={`${model}-${currentFrame}`} src={currentFrame} alt={`${model}, ângulo ${frameIndex + 1} de ${frameCount}, fotografia oficial`} fallbackLabel={model} loading="eager" decoding="async" fetchPriority="high" />
+            {currentFrame ? <AssetImage key={`${model}-${visibleFrameIndex}`} src={currentFrame} alt={`${model}, ângulo ${visibleFrameIndex + 1} de ${frameCount}, fotografia oficial`} fallbackLabel={model} loading="eager" decoding="async" fetchPriority="high" /> : null}
+            {isLoadingCurrentFrame ? <span className="official-360__loading" role="status">Carregando ângulo {String(frameIndex + 1).padStart(2, "0")}…</span> : null}
+            {failedFrames.has(frameIndex) && !isCurrentFrameReady ? <span className="official-360__loading" role="status">Ângulo indisponível temporariamente</span> : null}
             <span className="official-360__scrub-hint" aria-hidden="true"><MousePointer2 size={13} /> mover para girar</span>
             <button className="official-360__arrow official-360__arrow--left" type="button" onClick={() => moveFrame(-1)} aria-label="Ver ângulo anterior"><ChevronLeft size={18} /></button>
             <button className="official-360__arrow official-360__arrow--right" type="button" onClick={() => moveFrame(1)} aria-label="Ver próximo ângulo"><ChevronRight size={18} /></button>
