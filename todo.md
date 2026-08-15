@@ -343,3 +343,11 @@
 - [x] Executar alternativas acessíveis e descartar as que não retornaram GLB verificável; não recorrer a imagens ou motos de terceiros como substituto da SHI 250.
 - [x] Preservar a exigência de comparação visual: sem arquivo 3D de saída, não há modelo a aprovar ou publicar.
 - [x] Manter o catálogo sem botão 3D enquanto nenhuma alternativa gerar um modelo 3D real aprovado.
+
+## Configurador oficial acessível — URBAN 150 EFI
+
+- [x] Abrir o configurador oficial da URBAN 150 EFI e identificar que ele entrega um widget proprietário de 19 frames WebP, não GLB/GLTF.
+- [x] Registrar URLs, quantidade, ordem, acabamento e dados do widget 360º expostos pela fabricante no HTML fornecido pelo usuário.
+- [x] Validar que o payload pertence à URBAN 150 EFI; como o widget não declara cor, mantê-lo no nível do modelo e não atribuí-lo artificialmente aos swatches.
+- [x] Integrar somente os 19 frames completos e oficiais no manifesto, sem reutilizar a galeria editorial.
+- [x] Executar build e validar o CTA do viewer oficial em desktop e mobile; o host da Shineray retorna 408 no ambiente de desenvolvimento, impedindo somente a prévia dos frames aqui.

@@ -5,7 +5,20 @@
  * permanecerá vazio até receber sequências oficiais completas, ordenadas por
  * ângulo e verificadas visualmente contra o configurador da fabricante.
  */
-export const official360Frames: Record<string, string[]> = {};
+const urban150EfiOfficialFrames = Array.from(
+  { length: 19 },
+  (_, index) => `https://www.shineray.com.br/wp-content/uploads/2026/04/URBAN-150_${String(index + 1).padStart(2, "0")}.webp`,
+);
+
+/**
+ * A fonte oficial expôs `data-total-frames="19"` e o padrão
+ * `URBAN-150_xx.webp` no próprio widget de giro. Não há parâmetro de cor no
+ * payload, por isso esta única sequência permanece associada ao modelo — nunca
+ * às galerias editoriais ou às variações estáticas de acabamento.
+ */
+export const official360Frames: Record<string, string[]> = {
+  "urban-150-efi": urban150EfiOfficialFrames,
+};
 
 /**
  * Contrato futuro para giro fotográfico real. A lista deve conter somente
@@ -29,7 +42,12 @@ export type Official3DModel = {
   cameraTarget?: string;
 };
 
-export const official360Sequences: Record<string, Official360Sequence> = {};
+export const official360Sequences: Record<string, Official360Sequence> = {
+  "urban-150-efi": {
+    frames: urban150EfiOfficialFrames,
+    source: "https://www.shineray.com.br/produto/urban-150-efi/",
+  },
+};
 export const official3DModels: Record<string, Official3DModel> = {};
 
 export const official360SourceUrls: Record<string, string> = {
