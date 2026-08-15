@@ -378,3 +378,10 @@
 - [x] Avaliar frames auxiliares gerados por IA somente como hipótese técnica, preservando a geometria e a identidade da motocicleta; o lote foi mantido fora do catálogo por não ser fonte oficial.
 - [x] Não publicar frames gerados como se fossem oficiais enquanto a fidelidade visual não for comprovada.
 - [x] Validar URBAN 150 EFI em desktop e mobile e salvar checkpoint; build e capturas foram concluídos, com checkpoint final pendente.
+
+## Frames oficiais enviados — JET 125
+
+- [x] Inspecionar o pacote ZIP, verificar os 19 arquivos PNG de 768 × 512, a sequência angular e a identidade da JET 125 em acabamento roxo.
+- [x] Publicar os 19 frames originais validados em armazenamento persistente do catálogo.
+- [x] Substituir o manifesto da JET 125 pelos URLs persistentes e documentar que a origem foi fornecida pelo usuário.
+- [x] Validar o CTA da JET 125 em desktop e mobile, confirmar resposta 200 para frames 01, 10 e 19 após redirecionamento, executar build e salvar checkpoint.

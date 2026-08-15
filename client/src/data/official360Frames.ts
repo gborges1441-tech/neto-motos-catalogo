@@ -11,14 +11,33 @@ const urban150EfiOfficialFrames = Array.from(
 );
 
 /**
- * O widget oficial da JET 125 declara `data-main-image-url="NEW-JET-1.webp"`,
- * `data-image-url-format="NEW-JET-x.webp"` e `data-total-frames="24"`.
- * A sequência é construída diretamente desse contrato da fabricante.
+ * Sequência oficial da JET 125 enviada pelo usuário e validada visualmente.
+ * São 19 PNGs consecutivos, preservados no armazenamento do catálogo para
+ * não depender da disponibilidade temporária do host da fabricante. O lote
+ * mostra o acabamento roxo; por isso permanece associado ao modelo, sem
+ * alegar correspondência com o hero estático de outra cor.
  */
-const jet125OfficialFrames = Array.from(
-  { length: 24 },
-  (_, index) => `https://www.shineray.com.br/wp-content/uploads/2026/02/NEW-JET-${index + 1}.webp`,
-);
+const jet125OfficialFrames = [
+  "/manus-storage/frame_01_f37dc6ff.png",
+  "/manus-storage/frame_02_58d8dfa5.png",
+  "/manus-storage/frame_03_b3ae9151.png",
+  "/manus-storage/frame_04_60555d47.png",
+  "/manus-storage/frame_05_19a86e0e.png",
+  "/manus-storage/frame_06_2de47699.png",
+  "/manus-storage/frame_07_b9d6750a.png",
+  "/manus-storage/frame_08_2961c60b.png",
+  "/manus-storage/frame_09_93bcf849.png",
+  "/manus-storage/frame_10_aa2b03f6.png",
+  "/manus-storage/frame_11_cbc04f54.png",
+  "/manus-storage/frame_12_f6b0dfac.png",
+  "/manus-storage/frame_13_60caad67.png",
+  "/manus-storage/frame_14_3eda6367.png",
+  "/manus-storage/frame_15_275385fa.png",
+  "/manus-storage/frame_16_ed450389.png",
+  "/manus-storage/frame_17_16c89289.png",
+  "/manus-storage/frame_18_184dc7f2.png",
+  "/manus-storage/frame_19_3eaf5532.png",
+];
 
 /**
  * A fonte oficial expôs `data-total-frames="19"` e o padrão
