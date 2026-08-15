@@ -195,38 +195,38 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
     audioContextRef.current = context;
     void context.resume();
     const now = context.currentTime;
-    const duration = 0.18;
-    const buffer = context.createBuffer(1, Math.floor(context.sampleRate * duration), context.sampleRate);
-    const channel = buffer.getChannelData(0);
-    for (let index = 0; index < channel.length; index += 1) {
-      const envelope = Math.sin((index / channel.length) * Math.PI);
-      channel[index] = (Math.random() * 2 - 1) * envelope;
-    }
-    const paper = context.createBufferSource();
-    const paperFilter = context.createBiquadFilter();
-    const paperGain = context.createGain();
-    paper.buffer = buffer;
-    paperFilter.type = "bandpass";
-    paperFilter.frequency.setValueAtTime(direction === "next" ? 1800 : 1450, now);
-    paperFilter.Q.setValueAtTime(0.7, now);
-    paperGain.gain.setValueAtTime(0.0001, now);
-    paperGain.gain.exponentialRampToValueAtTime(0.028, now + 0.018);
-    paperGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-    paper.connect(paperFilter).connect(paperGain).connect(context.destination);
-    paper.start(now);
-    paper.stop(now + duration);
+    const duration = direction === "next" ? 0.32 : 0.27;
+    const engine = context.createOscillator();
+    const engineHarmonic = context.createOscillator();
+    const engineFilter = context.createBiquadFilter();
+    const engineGain = context.createGain();
+    const harmonicGain = context.createGain();
+    const startFrequency = direction === "next" ? 92 : 82;
+    const endFrequency = direction === "next" ? 276 : 220;
 
-    const rev = context.createOscillator();
-    const revGain = context.createGain();
-    rev.type = "sine";
-    rev.frequency.setValueAtTime(direction === "next" ? 155 : 125, now);
-    rev.frequency.exponentialRampToValueAtTime(direction === "next" ? 230 : 190, now + 0.12);
-    revGain.gain.setValueAtTime(0.0001, now);
-    revGain.gain.exponentialRampToValueAtTime(0.012, now + 0.03);
-    revGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.17);
-    rev.connect(revGain).connect(context.destination);
-    rev.start(now);
-    rev.stop(now + 0.18);
+    engine.type = "sawtooth";
+    engineHarmonic.type = "triangle";
+    engine.frequency.setValueAtTime(startFrequency, now);
+    engine.frequency.exponentialRampToValueAtTime(endFrequency, now + duration * 0.72);
+    engineHarmonic.frequency.setValueAtTime(startFrequency * 2.02, now);
+    engineHarmonic.frequency.exponentialRampToValueAtTime(endFrequency * 1.72, now + duration * 0.66);
+    engineFilter.type = "lowpass";
+    engineFilter.frequency.setValueAtTime(560, now);
+    engineFilter.frequency.exponentialRampToValueAtTime(1550, now + duration * 0.62);
+    engineFilter.Q.setValueAtTime(1.05, now);
+    engineGain.gain.setValueAtTime(0.0001, now);
+    engineGain.gain.exponentialRampToValueAtTime(0.034, now + 0.045);
+    engineGain.gain.exponentialRampToValueAtTime(0.018, now + duration * 0.68);
+    engineGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    harmonicGain.gain.setValueAtTime(0.0001, now);
+    harmonicGain.gain.exponentialRampToValueAtTime(0.009, now + 0.055);
+    harmonicGain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 0.85);
+    engine.connect(engineFilter).connect(engineGain).connect(context.destination);
+    engineHarmonic.connect(harmonicGain).connect(engineFilter);
+    engine.start(now);
+    engineHarmonic.start(now);
+    engine.stop(now + duration);
+    engineHarmonic.stop(now + duration);
   }
 
   function requestPage(nextIndex: number, direction: "next" | "prev") {

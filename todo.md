@@ -299,3 +299,10 @@
 - [x] Priorizar melhorias de conversão e navegação que preservem a capa aprovada, a estética de livro e o layout mobile validado.
 - [x] Implementar somente aperfeiçoamentos confirmados, sem alterar a capa, dados técnicos ou fotos oficiais: pré-carregamento dos três capítulos vizinhos e reforço imediato do capítulo solicitado na virada.
 - [x] Validar desktop, mobile, desempenho, acessibilidade, build e logs antes de checkpoint.
+
+## Som de aceleração nas viradas
+
+- [x] Auditar a síntese de som existente, o estado inicial do controle e os disparos por gesto, botão e teclado.
+- [x] Criar um acento curto de motor acelerando, com volume leve e variação sutil entre avançar e voltar.
+- [x] Garantir ativação explícita pelo usuário, estado acessível do botão e ausência de som quando estiver em modo mudo.
+- [x] Validar desktop, mobile, viradas rápidas, teclado, build e logs antes de checkpoint.

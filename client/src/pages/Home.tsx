@@ -22,7 +22,13 @@ export default function Home() {
   const initialModelIndex = motos.findIndex((moto) => moto.id === initialModelId);
   const [opened, setOpened] = useState(() => initialMode === "book" || initialModelIndex >= 0);
   const [activeIndex, setActiveIndex] = useState(() => initialModelIndex >= 0 ? initialModelIndex : coverIndex);
-  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(() => {
+    try {
+      return window.localStorage.getItem("neto-motos-sound") !== "off";
+    } catch {
+      return true;
+    }
+  });
   const [indexOpen, setIndexOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(() => new URLSearchParams(window.location.search).get("quote") === "1");
@@ -101,7 +107,11 @@ export default function Home() {
       ) : !opened ? (
         <Cover onOpen={() => openCatalog(coverIndex)} onOpenAbout={() => { setAboutOpen(true); setIndexOpen(false); }} onOpenIndex={() => { setIndexOpen(true); setAboutOpen(false); }} onOpenQuote={() => openQuote("cover")} onToggleMenu={() => setMobileMenuOpen(!mobileMenuOpen)} mobileMenuOpen={mobileMenuOpen} />
       ) : (
-        <BookFrame motos={motos} activeIndex={activeIndex} initialColorId={initialColorId} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled(!soundEnabled)} onOpenQuote={() => openQuote("book")} />
+        <BookFrame motos={motos} activeIndex={activeIndex} initialColorId={initialColorId} onIndexChange={setActiveIndex} onOpenIndex={() => setIndexOpen(true)} onOpenAbout={() => setAboutOpen(true)} onBackToCover={() => { setOpened(false); window.scrollTo({ top: 0, behavior: "smooth" }); }} soundEnabled={soundEnabled} onToggleSound={() => setSoundEnabled((enabled) => {
+          const next = !enabled;
+          try { window.localStorage.setItem("neto-motos-sound", next ? "on" : "off"); } catch { /* A preferência continua apenas nesta sessão. */ }
+          return next;
+        })} onOpenQuote={() => openQuote("book")} />
       )}
 
       {!listMode && <IndexDrawer open={indexOpen} activeIndex={activeIndex} onClose={() => setIndexOpen(false)} onSelect={(index) => { setIndexOpen(false); openCatalog(index); }} onListMode={() => { setIndexOpen(false); setListMode(true); }} />}
