@@ -394,3 +394,10 @@
 - [x] Revisar a experiência de compra em desktop e mobile; a capa, livro, WhatsApp e hierarquia comercial permanecem fortes, sem refinamentos adicionais seguros necessários nesta rodada.
 - [x] Executar build, verificar logs e validar capa, JET 125 e URBAN 150 EFI em desktop/mobile; checkpoint final de aprovação pendente.
 - [x] Preparar orientações para venda, publicação no GitHub e operação comercial do catálogo para entrega com o checkpoint final.
+
+## Correção de hero — SHI 175S EFI
+
+- [x] Auditar a imagem atual da SHI 175S EFI e localizar uma alternativa oficial com a moto inteira e isolada.
+- [x] Validar origem Shineray, identidade, enquadramento lateral e compatibilidade visual com os demais heroes.
+- [x] Substituir somente a hero do modelo, preservando a galeria, ficha técnica, copy e capa.
+- [x] Validar a SHI 175S EFI em desktop e mobile e executar build; checkpoint pendente ao final desta rodada.

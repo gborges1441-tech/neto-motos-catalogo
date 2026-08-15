@@ -98,7 +98,7 @@ const detail = {
   shi250Gallery: "/manus-storage/shi-250-05_da2c62f1.webp",
   shi250Detail: "/manus-storage/shi-250-08_25bdff28.webp",
   shi250Panel: "/manus-storage/shi-250-panel_2f379e5e.webp",
-  shi175sHero: "/manus-storage/shi-175s-01_e529b115.webp",
+  shi175sHero: "/manus-storage/shi-175s-efi-official-isolated_72f22930.webp",
   shi175sGallery: "/manus-storage/shi-175s-04_06baa5a6.webp",
   shi175sDetail: "/manus-storage/shi-175s-08_48bfa8cf.webp",
   jef170Hero: "/manus-storage/jef-170-01_9802b6ac.webp",
