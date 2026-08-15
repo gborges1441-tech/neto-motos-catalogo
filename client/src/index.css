@@ -327,42 +327,6 @@ button { border: 0; }
 .color-selector__option:hover, .color-selector__option--active { color: var(--ink); background: rgba(255,255,255,.72); border-color: var(--red); transform: translateY(-1px); }
 .color-selector__option:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 .color-selector__swatch { display: block; width: 13px; height: 13px; border: 1px solid rgba(21,21,20,.22); box-shadow: inset 0 0 0 2px rgba(255,255,255,.24); }
-.official-360 { position: relative; z-index: 2; margin: 10px 1% 0; }
-.book-page--right > .official-360 { position: absolute; right: 2.4%; bottom: 10.2%; width: auto; margin: 0; z-index: 5; }
-.book-page--right > .official-360 .official-360__trigger { width: auto; min-width: 142px; gap: 7px; padding: 6px 8px; background: rgba(248,243,236,.92); box-shadow: 0 7px 17px rgba(21,21,20,.1); }
-.book-page--right > .official-360 .official-360__trigger-mark { width: 22px; height: 22px; }
-.book-page--right > .official-360 .official-360__trigger b { font-size: 13px; }
-.book-page--right > .official-360 .official-360__trigger small { display: none; }
-.official-360__trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 11px; color: var(--ink); background: rgba(255,255,255,.3); border: 1px solid rgba(21,21,20,.15); text-align: left; cursor: pointer; transition: border-color .2s ease, background .2s ease, transform .2s var(--ease-out); }
-.official-360__trigger:hover { background: rgba(255,255,255,.62); border-color: rgba(217,46,46,.52); transform: translateY(-2px); }
-.official-360__trigger:focus-visible, .official-360__close:focus-visible, .official-360__arrow:focus-visible, .official-360__actions button:focus-visible, .official-360__stage:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
-.official-360__trigger-mark { display: grid; place-items: center; width: 28px; height: 28px; color: var(--paper); background: var(--red); }
-.official-360__trigger > span:nth-child(2) { display: grid; gap: 2px; min-width: 0; flex: 1; }
-.official-360__trigger b, .official-360__panel h3 { font-family: "Barlow Condensed", sans-serif; font-size: 17px; line-height: .95; letter-spacing: .06em; text-transform: uppercase; }
-.official-360__trigger small, .official-360__header small { color: rgba(21,21,20,.54); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
-.official-360__panel { padding: 11px 10px 8px; background: linear-gradient(145deg, rgba(255,255,255,.7), rgba(222,215,205,.54)); border: 1px solid rgba(21,21,20,.16); box-shadow: 0 13px 28px rgba(21,21,20,.08); }
-.official-360__header { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 0 1px 8px; }
-.official-360__header > div { display: grid; gap: 4px; }
-.official-360__header h3 { margin: 0; color: var(--ink); }
-.official-360__header .page-kicker { color: var(--red); font-size: 7px; }
-.official-360__close { display: grid; place-items: center; width: 25px; height: 25px; color: rgba(21,21,20,.68); background: transparent; border: 1px solid rgba(21,21,20,.18); cursor: pointer; }
-.official-360__stage { position: relative; display: grid; place-items: center; min-height: 174px; overflow: hidden; background: radial-gradient(ellipse at center, rgba(255,255,255,.92), rgba(222,215,205,.62)); cursor: ew-resize; touch-action: pan-y; user-select: none; }
-.official-360__stage img, .official-360__stage .asset-image-fallback { display: block; width: 100%; height: 174px; object-fit: contain; object-position: center; pointer-events: none; }
-.official-360__loading { position: absolute; left: 50%; top: 50%; z-index: 2; max-width: 80%; padding: 6px 9px; color: rgba(21,21,20,.62); background: rgba(248,243,236,.88); border: 1px solid rgba(21,21,20,.12); font-size: 7px; letter-spacing: .1em; text-transform: uppercase; transform: translate(-50%, -50%); pointer-events: none; }
-.official-360__scrub-hint { position: absolute; left: 50%; bottom: 8px; z-index: 1; display: inline-flex; align-items: center; gap: 5px; padding: 4px 7px; color: rgba(21,21,20,.58); background: rgba(248,243,236,.78); border: 1px solid rgba(21,21,20,.11); font-size: 7px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; transform: translateX(-50%); pointer-events: none; transition: opacity .18s var(--ease-out), transform .18s var(--ease-out); }
-.official-360__stage:hover .official-360__scrub-hint, .official-360__stage:focus-visible .official-360__scrub-hint { opacity: 0; transform: translate(-50%, 4px); }
-.official-360__arrow { position: absolute; top: 50%; display: grid; place-items: center; width: 30px; height: 30px; color: var(--ink); background: rgba(241,236,228,.78); border: 1px solid rgba(21,21,20,.18); transform: translateY(-50%); cursor: pointer; opacity: .2; transition: opacity .2s ease, color .2s ease, background .2s ease; }
-.official-360__stage:hover .official-360__arrow, .official-360__stage:focus-within .official-360__arrow { opacity: 1; }
-.official-360__arrow:hover { color: #fff; background: var(--red); }
-.official-360__arrow--left { left: 8px; }
-.official-360__arrow--right { right: 8px; }
-.official-360__controls { display: flex; align-items: center; justify-content: space-between; gap: 9px; padding-top: 8px; color: rgba(21,21,20,.62); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
-.official-360__actions { display: flex; gap: 4px; }
-.official-360__actions button { display: grid; place-items: center; width: 24px; height: 24px; color: var(--ink); background: rgba(21,21,20,.05); border: 1px solid rgba(21,21,20,.16); cursor: pointer; }
-.official-360__actions button:hover:not(:disabled) { color: #fff; background: var(--red); }
-.official-360__actions button:disabled { cursor: not-allowed; opacity: .38; }
-.official-360__controls a { display: inline-flex; align-items: center; gap: 4px; color: var(--red); font-size: 7px; font-weight: 800; text-decoration: none; }
-.official-360__controls a:hover { text-decoration: underline; }
 .moto-editorial { position: relative; z-index: 1; padding: 20px 6% 190px; }
 .moto-editorial__intro { max-width: 330px; padding: 15px 0 18px; border-top: 1px solid rgba(21,21,20,.15); border-bottom: 1px solid rgba(21,21,20,.12); }
 .moto-editorial__eyebrow { display: inline-flex; align-items: center; gap: 7px; color: var(--red); font-size: 8px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
@@ -721,11 +685,6 @@ button { border: 0; }
   .book-mobile-page .color-selector__options::-webkit-scrollbar { display: none; }
   .book-mobile-page .color-selector__option { flex: 0 0 auto; min-height: 28px; font-size: 8px; }
   .book-mobile-page .color-selector__swatch { width: 15px; height: 15px; }
-  .book-mobile-page .official-360 { margin: 16px 0 0; }
-  .book-mobile-page .official-360__panel { padding: 12px 10px 9px; }
-  .book-mobile-page .official-360__stage, .book-mobile-page .official-360__stage img, .book-mobile-page .official-360__stage .asset-image-fallback { min-height: 190px; height: 190px; }
-  .book-mobile-page .official-360__arrow { opacity: .92; }
-  .book-mobile-page .official-360__controls { flex-wrap: wrap; }
   .book-mobile-page__copy { position: relative; z-index: 1; padding-top: 26px; }
   .book-mobile-page__copy h1 { margin: 15px 0 13px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(63px, 18vw, 92px); font-weight: 700; line-height: .82; letter-spacing: -.045em; text-transform: uppercase; }
   .book-mobile-page__copy .lead-copy { font-size: 15px; line-height: 1.52; }

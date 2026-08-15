@@ -385,3 +385,12 @@
 - [x] Publicar os 19 frames originais validados em armazenamento persistente do catálogo.
 - [x] Substituir o manifesto da JET 125 pelos URLs persistentes e documentar que a origem foi fornecida pelo usuário.
 - [x] Validar o CTA da JET 125 em desktop e mobile, confirmar resposta 200 para frames 01, 10 e 19 após redirecionamento, executar build e salvar checkpoint.
+
+## Finalização comercial — sem 360º
+
+- [x] Remover o CTA, painel, scripts, pré-carregamentos e referências de 360º de todos os modelos.
+- [x] Excluir os estilos exclusivos do visualizador 360º e eliminar qualquer espaço residual no livro desktop ou mobile.
+- [x] Conferir que galerias, lightbox, seletor de cor, hero, CTA WhatsApp e viradas continuam íntegros sem o 360º.
+- [x] Revisar a experiência de compra em desktop e mobile; a capa, livro, WhatsApp e hierarquia comercial permanecem fortes, sem refinamentos adicionais seguros necessários nesta rodada.
+- [x] Executar build, verificar logs e validar capa, JET 125 e URBAN 150 EFI em desktop/mobile; checkpoint final de aprovação pendente.
+- [x] Preparar orientações para venda, publicação no GitHub e operação comercial do catálogo para entrega com o checkpoint final.
