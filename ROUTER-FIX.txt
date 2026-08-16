@@ -1,1 +1,1 @@
-Router base-aware publicado em 2026-08-16.
+Assets locais restaurados com Router base-aware.
