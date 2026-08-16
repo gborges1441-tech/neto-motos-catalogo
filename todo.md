@@ -496,3 +496,10 @@
 - [x] Reforçar contraste e reorganizar a hierarquia tipográfica para leitura confortável em desktop e mobile.
 - [x] Validar os capítulos em desktop e celular, garantindo que os textos ampliados não sobreponham imagens, preço, botões ou navegação.
 - [x] Publicar o commit com a nova tipografia nas branches main e gh-pages e confirmar que a infraestrutura externa ainda mantém a implantação anterior, apesar da configuração main/root correta.
+
+## Ampliação tipográfica perceptível
+
+- [x] Aumentar de maneira visível, em escala real de desktop, a descrição, chamada editorial, destaques e ficha técnica dos capítulos.
+- [x] Reequilibrar os blocos internos para usar o espaço livre sem reduzir a área de foto, o CTA ou a navegação.
+- [x] Comparar visualmente desktop e celular após a alteração e confirmar que a nova escala é perceptível, sem sobreposições.
+- [ ] Reconstruir a versão portátil e confirmar no GitHub Pages que o bundle atualizado está sendo servido.
