@@ -471,3 +471,9 @@
 - [x] Diagnosticar a origem da página 404 exibida antes da capa no link público.
 - [x] Fazer a raiz do GitHub Pages abrir diretamente o `index.html` da capa cinematográfica.
 - [x] Manter um fallback amigável apenas para rotas realmente inexistentes e validar o acesso direto no domínio público.
+
+## Falha reproduzida no endereço público
+
+- [ ] Reproduzir a URL exata `https://gborges1441-tech.github.io/neto-motos-catalogo/` no navegador e comparar com a resposta HTTP automatizada.
+- [ ] Identificar qual arquivo ou configuração está fazendo o usuário cair na tela 404/Go Home.
+- [ ] Corrigir a publicação efetiva e validar o mesmo fluxo visual relatado pelo usuário antes de entregar novamente.
