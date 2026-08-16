@@ -477,3 +477,9 @@
 - [x] Reproduzir a URL exata `https://gborges1441-tech.github.io/neto-motos-catalogo/` no navegador e comparar com a resposta HTTP automatizada.
 - [x] Identificar qual arquivo ou configuração está fazendo o usuário cair na tela 404/Go Home.
 - [x] Corrigir a publicação efetiva e validar o mesmo fluxo visual relatado pelo usuário antes de entregar novamente.
+
+## Assets ausentes após correção do Router público
+
+- [x] Comparar as referências de imagens e vídeos do bundle atualizado com os arquivos existentes na branch pública.
+- [x] Reconstruir a cópia pública com todos os assets locais e caminhos compatíveis com o Router base-aware.
+- [x] Validar no domínio público a capa, logo, vídeo e fotos de vários capítulos antes do checkpoint.
