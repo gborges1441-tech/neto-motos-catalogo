@@ -439,8 +439,8 @@
 
 ## Publicação pública e avaliação comercial solicitadas
 
-- [ ] Auditar prontidão de venda, documentação, dependências, direitos de assets e dados comerciais antes da publicação pública.
-- [ ] Criar repositório GitHub público e enviar o código do catálogo.
-- [ ] Gerar pacote de download do site e disponibilizar link verificável.
-- [ ] Avaliar faixa de preço mínima, recomendada e máxima com justificativa, separando desenvolvimento, implantação e manutenção.
-- [ ] Validar links públicos, registrar limitações e entregar orientação honesta de venda.
+- [x] Auditar prontidão de venda, documentação, dependências, direitos de assets e dados comerciais antes da publicação pública.
+- [x] Criar repositório GitHub público e enviar o código do catálogo.
+- [x] Gerar pacote de download do site e disponibilizar link verificável.
+- [x] Avaliar faixa de preço mínima, recomendada e máxima com justificativa, separando desenvolvimento, implantação e manutenção.
+- [x] Validar links públicos, registrar limitações e entregar orientação honesta de venda.
