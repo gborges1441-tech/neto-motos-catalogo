@@ -1,5 +1,0 @@
-Neto Motos — Arquivo de Performance
-Distribuição estática portátil
-Data da entrega: 2026-08-16
-Assets locais: 442 arquivos
-Dependências de servidor: nenhuma
