@@ -474,6 +474,6 @@
 
 ## Falha reproduzida no endereço público
 
-- [ ] Reproduzir a URL exata `https://gborges1441-tech.github.io/neto-motos-catalogo/` no navegador e comparar com a resposta HTTP automatizada.
-- [ ] Identificar qual arquivo ou configuração está fazendo o usuário cair na tela 404/Go Home.
-- [ ] Corrigir a publicação efetiva e validar o mesmo fluxo visual relatado pelo usuário antes de entregar novamente.
+- [x] Reproduzir a URL exata `https://gborges1441-tech.github.io/neto-motos-catalogo/` no navegador e comparar com a resposta HTTP automatizada.
+- [x] Identificar qual arquivo ou configuração está fazendo o usuário cair na tela 404/Go Home.
+- [x] Corrigir a publicação efetiva e validar o mesmo fluxo visual relatado pelo usuário antes de entregar novamente.
