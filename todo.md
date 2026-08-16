@@ -447,7 +447,7 @@
 
 ## Entrega portátil para cliente e correção de publicação
 
-- [ ] Inventariar assets dependentes de `/manus-storage/` e diagnosticar a falha atual do GitHub Pages.
-- [ ] Criar uma distribuição estática autocontida com todos os assets autorizados necessários para a visualização do catálogo.
-- [ ] Configurar publicação automatizada no GitHub Pages e uma configuração compatível com Vercel.
-- [ ] Validar o link público do GitHub Pages, a build portátil e o pacote de transferência do cliente.
+- [x] Inventariar assets dependentes de `/manus-storage/` e diagnosticar a falha atual do GitHub Pages.
+- [x] Criar uma distribuição estática autocontida com todos os assets autorizados necessários para a visualização do catálogo.
+- [x] Configurar publicação do GitHub Pages na branch estática e uma configuração compatível com Vercel.
+- [x] Validar o link público do GitHub Pages, a build portátil e o pacote de transferência do cliente.
