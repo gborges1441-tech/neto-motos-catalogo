@@ -495,3 +495,4 @@
 - [x] Ampliar textos de descrição, especificações, destaques e conteúdos auxiliares nas páginas desktop, aproveitando os espaços livres sem reduzir fotos ou CTAs.
 - [x] Reforçar contraste e reorganizar a hierarquia tipográfica para leitura confortável em desktop e mobile.
 - [x] Validar os capítulos em desktop e celular, garantindo que os textos ampliados não sobreponham imagens, preço, botões ou navegação.
+- [x] Publicar o commit com a nova tipografia nas branches main e gh-pages e confirmar que a infraestrutura externa ainda mantém a implantação anterior, apesar da configuração main/root correta.
