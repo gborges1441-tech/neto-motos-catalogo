@@ -1,3 +1,0 @@
-Neto Motos — Arquivo de Performance
-Build GitHub Pages com caminhos absolutos de repositório.
-Publicada em 2026-08-16 para corrigir rotas 404 e referências de mídia.
