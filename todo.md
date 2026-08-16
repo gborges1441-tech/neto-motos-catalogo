@@ -429,3 +429,10 @@
 
 - [x] Revisar individualmente as heroes e a primeira foto de galeria das 32 motos a combustão e substituir todos os casos fora do padrão por assets oficiais com moto inteira, enquadramento lateral ou isolado e sem cortes.
 - [x] Validar os capítulos atualizados em desktop e mobile, registrar cada decisão de asset e preservar a capa cinematográfica.
+
+## Nova correção de enquadramento renderizado
+
+- [ ] Auditar as 32 heroes no quadro real do livro e identificar qualquer imagem ampliada além do limite ou com cortes nas extremidades.
+- [ ] Revisar a PHOENIX S EFI e localizar a fotografia oficial cinza em perfil mencionada pelo usuário.
+- [ ] Substituir ou ajustar apenas os assets que falharem, preservando a capa cinematográfica e as galerias aprovadas.
+- [ ] Validar novamente desktop e mobile, sem deixar moto maior que o quadro ou cortada.
