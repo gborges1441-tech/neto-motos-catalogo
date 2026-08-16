@@ -465,3 +465,9 @@
 - [x] Montar uma pasta de publicação limpa com referências explícitas para `/neto-motos-catalogo/assets/`.
 - [x] Publicar novamente a branch `main` com a estrutura única e validar a capa e as imagens de modelos no domínio público.
 - [x] Confirmar que o único link público não possui 404 nem imagens ausentes.
+
+## Correção da entrada pública sem tela 404
+
+- [ ] Diagnosticar a origem da página 404 exibida antes da capa no link público.
+- [ ] Fazer a raiz do GitHub Pages abrir diretamente o `index.html` da capa cinematográfica.
+- [ ] Manter um fallback amigável apenas para rotas realmente inexistentes e validar o acesso direto no domínio público.
