@@ -451,3 +451,10 @@
 - [x] Criar uma distribuição estática autocontida com todos os assets autorizados necessários para a visualização do catálogo.
 - [x] Configurar publicação do GitHub Pages na branch estática e uma configuração compatível com Vercel.
 - [x] Validar o link público do GitHub Pages, a build portátil e o pacote de transferência do cliente.
+
+## Correção crítica do link público
+
+- [x] Diagnosticar a resposta 401 relatada e conferir o caminho real de cada asset servido pelo GitHub Pages.
+- [x] Reconstruir a publicação estática para garantir que capa, catálogo, logo, vídeo, áudio e todas as fotos sejam entregues diretamente no repositório.
+- [x] Validar no domínio público a capa e capítulos representativos com imagens carregadas.
+- [x] Remover a release e o ZIP auxiliares, deixando o link do GitHub Pages como única entrega pública.
