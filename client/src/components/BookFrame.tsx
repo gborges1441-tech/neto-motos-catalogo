@@ -1,5 +1,5 @@
 // Style reminder: the book frame is the hero interaction of Arquivo de Performance—material, asymmetric and intentionally editorial.
-import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bookmark, ChevronLeft, ChevronRight, FileText, Grid2X2, Image as ImageIcon, Info, MousePointer2, Share2, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Moto } from "@/data/motos";
 import { BrandMark } from "@/components/BrandMark";
@@ -10,6 +10,7 @@ import { MotoEditorial } from "@/components/MotoEditorial";
 import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
 import { assetUrl } from "@/lib/assetUrl";
+import { buildModelShareUrl } from "@/lib/modelShare";
 
 const motorcycleTurnSound = assetUrl("/manus-storage/motorbike-rev-turn_9baf8ab2.mp3");
 const netoPortrait = assetUrl("/manus-storage/neto-portrait-professional_bbafcc75.png");
@@ -37,6 +38,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const [mobilePhotoRatio, setMobilePhotoRatio] = useState(4 / 3);
   const [spreadScale, setSpreadScale] = useState(1);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [shareState, setShareState] = useState<"idle" | "shared" | "copied">("idle");
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
   const [colorTransitioning, setColorTransitioning] = useState(false);
   const [outgoingColorImage, setOutgoingColorImage] = useState<Moto["images"][number] | null>(null);
@@ -69,6 +71,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
 
   useEffect(() => {
     setSelectedImage(0);
+    setShareState("idle");
     setLightboxIndex(null);
     setColorTransitioning(false);
     setOutgoingColorImage(null);
@@ -251,6 +254,25 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
     trackEvent("gallery_view", { model: current.name, image: index + 1, mode: "lightbox" });
   }
 
+  async function shareModel() {
+    const shareData = { title: `${current.name} — Neto Motos`, text: `Confira a ${current.name} no catálogo da Neto Motos.`, url: buildModelShareUrl(window.location.href, current.id, selectedColor?.id) };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        setShareState("shared");
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(shareData.url);
+        setShareState("copied");
+      } else {
+        window.prompt("Copie o link desta moto:", shareData.url);
+      }
+      window.setTimeout(() => setShareState("idle"), 2200);
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+      setShareState("idle");
+    }
+  }
+
   function changeLightbox(delta: number) {
     setLightboxIndex((index) => {
       if (index === null) return null;
@@ -405,7 +427,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
 
           <div className={`book-page book-page--right ${colorVariants.length > 1 ? "book-page--has-colors" : ""}`}>
             <div className="page-grain" />
-            <div className="right-page__meta"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
+            <div className="right-page__meta"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span><button className="model-share-button" type="button" onClick={shareModel} aria-label={`Compartilhar ${current.name}`}><Share2 size={14} /><span>{shareState === "copied" ? "Link copiado" : shareState === "shared" ? "Compartilhado" : "Compartilhar"}</span></button></div>
             <div className="right-page__hero-heading">
               <span className="right-page__brand">{current.brand}</span>
               <h2>{current.name}</h2>
@@ -437,7 +459,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
         </div>
 
         <article className={`book-mobile-page ${turning ? `book-mobile-page--turning-${turning}` : ""}`} aria-label={`Página única do catálogo: ${current.name}`}>
-          <div className="book-mobile-page__topline"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span></div>
+          <div className="book-mobile-page__topline"><span>{current.brand} / {current.category}</span><span>NETO / {formatFolio(activeIndex)}</span><button className="model-share-button model-share-button--mobile" type="button" onClick={shareModel} aria-label={`Compartilhar ${current.name}`}><Share2 size={14} /><span>{shareState === "copied" ? "Copiado" : "Compartilhar"}</span></button></div>
           {!hasInteracted && <span className="book-mobile-page__gesture-hint"><MousePointer2 size={12} /> Deslize para folhear</span>}
           <div className="book-mobile-page__visual" style={{ aspectRatio: mobilePhotoRatio }}>
               <button className={`book-mobile-page__zoom ${colorTransitioning ? "is-color-transitioning" : ""}`} type="button" onClick={() => openLightbox(selectedImage)} aria-label={`Abrir foto ${selectedImage + 1} de ${displayImages.length} da ${current.name}`}>

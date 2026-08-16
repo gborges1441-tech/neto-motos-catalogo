@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { motos } from "./motos";
 import { resolveAssetUrl } from "@/lib/assetUrl";
+import { buildModelShareUrl } from "@/lib/modelShare";
 
 const approvedHeroes: Record<string, string> = {
   "jef-170": "/manus-storage/10-Galeria-JEF-170-10-1-scaled_00bb2da6.webp",
@@ -34,5 +35,12 @@ describe("heroes de catálogo padronizadas", () => {
     expect(resolveAssetUrl("/manus-storage/exemplo.webp", true, "./")).toBe("./assets/exemplo.webp");
     expect(resolveAssetUrl("/manus-storage/exemplo.webp", false, "/")).toBe("/manus-storage/exemplo.webp");
     expect(resolveAssetUrl("https://example.com/imagem.webp", true, "./")).toBe("https://example.com/imagem.webp");
+  });
+
+  it("gera um link compartilhável do capítulo e da variante selecionada", () => {
+    const url = new URL(buildModelShareUrl("https://example.com/neto-motos-catalogo/?mode=book", "shi-250", "vermelha"));
+    expect(url.searchParams.get("mode")).toBe("book");
+    expect(url.searchParams.get("model")).toBe("shi-250");
+    expect(url.searchParams.get("color")).toBe("vermelha");
   });
 });

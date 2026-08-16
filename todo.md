@@ -483,3 +483,9 @@
 - [x] Comparar as referências de imagens e vídeos do bundle atualizado com os arquivos existentes na branch pública.
 - [x] Reconstruir a cópia pública com todos os assets locais e caminhos compatíveis com o Router base-aware.
 - [x] Validar no domínio público a capa, logo, vídeo e fotos de vários capítulos antes do checkpoint.
+
+## Legibilidade e compartilhamento por modelo
+
+- [x] Aumentar e equilibrar a tipografia das páginas de motos com regras responsivas, preservando o enquadramento do livro em desktop e mobile.
+- [x] Adicionar botão acessível de compartilhamento em cada modelo, com Web Share API quando disponível e fallback para copiar link/compartilhar por URL.
+- [x] Validar visualmente os capítulos e testar o link compartilhado de um modelo em desktop e celular.
