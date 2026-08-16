@@ -489,3 +489,9 @@
 - [x] Aumentar e equilibrar a tipografia das páginas de motos com regras responsivas, preservando o enquadramento do livro em desktop e mobile.
 - [x] Adicionar botão acessível de compartilhamento em cada modelo, com Web Share API quando disponível e fallback para copiar link/compartilhar por URL.
 - [x] Validar visualmente os capítulos e testar o link compartilhado de um modelo em desktop e celular.
+
+## Refinamento de leitura e ocupação editorial
+
+- [x] Ampliar textos de descrição, especificações, destaques e conteúdos auxiliares nas páginas desktop, aproveitando os espaços livres sem reduzir fotos ou CTAs.
+- [x] Reforçar contraste e reorganizar a hierarquia tipográfica para leitura confortável em desktop e mobile.
+- [x] Validar os capítulos em desktop e celular, garantindo que os textos ampliados não sobreponham imagens, preço, botões ou navegação.
