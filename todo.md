@@ -468,6 +468,6 @@
 
 ## Correção da entrada pública sem tela 404
 
-- [ ] Diagnosticar a origem da página 404 exibida antes da capa no link público.
-- [ ] Fazer a raiz do GitHub Pages abrir diretamente o `index.html` da capa cinematográfica.
-- [ ] Manter um fallback amigável apenas para rotas realmente inexistentes e validar o acesso direto no domínio público.
+- [x] Diagnosticar a origem da página 404 exibida antes da capa no link público.
+- [x] Fazer a raiz do GitHub Pages abrir diretamente o `index.html` da capa cinematográfica.
+- [x] Manter um fallback amigável apenas para rotas realmente inexistentes e validar o acesso direto no domínio público.
