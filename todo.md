@@ -424,3 +424,8 @@
 - [x] Registrar no relatório as páginas e assets oficiais recuperados, além dos casos 408/timeout que permaneceram inacessíveis.
 - [x] Executar auditoria sistemática dos manifestos e documentar formalmente a validação visual por amostragem, sem alegar inspeção exaustiva das 320+ fotos.
 - [x] Documentar claramente que somente URBAN 150 EFI e JET 125 tiveram frames 360º verificados antes da remoção do recurso.
+
+## Revisão integral de padronização visual solicitada
+
+- [x] Revisar individualmente as heroes e a primeira foto de galeria das 32 motos a combustão e substituir todos os casos fora do padrão por assets oficiais com moto inteira, enquadramento lateral ou isolado e sem cortes.
+- [x] Validar os capítulos atualizados em desktop e mobile, registrar cada decisão de asset e preservar a capa cinematográfica.

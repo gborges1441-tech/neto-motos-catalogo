@@ -109,6 +109,24 @@ const detail = {
   urbanDetail: "/manus-storage/urban-lite-08_39b3a83a.webp",
 };
 
+/**
+ * Heroes aprovadas na revisão integral de padronização visual.
+ * Cada URL é uma fotografia oficial já presente nas galerias persistidas.
+ */
+const standardHeroImages: Record<string, string> = {
+  "jef-170": "/manus-storage/10-Galeria-JEF-170-10-1-scaled_00bb2da6.webp",
+  "shi-400sc": "/manus-storage/05-Galeria-SHI-400sc-6_1c0ebcb9.webp",
+  "shi-170": "/manus-storage/06-Galeria-SHI-170-6_fb34617e.webp",
+  "free-150-efi": "/manus-storage/09-Galeria-FREE-150-9-1_65f89a03.webp",
+  "jef-150s-efi": "/manus-storage/01-Galeria-JEF-150s-EFI-1_327f6062.webp",
+  "phoenix-s-efi": "/manus-storage/10-Galeria-Phoenix-S-EFI-10-1_014a873c.webp",
+  "jef-150": "/manus-storage/08-Galeria-JEF-150-3-1-scaled_a50c371c.webp",
+  "sbm-400s": "/manus-storage/10-Galeria-SBM-400s-6_0dff04c4.webp",
+  iron: "/manus-storage/iron-official-full-product_32f7aae9.webp",
+  titanium: "/manus-storage/02-Galeria-Titanium-1-3_5a9b00c8.webp",
+  "storm-200-efi": "/manus-storage/04-02_d8c81183.webp",
+};
+
 function galleryImages(name: string, sources: string[]): MotoImage[] {
   return sources.map((src, index) => ({ src, label: `Galeria ${String(index + 2).padStart(2, "0")}`, alt: `${name} em fotografia oficial adicional da Shineray` }));
 }
@@ -209,6 +227,7 @@ function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, descr
   colorVariants?: MotoColorVariant[];
 }): Moto {
   const officialGallery = officialGallerySources[id] ?? [];
+  const standardizedHero = standardHeroImages[id] ?? image;
   const officialImages = officialGallery.map((src, index) => ({
     src,
     label: index === 0 ? "Foto oficial" : `Galeria ${String(index + 1).padStart(2, "0")}`,
@@ -228,7 +247,7 @@ function makeMoto({ id, name, brand = "SHINERAY", category, engine, price, descr
     copyLine,
     audience,
     highlights,
-    images: images(name, image, [...officialImages, ...supplementalImages]),
+    images: images(name, standardizedHero, [...officialImages, ...supplementalImages]),
     details: editorialDetails[id] ?? details,
     specs: officialSpecs[id] ?? specs,
     colors,
