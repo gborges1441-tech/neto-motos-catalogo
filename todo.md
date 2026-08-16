@@ -432,7 +432,7 @@
 
 ## Nova correção de enquadramento renderizado
 
-- [ ] Auditar as 32 heroes no quadro real do livro e identificar qualquer imagem ampliada além do limite ou com cortes nas extremidades.
-- [ ] Revisar a PHOENIX S EFI e localizar a fotografia oficial cinza em perfil mencionada pelo usuário.
-- [ ] Substituir ou ajustar apenas os assets que falharem, preservando a capa cinematográfica e as galerias aprovadas.
-- [ ] Validar novamente desktop e mobile, sem deixar moto maior que o quadro ou cortada.
+- [x] Auditar as 32 heroes no quadro real do livro e identificar qualquer imagem ampliada além do limite ou com cortes nas extremidades.
+- [x] Revisar a PHOENIX S EFI e localizar a fotografia oficial cinza em perfil mencionada pelo usuário.
+- [x] Substituir ou ajustar apenas os assets que falharem, preservando a capa cinematográfica e as galerias aprovadas.
+- [x] Validar novamente desktop e mobile, sem deixar moto maior que o quadro ou cortada.

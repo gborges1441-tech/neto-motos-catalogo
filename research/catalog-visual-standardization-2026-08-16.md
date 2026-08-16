@@ -126,3 +126,20 @@ A validação posterior confirmou a correção: IRON, TITANIUM e STORM 200 EFI f
 Os 32 capítulos a combustão foram inspecionados por hero e primeira foto de galeria. Onze heroes fora do padrão foram substituídas por fotografias oficiais completas já existentes na galeria ou, no caso da IRON, por uma imagem oficial completa recuperada e publicada em armazenamento persistente. As outras 21 heroes já atendiam ao critério de produto inteiro, isolado ou em vista lateral e foram preservadas para evitar alterações desnecessárias.
 
 O catálogo foi validado por capturas diretas dos onze capítulos atualizados em desktop e mobile, além de uma inspeção visual em lote dos 32 modelos. A capa cinematográfica não foi modificada. A verificação automatizada da base confirma 32 modelos a combustão e as onze URLs de hero aprovadas; os testes, a checagem TypeScript e o build de produção passaram ao final da rodada.
+
+
+## Correção adicional de enquadramento — PHOENIX S EFI
+
+A auditoria direta do capítulo em 1440 × 900 confirmou que a hero anterior da PHOENIX S EFI ultrapassava visualmente o quadro e cortava as extremidades da motocicleta. A substituição aplicada usa a fotografia oficial da página da Shineray, com a versão cinza em perfil lateral e o produto inteiro visível, publicada como `/manus-storage/phoenix-s-efi-grey-side-official_7b7dce8c.webp`. A galeria editorial foi preservada; somente a hero foi alterada.
+
+
+A primeira alternativa cinza encontrada para a PHOENIX S EFI ainda era uma fotografia horizontal de campanha e, quando renderizada no quadro desktop, continuou cortando a traseira e a roda dianteira. Ela foi rejeitada. A candidata seguinte, originada da página de produto da PHOENIX S EFI, apresenta a moto cinza inteira em fundo branco, com rodas, espelhos, guidão e traseira preservados, e será publicada como a nova hero definitiva.
+
+
+A segunda substituição foi validada no livro em desktop (1440 × 900) e celular (430 × 932). A PHOENIX S EFI agora aparece em enquadramento contido, com a moto inteira, rodas, espelhos e traseira visíveis nos dois formatos; a versão cinza em perfil atende ao padrão solicitado. A primeira candidata horizontal permanece rejeitada e não é usada no catálogo.
+
+
+A validação mobile dos 16 primeiros capítulos (430 × 932) confirmou que as heroes permanecem contidas no quadro, sem corte de rodas, guidão ou traseira. A PHOENIX S EFI, em especial, aparece agora como a scooter cinza inteira em perfil, com margens visíveis e sem ultrapassar o quadrado da fotografia. Os demais modelos do primeiro e segundo lotes mantiveram produto inteiro e CTAs acessíveis.
+
+
+A validação mobile dos 16 capítulos restantes (430 × 932) também não encontrou cortes críticos: as heroes de JEF 150, PHOENIX S, SBM 150S, SBM 250S, SBM 400S, SBM 400SS, SBM 600V, SBM 250T, DENVER, SBM 600, SBM 600T, SBM 600RC, SBM 400RR, IRON, TITANIUM e STORM 200 EFI permaneceram contidas e com a moto inteira visível. O registro visual completo agora cobre os 32 capítulos em desktop e celular.
