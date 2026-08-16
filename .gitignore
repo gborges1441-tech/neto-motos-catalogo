@@ -5,6 +5,7 @@
 # Build outputs
 dist/
 dist-portable/
+dist-github-pages/
 build/
 *.dist
 

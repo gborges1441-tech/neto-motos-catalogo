@@ -13,3 +13,7 @@ O primeiro pacote tinha uma pasta `assets/assets/` criada por uma cópia de dire
 ## Auditoria do GitHub Pages
 
 Após a publicação da branch estática em `main`, o HTML público passou a responder 200 com o `index.html` do catálogo. Logo, pôster, vídeo, hero isolada da PHOENIX S EFI e uma imagem da sua galeria também responderam 200 no domínio público. A comparação entre o manifesto local e a branch publicada confirmou os 442 assets esperados, sem ausências; a branch contém 446 arquivos em `assets/` porque também inclui os bundles CSS e JavaScript do Vite. O `.nojekyll`, `404.html` e `vercel.json` também foram confirmados na raiz publicada.
+
+## Reconstrução com caminhos absolutos
+
+Como o usuário ainda reportou 404 e mídia ausente, a publicação foi reconstruída com `base` explícito em `/neto-motos-catalogo/`. Todo HTML, CSS e JavaScript da distribuição agora aponta para `/neto-motos-catalogo/assets/`, eliminando a interpretação ambígua de caminhos relativos no subdiretório do GitHub Pages. A URL sem barra final redireciona com 301 para a raiz correta; a raiz, a URL direta de um capítulo e o marcador de deployment respondem 200. Os 442 assets foram revalidados um a um com resposta 200 pelo domínio público após a nova publicação.

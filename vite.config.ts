@@ -6,7 +6,9 @@ import path from "node:path";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
-const portableBuild = process.env.PORTABLE_BUILD === "true";
+const githubPagesBuild = process.env.GITHUB_PAGES_BUILD === "true";
+const portableBuild = process.env.PORTABLE_BUILD === "true" || githubPagesBuild;
+const publicBase = githubPagesBuild ? "/neto-motos-catalogo/" : portableBuild ? "./" : "/";
 
 // =============================================================================
 // Manus Debug Collector - Vite Plugin
@@ -210,7 +212,7 @@ const plugins = portableBuild
   : [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
 export default defineConfig({
-  base: portableBuild ? "./" : "/",
+  base: publicBase,
   plugins,
   resolve: {
     alias: {
@@ -222,7 +224,7 @@ export default defineConfig({
   envDir: path.resolve(import.meta.dirname),
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, portableBuild ? "dist-portable" : "dist/public"),
+    outDir: path.resolve(import.meta.dirname, githubPagesBuild ? "dist-github-pages" : portableBuild ? "dist-portable" : "dist/public"),
     emptyOutDir: true,
     chunkSizeWarningLimit: 700,
     rollupOptions: {

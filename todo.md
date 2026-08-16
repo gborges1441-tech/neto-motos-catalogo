@@ -458,3 +458,10 @@
 - [x] Reconstruir a publicação estática para garantir que capa, catálogo, logo, vídeo, áudio e todas as fotos sejam entregues diretamente no repositório.
 - [x] Validar no domínio público a capa e capítulos representativos com imagens carregadas.
 - [x] Remover a release e o ZIP auxiliares, deixando o link do GitHub Pages como única entrega pública.
+
+## Reconstrução limpa do GitHub Pages
+
+- [x] Reproduzir a resposta 404 e mapear a diferença entre URLs relativas e URLs no subdiretório do repositório.
+- [x] Montar uma pasta de publicação limpa com referências explícitas para `/neto-motos-catalogo/assets/`.
+- [x] Publicar novamente a branch `main` com a estrutura única e validar a capa e as imagens de modelos no domínio público.
+- [x] Confirmar que o único link público não possui 404 nem imagens ausentes.
