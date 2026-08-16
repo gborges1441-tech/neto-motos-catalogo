@@ -436,3 +436,11 @@
 - [x] Revisar a PHOENIX S EFI e localizar a fotografia oficial cinza em perfil mencionada pelo usuário.
 - [x] Substituir ou ajustar apenas os assets que falharem, preservando a capa cinematográfica e as galerias aprovadas.
 - [x] Validar novamente desktop e mobile, sem deixar moto maior que o quadro ou cortada.
+
+## Publicação pública e avaliação comercial solicitadas
+
+- [ ] Auditar prontidão de venda, documentação, dependências, direitos de assets e dados comerciais antes da publicação pública.
+- [ ] Criar repositório GitHub público e enviar o código do catálogo.
+- [ ] Gerar pacote de download do site e disponibilizar link verificável.
+- [ ] Avaliar faixa de preço mínima, recomendada e máxima com justificativa, separando desenvolvimento, implantação e manutenção.
+- [ ] Validar links públicos, registrar limitações e entregar orientação honesta de venda.
