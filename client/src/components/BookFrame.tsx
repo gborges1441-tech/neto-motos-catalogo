@@ -9,8 +9,10 @@ import { ColorSelector } from "@/components/ColorSelector";
 import { MotoEditorial } from "@/components/MotoEditorial";
 import { formatFolio } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
+import { assetUrl } from "@/lib/assetUrl";
 
-const motorcycleTurnSound = "/manus-storage/motorbike-rev-turn_9baf8ab2.mp3";
+const motorcycleTurnSound = assetUrl("/manus-storage/motorbike-rev-turn_9baf8ab2.mp3");
+const netoPortrait = assetUrl("/manus-storage/neto-portrait-professional_bbafcc75.png");
 
 type BookFrameProps = {
   motos: Moto[];
@@ -394,7 +396,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
               <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
               <div className="left-page__footer">
                 <div className="page-footer-note"><span>{formatFolio(activeIndex)}</span><small>arquivo de performance</small></div>
-                <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button>
+                <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src={netoPortrait} alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button>
               </div>
             </div>
           </div>
@@ -455,7 +457,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
             <p className="copy-line">{current.copyLine}</p>
             <p className="editorial-copy">{current.audience}</p>
             <div className="highlight-list">{current.highlights.map((highlight) => <span key={`mobile-${highlight}`}>{highlight}</span>)}</div>
-            <div className="book-mobile-page__commercial"><div className="price-block"><span>A partir de</span><b>{current.price}</b><small>Preço de referência.<br />Confirme condições com o Neto.</small></div><button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button></div>
+            <div className="book-mobile-page__commercial"><div className="price-block"><span>A partir de</span><b>{current.price}</b><small>Preço de referência.<br />Confirme condições com o Neto.</small></div><button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src={netoPortrait} alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button></div>
           </div>
           <MotoEditorial moto={current} />
         </article>

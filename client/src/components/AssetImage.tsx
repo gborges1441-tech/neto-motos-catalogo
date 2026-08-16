@@ -1,5 +1,6 @@
 // Style reminder: image states keep the archive tactile and calm when an official asset is slow, missing or temporarily unavailable.
 import { useEffect, useState } from "react";
+import { assetUrl } from "@/lib/assetUrl";
 
 type AssetImageProps = React.ComponentPropsWithoutRef<"img"> & {
   fallbackLabel?: string;
@@ -8,11 +9,12 @@ type AssetImageProps = React.ComponentPropsWithoutRef<"img"> & {
 export function AssetImage({ fallbackLabel = "Imagem indisponível", className = "", alt = "", onError, ...props }: AssetImageProps) {
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const resolvedSource = assetUrl(typeof props.src === "string" ? props.src : undefined);
 
   useEffect(() => {
     setFailed(false);
     setLoaded(false);
-  }, [props.src]);
+  }, [resolvedSource]);
 
   if (failed) {
     return (
@@ -23,6 +25,7 @@ export function AssetImage({ fallbackLabel = "Imagem indisponível", className =
   return (
     <img
       {...props}
+      src={resolvedSource}
       alt={alt}
       className={`asset-image ${loaded ? "asset-image--loaded" : "asset-image--loading"} ${className}`}
       loading={props.loading ?? "lazy"}

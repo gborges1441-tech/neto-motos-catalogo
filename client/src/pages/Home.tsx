@@ -9,10 +9,12 @@ import { WhatsAppButton, quoteHref, whatsappHref, type QuoteDetails } from "@/co
 import { WhatsAppMark } from "@/components/WhatsAppMark";
 import { catalogBrands, catalogFamilies, catalogPriceRanges, familyFromCategory, formatChapter, priceInRange, type CatalogBrand, type CatalogFamily, type PriceRange } from "@/lib/catalog";
 import { trackEvent } from "@/lib/analytics";
+import { assetUrl } from "@/lib/assetUrl";
 
 // Arquivo de Performance: o comercial é a peça principal da capa; texto e CTA conduzem a uma decisão de compra, sem competir com o produto.
-const commercialVideo = "/manus-storage/neto-motos-commercial_e09bc38e.mp4";
-const commercialPoster = "/manus-storage/neto-motos-commercial-poster_c430828f.jpg";
+const commercialVideo = assetUrl("/manus-storage/neto-motos-commercial_e09bc38e.mp4");
+const commercialPoster = assetUrl("/manus-storage/neto-motos-commercial-poster_c430828f.jpg");
+const netoPortrait = assetUrl("/manus-storage/neto-portrait-professional_bbafcc75.png");
 const coverIndex = 0;
 
 export default function Home() {
@@ -226,7 +228,7 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
       <button className="overlay-backdrop" type="button" onClick={onClose} aria-label="Fechar apresentação" />
       <section className="about-card" role="dialog" aria-modal="true" aria-labelledby="about-title">
         <button ref={closeRef} type="button" className="icon-button about-card__close" onClick={onClose} aria-label="Fechar apresentação"><X size={18} /></button>
-        <div className="about-card__image"><AssetImage src="/manus-storage/neto-portrait-professional_bbafcc75.png" alt="Neto, consultor da Neto Motos" fallbackLabel="Neto Motos" /><span>NETO / CONSULTOR</span></div>
+          <div className="about-card__image"><AssetImage src={netoPortrait} alt="Neto, consultor da Neto Motos" fallbackLabel="Neto Motos" /><span>NETO / CONSULTOR</span></div>
           <div className="about-card__copy"><span className="page-kicker">ATENDIMENTO DIRETO COM O NETO</span><h2 id="about-title">A moto certa<br /><em>começa com uma boa escolha.</em></h2><p>Não precisa escolher sozinho. Conte ao Neto como você pretende usar sua moto — para trabalhar, estudar, se locomover pela cidade, viajar ou simplesmente aproveitar mais a liberdade de estar sobre duas rodas. Ele pode te ajudar a conhecer os modelos que fazem sentido para você, tirar suas dúvidas e apresentar as condições disponíveis.</p><div className="about-card__line" /><div className="about-card__contact"><span>WhatsApp</span><b>(11) 97847-3480</b></div><small className="about-card__microcopy">Atendimento pelo WhatsApp</small><WhatsAppButton className="about-card__whatsapp" label="Quero encontrar minha moto" /><div className="about-card__faq"><span className="page-kicker">ANTES DE COMPRAR</span><details><summary>Posso falar diretamente com o Neto?</summary><p>Sim. O atendimento acontece pelo WhatsApp oficial da Neto Motos.</p></details><details><summary>Como confirmo disponibilidade e condições?</summary><p>Envie o modelo de interesse e o Neto confirma as informações atuais diretamente no atendimento.</p></details><details><summary>Posso pedir uma indicação?</summary><p>Conte como pretende usar o veículo. O Neto ajuda você a comparar os modelos que fazem sentido para a sua rotina.</p></details></div></div>
       </section>
     </div>

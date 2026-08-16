@@ -444,3 +444,10 @@
 - [x] Gerar pacote de download do site e disponibilizar link verificável.
 - [x] Avaliar faixa de preço mínima, recomendada e máxima com justificativa, separando desenvolvimento, implantação e manutenção.
 - [x] Validar links públicos, registrar limitações e entregar orientação honesta de venda.
+
+## Entrega portátil para cliente e correção de publicação
+
+- [ ] Inventariar assets dependentes de `/manus-storage/` e diagnosticar a falha atual do GitHub Pages.
+- [ ] Criar uma distribuição estática autocontida com todos os assets autorizados necessários para a visualização do catálogo.
+- [ ] Configurar publicação automatizada no GitHub Pages e uma configuração compatível com Vercel.
+- [ ] Validar o link público do GitHub Pages, a build portátil e o pacote de transferência do cliente.

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { motos } from "./motos";
+import { resolveAssetUrl } from "@/lib/assetUrl";
 
 const approvedHeroes: Record<string, string> = {
   "jef-170": "/manus-storage/10-Galeria-JEF-170-10-1-scaled_00bb2da6.webp",
@@ -27,5 +28,11 @@ describe("heroes de catálogo padronizadas", () => {
       expect(moto, `modelo ${id}`).toBeDefined();
       expect(moto?.images[0]?.src, `hero de ${id}`).toBe(hero);
     }
+  });
+
+  it("converte referências Manus em arquivos locais na distribuição portátil", () => {
+    expect(resolveAssetUrl("/manus-storage/exemplo.webp", true, "./")).toBe("./assets/exemplo.webp");
+    expect(resolveAssetUrl("/manus-storage/exemplo.webp", false, "/")).toBe("/manus-storage/exemplo.webp");
+    expect(resolveAssetUrl("https://example.com/imagem.webp", true, "./")).toBe("https://example.com/imagem.webp");
   });
 });
