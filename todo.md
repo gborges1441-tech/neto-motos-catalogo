@@ -520,6 +520,6 @@
 
 ## Restauração do GitHub
 
-- [ ] Diagnosticar o conteúdo atual das branches main, gh-pages e source após a alteração acidental.
-- [ ] Restaurar o catálogo completo, a capa, as mídias e a distribuição estática na branch pública.
-- [ ] Validar a página pública, os assets e o carregamento dos capítulos restaurados.
+- [x] Diagnosticar o conteúdo atual das branches main, gh-pages e source após a alteração acidental.
+- [x] Restaurar o catálogo completo, a capa, as mídias e a distribuição estática na branch pública.
+- [x] Validar a página pública, os assets e o carregamento dos capítulos restaurados.
