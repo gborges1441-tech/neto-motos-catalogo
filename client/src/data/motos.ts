@@ -496,7 +496,7 @@ const additionalRawMotos: Moto[] = [
   makeMoto({ id: "storm-200-efi", name: "STORM 200 EFI", category: "Crossover / 198 cc", engine: "198,1 cc", price: "R$ 21.590,00", image: additionalHeroImages["storm-200-efi"], source: "https://www.shineray.com.br/produto/storm-200/", description: "A STORM 200 EFI combina desenho crossover, injeção eletrônica e segurança para encarar cidade e estrada.", copyLine: "Mais potência e controle para mudar de rota.", audience: "Para quem quer 20,4 CV, ABS de dois canais e suspensão invertida em uma crossover versátil.", highlights: ["Injeção eletrônica", "20,4 CV", "ABS de duplo canal", "Garfo invertido"] }),
 ];
 
-const excludedNonCombustionIds = new Set(["sh3", "sh4", "se1", "se2", "she-s", "ptxs", "pt-stand", "pt4-pro", "ptxr", "pt1s", "pt2xs"]);
+const excludedNonCombustionIds = new Set(["urban-lite", "sh3", "sh4", "se1", "se2", "she-s", "ptxs", "pt-stand", "pt4-pro", "ptxr", "pt1s", "pt2xs"]);
 const allRawMotos = [...rawMotos, ...additionalRawMotos];
 const combustionMotos = allRawMotos.filter((moto) => !excludedNonCombustionIds.has(moto.id) && !["Elétrica", "Mobilidade elétrica", "Scooter elétrica"].some((term) => moto.category.includes(term)));
 const firstMoto = combustionMotos.find((moto) => moto.id === "shi-250") ?? combustionMotos[0];

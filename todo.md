@@ -529,3 +529,31 @@
 - [x] Comparar a página pública entregue, o bundle servido e os arquivos presentes em main e gh-pages.
 - [x] Corrigir o bundle JavaScript ausente, republicar a distribuição consistente e acionar a reconstrução efetiva pelo GitHub.
 - [x] Validar a URL pública em acesso direto, no modo livro e com assets críticos carregados.
+
+## Ajustes de prévia solicitados — sem publicação
+
+- [x] Remover a Urban Lite do inventário, índice, filtros e seleção de orçamento no ambiente local.
+- [x] Inverter a dupla editorial dos capítulos, com imagem principal à esquerda e conteúdo à direita, preservando mobile.
+- [x] Refinar a animação para completar a virada até o fim da folha, com continuidade física e sem travamentos.
+- [x] Mover a ficha técnica para uma ação no final do capítulo, aberta sob demanda em vez de ocupar a composição inicial.
+- [x] Validar a prévia em desktop e celular e apresentar o resultado para aprovação sem publicar no GitHub.
+
+## Livro sem rolagem interna — prévia
+
+- [x] Remover a barra e a rolagem vertical de todas as páginas do spread desktop.
+- [x] Preservar os três destaques ilustrados por modelo como conteúdo principal, com foto oficial, título, descrição e benefício de rotina.
+- [x] Distribuir os três destaques em páginas editoriais próprias, navegadas pela virada de folha em vez de rolagem interna.
+- [x] Validar a sequência completa e o encaixe mobile sem publicar nenhuma alteração no GitHub.
+
+## Reversão da última prévia
+
+- [x] Restaurar a composição anterior ao fluxo de páginas internas dos três destaques.
+- [x] Manter as alterações anteriores já aprovadas em prévia e não publicar nenhuma mudança no GitHub.
+- [x] Validar a prévia restaurada e aguardar o novo detalhamento do usuário.
+
+## Folha editorial fixa por modelo — prévia
+
+- [x] Exibir apenas três destaques por modelo na folha editorial: foto oficial, título, descrição e benefício de rotina.
+- [x] Eliminar dessa folha nome grande, apresentação, preço, CTA, atendimento, ficha técnica e qualquer outra informação comercial.
+- [x] Ajustar o layout fixo sem barra de rolagem, alternando foto e texto nos três destaques.
+- [x] Validar o padrão em desktop e celular sem publicar alterações no GitHub.

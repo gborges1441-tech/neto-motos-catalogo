@@ -42,6 +42,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
   const [colorTransitioning, setColorTransitioning] = useState(false);
   const [outgoingColorImage, setOutgoingColorImage] = useState<Moto["images"][number] | null>(null);
+  const [technicalOpen, setTechnicalOpen] = useState(false);
   const bookShellRef = useRef<HTMLElement>(null);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const turnTimer = useRef<number | null>(null);
@@ -73,6 +74,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
     setSelectedImage(0);
     setShareState("idle");
     setLightboxIndex(null);
+    setTechnicalOpen(false);
     setColorTransitioning(false);
     setOutgoingColorImage(null);
     if (colorTransitionTimer.current !== null) window.clearTimeout(colorTransitionTimer.current);
@@ -219,7 +221,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
       setTurning(null);
       setTurnTarget(null);
       turnTimer.current = null;
-    }, 980);
+    }, 1140);
   }
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
@@ -396,31 +398,9 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
         </div>
         <div className="book-spread-frame" style={{ "--spread-scale": spreadScale } as CSSProperties}>
         <div className="book-spread" data-turning={turning ?? "idle"}>
-          <div className="book-page book-page--left" data-scrollable>
+          <div className="book-page book-page--left book-page--details-only">
             <div className="page-grain" />
-            <div className="left-page__top">
-              <span className="chapter-index">{current.eyebrow}</span>
-              <Bookmark size={16} strokeWidth={1.3} />
-            </div>
-            <div className="left-page__content">
-              <span className="page-kicker">NETO MOTOS / {current.brand}</span>
-              <h1>{current.name}</h1>
-              <p className="lead-copy">{current.description}</p>
-              <div className="red-stroke" />
-              <p className="copy-line">{current.copyLine}</p>
-              <p className="editorial-copy">{current.audience}</p>
-              <div className="highlight-list">
-                {current.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
-              </div>
-            </div>
-            <MotoEditorial moto={current} compact />
-            <div className="left-page__lower">
-              <div className="price-block page-price"><span>A partir de</span><b>{current.price}</b><small>Ref. oficial · confirme com o Neto.</small></div>
-              <div className="left-page__footer">
-                <div className="page-footer-note"><span>{formatFolio(activeIndex)}</span><small>arquivo de performance</small></div>
-                <button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src={netoPortrait} alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button>
-              </div>
-            </div>
+            <MotoEditorial moto={current} compact detailsOnly />
           </div>
 
           <div className="book-gutter" aria-hidden="true"><span /></div>
@@ -470,18 +450,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
           <div className={`book-mobile-page__gallery ${colorTransitioning ? "book-mobile-page__gallery--color-transitioning" : ""}`} aria-label="Galeria da moto">
             {displayImages.map((image, index) => <button key={`mobile-${image.src}`} type="button" className={`gallery-thumb ${selectedImage === index ? "gallery-thumb--active" : ""} ${colorTransitioning ? "gallery-thumb--color-enter" : ""}`} onClick={() => openLightbox(index)} aria-label={`Ampliar imagem: ${image.label}`}><AssetImage src={image.src} alt="" fallbackLabel={current.name} loading="eager" decoding="sync" fetchPriority="high" /></button>)}
           </div>
-          <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} disabled={colorTransitioning} onSelect={selectColor} />
-            <div className="book-mobile-page__copy">
-            <span className="page-kicker">NETO MOTOS / {current.brand}</span>
-            <h1>{current.name}</h1>
-            <p className="lead-copy">{current.description}</p>
-            <div className="red-stroke" />
-            <p className="copy-line">{current.copyLine}</p>
-            <p className="editorial-copy">{current.audience}</p>
-            <div className="highlight-list">{current.highlights.map((highlight) => <span key={`mobile-${highlight}`}>{highlight}</span>)}</div>
-            <div className="book-mobile-page__commercial"><div className="price-block"><span>A partir de</span><b>{current.price}</b><small>Preço de referência.<br />Confirme condições com o Neto.</small></div><button className="about-teaser" type="button" onClick={onOpenAbout}><span className="about-teaser__avatar"><img src={netoPortrait} alt="Neto, consultor da Neto Motos" /></span><span><b>Neto explica. Você decide.</b><small>Conheça o atendimento</small></span><ArrowRight size={14} /></button></div>
-          </div>
-          <MotoEditorial moto={current} />
+          <MotoEditorial moto={current} detailsOnly />
         </article>
 
         <div className="book-bottomline">

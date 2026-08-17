@@ -18,9 +18,10 @@ const approvedHeroes: Record<string, string> = {
 };
 
 describe("heroes de catálogo padronizadas", () => {
-  it("mantém somente os 32 modelos a combustão publicados", () => {
-    expect(motos).toHaveLength(32);
+  it("mantém somente os 31 modelos a combustão comercializados", () => {
+    expect(motos).toHaveLength(31);
     expect(motos.every((moto) => !/elétrica/i.test(moto.category))).toBe(true);
+    expect(motos.some((moto) => moto.id === "urban-lite")).toBe(false);
   });
 
   it("usa as fotografias oficiais aprovadas para os casos corrigidos", () => {
