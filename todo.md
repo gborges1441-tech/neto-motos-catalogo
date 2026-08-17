@@ -523,3 +523,9 @@
 - [x] Diagnosticar o conteúdo atual das branches main, gh-pages e source após a alteração acidental.
 - [x] Restaurar o catálogo completo, a capa, as mídias e a distribuição estática na branch pública.
 - [x] Validar a página pública, os assets e o carregamento dos capítulos restaurados.
+
+## Correção da publicação pública
+
+- [x] Comparar a página pública entregue, o bundle servido e os arquivos presentes em main e gh-pages.
+- [x] Corrigir o bundle JavaScript ausente, republicar a distribuição consistente e acionar a reconstrução efetiva pelo GitHub.
+- [x] Validar a URL pública em acesso direto, no modo livro e com assets críticos carregados.
