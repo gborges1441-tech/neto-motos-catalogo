@@ -517,3 +517,9 @@
 - [x] Montar uma distribuição estática autocontida com todas as mídias em caminhos locais.
 - [x] Criar um ZIP único, pronto para extrair e publicar em GitHub Pages ou hospedagem estática.
 - [x] Incluir instruções curtas de publicação e validar a integridade dos arquivos do pacote.
+
+## Restauração do GitHub
+
+- [ ] Diagnosticar o conteúdo atual das branches main, gh-pages e source após a alteração acidental.
+- [ ] Restaurar o catálogo completo, a capa, as mídias e a distribuição estática na branch pública.
+- [ ] Validar a página pública, os assets e o carregamento dos capítulos restaurados.
