@@ -503,3 +503,11 @@
 - [x] Reequilibrar os blocos internos para usar o espaço livre sem reduzir a área de foto, o CTA ou a navegação.
 - [x] Comparar visualmente desktop e celular após a alteração e confirmar que a nova escala é perceptível, sem sobreposições.
 - [ ] Reconstruir a versão portátil e confirmar no GitHub Pages que o bundle atualizado está sendo servido.
+
+## Revisão integral de hierarquia e acabamento
+
+- [x] Auditar a composição completa dos capítulos, incluindo cabeçalho, índice, descrição, destaques, preço, blocos editoriais, capítulos inferiores e ficha técnica.
+- [x] Ampliar e reequilibrar os conteúdos inferiores que continuam pequenos, sem deixar a parte superior desproporcional.
+- [x] Validar a harmonia visual em desktop e celular, preservando capa, fotos, compartilhamento, WhatsApp e navegação.
+- [ ] Reconstruir a distribuição e confirmar a implantação efetiva no GitHub Pages.
+- [ ] Salvar o checkpoint final sem pendências de implementação.
