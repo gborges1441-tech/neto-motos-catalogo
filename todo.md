@@ -643,3 +643,9 @@
 - [x] Sincronizar as branches `source`, `main` e `gh-pages`.
 - [x] Acionar e validar a implantação pública do GitHub Pages.
 - [x] Entregar o link público atualizado e o checkpoint correspondente.
+
+## Apresentação comercial e precificação do projeto
+- [x] Consolidar o escopo desenvolvido desde o início do projeto.
+- [x] Organizar entregáveis, recursos incluídos e limites da entrega.
+- [x] Definir uma precificação comercial clara por pacote e condições.
+- [x] Redigir e revisar o e-mail final pronto para encaminhamento.
