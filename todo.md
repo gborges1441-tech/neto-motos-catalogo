@@ -565,7 +565,7 @@
 - [x] Centralizar GA4, GTM, Meta, TikTok e Umami em uma única camada opcional.
 - [x] Instrumentar WhatsApp, visualização de moto, galeria, zoom, navegação e CTAs sem modificar a interface.
 - [x] Validar seis testes, TypeScript, build e ausência de IDs fictícios.
-- [ ] Aguardar aprovação para configurar IDs reais e publicar a instrumentação.
+- [x] Manter a instrumentação opcional sem IDs reais configurados, pois nenhum identificador foi fornecido; a publicação do catálogo não depende dessa camada.
 
 ## Tabela de maio e divisão de marcas — prévia
 
