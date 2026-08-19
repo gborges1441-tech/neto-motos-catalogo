@@ -54,6 +54,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const lightboxTap = useRef<{ time: number; x: number; y: number } | null>(null);
   const lightboxCloseRef = useRef<HTMLButtonElement>(null);
   const lightboxPreviousFocus = useRef<HTMLElement | null>(null);
+  const viewedModels = useRef(new Set<string>());
   const current = motos[activeIndex];
   const colorVariants = current.colorVariants ?? [];
   const selectedColor = useMemo(
@@ -68,9 +69,12 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   const safeLightboxIndex = lightboxIndex === null ? 0 : Math.min(lightboxIndex, displayImages.length - 1);
   const lightboxImage = displayImages[safeLightboxIndex] ?? activeImage;
   const turnMoto = motos[turnTarget ?? activeIndex] ?? current;
-  const currentEngine = current.engine ?? current.specs.find((item) => item.label.toLowerCase().includes("cilindrada"))?.value ?? "—";
 
   useEffect(() => {
+    if (!viewedModels.current.has(current.id)) {
+      viewedModels.current.add(current.id);
+      trackEvent("motorcycle_view", { model: current.name, brand: current.brand, category: current.category });
+    }
     setSelectedImage(0);
     setShareState("idle");
     setLightboxIndex(null);
@@ -217,7 +221,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
     if (turnTimer.current !== null) window.clearTimeout(turnTimer.current);
     turnTimer.current = window.setTimeout(() => {
       onIndexChange(nextIndex);
-      trackEvent("chapter_change", { direction, chapter: nextIndex + 1, model: motos[nextIndex]?.name ?? "catalogo" });
+      trackEvent("catalog_page_view", { page: nextIndex + 1, section: "catalog", direction, model: motos[nextIndex]?.name ?? "catalogo" });
       setTurning(null);
       setTurnTarget(null);
       turnTimer.current = null;
@@ -253,7 +257,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
   function openLightbox(index: number) {
     setSelectedImage(index);
     setLightboxIndex(index);
-    trackEvent("gallery_view", { model: current.name, image: index + 1, mode: "lightbox" });
+    trackEvent("gallery_open", { model: current.name, image_index: index + 1 });
   }
 
   async function shareModel() {
@@ -362,11 +366,13 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
         lightboxTap.current = { time: now, x: event.clientX, y: event.clientY };
       }
     }
+    if (wasPinching && lightboxZoom > 1) trackEvent("image_zoom", { model: current.name, image_index: safeLightboxIndex + 1 });
     if (!wasPinching && event.pointerType === "touch" && lightboxZoom === 1 && Math.abs(distanceX) > 60 && Math.abs(distanceX) > Math.abs(distanceY) * 1.25) changeLightbox(distanceX < 0 ? 1 : -1);
   }
 
   function onLightboxDoubleClick(event: React.MouseEvent<HTMLDivElement>) {
     event.preventDefault();
+    trackEvent("image_zoom", { model: current.name, image_index: safeLightboxIndex + 1 });
     setLightboxZoom((zoom) => zoom > 1 ? 1 : 2.2);
     setLightboxPan({ x: 0, y: 0 });
   }
@@ -412,7 +418,6 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
               <span className="right-page__brand">{current.brand}</span>
               <h2>{current.name}</h2>
               <p>{current.category}</p>
-              <b>{currentEngine}</b><small>CILINDRADA OFICIAL</small>
               <ColorSelector variants={colorVariants} selectedId={selectedColor?.id ?? null} disabled={colorTransitioning} onSelect={selectColor} />
             </div>
             <div className="moto-visual">

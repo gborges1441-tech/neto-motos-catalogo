@@ -608,16 +608,16 @@
 - [x] Validar desktop e celular sem publicar no GitHub.
 
 ## Retrabalho anti-halo dos logos — prévia
-- [ ] Remover halos e rebarbas brancas dos contornos dos logos Shineray e SBM.
-- [ ] Regenerar PNGs transparentes com bordas limpas e cores preservadas.
-- [ ] Validar os arquivos sobre fundo escuro em desktop e celular.
-- [ ] Manter o GitHub sem alterações até aprovação do usuário.
+- [x] Remover halos e rebarbas brancas dos contornos dos logos Shineray e SBM.
+- [x] Regenerar PNGs transparentes com bordas limpas e cores preservadas.
+- [x] Validar os arquivos sobre fundo escuro em desktop e celular.
+- [x] Manter o GitHub sem alterações até aprovação do usuário.
 
 ## Nitidez premium dos logos — prévia
-- [ ] Ampliar os logos Shineray e SBM com preservação de bordas e proporção.
-- [ ] Melhorar a nitidez percebida sem reintroduzir halos ou rebarbas brancas.
-- [ ] Integrar a versão de maior resolução na capa.
-- [ ] Validar desktop e celular sem publicar no GitHub.
+- [x] Ampliar os logos Shineray e SBM com preservação de bordas e proporção.
+- [x] Melhorar a nitidez percebida sem reintroduzir halos ou rebarbas brancas.
+- [x] Integrar a versão de maior resolução na capa.
+- [x] Validar desktop e celular sem publicar no GitHub.
 
 ## Restauração após placeholder dos logos — prévia
 - [x] Remover da capa as URLs dos arquivos premium provisórios que exibem carregamento infinito.
@@ -638,8 +638,8 @@
 - [x] Validar nitidez, carregamento e transparência em desktop e celular sem publicar no GitHub.
 
 ## Publicação autorizada no GitHub Pages
-- [ ] Executar validação final da versão aprovada antes da publicação.
-- [ ] Gerar a distribuição portátil com base correta `/neto-motos-catalogo/` e todos os assets.
-- [ ] Sincronizar as branches `source`, `main` e `gh-pages`.
-- [ ] Acionar e validar a implantação pública do GitHub Pages.
-- [ ] Entregar o link público atualizado e o checkpoint correspondente.
+- [x] Executar validação final da versão aprovada antes da publicação.
+- [x] Gerar a distribuição portátil com base correta `/neto-motos-catalogo/` e todos os assets.
+- [x] Sincronizar as branches `source`, `main` e `gh-pages`.
+- [x] Acionar e validar a implantação pública do GitHub Pages.
+- [x] Entregar o link público atualizado e o checkpoint correspondente.

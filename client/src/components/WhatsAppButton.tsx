@@ -8,6 +8,8 @@ type WhatsAppButtonProps = {
   compact?: boolean;
   label?: string;
   className?: string;
+  source?: string;
+  location?: string;
 };
 
 export function whatsappHref(model?: string) {
@@ -39,7 +41,7 @@ export function quoteHref(details: QuoteDetails) {
   return `https://wa.me/5511978473480?text=${encodeURIComponent(message)}`;
 }
 
-export function WhatsAppButton({ model, compact = false, label, className = "" }: WhatsAppButtonProps) {
+export function WhatsAppButton({ model, compact = false, label, className = "", source = "catalog", location = "whatsapp_button" }: WhatsAppButtonProps) {
   return (
     <a
       className={`whatsapp-button ${compact ? "whatsapp-button--compact" : ""} ${className}`.trim()}
@@ -47,7 +49,7 @@ export function WhatsAppButton({ model, compact = false, label, className = "" }
       target="_blank"
       rel="noreferrer"
       data-analytics="click_whatsapp"
-      onClick={() => trackEvent("whatsapp_click", { model: model ?? "catalogo" })}
+      onClick={() => trackEvent("whatsapp_click", { model: model ?? "catalogo", source, location })}
       aria-label={label ?? `Falar com o Neto sobre ${model ?? "o catálogo"}`}
     >
       <span className="whatsapp-mark" aria-hidden="true"><WhatsAppMark size={compact ? 15 : 18} /></span>
