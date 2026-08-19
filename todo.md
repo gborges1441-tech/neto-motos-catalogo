@@ -557,3 +557,89 @@
 - [x] Eliminar dessa folha nome grande, apresentação, preço, CTA, atendimento, ficha técnica e qualquer outra informação comercial.
 - [x] Ajustar o layout fixo sem barra de rolagem, alternando foto e texto nos três destaques.
 - [x] Validar o padrão em desktop e celular sem publicar alterações no GitHub.
+
+## Mensuração técnica — sem publicação
+
+- [x] Criar checkpoint de segurança antes da instrumentação.
+- [x] Auditar IDs reais e confirmar que nenhum ID fictício será usado.
+- [x] Centralizar GA4, GTM, Meta, TikTok e Umami em uma única camada opcional.
+- [x] Instrumentar WhatsApp, visualização de moto, galeria, zoom, navegação e CTAs sem modificar a interface.
+- [x] Validar seis testes, TypeScript, build e ausência de IDs fictícios.
+- [ ] Aguardar aprovação para configurar IDs reais e publicar a instrumentação.
+
+## Tabela de maio e divisão de marcas — prévia
+
+- [x] Mapear os preços da tabela de maio aos modelos efetivamente presentes no catálogo, mantendo Urban Lite excluída.
+- [x] Atualizar os valores comerciais sem alterar os demais dados editoriais ou o visual aprovado.
+- [x] Criar uma divisão profissional e discreta entre a linha Shineray e a linha SBM.
+- [x] Validar busca, filtros, índice e exibição em desktop e celular sem publicar no GitHub.
+
+## Limpeza visual das fotos — prévia
+
+- [x] Remover o texto “cilindrada oficial” e o número em cc sobre as fotos principais de todos os modelos.
+- [x] Preservar fotos, ficha editorial, preços, divisão Shineray/SBM, capa e navegação.
+- [x] Validar desktop e celular sem publicar alterações no GitHub.
+
+## Seleção por marca com logos — prévia
+
+- [x] Preparar uma entrada visual com os logos Shineray e SBM.
+- [x] Fazer cada logo abrir somente a respectiva linha de motocicletas.
+- [x] Preservar o catálogo completo, retorno entre marcas e todos os elementos visuais já aprovados.
+- [x] Validar desktop e celular sem publicar alterações no GitHub.
+
+## Sessões independentes por marca — prévia
+- [x] Substituir os recortes distorcidos por logos oficiais limpos e proporcionais.
+- [x] Criar sessão Catálogo completo com os 31 modelos ativos.
+- [x] Criar sessão Shineray independente, com numeração, anterior e próxima limitados à linha.
+- [x] Criar sessão SBM independente, com numeração, anterior e próxima limitados à linha.
+- [x] Validar retorno, limites de navegação e logos em desktop e celular sem publicar no GitHub.
+
+## Storm 200 EFI e logos oficiais enviados — prévia
+- [x] Corrigir a classificação da STORM 200 EFI de Shineray para SBM.
+- [x] Mover a STORM 200 EFI para a sessão e o índice exclusivos da SBM.
+- [x] Inspecionar a composição oficial enviada pelo usuário e separar os logos sem distorção.
+- [x] Substituir os ícones atuais da capa pelos logos oficiais proporcionais.
+- [x] Validar contagens, índices, início das sessões e capa em desktop e celular sem publicar no GitHub.
+
+## Logos sem fundo — prévia
+- [x] Remover a base branca dos logos oficiais Shineray e SBM.
+- [x] Preservar as cores, proporção e recorte real das logomarcas.
+- [x] Ajustar o contraste dos cartões sem recriar uma faixa branca.
+- [x] Validar desktop e celular sem publicar no GitHub.
+
+## Retrabalho anti-halo dos logos — prévia
+- [ ] Remover halos e rebarbas brancas dos contornos dos logos Shineray e SBM.
+- [ ] Regenerar PNGs transparentes com bordas limpas e cores preservadas.
+- [ ] Validar os arquivos sobre fundo escuro em desktop e celular.
+- [ ] Manter o GitHub sem alterações até aprovação do usuário.
+
+## Nitidez premium dos logos — prévia
+- [ ] Ampliar os logos Shineray e SBM com preservação de bordas e proporção.
+- [ ] Melhorar a nitidez percebida sem reintroduzir halos ou rebarbas brancas.
+- [ ] Integrar a versão de maior resolução na capa.
+- [ ] Validar desktop e celular sem publicar no GitHub.
+
+## Restauração após placeholder dos logos — prévia
+- [x] Remover da capa as URLs dos arquivos premium provisórios que exibem carregamento infinito.
+- [x] Restaurar os logos transparentes estáveis que carregavam corretamente.
+- [x] Aplicar nitidez segura sem depender de geração assíncrona ou placeholder.
+- [x] Validar carregamento real da capa em desktop e celular sem publicar no GitHub.
+
+## Correção definitiva de nitidez dos logos — prévia
+- [x] Substituir os PNGs pequenos e comprimidos por uma fonte visual de alta definição.
+- [x] Preservar fielmente formas, cores, proporções e transparência dos logos oficiais.
+- [x] Integrar uma versão nítida sem depender de placeholder ou geração assíncrona.
+- [x] Validar a nitidez real na capa em desktop e celular sem publicar no GitHub.
+
+## Refinamento específico do logo SBM — prévia
+- [x] Melhorar a definição das linhas e do lettering do logo SBM.
+- [x] Preservar as cores verde, vermelho e a proporção oficial.
+- [x] Integrar somente o SBM refinado, sem alterar o Shineray.
+- [x] Validar nitidez, carregamento e transparência em desktop e celular sem publicar no GitHub.
+
+## Publicação autorizada no GitHub Pages
+- [ ] Executar validação final da versão aprovada antes da publicação.
+- [ ] Gerar a distribuição portátil com base correta `/neto-motos-catalogo/` e todos os assets.
+- [ ] Sincronizar as branches `source`, `main` e `gh-pages`.
+- [ ] Acionar e validar a implantação pública do GitHub Pages.
+- [ ] Entregar o link público atualizado e o checkpoint correspondente.

@@ -493,12 +493,37 @@ const additionalRawMotos: Moto[] = [
   makeMoto({ id: "sbm-400rr", brand: "SBM", name: "SBM 400RR", category: "Sport / 400 cc", engine: "400 cc", price: "R$ 44.990,00", image: additionalHeroImages["sbm-400rr"], source: "https://www.shineray.com.br/produto/sbm-400rr/", description: "Uma esportiva de quatro cilindros criada para quem quer alto desempenho, adrenalina e precisão sobre duas rodas.", copyLine: "A esportiva para quem quer sentir a resposta.", audience: "Para quem quer quatro cilindros, ABS de duplo canal e uma ciclística firme para pilotar com intenção.", highlights: ["4 cilindros", "400 cc", "ABS de duplo canal", "Garfo invertido"] }),
   makeMoto({ id: "iron", brand: "SBM", name: "IRON", category: "Cruiser / 250 cc", engine: "249,60 cc", price: "R$ 21.990,00", image: additionalHeroImages.iron, source: "https://www.shineray.com.br/produto/iron/", description: "A IRON combina design sofisticado, motor de 250 cc e uma postura cruiser feita para enfrentar a estrada.", copyLine: "Estilo sofisticado para conquistar novos caminhos.", audience: "Para quem quer motor de 249,60 cc, ABS de dois canais e uma linguagem cruiser marcante.", highlights: ["249,60 cc", "27,67 CV", "ABS de dois canais", "Full LED"] }),
   makeMoto({ id: "titanium", brand: "SBM", name: "TITANIUM", category: "Cruiser / 249 cc", engine: "248,92 cc", price: "R$ 25.490,00", image: additionalHeroImages.titanium, source: "https://www.shineray.com.br/produto/titanium/", description: "A TITANIUM coloca motor em V, design marcante e desempenho equilibrado no mesmo capítulo.", copyLine: "Uma cruiser com assinatura própria.", audience: "Para quem quer bicilíndrica em V, ABS de dois canais e uma experiência urbana com presença.", highlights: ["Motor em V", "19 CV", "ABS de dois canais", "Painel digital"] }),
-  makeMoto({ id: "storm-200-efi", name: "STORM 200 EFI", category: "Crossover / 198 cc", engine: "198,1 cc", price: "R$ 21.590,00", image: additionalHeroImages["storm-200-efi"], source: "https://www.shineray.com.br/produto/storm-200/", description: "A STORM 200 EFI combina desenho crossover, injeção eletrônica e segurança para encarar cidade e estrada.", copyLine: "Mais potência e controle para mudar de rota.", audience: "Para quem quer 20,4 CV, ABS de dois canais e suspensão invertida em uma crossover versátil.", highlights: ["Injeção eletrônica", "20,4 CV", "ABS de duplo canal", "Garfo invertido"] }),
+  makeMoto({ id: "storm-200-efi", brand: "SBM", name: "STORM 200 EFI", category: "Crossover / 198 cc", engine: "198,1 cc", price: "R$ 21.590,00", image: additionalHeroImages["storm-200-efi"], source: "https://www.shineray.com.br/produto/storm-200/", description: "A STORM 200 EFI combina desenho crossover, injeção eletrônica e segurança para encarar cidade e estrada.", copyLine: "Mais potência e controle para mudar de rota.", audience: "Para quem quer 20,4 CV, ABS de dois canais e suspensão invertida em uma crossover versátil.", highlights: ["Injeção eletrônica", "20,4 CV", "ABS de duplo canal", "Garfo invertido"] }),
 ];
 
 const excludedNonCombustionIds = new Set(["urban-lite", "sh3", "sh4", "se1", "se2", "she-s", "ptxs", "pt-stand", "pt4-pro", "ptxr", "pt1s", "pt2xs"]);
 const allRawMotos = [...rawMotos, ...additionalRawMotos];
 const combustionMotos = allRawMotos.filter((moto) => !excludedNonCombustionIds.has(moto.id) && !["Elétrica", "Mobilidade elétrica", "Scooter elétrica"].some((term) => moto.category.includes(term)));
+const mayPriceById: Record<string, string> = {
+  "free-150-efi": "R$ 14.987,00",
+  "jet-50": "R$ 12.457,00",
+  "jet-125": "R$ 13.487,00",
+  "rio-125-efi": "R$ 14.857,00",
+  "jef-150": "R$ 16.477,00",
+  "shi-170": "R$ 14.987,00",
+  "shi-175": "R$ 17.487,00",
+  "urban-150-efi": "R$ 22.987,00",
+  "storm-200-efi": "R$ 23.987,00",
+  "shi-250": "R$ 24.287,00",
+  "iron": "R$ 24.777,00",
+  "titanium": "R$ 28.277,00",
+  "sbm-250s": "R$ 24.787,00",
+  "sbm-250t": "R$ 26.287,00",
+  "sbm-400s": "R$ 34.787,00",
+  "sbm-400ss": "R$ 38.787,00",
+  "sbm-600t": "R$ 48.787,00",
+  "sbm-600v": "R$ 53.287,00",
+  "sbm-600rc": "R$ 53.787,00",
+  "sbm-600": "R$ 39.287,00",
+};
 const firstMoto = combustionMotos.find((moto) => moto.id === "shi-250") ?? combustionMotos[0];
-export const motos: Moto[] = [firstMoto, ...combustionMotos.filter((moto) => moto.id !== firstMoto.id)];
+export const motos: Moto[] = [firstMoto, ...combustionMotos.filter((moto) => moto.id !== firstMoto.id)].map((moto) => ({
+  ...moto,
+  price: mayPriceById[moto.id] ?? moto.price,
+}));
 export const coverMoto = motos[0];
