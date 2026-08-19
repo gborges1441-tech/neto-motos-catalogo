@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-label="SBM by Shineray">
+  <defs>
+    <linearGradient id="sbmStripe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e21e2b"/>
+      <stop offset="0.45" stop-color="#e21e2b"/>
+      <stop offset="0.46" stop-color="#f5f0df"/>
+      <stop offset="0.56" stop-color="#f5f0df"/>
+      <stop offset="0.57" stop-color="#56a84a"/>
+      <stop offset="1" stop-color="#56a84a"/>
+    </linearGradient>
+    <filter id="softEdge" x="-5%" y="-8%" width="110%" height="116%">
+      <feGaussianBlur stdDeviation="0.35"/>
+    </filter>
+  </defs>
+  <g opacity="0.98">
+    <path d="M44 55h270l-18 18H44z" fill="#d91f2b"/>
+    <path d="M38 98h286l-18 18H38z" fill="#f0eee4"/>
+    <path d="M32 141h294l-18 18H32z" fill="#57a94c"/>
+    <text x="330" y="174" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="190" font-weight="900" letter-spacing="-13" fill="url(#sbmStripe)" stroke="#17191b" stroke-width="5" paint-order="stroke">SBM</text>
+    <text x="548" y="270" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700" letter-spacing="4" fill="#ece9df">by SHINERAY</text>
+  </g>
+</svg>
