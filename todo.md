@@ -684,3 +684,8 @@
 - [x] Substituir o verde chamativo por tons integrados à paleta preto, vermelho e off-white do catálogo.
 - [x] Preservar exatamente a posição, tamanho, foto e composição do selo.
 - [x] Validar o equilíbrio visual em desktop e celular sem publicar no GitHub.
+
+## Publicação do selo em paleta discreta
+- [ ] Gerar a distribuição final mantendo somente o ajuste cromático aprovado.
+- [ ] Sincronizar as branches `source`, `main` e `gh-pages`.
+- [ ] Validar o GitHub Pages público após a implantação.
