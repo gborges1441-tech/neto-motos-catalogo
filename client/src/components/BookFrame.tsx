@@ -480,7 +480,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
         </div>
       </div>}
 
-      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY / SBM</span><span>Especificações e condições sujeitas a confirmação.</span><a className="creator-badge" href={creatorPortfolio} target="_blank" rel="noreferrer" aria-label="Conheça o trabalho de Gustavo Borges"><img src={creatorPortrait} alt="Gustavo Borges" /><span><small>CRIADO POR</small><b>GUSTAVO<br />BORGES</b></span></a><span>Arraste / ← →</span></div>
+      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY / SBM</span><span>Especificações e condições sujeitas a confirmação.</span><a className="creator-badge" href={creatorPortfolio} target="_blank" rel="noreferrer" aria-label="Conheça o trabalho de Gustavo Borges"><img src={creatorPortrait} alt="Gustavo Borges" /><span><small>CRIADO POR</small><b>GUSTAVO BORGES</b></span></a><span>Arraste / ← →</span></div>
     </main>
   );
 }

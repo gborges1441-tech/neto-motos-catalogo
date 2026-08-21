@@ -210,7 +210,7 @@ function Cover({ onOpen, onOpenBrand, onOpenAbout, onOpenIndex, onOpenQuote, onT
           </div>
         </div>
       </div>
-      <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><a className="creator-badge" href={creatorPortfolio} target="_blank" rel="noreferrer" aria-label="Conheça o trabalho de Gustavo Borges"><img src={creatorPortrait} alt="Gustavo Borges" /><span><small>CRIADO POR</small><b>GUSTAVO<br />BORGES</b></span></a><span>SCROLL <ArrowDown size={12} /></span></footer>
+      <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><a className="creator-badge" href={creatorPortfolio} target="_blank" rel="noreferrer" aria-label="Conheça o trabalho de Gustavo Borges"><img src={creatorPortrait} alt="Gustavo Borges" /><span><small>CRIADO POR</small><b>GUSTAVO BORGES</b></span></a><span>SCROLL <ArrowDown size={12} /></span></footer>
     </main>
   );
 }

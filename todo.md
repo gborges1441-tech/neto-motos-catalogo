@@ -668,3 +668,9 @@
 - [x] Vincular o selo ao site profissional informado.
 - [x] Integrar o selo no rodapé final sem competir com produto e WhatsApp.
 - [x] Validar desktop e celular sem publicar no GitHub.
+
+## Selo de autoria mais discreto — nova prévia
+- [x] Reduzir a dimensão do ícone/foto do selo.
+- [x] Exibir GUSTAVO BORGES em uma única linha.
+- [x] Afinar largura, padding e destaque visual sem perder legibilidade.
+- [x] Validar desktop e celular sem publicar no GitHub.
