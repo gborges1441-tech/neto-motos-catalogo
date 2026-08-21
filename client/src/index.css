@@ -232,6 +232,8 @@ button { border: 0; }
 .cover-object__hint { position: absolute; bottom: 15%; right: -6%; display: flex; align-items: center; gap: 9px; color: rgba(245,239,230,.44); font-size: 8px; text-transform: uppercase; letter-spacing: .18em; transform: rotate(9deg); }
 .cover-footer { position: absolute; bottom: 28px; left: 5vw; right: 5vw; display: flex; align-items: center; justify-content: space-between; gap: 18px; color: rgba(245,239,230,.45); border-top: 1px solid rgba(255,255,255,.14); padding-top: 14px; font-size: 8px; letter-spacing: .18em; z-index: 3; }
 .cover-footer span:last-child { display: inline-flex; align-items: center; gap: 8px; color: rgba(245,239,230,.7); }
+.copyright-notice { color: rgba(245,239,230,.58); font-size: 7px; font-weight: 700; letter-spacing: .08em; white-space: nowrap; }
+.catalog-footer .copyright-notice { color: rgba(245,239,230,.68); }
 .creator-credit { color: rgba(245,239,230,.62); text-decoration: none; letter-spacing: .12em; transition: color .2s ease, opacity .2s ease; white-space: nowrap; }
 .creator-credit::before { content: "✦"; color: var(--red); margin-right: 7px; }
 .creator-credit:hover, .creator-credit:focus-visible { color: var(--paper); opacity: 1; }
@@ -719,6 +721,7 @@ button { border: 0; }
   .cover-paper-artifact { display: none; }
   .cover-footer { bottom: 17px; left: 20px; right: 20px; gap: 8px; font-size: 6px; }
   .cover-footer span:nth-child(2) { display: none; }
+  .cover-footer .copyright-notice { font-size: 5px; letter-spacing: .04em; }
   .cover-footer .creator-credit { font-size: 6px; letter-spacing: .06em; }
   .cover-footer .creator-credit::before { margin-right: 4px; }
   .cover-footer .creator-badge { min-width: 121px; padding: 3px 6px 3px 3px; gap: 5px; }
@@ -812,6 +815,7 @@ button { border: 0; }
   .floating-whatsapp .whatsapp-mark, .site-shell--floating-compact .floating-whatsapp .whatsapp-mark { width: 27px; height: 27px; }
   .catalog-footer { align-items: flex-start; margin-top: 16px; }
   .catalog-footer span:nth-child(2) { display: none; }
+  .catalog-footer .copyright-notice { font-size: 6px; letter-spacing: .035em; }
   .catalog-footer .creator-credit { flex-basis: 100%; font-size: 7px; text-align: left; }
   .catalog-footer .creator-badge { flex-basis: auto; margin-left: 0; min-width: 126px; }
   .index-panel { padding: 25px 22px; }

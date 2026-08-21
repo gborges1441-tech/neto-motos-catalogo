@@ -674,3 +674,8 @@
 - [x] Exibir GUSTAVO BORGES em uma única linha.
 - [x] Afinar largura, padding e destaque visual sem perder legibilidade.
 - [x] Validar desktop e celular sem publicar no GitHub.
+
+## Direitos autorais na prévia
+- [x] Incluir aviso com símbolo ©, ano e “Todos os direitos reservados”.
+- [x] Preservar o selo Gustavo Borges e a hierarquia visual do rodapé.
+- [x] Validar capa, livro e modo lista em desktop e celular sem publicar no GitHub.
