@@ -649,3 +649,10 @@
 - [x] Organizar entregáveis, recursos incluídos e limites da entrega.
 - [x] Definir uma precificação comercial clara por pacote e condições.
 - [x] Redigir e revisar o e-mail final pronto para encaminhamento.
+
+## Auditoria jurídica preliminar — sem alteração do site
+- [x] Mapear marcas, logos, fotos, vídeo, textos e ativos de terceiros usados publicamente.
+- [x] Revisar riscos de direitos autorais, uso de marca e autorização de materiais.
+- [x] Verificar privacidade, cookies, analytics, formulário e dados de contato.
+- [x] Revisar publicidade, preços, disponibilidade, disclaimers e responsabilidade comercial.
+- [x] Entregar diagnóstico preliminar com prioridades e recomendações, sem editar o site.
