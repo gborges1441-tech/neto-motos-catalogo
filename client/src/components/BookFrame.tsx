@@ -478,7 +478,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
         </div>
       </div>}
 
-      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY / SBM</span><span>Especificações e condições sujeitas a confirmação.</span><span>Arraste / ← →</span></div>
+      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY / SBM</span><span>Especificações e condições sujeitas a confirmação.</span><a className="creator-credit" href="https://gborges1441-tech.github.io/page3dpremium/" target="_blank" rel="noreferrer">Desenvolvido por Gustavo Borges</a><span>Arraste / ← →</span></div>
     </main>
   );
 }

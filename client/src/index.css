@@ -230,8 +230,12 @@ button { border: 0; }
 .cover-object__meta b { font-family: "Barlow Condensed", sans-serif; color: var(--red); font-size: 24px; letter-spacing: .03em; font-weight: 500; }
 .cover-object__line { position: absolute; top: 39%; left: 23%; width: 68%; height: 1px; background: linear-gradient(90deg, transparent, rgba(217,46,46,.8), transparent); transform: rotate(-18deg); }
 .cover-object__hint { position: absolute; bottom: 15%; right: -6%; display: flex; align-items: center; gap: 9px; color: rgba(245,239,230,.44); font-size: 8px; text-transform: uppercase; letter-spacing: .18em; transform: rotate(9deg); }
-.cover-footer { position: absolute; bottom: 28px; left: 5vw; right: 5vw; display: flex; justify-content: space-between; color: rgba(245,239,230,.45); border-top: 1px solid rgba(255,255,255,.14); padding-top: 14px; font-size: 8px; letter-spacing: .18em; z-index: 3; }
+.cover-footer { position: absolute; bottom: 28px; left: 5vw; right: 5vw; display: flex; align-items: center; justify-content: space-between; gap: 18px; color: rgba(245,239,230,.45); border-top: 1px solid rgba(255,255,255,.14); padding-top: 14px; font-size: 8px; letter-spacing: .18em; z-index: 3; }
 .cover-footer span:last-child { display: inline-flex; align-items: center; gap: 8px; color: rgba(245,239,230,.7); }
+.creator-credit { color: rgba(245,239,230,.62); text-decoration: none; letter-spacing: .12em; transition: color .2s ease, opacity .2s ease; white-space: nowrap; }
+.creator-credit::before { content: "✦"; color: var(--red); margin-right: 7px; }
+.creator-credit:hover, .creator-credit:focus-visible { color: var(--paper); opacity: 1; }
+.creator-credit--list { flex-basis: 100%; text-align: right; margin-top: -2px; }
 
 /* Book workspace */
 .catalog-workspace { min-height: 100svh; color: var(--paper); background: radial-gradient(circle at 70% 18%, rgba(78,36,33,.22), transparent 28%), #171716; padding: 0 4.5vw 18px; position: relative; }
@@ -455,7 +459,8 @@ button { border: 0; }
 .whatsapp-button:active { transform: translateY(0) scale(.97); }
 .whatsapp-button:focus-visible, .floating-whatsapp:focus-visible { outline: 2px solid #f6fff8; outline-offset: 4px; }
 .whatsapp-button--compact { padding: 10px 14px; font-size: 9px; }
-.catalog-footer { display: flex; justify-content: space-between; color: rgba(241,236,228,.3); text-transform: uppercase; letter-spacing: .16em; font-size: 7px; margin: 21px 0 0; }
+.catalog-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 7px 18px; color: rgba(241,236,228,.3); text-transform: uppercase; letter-spacing: .16em; font-size: 7px; margin: 21px 0 0; }
+.catalog-footer .creator-credit { text-transform: none; letter-spacing: .1em; }
 
 /* Drawers and alternate reading mode */
 .overlay-panel, .about-dialog { position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0; transition: opacity .3s ease; }
@@ -595,7 +600,7 @@ button { border: 0; }
 .list-card__bottom b { font-family: "Barlow Condensed", sans-serif; font-size: 18px; font-weight: 600; white-space: nowrap; }
 .list-card__bottom b small { display: block; font-family: "Manrope", sans-serif; color: rgba(21,21,20,.42); font-size: 7px; text-transform: uppercase; letter-spacing: .14em; margin-bottom: 3px; }
 .list-card__bottom button { display: flex; align-items: center; gap: 6px; max-width: 138px; padding: 8px 10px; background: var(--red); color: #fff; text-align: left; text-transform: uppercase; letter-spacing: .11em; font-size: 7px; cursor: pointer; }
-.list-mode__footer { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin-top: 33px; padding-top: 16px; border-top: 1px solid rgba(241,236,228,.14); color: rgba(241,236,228,.35); font-size: 8px; letter-spacing: .17em; }
+.list-mode__footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; max-width: 1200px; margin-top: 33px; padding-top: 16px; border-top: 1px solid rgba(241,236,228,.14); color: rgba(241,236,228,.35); font-size: 8px; letter-spacing: .17em; }
 .list-mode__footer-actions { display: flex; align-items: center; gap: 10px; }
 .list-mode__quote { display: inline-flex; align-items: center; gap: 7px; padding: 10px 12px; color: var(--paper); background: transparent; border: 1px solid rgba(241,236,228,.2); font-size: 8px; text-transform: uppercase; letter-spacing: .1em; cursor: pointer; transition: border-color .2s ease, color .2s ease, transform .2s var(--ease-out); }
 .list-mode__quote:hover { color: #fff; border-color: var(--red); transform: translateY(-2px); }
@@ -700,8 +705,10 @@ button { border: 0; }
   .cover-commercial__caption { right: 22px; bottom: 17%; gap: 4px; font-size: 6px; }
   .cover-commercial__caption b { font-size: 14px; }
   .cover-paper-artifact { display: none; }
-  .cover-footer { bottom: 17px; left: 20px; right: 20px; font-size: 6px; }
+  .cover-footer { bottom: 17px; left: 20px; right: 20px; gap: 8px; font-size: 6px; }
   .cover-footer span:nth-child(2) { display: none; }
+  .cover-footer .creator-credit { font-size: 6px; letter-spacing: .06em; }
+  .cover-footer .creator-credit::before { margin-right: 4px; }
   .catalog-workspace { padding: 0 18px 96px; }
   .catalog-header { height: 66px; }
   .catalog-header__center { display: none; }
@@ -787,8 +794,9 @@ button { border: 0; }
   .site-shell--opened > .floating-whatsapp, .floating-whatsapp { right: 14px; bottom: calc(104px + env(safe-area-inset-bottom)); z-index: 26; display: flex; width: 44px; height: 44px; padding: 7px; justify-content: center; border-radius: 50%; }
   .floating-whatsapp > span:last-child, .floating-whatsapp__ping { display: none; }
   .floating-whatsapp .whatsapp-mark, .site-shell--floating-compact .floating-whatsapp .whatsapp-mark { width: 27px; height: 27px; }
-  .catalog-footer { margin-top: 16px; }
+  .catalog-footer { align-items: flex-start; margin-top: 16px; }
   .catalog-footer span:nth-child(2) { display: none; }
+  .catalog-footer .creator-credit { flex-basis: 100%; font-size: 7px; text-align: left; }
   .index-panel { padding: 25px 22px; }
   .index-panel__heading { padding-top: 42px; }
   .index-panel__heading h2 { font-size: 62px; }
@@ -823,6 +831,7 @@ button { border: 0; }
   .list-card__bottom b { font-size: 15px; }
   .list-mode__footer { align-items: flex-start; gap: 15px; }
   .list-mode__footer span { font-size: 6px; }
+  .list-mode__footer .creator-credit--list { flex-basis: 100%; text-align: left; font-size: 7px; }
   .list-mode__footer-actions { flex-direction: column; align-items: stretch; width: 100%; }
   .list-mode__quote, .list-mode__footer .whatsapp-button { justify-content: center; width: 100%; }
   .quote-card { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); overflow-y: auto; grid-template-columns: 1fr; }

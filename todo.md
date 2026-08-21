@@ -656,3 +656,9 @@
 - [x] Verificar privacidade, cookies, analytics, formulário e dados de contato.
 - [x] Revisar publicidade, preços, disponibilidade, disclaimers e responsabilidade comercial.
 - [x] Entregar diagnóstico preliminar com prioridades e recomendações, sem editar o site.
+
+## Crédito de autoria Gustavo Borges — prévia sem publicação
+- [x] Inserir crédito discreto de desenvolvimento no rodapé do catálogo.
+- [x] Vincular o crédito ao portfólio profissional informado pelo usuário.
+- [x] Preservar a hierarquia comercial, a capa e os CTAs existentes.
+- [x] Validar desktop e celular sem publicar nenhuma alteração no GitHub.
