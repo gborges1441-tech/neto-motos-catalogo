@@ -679,3 +679,8 @@
 - [x] Incluir aviso com símbolo ©, ano e “Todos os direitos reservados”.
 - [x] Preservar o selo Gustavo Borges e a hierarquia visual do rodapé.
 - [x] Validar capa, livro e modo lista em desktop e celular sem publicar no GitHub.
+
+## Paleta discreta no selo de desenvolvedor — prévia
+- [x] Substituir o verde chamativo por tons integrados à paleta preto, vermelho e off-white do catálogo.
+- [x] Preservar exatamente a posição, tamanho, foto e composição do selo.
+- [x] Validar o equilíbrio visual em desktop e celular sem publicar no GitHub.
