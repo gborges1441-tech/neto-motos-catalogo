@@ -695,3 +695,8 @@
 - [x] Ajustar quebra, largura e espaçamento somente dentro das regras mobile.
 - [x] Preservar a versão desktop, o copyright, o WhatsApp e a navegação.
 - [x] Validar mobile sem publicar nova alteração no GitHub.
+
+## Publicação da correção mobile aprovada
+- [ ] Gerar a distribuição final com o ajuste responsivo aprovado.
+- [ ] Sincronizar as branches `source`, `main` e `gh-pages`.
+- [ ] Validar o GitHub Pages público após a implantação.
