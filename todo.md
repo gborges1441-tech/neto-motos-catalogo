@@ -689,3 +689,9 @@
 - [x] Gerar a distribuição final mantendo somente o ajuste cromático aprovado.
 - [x] Sincronizar as branches `source`, `main` e `gh-pages`.
 - [x] Validar o GitHub Pages público após a implantação.
+
+## Correção mobile do selo Gustavo Borges — prévia
+- [x] Fazer o nome Gustavo Borges aparecer completo e legível no mobile.
+- [x] Ajustar quebra, largura e espaçamento somente dentro das regras mobile.
+- [x] Preservar a versão desktop, o copyright, o WhatsApp e a navegação.
+- [x] Validar mobile sem publicar nova alteração no GitHub.
