@@ -662,3 +662,9 @@
 - [x] Vincular o crédito ao portfólio profissional informado pelo usuário.
 - [x] Preservar a hierarquia comercial, a capa e os CTAs existentes.
 - [x] Validar desktop e celular sem publicar nenhuma alteração no GitHub.
+
+## Selo de autoria Gustavo Borges — nova prévia
+- [x] Preparar um selo visual com foto, nome Gustavo Borges e destaque verde inspirado no portfólio.
+- [x] Vincular o selo ao site profissional informado.
+- [x] Integrar o selo no rodapé final sem competir com produto e WhatsApp.
+- [x] Validar desktop e celular sem publicar no GitHub.

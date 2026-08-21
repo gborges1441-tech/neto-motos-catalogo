@@ -14,6 +14,8 @@ import { buildModelShareUrl } from "@/lib/modelShare";
 
 const motorcycleTurnSound = assetUrl("/manus-storage/motorbike-rev-turn_9baf8ab2.mp3");
 const netoPortrait = assetUrl("/manus-storage/neto-portrait-professional_bbafcc75.png");
+const creatorPortrait = assetUrl("/manus-storage/gustavo-borges-portrait_ef9643cc.jpg");
+const creatorPortfolio = "https://gborges1441-tech.github.io/page3dpremium/";
 
 type BookFrameProps = {
   motos: Moto[];
@@ -478,7 +480,7 @@ export function BookFrame({ motos, activeIndex, initialColorId, onIndexChange, o
         </div>
       </div>}
 
-      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY / SBM</span><span>Especificações e condições sujeitas a confirmação.</span><a className="creator-credit" href="https://gborges1441-tech.github.io/page3dpremium/" target="_blank" rel="noreferrer">Desenvolvido por Gustavo Borges</a><span>Arraste / ← →</span></div>
+      <div className="catalog-footer"><span>© NETO MOTOS — SHINERAY / SBM</span><span>Especificações e condições sujeitas a confirmação.</span><a className="creator-badge" href={creatorPortfolio} target="_blank" rel="noreferrer" aria-label="Conheça o trabalho de Gustavo Borges"><img src={creatorPortrait} alt="Gustavo Borges" /><span><small>CRIADO POR</small><b>GUSTAVO<br />BORGES</b></span></a><span>Arraste / ← →</span></div>
     </main>
   );
 }

@@ -17,6 +17,8 @@ const commercialPoster = assetUrl("/manus-storage/neto-motos-commercial-poster_c
 const netoPortrait = assetUrl("/manus-storage/neto-portrait-professional_bbafcc75.png");
 const shinerayLogo = assetUrl("/manus-storage/logo-shineray-dark-hd_b0a86540.png");
 const sbmLogo = assetUrl("/manus-storage/logo-sbm-vector_d6144b79.svg");
+const creatorPortrait = assetUrl("/manus-storage/gustavo-borges-portrait_ef9643cc.jpg");
+const creatorPortfolio = "https://gborges1441-tech.github.io/page3dpremium/";
 const coverIndex = 0;
 type CatalogScope = "all" | "SHINERAY" | "SBM";
 
@@ -208,7 +210,7 @@ function Cover({ onOpen, onOpenBrand, onOpenAbout, onOpenIndex, onOpenQuote, onT
           </div>
         </div>
       </div>
-      <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><a className="creator-credit" href="https://gborges1441-tech.github.io/page3dpremium/" target="_blank" rel="noreferrer">Desenvolvido por Gustavo Borges</a><span>SCROLL <ArrowDown size={12} /></span></footer>
+      <footer className="cover-footer"><span>NETO MOTOS / SHINERAY</span><span>ATENDIMENTO DIRETO — (11) 97847-3480</span><a className="creator-badge" href={creatorPortfolio} target="_blank" rel="noreferrer" aria-label="Conheça o trabalho de Gustavo Borges"><img src={creatorPortrait} alt="Gustavo Borges" /><span><small>CRIADO POR</small><b>GUSTAVO<br />BORGES</b></span></a><span>SCROLL <ArrowDown size={12} /></span></footer>
     </main>
   );
 }
