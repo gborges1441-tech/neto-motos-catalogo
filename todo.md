@@ -686,6 +686,6 @@
 - [x] Validar o equilíbrio visual em desktop e celular sem publicar no GitHub.
 
 ## Publicação do selo em paleta discreta
-- [ ] Gerar a distribuição final mantendo somente o ajuste cromático aprovado.
-- [ ] Sincronizar as branches `source`, `main` e `gh-pages`.
-- [ ] Validar o GitHub Pages público após a implantação.
+- [x] Gerar a distribuição final mantendo somente o ajuste cromático aprovado.
+- [x] Sincronizar as branches `source`, `main` e `gh-pages`.
+- [x] Validar o GitHub Pages público após a implantação.
